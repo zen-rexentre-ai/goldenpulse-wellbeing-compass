@@ -20,6 +20,14 @@ const Welcome = () => {
           </p>
         </div>
         
+        <div className="w-full rounded-lg overflow-hidden shadow-lg">
+          <img 
+            src="/lovable-uploads/1afecd79-96fc-404a-9fd6-6d7cee1b4bf1.png" 
+            alt="Senior couple enjoying their golden years"
+            className="w-full h-auto object-cover brightness-105 contrast-105"
+          />
+        </div>
+        
         <div className="w-full space-y-6 my-6">
           <div className="bg-card p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">What Awaits You:</h2>
