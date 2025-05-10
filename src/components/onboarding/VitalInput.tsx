@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
-import { Heart, Activity, ThermometerSnowflake, Sleep } from 'lucide-react';
+import { Heart, Activity, ThermometerSnowflake, Bed } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
@@ -108,7 +107,7 @@ const VitalInput: React.FC = () => {
         <Card className="overflow-hidden">
           <CardContent className="p-0">
             <div className="p-4 bg-primary/10 flex items-center gap-2">
-              <Sleep className="h-5 w-5 text-primary" />
+              <Bed className="h-5 w-5 text-primary" />
               <h3 className="font-medium">Sleep Patterns</h3>
             </div>
             <div className="p-4 space-y-4">

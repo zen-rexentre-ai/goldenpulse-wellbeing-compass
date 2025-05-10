@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
-import { Plus, X, Upload, Medication, FileImage } from 'lucide-react';
+import { Plus, X, Upload, Pill, FileImage } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -58,7 +58,7 @@ const MedicineList: React.FC = () => {
       <Tabs defaultValue="manual" className="w-full">
         <TabsList className="grid grid-cols-2 mb-6">
           <TabsTrigger value="manual" className="flex items-center gap-2">
-            <Medication className="w-4 h-4" />
+            <Pill className="w-4 h-4" />
             <span>Manual Entry</span>
           </TabsTrigger>
           <TabsTrigger value="upload" className="flex items-center gap-2">
