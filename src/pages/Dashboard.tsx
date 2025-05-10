@@ -1,28 +1,72 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { AccessibilityControls } from '@/components/AccessibilityControls';
-import { ArrowUp, Bell, Home } from 'lucide-react';
+import { 
+  ArrowLeft,
+  ArrowRight, 
+  ArrowUp, 
+  ArrowDown, 
+  Bell, 
+  Home, 
+  Pill,
+  Calendar,
+  Activity,
+  Heart,
+  Weight,
+  Bed,
+  Users
+} from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
 import Logo from '@/components/Logo';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { useToast } from '@/hooks/use-toast';
 
 const Dashboard = () => {
   const [showAccessibility, setShowAccessibility] = useState(false);
+  const [activeScoreTab, setActiveScoreTab] = useState('week');
+  const { toast } = useToast();
   
-  // Mock data - in a real app this would come from an API
-  const fitnessScore = 79.8;
-  const fitnessScoreChange = 3.2;
+  // Mock fitness score data - in a real app this would come from an API
+  const fitnessScores = {
+    current: 79.8,
+    week: {
+      score: 76.6,
+      change: 3.2,
+      direction: 'up'
+    },
+    month: {
+      score: 72.5,
+      change: 7.3,
+      direction: 'up'
+    },
+    sinceLogin: {
+      score: 65.2,
+      change: 14.6,
+      direction: 'up'
+    }
+  };
+  
   const medicines = [
     { id: 1, name: "Vitamin D", time: "8:00 AM", dosage: "1000 IU", taken: false },
     { id: 2, name: "Omega-3", time: "12:00 PM", dosage: "1000 mg", taken: true },
     { id: 3, name: "Calcium", time: "8:00 PM", dosage: "500 mg", taken: false },
   ];
+  
   const appointments = [
     { id: 1, title: "Dr. Smith", type: "doctor", date: "2025-05-15", time: "10:30 AM" },
     { id: 2, title: "Yoga Class", type: "event", date: "2025-05-12", time: "9:00 AM" },
     { id: 3, title: "Volunteer - Food Bank", type: "volunteer", date: "2025-05-18", time: "1:00 PM" },
   ];
+  
   const vitals = {
     steps: 8000,
     weight: "68 kg",
@@ -30,6 +74,43 @@ const Dashboard = () => {
     heartRate: "70 bpm"
   };
   
+  const healthFocus = [
+    { name: "Cholesterol", value: "210 mg/dL", status: "warning", recommendation: "Consider dietary changes" },
+    { name: "Blood Pressure", value: "125/82", status: "normal", recommendation: "Continue monitoring" },
+    { name: "Blood Sugar", value: "105 mg/dL", status: "normal", recommendation: "Maintain current habits" }
+  ];
+
+  const upcomingActivities = [
+    { id: 1, name: "Memory Game Challenge", type: "game", time: "Today at 3:00 PM", color: "bg-golden-yellow/20" },
+    { id: 2, name: "Gentle Yoga Webinar", type: "webinar", time: "Tomorrow at 10:00 AM", color: "bg-golden-pink/20" },
+    { id: 3, name: "Community Garden Volunteering", type: "volunteer", time: "May 15 at 9:00 AM", color: "bg-golden-peach/20" }
+  ];
+
+  const handleMedicineTaken = (id: number) => {
+    // In a real app, this would update the database
+    toast({
+      title: "Medicine marked as taken",
+      description: "We've updated your medication record."
+    });
+  };
+
+  // Function to handle widget visibility toggle
+  const toggleWidget = (widgetName: string) => {
+    toast({
+      title: "Widget settings updated",
+      description: `${widgetName} widget visibility toggled.`
+    });
+  };
+
+  // Function to render the trend arrow based on direction
+  const renderTrendArrow = (direction: string) => {
+    if (direction === 'up') {
+      return <ArrowUp className="text-green-500" size={20} />;
+    } else {
+      return <ArrowDown className="text-red-500" size={20} />;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -65,48 +146,147 @@ const Dashboard = () => {
       )}
       
       <main className="container max-w-6xl p-4 space-y-6">
-        {/* Fitness Score Card */}
-        <Card className="w-full overflow-hidden bg-primary/5">
-          <CardHeader className="bg-primary text-primary-foreground p-4">
-            <CardTitle className="text-xl">Your Fitness Score</CardTitle>
-          </CardHeader>
-          <CardContent className="p-6">
-            <div className="flex justify-between items-center">
-              <div className="text-5xl font-bold">{fitnessScore}</div>
-              <div className="flex items-center gap-1 text-green-600">
-                <ArrowUp size={20} />
-                <span>{fitnessScoreChange}%</span>
-              </div>
+        {/* Fitness Score Card with Carousel */}
+        <div className="w-full overflow-hidden bg-primary/5 rounded-lg border shadow-sm">
+          <div className="bg-primary text-primary-foreground p-4">
+            <h2 className="text-xl font-semibold">Your Fitness Score</h2>
+          </div>
+          
+          <Carousel className="w-full">
+            <CarouselContent>
+              <CarouselItem className="pl-0">
+                <Card className="border-0 shadow-none">
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <div className="text-5xl font-bold">{fitnessScores.current}</div>
+                        <p className="text-sm text-muted-foreground mt-1">Current Score</p>
+                      </div>
+                      <div className="flex items-center gap-1 text-green-600">
+                        {renderTrendArrow(fitnessScores.week.direction)}
+                        <span>{fitnessScores.week.change}%</span>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-muted-foreground">Your score has improved since last week.</p>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <Card className="border-0 shadow-none">
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <div className="text-5xl font-bold">{fitnessScores.week.score}</div>
+                        <p className="text-sm text-muted-foreground mt-1">Last Week</p>
+                      </div>
+                      <div className="flex items-center gap-1 text-green-600">
+                        {renderTrendArrow('up')}
+                        <span>Weekly Progress</span>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-muted-foreground">This was your score one week ago.</p>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <Card className="border-0 shadow-none">
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <div className="text-5xl font-bold">{fitnessScores.month.score}</div>
+                        <p className="text-sm text-muted-foreground mt-1">Last Month</p>
+                      </div>
+                      <div className="flex items-center gap-1 text-green-600">
+                        {renderTrendArrow('up')}
+                        <span>Monthly Progress</span>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-muted-foreground">This was your score one month ago.</p>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+              
+              <CarouselItem>
+                <Card className="border-0 shadow-none">
+                  <CardContent className="p-6">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <div className="text-5xl font-bold">{fitnessScores.sinceLogin.score}</div>
+                        <p className="text-sm text-muted-foreground mt-1">Since Login</p>
+                      </div>
+                      <div className="flex items-center gap-1 text-green-600">
+                        {renderTrendArrow('up')}
+                        <span>Overall Progress</span>
+                      </div>
+                    </div>
+                    <p className="mt-2 text-muted-foreground">Your progress since you started using the app.</p>
+                  </CardContent>
+                </Card>
+              </CarouselItem>
+            </CarouselContent>
+            
+            <div className="flex items-center justify-center mt-4 mb-2">
+              <CarouselPrevious className="relative inset-auto mx-2" />
+              <CarouselNext className="relative inset-auto mx-2" />
             </div>
-            <p className="mt-2 text-muted-foreground">Score is calculated based on your activity, vitals, and health data.</p>
-            <Button className="mt-4" variant="outline">View Detailed Analysis</Button>
-          </CardContent>
-        </Card>
+          </Carousel>
+          
+          <div className="flex justify-center p-4">
+            <Button className="mt-2" variant="outline">View Detailed Analysis</Button>
+          </div>
+        </div>
+        
+        {/* Widget Controls */}
+        <div className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">Your Health Dashboard</h2>
+          <Button variant="outline" size="sm">Customize Widgets</Button>
+        </div>
         
         {/* Dashboard Tabs */}
         <Tabs defaultValue="medicines" className="w-full">
-          <TabsList className="grid grid-cols-4 mb-4">
+          <TabsList className="grid grid-cols-5 mb-4">
             <TabsTrigger value="medicines">Medicines</TabsTrigger>
             <TabsTrigger value="appointments">Appointments</TabsTrigger>
             <TabsTrigger value="vitals">Vitals</TabsTrigger>
+            <TabsTrigger value="healthfocus">Health Focus</TabsTrigger>
             <TabsTrigger value="activities">Activities</TabsTrigger>
           </TabsList>
           
           {/* Medicines Tab */}
           <TabsContent value="medicines" className="space-y-4">
-            <h2 className="text-xl font-semibold">Today's Medications</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">Today's Medications</h2>
+              <Button variant="outline" size="sm" onClick={() => toggleWidget('Medicines')}>
+                Customize
+              </Button>
+            </div>
+            
             {medicines.map(medicine => (
               <Card key={medicine.id}>
-                <CardContent className="p-4 flex justify-between items-center">
-                  <div>
-                    <h3 className="font-medium">{medicine.name}</h3>
-                    <p className="text-sm text-muted-foreground">
-                      {medicine.time} · {medicine.dosage}
-                    </p>
+                <CardContent className="p-4">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-primary/10 p-2 rounded-full">
+                        <Pill className="text-primary" size={20} />
+                      </div>
+                      <div>
+                        <h3 className="font-medium">{medicine.name}</h3>
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <span>{medicine.time}</span>
+                          <span>•</span>
+                          <span>{medicine.dosage}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <Button 
+                      variant={medicine.taken ? "secondary" : "default"}
+                      onClick={() => handleMedicineTaken(medicine.id)}
+                    >
+                      {medicine.taken ? "Taken" : "Take Now"}
+                    </Button>
                   </div>
-                  <Button variant={medicine.taken ? "secondary" : "default"}>
-                    {medicine.taken ? "Taken" : "Take Now"}
-                  </Button>
                 </CardContent>
               </Card>
             ))}
@@ -115,21 +295,37 @@ const Dashboard = () => {
           
           {/* Appointments Tab */}
           <TabsContent value="appointments" className="space-y-4">
-            <h2 className="text-xl font-semibold">Upcoming Appointments</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">Upcoming Appointments</h2>
+              <Button variant="outline" size="sm" onClick={() => toggleWidget('Appointments')}>
+                Customize
+              </Button>
+            </div>
+            
             {appointments.map(appointment => (
               <Card key={appointment.id}>
                 <CardContent className="p-4">
-                  <div className="flex justify-between">
-                    <h3 className="font-medium">{appointment.title}</h3>
-                    <span className="text-sm px-2 py-1 bg-secondary rounded-full">
-                      {appointment.type}
-                    </span>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <div className="bg-secondary/20 p-2 rounded-full">
+                        <Calendar className="text-secondary-foreground" size={20} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <h3 className="font-medium">{appointment.title}</h3>
+                          <Badge variant="outline" className="text-xs">
+                            {appointment.type}
+                          </Badge>
+                        </div>
+                        <p className="text-sm text-muted-foreground">
+                          {new Date(appointment.date).toLocaleDateString('en-US', { 
+                            month: 'short', day: 'numeric' 
+                          })} · {appointment.time}
+                        </p>
+                      </div>
+                    </div>
+                    <Button variant="outline" size="sm">Details</Button>
                   </div>
-                  <p className="text-sm text-muted-foreground">
-                    {new Date(appointment.date).toLocaleDateString('en-US', { 
-                      month: 'short', day: 'numeric' 
-                    })} · {appointment.time}
-                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -138,60 +334,151 @@ const Dashboard = () => {
           
           {/* Vitals Tab */}
           <TabsContent value="vitals" className="space-y-4">
-            <h2 className="text-xl font-semibold">Today's Health Vitals</h2>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">Today's Health Vitals</h2>
+              <Button variant="outline" size="sm" onClick={() => toggleWidget('Vitals')}>
+                Customize
+              </Button>
+            </div>
+            
             <div className="grid grid-cols-2 gap-4">
               <Card>
-                <CardContent className="p-4 text-center">
-                  <h3 className="text-muted-foreground">Steps</h3>
-                  <div className="text-2xl font-semibold">{vitals.steps}</div>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-blue-100 p-3 rounded-full">
+                      <Activity size={24} className="text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-muted-foreground text-sm">Steps</h3>
+                      <div className="text-2xl font-semibold">{vitals.steps}</div>
+                      <div className="text-xs text-green-600">+12% from yesterday</div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
+              
               <Card>
-                <CardContent className="p-4 text-center">
-                  <h3 className="text-muted-foreground">Weight</h3>
-                  <div className="text-2xl font-semibold">{vitals.weight}</div>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-green-100 p-3 rounded-full">
+                      <Weight size={24} className="text-green-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-muted-foreground text-sm">Weight</h3>
+                      <div className="text-2xl font-semibold">{vitals.weight}</div>
+                      <div className="text-xs text-muted-foreground">Last updated today</div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
+              
               <Card>
-                <CardContent className="p-4 text-center">
-                  <h3 className="text-muted-foreground">Sleep</h3>
-                  <div className="text-2xl font-semibold">{vitals.sleep}</div>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-indigo-100 p-3 rounded-full">
+                      <Bed size={24} className="text-indigo-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-muted-foreground text-sm">Sleep</h3>
+                      <div className="text-2xl font-semibold">{vitals.sleep}</div>
+                      <div className="text-xs text-amber-600">-0.5 hrs from average</div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
+              
               <Card>
-                <CardContent className="p-4 text-center">
-                  <h3 className="text-muted-foreground">Heart Rate</h3>
-                  <div className="text-2xl font-semibold">{vitals.heartRate}</div>
+                <CardContent className="p-4">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-red-100 p-3 rounded-full">
+                      <Heart size={24} className="text-red-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-muted-foreground text-sm">Heart Rate</h3>
+                      <div className="text-2xl font-semibold">{vitals.heartRate}</div>
+                      <div className="text-xs text-green-600">Within normal range</div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </div>
+            
             <Button variant="outline" className="w-full">Update Vitals</Button>
+          </TabsContent>
+          
+          {/* Health Focus Tab */}
+          <TabsContent value="healthfocus" className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">Health Areas to Focus</h2>
+              <Button variant="outline" size="sm" onClick={() => toggleWidget('Health Focus')}>
+                Customize
+              </Button>
+            </div>
+            
+            {healthFocus.map((item, index) => (
+              <Card key={index} className={item.status === 'warning' ? 'border-amber-300' : 'border-green-300'}>
+                <CardContent className="p-4">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="font-medium">{item.name}</h3>
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg font-semibold">{item.value}</span>
+                        <Badge 
+                          variant={item.status === 'warning' ? 'default' : 'secondary'}
+                          className={item.status === 'warning' ? 'bg-amber-500' : 'bg-green-500'}
+                        >
+                          {item.status}
+                        </Badge>
+                      </div>
+                    </div>
+                    <div className="text-right max-w-[50%]">
+                      <p className="text-sm text-muted-foreground">{item.recommendation}</p>
+                      <Button variant="link" className="p-0 h-auto mt-1">Learn more</Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            
+            <Button variant="outline" className="w-full">View Health Report</Button>
           </TabsContent>
           
           {/* Activities Tab */}
           <TabsContent value="activities" className="space-y-4">
-            <h2 className="text-xl font-semibold">Upcoming Activities</h2>
-            <Card className="bg-golden-yellow/20">
-              <CardContent className="p-4">
-                <h3 className="font-medium">Memory Game Challenge</h3>
-                <p className="text-sm text-muted-foreground">Today at 3:00 PM</p>
-                <Button className="mt-3" size="sm">Play Now</Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-golden-pink/20">
-              <CardContent className="p-4">
-                <h3 className="font-medium">Gentle Yoga Webinar</h3>
-                <p className="text-sm text-muted-foreground">Tomorrow at 10:00 AM</p>
-                <Button className="mt-3" variant="outline" size="sm">Set Reminder</Button>
-              </CardContent>
-            </Card>
-            <Card className="bg-golden-peach/20">
-              <CardContent className="p-4">
-                <h3 className="font-medium">Community Garden Volunteering</h3>
-                <p className="text-sm text-muted-foreground">May 15 at 9:00 AM</p>
-                <Button className="mt-3" variant="outline" size="sm">Learn More</Button>
-              </CardContent>
-            </Card>
+            <div className="flex justify-between items-center">
+              <h2 className="text-xl font-semibold">Upcoming Activities</h2>
+              <Button variant="outline" size="sm" onClick={() => toggleWidget('Activities')}>
+                Customize
+              </Button>
+            </div>
+            
+            {upcomingActivities.map((activity) => (
+              <Card key={activity.id} className={activity.color}>
+                <CardContent className="p-4">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <h3 className="font-medium">{activity.name}</h3>
+                      <div className="flex items-center gap-2">
+                        <p className="text-sm text-muted-foreground">{activity.time}</p>
+                        <Badge variant="outline">{activity.type}</Badge>
+                      </div>
+                    </div>
+                    <div>
+                      {activity.type === 'game' && (
+                        <Button size="sm">Play Now</Button>
+                      )}
+                      {activity.type === 'webinar' && (
+                        <Button variant="outline" size="sm">Set Reminder</Button>
+                      )}
+                      {activity.type === 'volunteer' && (
+                        <Button variant="outline" size="sm">Learn More</Button>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            
             <Button variant="outline" className="w-full">View All Activities</Button>
           </TabsContent>
         </Tabs>
@@ -206,21 +493,12 @@ const Dashboard = () => {
           </Button>
           
           <Button variant="ghost" className="flex flex-col items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4" />
-              <path d="M4 6v12c0 1.1.9 2 2 2h14v-4" />
-              <path d="M18 12a2 2 0 0 0 0 4h2v-4Z" />
-            </svg>
+            <Pill size={24} />
             <span className="text-xs">Health</span>
           </Button>
           
           <Button variant="ghost" className="flex flex-col items-center gap-1">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
+            <Users size={24} />
             <span className="text-xs">Community</span>
           </Button>
           
