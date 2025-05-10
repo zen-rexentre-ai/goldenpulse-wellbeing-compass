@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Pill, Users, HandShake, Phone } from 'lucide-react';
+import { Home, Pill, Users, Handshake, Phone } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const BottomNavigation: React.FC = () => {
@@ -53,7 +53,7 @@ const BottomNavigation: React.FC = () => {
           asChild
         >
           <Link to="/volunteering">
-            <HandShake size={24} />
+            <Handshake size={24} />
             <span className="text-xs">Volunteer</span>
           </Link>
         </Button>
