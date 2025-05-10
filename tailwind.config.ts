@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,7 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				// GoldenPulse custom colors
+				"golden-purple": "#7E69AB",
+				"golden-orange": "#FEC6A1",
+				"golden-pink": "#FFDEE2",
+				"golden-peach": "#FDE1D3",
+				"golden-yellow": "#FEF7CD",
+				"golden-dark": "#1A1F2C",
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -84,11 +92,28 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				// Add animations for the app
+				'fade-in': {
+					'0%': { opacity: '0', transform: 'translateY(10px)' },
+					'100%': { opacity: '1', transform: 'translateY(0)' }
+				},
+				'scale-in': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in': 'fade-in 0.5s ease-out forwards',
+				'scale-in': 'scale-in 0.3s ease-out forwards'
+			},
+			fontSize: {
+				'senior-base': '18px',
+				'senior-lg': '20px',
+				'senior-xl': '22px',
+				'senior-2xl': '24px',
 			}
 		}
 	},
