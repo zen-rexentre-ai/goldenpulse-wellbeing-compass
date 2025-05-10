@@ -13,11 +13,13 @@ import DocumentUpload from '@/components/onboarding/DocumentUpload';
 import AIProfileBasic from '@/components/onboarding/AIProfileBasic';
 import AIProfileExtended from '@/components/onboarding/AIProfileExtended';
 import OnboardingProgress from '@/components/onboarding/OnboardingProgress';
+import EmergencyContacts from '@/components/onboarding/EmergencyContacts';
+import VolunteeringPreferences from '@/components/onboarding/VolunteeringPreferences';
 
 const Onboarding = () => {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
-  const totalSteps = 7;
+  const totalSteps = 9; // Updated total steps
   
   const nextStep = () => {
     if (step < totalSteps) {
@@ -52,8 +54,12 @@ const Onboarding = () => {
       case 5:
         return <DocumentUpload />;
       case 6:
-        return <AIProfileBasic />;
+        return <EmergencyContacts />; // New step
       case 7:
+        return <VolunteeringPreferences />; // New step
+      case 8:
+        return <AIProfileBasic />;
+      case 9:
         return <AIProfileExtended />;
       default:
         return <WellnessGoals />;

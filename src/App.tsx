@@ -12,6 +12,8 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
+import EmergencyContacts from "./pages/EmergencyContacts";
+import Volunteering from "./pages/Volunteering";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +31,8 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/emergency-contacts" element={<EmergencyContacts />} />
+            <Route path="/volunteering" element={<Volunteering />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
