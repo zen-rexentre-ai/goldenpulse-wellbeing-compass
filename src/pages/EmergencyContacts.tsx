@@ -2,14 +2,27 @@
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Phone, Edit } from 'lucide-react';
+import { Phone, Edit, MapPin } from 'lucide-react';
 import BottomNavigation from '@/components/dashboard/BottomNavigation';
+import LocationMap from '@/components/LocationMap';
 
 const EmergencyContacts = () => {
   return (
     <div className="min-h-screen flex flex-col pb-20">
       <div className="flex-1 container max-w-6xl py-6 space-y-6">
         <h1 className="text-2xl font-bold">Emergency Contacts</h1>
+        
+        <Card className="border-none shadow-md">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-lg flex items-center gap-2">
+              <MapPin className="h-5 w-5 text-red-500" />
+              Your Current Location
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <LocationMap className="mt-2" />
+          </CardContent>
+        </Card>
         
         <Card className="border-l-4 border-l-blue-600">
           <CardHeader className="pb-2">
