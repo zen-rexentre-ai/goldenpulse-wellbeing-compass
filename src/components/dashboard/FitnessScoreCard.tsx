@@ -2,14 +2,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowUp, ArrowDown } from 'lucide-react';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { ArrowUp, ArrowDown, ArrowLeft, ArrowRight } from 'lucide-react';
 
 interface FitnessScore {
   current: number;
@@ -36,6 +29,51 @@ interface FitnessScoreCardProps {
 }
 
 export const FitnessScoreCard: React.FC<FitnessScoreCardProps> = ({ fitnessScores, onViewDetailedAnalysis }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const scoreItems = [
+    { 
+      title: 'Current Score', 
+      score: fitnessScores.current, 
+      subtitle: 'Your score today',
+      change: null 
+    },
+    { 
+      title: 'Weekly Score', 
+      score: fitnessScores.week.score, 
+      subtitle: 'Last week',
+      change: { 
+        value: fitnessScores.week.change, 
+        direction: fitnessScores.week.direction 
+      } 
+    },
+    { 
+      title: 'Monthly Score', 
+      score: fitnessScores.month.score, 
+      subtitle: 'Last month',
+      change: { 
+        value: fitnessScores.month.change, 
+        direction: fitnessScores.month.direction 
+      } 
+    },
+    { 
+      title: 'Since Login', 
+      score: fitnessScores.sinceLogin.score, 
+      subtitle: 'Your progress', 
+      change: { 
+        value: fitnessScores.sinceLogin.change, 
+        direction: fitnessScores.sinceLogin.direction 
+      } 
+    }
+  ];
+
+  const nextScore = () => {
+    setActiveIndex((prev) => (prev === scoreItems.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevScore = () => {
+    setActiveIndex((prev) => (prev === 0 ? scoreItems.length - 1 : prev - 1));
+  };
+
   // Function to render the trend arrow based on direction
   const renderTrendArrow = (direction: string) => {
     if (direction === 'up') {
@@ -45,107 +83,75 @@ export const FitnessScoreCard: React.FC<FitnessScoreCardProps> = ({ fitnessScore
     }
   };
 
+  const activeItem = scoreItems[activeIndex];
+
   return (
-    <div className="w-full overflow-hidden bg-primary/5 rounded-lg border shadow-sm">
-      <div className="bg-primary text-primary-foreground p-4 text-center">
-        <h2 className="text-xl font-semibold">Your Fitness Score</h2>
+    <div className="w-full flex flex-col items-center">
+      <div className="w-full max-w-md bg-primary/5 rounded-lg border shadow-sm relative">
+        <div className="bg-primary text-primary-foreground p-3 text-center rounded-t-lg">
+          <h2 className="text-lg font-semibold">Your Fitness Score</h2>
+        </div>
+        
+        <div className="flex items-center justify-center py-4">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="absolute left-2 h-8 w-8" 
+            onClick={prevScore}
+            aria-label="Previous score"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          
+          <div className="flex flex-col items-center justify-center text-center px-12">
+            <h3 className="text-lg font-medium text-muted-foreground">{activeItem.title}</h3>
+            <div className="text-5xl font-bold my-3">{activeItem.score}</div>
+            <p className="text-sm text-muted-foreground">{activeItem.subtitle}</p>
+            
+            {activeItem.change && (
+              <div className="flex items-center gap-1 mt-2">
+                {renderTrendArrow(activeItem.change.direction)}
+                <span className={activeItem.change.direction === 'up' ? 'text-green-600' : 'text-red-600'}>
+                  {activeItem.change.value}%
+                </span>
+              </div>
+            )}
+          </div>
+          
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="absolute right-2 h-8 w-8" 
+            onClick={nextScore}
+            aria-label="Next score"
+          >
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+        </div>
+        
+        <div className="flex justify-end p-3 pt-0">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            onClick={onViewDetailedAnalysis}
+            className="text-primary hover:text-primary/80"
+          >
+            View Detailed Analysis
+          </Button>
+        </div>
       </div>
       
-      <Carousel className="w-full">
-        <CarouselContent>
-          <CarouselItem className="pl-0">
-            <Card className="border-0 shadow-none">
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center justify-center text-center">
-                  <div className="text-6xl font-bold mb-2">{fitnessScores.current}</div>
-                  <p className="text-sm text-muted-foreground">Current Score</p>
-                  <div className="flex items-center gap-2 mt-3 text-lg">
-                    <span>Weekly Change:</span>
-                    <div className="flex items-center gap-1">
-                      {renderTrendArrow(fitnessScores.week.direction)}
-                      <span className={fitnessScores.week.direction === 'up' ? 'text-green-600' : 'text-red-600'}>
-                        {fitnessScores.week.change}%
-                      </span>
-                    </div>
-                  </div>
-                  <p className="mt-4 text-muted-foreground">Use the arrows to view your score history</p>
-                </div>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-          
-          <CarouselItem>
-            <Card className="border-0 shadow-none">
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center justify-center text-center">
-                  <div className="text-6xl font-bold mb-2">{fitnessScores.week.score}</div>
-                  <p className="text-sm text-muted-foreground">Last Week</p>
-                  <div className="flex items-center gap-2 mt-3 text-lg">
-                    <span>Weekly Change:</span>
-                    <div className="flex items-center gap-1 text-green-600">
-                      <ArrowUp size={20} />
-                      <span>2.8%</span>
-                    </div>
-                  </div>
-                  <p className="mt-4 text-muted-foreground">This was your score one week ago</p>
-                </div>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-          
-          <CarouselItem>
-            <Card className="border-0 shadow-none">
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center justify-center text-center">
-                  <div className="text-6xl font-bold mb-2">{fitnessScores.month.score}</div>
-                  <p className="text-sm text-muted-foreground">Last Month</p>
-                  <div className="flex items-center gap-2 mt-3 text-lg">
-                    <span>Monthly Change:</span>
-                    <div className="flex items-center gap-1 text-green-600">
-                      <ArrowUp size={20} />
-                      <span>{fitnessScores.month.change}%</span>
-                    </div>
-                  </div>
-                  <p className="mt-4 text-muted-foreground">This was your score one month ago</p>
-                </div>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-          
-          <CarouselItem>
-            <Card className="border-0 shadow-none">
-              <CardContent className="p-6">
-                <div className="flex flex-col items-center justify-center text-center">
-                  <div className="text-6xl font-bold mb-2">{fitnessScores.sinceLogin.score}</div>
-                  <p className="text-sm text-muted-foreground">Since Login</p>
-                  <div className="flex items-center gap-2 mt-3 text-lg">
-                    <span>Overall Progress:</span>
-                    <div className="flex items-center gap-1 text-green-600">
-                      <ArrowUp size={20} />
-                      <span>{fitnessScores.sinceLogin.change}%</span>
-                    </div>
-                  </div>
-                  <p className="mt-4 text-muted-foreground">Your progress since you started using the app</p>
-                </div>
-              </CardContent>
-            </Card>
-          </CarouselItem>
-        </CarouselContent>
-        
-        <div className="flex items-center justify-center mt-4 mb-2">
-          <CarouselPrevious className="relative inset-auto mx-2" />
-          <CarouselNext className="relative inset-auto mx-2" />
-        </div>
-      </Carousel>
-      
-      <div className="flex justify-center p-4">
-        <Button 
-          className="mt-2" 
-          variant="outline" 
-          onClick={onViewDetailedAnalysis}
-        >
-          View Detailed Analysis
-        </Button>
+      <div className="flex justify-center mt-2">
+        {scoreItems.map((_, idx) => (
+          <Button 
+            key={idx}
+            variant="ghost" 
+            size="icon" 
+            className={`h-2 w-2 rounded-full mx-1 p-0 ${idx === activeIndex ? 'bg-primary' : 'bg-muted'}`}
+            onClick={() => setActiveIndex(idx)}
+            aria-label={`Go to score ${idx + 1}`}
+          />
+        ))}
       </div>
     </div>
   );

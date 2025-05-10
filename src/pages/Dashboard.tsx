@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AccessibilityControls } from '@/components/AccessibilityControls';
@@ -110,17 +109,19 @@ const Dashboard = () => {
       )}
       
       <main className="container max-w-6xl p-4 space-y-6">
-        {/* Fitness Score Card */}
-        <FitnessScoreCard 
-          fitnessScores={fitnessScores}
-          onViewDetailedAnalysis={() => setShowDetailedAnalysis(true)}
-        />
-        
-        {/* Detailed Analysis Dialog */}
-        <DetailedAnalysisDialog 
-          open={showDetailedAnalysis} 
-          onOpenChange={setShowDetailedAnalysis} 
-        />
+        {/* Fitness Score Card - Updated to be more centered/prominent */}
+        <div className="relative">
+          <FitnessScoreCard 
+            fitnessScores={fitnessScores}
+            onViewDetailedAnalysis={() => setShowDetailedAnalysis(true)}
+          />
+          
+          {/* Detailed Analysis Dialog */}
+          <DetailedAnalysisDialog 
+            open={showDetailedAnalysis} 
+            onOpenChange={setShowDetailedAnalysis} 
+          />
+        </div>
         
         {/* Widget Controls */}
         <div className="flex justify-between items-center">
@@ -128,7 +129,7 @@ const Dashboard = () => {
           <Button variant="outline" size="sm">Customize Widgets</Button>
         </div>
         
-        {/* Dashboard Tabs */}
+        {/* Dashboard Tabs - Will be styled in the component */}
         <DashboardTabs 
           medicines={medicines}
           appointments={appointments}
