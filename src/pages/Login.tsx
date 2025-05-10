@@ -19,7 +19,7 @@ const Login = () => {
     e.preventDefault();
     // In a real app, you would authenticate with a backend
     toast.success("Login successful!");
-    navigate('/dashboard');
+    navigate('/onboarding');
   };
 
   const handlePinLogin = (e: React.FormEvent) => {
@@ -27,7 +27,7 @@ const Login = () => {
     // In a real app, you would verify the PIN
     if (pin.length >= 4) {
       toast.success("PIN login successful!");
-      navigate('/dashboard');
+      navigate('/onboarding');
     } else {
       toast.error("Please enter a valid PIN");
     }
@@ -36,7 +36,7 @@ const Login = () => {
   const handleBiometricLogin = () => {
     // In a real app, this would trigger native biometric authentication
     toast.success("Biometric authentication successful!");
-    navigate('/dashboard');
+    navigate('/onboarding');
   };
 
   return (
