@@ -17,7 +17,7 @@ const OnboardingProgress: React.FC<OnboardingProgressProps> = ({
     'Appointments', 
     'Vitals', 
     'Documents', 
-    'Basic Profile', 
+    'Volunteering Preferences', 
     'Extended Profile'
   ];
 
