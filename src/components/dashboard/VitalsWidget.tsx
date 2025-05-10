@@ -1,8 +1,12 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Activity, Heart, Bed, Weight } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogClose } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 
 interface Vitals {
   steps: number;
@@ -16,7 +20,37 @@ interface VitalsWidgetProps {
   toggleWidget: (widgetName: string) => void;
 }
 
-export const VitalsWidget: React.FC<VitalsWidgetProps> = ({ vitals, toggleWidget }) => {
+export const VitalsWidget: React.FC<VitalsWidgetProps> = ({ vitals: initialVitals, toggleWidget }) => {
+  const [vitals, setVitals] = useState(initialVitals);
+  const [newVitals, setNewVitals] = useState({
+    steps: initialVitals.steps,
+    weight: initialVitals.weight.split(' ')[0],
+    sleep: initialVitals.sleep.split(' ')[0],
+    heartRate: initialVitals.heartRate.split(' ')[0]
+  });
+  const { toast } = useToast();
+
+  const handleVitalChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setNewVitals(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    setVitals({
+      steps: Number(newVitals.steps),
+      weight: `${newVitals.weight} kg`,
+      sleep: `${newVitals.sleep} hrs`,
+      heartRate: `${newVitals.heartRate} bpm`
+    });
+    
+    toast({
+      title: "Vitals Updated",
+      description: "Your health vitals have been successfully updated."
+    });
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
@@ -88,7 +122,73 @@ export const VitalsWidget: React.FC<VitalsWidgetProps> = ({ vitals, toggleWidget
         </Card>
       </div>
       
-      <Button variant="outline" className="w-full">Update Vitals</Button>
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="outline" className="w-full">Update Vitals</Button>
+        </DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Update Your Vitals</DialogTitle>
+          </DialogHeader>
+          
+          <form onSubmit={handleSubmit} className="space-y-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="steps">Steps</Label>
+              <Input 
+                id="steps" 
+                name="steps"
+                type="number" 
+                value={newVitals.steps}
+                onChange={handleVitalChange}
+              />
+            </div>
+            
+            <div className="grid gap-2">
+              <Label htmlFor="weight">Weight (kg)</Label>
+              <Input 
+                id="weight" 
+                name="weight"
+                type="number" 
+                step="0.1"
+                value={newVitals.weight}
+                onChange={handleVitalChange}
+              />
+            </div>
+            
+            <div className="grid gap-2">
+              <Label htmlFor="sleep">Sleep (hours)</Label>
+              <Input 
+                id="sleep" 
+                name="sleep"
+                type="number" 
+                step="0.1"
+                value={newVitals.sleep}
+                onChange={handleVitalChange}
+              />
+            </div>
+            
+            <div className="grid gap-2">
+              <Label htmlFor="heartRate">Resting Heart Rate (bpm)</Label>
+              <Input 
+                id="heartRate" 
+                name="heartRate"
+                type="number" 
+                value={newVitals.heartRate}
+                onChange={handleVitalChange}
+              />
+            </div>
+            
+            <DialogFooter className="mt-4">
+              <DialogClose asChild>
+                <Button type="button" variant="outline">Cancel</Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button type="submit">Save Changes</Button>
+              </DialogClose>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
