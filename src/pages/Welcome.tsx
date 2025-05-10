@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
@@ -12,7 +13,10 @@ const Welcome = () => {
         <div className="text-center space-y-4">
           <h1 className="text-3xl font-bold">Welcome to GoldenPulse!</h1>
           <p className="text-lg">
-            We're delighted to have you here. Empowering seniors to live vibrant, meaningful, and fulfilling lives.
+            We're delighted to have you here.
+          </p>
+          <p className="text-lg font-medium">
+            We Empower Seniors to live Vibrant, Purposeful and Fulfilling lives.
           </p>
         </div>
         
