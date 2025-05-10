@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Pill, Users, Handshake, Phone, Settings } from 'lucide-react';
+import { Home, Pill, Users, Handshake, Siren, Settings } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const BottomNavigation: React.FC = () => {
@@ -32,7 +32,7 @@ const BottomNavigation: React.FC = () => {
           asChild
         >
           <Link to="/emergency-contacts">
-            <Phone size={24} />
+            <Siren size={24} />
             <span className="text-xs">Emergency</span>
           </Link>
         </Button>

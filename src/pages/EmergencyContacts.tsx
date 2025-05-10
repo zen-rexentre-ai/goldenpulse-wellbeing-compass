@@ -1,16 +1,104 @@
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Phone, Edit, MapPin } from 'lucide-react';
+import { Phone, Edit, MapPin, PhoneCall } from 'lucide-react';
 import BottomNavigation from '@/components/dashboard/BottomNavigation';
 import LocationMap from '@/components/LocationMap';
+import { toast } from "@/hooks/use-toast";
 
 const EmergencyContacts = () => {
+  const [pressing, setPressing] = useState(false);
+  const [pressProgress, setPressProgress] = useState(0);
+  const pressTimer = useRef<NodeJS.Timeout | null>(null);
+  const progressInterval = useRef<NodeJS.Timeout | null>(null);
+  const primaryPhone = "(555) 123-4567"; // This would come from your user data in a real app
+  
+  const handlePressStart = () => {
+    setPressing(true);
+    setPressProgress(0);
+    
+    // Start progress timer
+    progressInterval.current = setInterval(() => {
+      setPressProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(progressInterval.current as NodeJS.Timeout);
+          return 100;
+        }
+        return prev + (100 / 7000) * 100; // Increase by percentage points per 100ms (7 seconds total)
+      });
+    }, 100);
+    
+    // Start the main timer for 7 seconds
+    pressTimer.current = setTimeout(() => {
+      handleEmergencyCall();
+      clearInterval(progressInterval.current as NodeJS.Timeout);
+    }, 7000);
+  };
+  
+  const handlePressEnd = () => {
+    setPressing(false);
+    setPressProgress(0);
+    
+    if (pressTimer.current) {
+      clearTimeout(pressTimer.current);
+      pressTimer.current = null;
+    }
+    
+    if (progressInterval.current) {
+      clearInterval(progressInterval.current);
+      progressInterval.current = null;
+    }
+  };
+  
+  const handleEmergencyCall = () => {
+    // In a real app, this would use a native phone API
+    toast({
+      title: "Emergency call initiated",
+      description: `Calling primary emergency contact: ${primaryPhone}`,
+      variant: "destructive"
+    });
+    
+    // This would be the actual call implementation
+    window.location.href = `tel:${primaryPhone.replace(/[^0-9]/g, '')}`;
+  };
+
   return (
     <div className="min-h-screen flex flex-col pb-20">
       <div className="flex-1 container max-w-6xl py-6 space-y-6">
         <h1 className="text-2xl font-bold">Emergency Contacts</h1>
+        
+        {/* SOS Button */}
+        <div className="flex justify-center my-6">
+          <div className="relative">
+            <Button 
+              className="rounded-full h-24 w-24 text-lg font-bold bg-red-600 hover:bg-red-700 flex flex-col items-center justify-center"
+              onMouseDown={handlePressStart}
+              onMouseUp={handlePressEnd}
+              onMouseLeave={handlePressEnd}
+              onTouchStart={handlePressStart}
+              onTouchEnd={handlePressEnd}
+            >
+              <PhoneCall className="h-8 w-8 mb-1" />
+              SOS
+            </Button>
+            
+            {pressing && (
+              <div className="absolute bottom-0 left-0 right-0 bg-gray-200 h-1 rounded-full overflow-hidden">
+                <div 
+                  className="bg-red-600 h-full transition-all duration-100"
+                  style={{ width: `${pressProgress}%` }}
+                />
+              </div>
+            )}
+            
+            {pressing && pressProgress > 0 && (
+              <div className="absolute -bottom-8 w-full text-center text-xs text-gray-500">
+                Hold for {Math.max(0, Math.ceil(7 - (pressProgress * 7 / 100)))} more seconds
+              </div>
+            )}
+          </div>
+        </div>
         
         <Card className="border-none shadow-md">
           <CardHeader className="pb-2">
