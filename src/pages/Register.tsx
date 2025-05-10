@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -27,17 +26,14 @@ const Register = () => {
   };
   
   const nextStep = () => {
-    // In a real app, you would validate inputs here
     if (step < 3) {
       setStep(step + 1);
       window.scrollTo(0, 0);
     } else {
-      // Submit registration
       toast.success("Registration successful!", {
-        description: "Welcome to GoldenPulse!"
+        description: "Welcome to GoldenPulse! Complete your profile to get started."
       });
-      // In a real app, you would save data and authenticate
-      navigate('/dashboard');
+      navigate('/onboarding');
     }
   };
   
