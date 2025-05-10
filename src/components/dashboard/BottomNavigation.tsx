@@ -25,17 +25,7 @@ const BottomNavigation: React.FC = () => {
           </Link>
         </Button>
         
-        <Button 
-          variant={isActive('/health') ? "default" : "ghost"} 
-          className="flex flex-col items-center gap-1"
-          asChild
-        >
-          <Link to="/health">
-            <Pill size={24} />
-            <span className="text-xs">Health</span>
-          </Link>
-        </Button>
-        
+               
         <Button 
           variant={isActive('/emergency-contacts') ? "default" : "ghost"} 
           className="flex flex-col items-center gap-1"
@@ -58,17 +48,7 @@ const BottomNavigation: React.FC = () => {
           </Link>
         </Button>
         
-        <Button 
-          variant={isActive('/community') ? "default" : "ghost"} 
-          className="flex flex-col items-center gap-1"
-          asChild
-        >
-          <Link to="/community">
-            <Users size={24} />
-            <span className="text-xs">Community</span>
-          </Link>
-        </Button>
-        
+               
         <Button 
           variant={isActive('/settings') ? "default" : "ghost"} 
           className="flex flex-col items-center gap-1"
