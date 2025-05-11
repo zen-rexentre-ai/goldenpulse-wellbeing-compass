@@ -7,7 +7,35 @@ import { FeatureCardProps } from '@/types/subscription';
 
 const SubscriptionPlans = () => {
   const featureCards: FeatureCardProps[] = [
+  	{
+      title: 'Personalized Wellness Journey',
+      icon: <Heart className="h-8 w-8 text-golden-purple" />,
+      description: 'Your own Personalized Wellness Journey currated by our Specialist Medical teams based on your goals & health reports.',
+      gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
+      textColor: 'text-golden-dark'
+    },
+	{
+      title: 'Emergency & SoS Tracking',
+      icon: <AlertTriangle className="h-8 w-8 text-golden-purple" />,
+      description: 'Real-time emergency and SoS tracking for peace of mind.',
+      gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
+      textColor: 'text-golden-dark'
+    },
+	{
+      title: 'AI Powered Diagnostics',
+      icon: <Brain className="h-8 w-8 text-golden-purple" />,
+      description: 'Advanced AI-driven health diagnostics for proactive care.',
+      gradient: 'bg-gradient-to-br from-golden-orange to-golden-pink',
+      textColor: 'text-golden-dark'
+    }, 
     {
+      title: 'Dependents Access',
+      icon: <UsersRound className="h-8 w-8 text-golden-purple" />,
+      description: 'Your dependents can access GoldenPulse for free.',
+      gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
+      textColor: 'text-golden-dark'
+    },
+   {
       title: 'Volunteering',
       icon: <HelpingHand className="h-8 w-8 text-golden-purple" />,
       description: 'For users seeking purpose through volunteering opportunities in their community.',
@@ -17,52 +45,24 @@ const SubscriptionPlans = () => {
     {
       title: 'Community Module',
       icon: <Users className="h-8 w-8 text-golden-purple" />,
-      description: 'Connect, share, and grow with a vibrant member community of like-minded individuals.',
+      description: 'Expand on your hobbies and interests by Connect, share, and growing with a vibrant member community of like-minded individuals.',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
-    {
-      title: 'Personalized Fitness Journey',
-      icon: <Heart className="h-8 w-8 text-golden-purple" />,
-      description: 'Tailored fitness plans and ongoing care from our specialist physician team.',
-      gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
-      textColor: 'text-golden-dark'
-    },
-    {
-      title: 'Six Month Review',
-      icon: <Calendar className="h-8 w-8 text-golden-purple" />,
-      description: 'Comprehensive health review by our medical team every six months.',
-      gradient: 'bg-gradient-to-br from-golden-orange to-golden-pink',
-      textColor: 'text-golden-dark'
-    },
-    {
-      title: 'Limited Medical Team Access',
-      icon: <UserRound className="h-8 w-8 text-golden-purple" />,
-      description: 'Up to 3 consults/month with Physio, GeriCare, Happiness Consultant, Sleep Therapist, or Yoga Master.',
-      gradient: 'bg-gradient-to-br from-golden-pink to-golden-peach',
-      textColor: 'text-golden-dark'
-    },
-    {
-      title: 'Dependents Access',
-      icon: <UsersRound className="h-8 w-8 text-golden-purple" />,
-      description: 'Your dependents can access GoldenPulse for free.',
+	  {
+      title: 'Webinars',
+      icon: <Users className="h-8 w-8 text-golden-purple" />,
+      description: 'Live and Recorded Webinars in variety of topics from Financial Literacy, Investments, Insurances, Safety devices and interesting Health topics',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
-    {
-      title: 'Emergency & SoS Tracking',
-      icon: <AlertTriangle className="h-8 w-8 text-golden-purple" />,
-      description: 'Real-time emergency and SoS tracking for peace of mind.',
-      gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
+	  {
+      title: 'Games',
+      icon: <Users className="h-8 w-8 text-golden-purple" />,
+      description: 'Fun and Cognitive games to keep your mind fresh and active',
+      gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
-    },
-    {
-      title: 'AI Powered Diagnostics',
-      icon: <Brain className="h-8 w-8 text-golden-purple" />,
-      description: 'Advanced AI-driven health diagnostics for proactive care.',
-      gradient: 'bg-gradient-to-br from-golden-orange to-golden-pink',
-      textColor: 'text-golden-dark'
-    },
+    }, 
   ];
 
   return (
