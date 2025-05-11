@@ -105,26 +105,6 @@ const SubscriptionPlans = () => {
         Choose the perfect plan for your wellness journey. Unlock premium features to enhance your health and well-being.
       </p>
 
-      {/* Feature Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-        {featureCards.map((card, index) => (
-          <Card key={index} className={cn("overflow-hidden shadow-lg transform transition-all hover:scale-105", card.gradient)}>
-            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm z-0"></div>
-            <CardHeader className="relative z-10">
-              <div className="flex items-center justify-center mb-4 p-3 rounded-full bg-white/80 w-16 h-16 mx-auto shadow-inner">
-                {card.icon}
-              </div>
-              <CardTitle className={cn("text-center", card.textColor)}>{card.title}</CardTitle>
-            </CardHeader>
-            <CardContent className="relative z-10">
-              <CardDescription className={cn("text-center font-medium", card.textColor)}>
-                {card.description}
-              </CardDescription>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-
             {/* Plan Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Free Plan */}
@@ -232,7 +212,26 @@ const SubscriptionPlans = () => {
           </CardFooter>
         </Card>
       </div>
-  
+
+            {/* Feature Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+        {featureCards.map((card, index) => (
+          <Card key={index} className={cn("overflow-hidden shadow-lg transform transition-all hover:scale-105", card.gradient)}>
+            <div className="absolute inset-0 bg-white/60 backdrop-blur-sm z-0"></div>
+            <CardHeader className="relative z-10">
+              <div className="flex items-center justify-center mb-4 p-3 rounded-full bg-white/80 w-16 h-16 mx-auto shadow-inner">
+                {card.icon}
+              </div>
+              <CardTitle className={cn("text-center", card.textColor)}>{card.title}</CardTitle>
+            </CardHeader>
+            <CardContent className="relative z-10">
+              <CardDescription className={cn("text-center font-medium", card.textColor)}>
+                {card.description}
+              </CardDescription>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
       
       {/* Plan Comparison */}
       <h2 className="text-3xl font-bold text-center mb-8">Detailed Plan Comparison</h2>
