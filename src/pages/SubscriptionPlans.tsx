@@ -124,8 +124,8 @@ const SubscriptionPlans = () => {
                 <span>Basic Emergency Tracking</span>
               </li>
               <li className="flex items-center text-muted-foreground">
-                <X className="h-5 w-5 mr-2" />
-                <span>Community Module*</span>
+                <X className="className="h-5 w-5 text-green-500 mr-2" />
+                <span>Community Module* (Enabled after 3 volunteering sessions) </span>
               </li>
               <li className="flex items-center text-muted-foreground">
                 <X className="h-5 w-5 mr-2" />
@@ -137,8 +137,7 @@ const SubscriptionPlans = () => {
             <Button className="w-full" variant="outline" onClick={() => handlePlanSelection('free')}>
               Get Started
             </Button>
-            *Access enabled after completion of 3 volunteering sessions
-          </CardFooter>
+            </CardFooter>
         </Card>
 
         {/* Basic Plan */}
