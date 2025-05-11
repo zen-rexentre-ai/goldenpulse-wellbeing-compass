@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Check, X, AlertTriangle, Calendar, Users, Brain, Heart, HelpingHand, UserRound, Family } from 'lucide-react';
+import { Check, X, AlertTriangle, Calendar, Users, Brain, Heart, HelpingHand, UserRound, UsersRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const SubscriptionPlans = () => {
@@ -60,7 +60,7 @@ const SubscriptionPlans = () => {
     },
     {
       title: 'Dependents Access',
-      icon: <Family className="h-8 w-8 text-golden-purple" />,
+      icon: <UsersRound className="h-8 w-8 text-golden-purple" />,
       description: 'Your dependents can access GoldenPulse for free.',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
