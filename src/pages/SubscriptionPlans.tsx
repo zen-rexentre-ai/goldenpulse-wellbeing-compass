@@ -156,17 +156,19 @@ const SubscriptionPlans = () => {
               </li>
               <li className="flex items-center">
                 <Check className="h-5 w-5 text-green-500 mr-2" />
-                <span>Community Module</span>
-              </li>
-              <li className="flex items-center">
-                <Check className="h-5 w-5 text-green-500 mr-2" />
                 <span>Personalized Fitness Journey</span>
               </li>
               <li className="flex items-center">
                 <Check className="h-5 w-5 text-green-500 mr-2" />
                 <span>2 Medical Consultation/Year</span>
               </li>
+                <li className="flex items-center">
+                <Check className="h-5 w-5 text-green-500 mr-2" />
+                <span>Community Module</span>
+                <span> * Enabled after 3 volunteering sessions</span>
+              </li>
             </ul>
+            
           </CardContent>
           <CardFooter>
             <Button className="w-full" onClick={() => handlePlanSelection('basic')}>
