@@ -162,8 +162,8 @@ const SubscriptionPlans = () => {
             <TableRow>
               <TableCell className="font-medium">Monthly Price</TableCell>
               <TableCell className="text-center font-bold">$0</TableCell>
-              <TableCell className="text-center font-bold">$9.99</TableCell>
-              <TableCell className="text-center font-bold bg-golden-yellow/10">$19.99</TableCell>
+              <TableCell className="text-center font-bold">Rs. 750/pm</TableCell>
+              <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 1500/pm </TableCell>
             </TableRow>
           </TableBody>
         </Table>
