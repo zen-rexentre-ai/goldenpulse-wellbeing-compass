@@ -144,7 +144,7 @@ const SubscriptionPlans = () => {
         <Card className="overflow-hidden shadow-lg">
           <CardHeader className="bg-gradient-to-b from-blue-50 to-blue-100 border-b">
             <CardTitle className="text-center">Basic</CardTitle>
-            <CardDescription className="text-center text-xl font-bold mt-2">Rs. 750</CardDescription>
+            <CardDescription className="text-center text-xl font-bold mt-2">Rs. 1000</CardDescription>
             <CardDescription className="text-center">per month</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
@@ -178,7 +178,7 @@ const SubscriptionPlans = () => {
         <Card className="overflow-hidden shadow-lg border-golden-yellow border-2">
             <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
             <CardTitle className="text-center text-golden-dark">Premium</CardTitle>
-            <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">Rs. 1500</CardDescription>
+            <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">Rs. 2000</CardDescription>
             <CardDescription className="text-center text-golden-dark">per month</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
@@ -270,8 +270,8 @@ const SubscriptionPlans = () => {
             <TableRow>
               <TableCell className="font-medium">Monthly Price</TableCell>
               <TableCell className="text-center font-bold">Rs. 0</TableCell>
-              <TableCell className="text-center font-bold">Rs. 750</TableCell>
-              <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 1500</TableCell>
+              <TableCell className="text-center font-bold">Rs. 1000</TableCell>
+              <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 2000</TableCell>
             </TableRow>
           </TableBody>
         </Table>
