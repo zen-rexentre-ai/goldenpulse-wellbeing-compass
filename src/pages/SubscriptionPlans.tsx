@@ -6,22 +6,23 @@ import FeatureCard from '@/components/subscription/FeatureCard';
 import { FeatureCardProps } from '@/types/subscription';
 
 const SubscriptionPlans = () => {
-  const featureCards: FeatureCardProps[] = [
-  	{
+  // Wellness Module feature cards
+  const wellnessFeatures: FeatureCardProps[] = [
+    {
       title: 'Personalized Wellness Journey',
       icon: <Heart className="h-8 w-8 text-golden-purple" />,
       description: 'Your own Personalized Wellness Journey currated by our Specialist Medical teams based on your goals & health reports.',
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
     },
-	{
+    {
       title: 'Emergency & SoS Tracking',
       icon: <AlertTriangle className="h-8 w-8 text-golden-purple" />,
       description: 'Real-time emergency and SoS tracking for peace of mind.',
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
     },
-	{
+    {
       title: 'AI Powered Diagnostics',
       icon: <Brain className="h-8 w-8 text-golden-purple" />,
       description: 'Advanced AI-driven health diagnostics for proactive care.',
@@ -35,7 +36,11 @@ const SubscriptionPlans = () => {
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
-   {
+  ];
+
+  // Community Module feature cards
+  const communityFeatures: FeatureCardProps[] = [
+    {
       title: 'Volunteering',
       icon: <HelpingHand className="h-8 w-8 text-golden-purple" />,
       description: 'For users seeking purpose through volunteering opportunities in their community.',
@@ -49,20 +54,20 @@ const SubscriptionPlans = () => {
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
-	  {
+    {
       title: 'Webinars',
       icon: <Users className="h-8 w-8 text-golden-purple" />,
       description: 'Live and Recorded Webinars in variety of topics from Financial Literacy, Investments, Insurances, Safety devices and interesting Health topics',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
-	  {
+    {
       title: 'Games',
       icon: <Users className="h-8 w-8 text-golden-purple" />,
       description: 'Fun and Cognitive games to keep your mind fresh and active',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
-    }, 
+    },
   ];
 
   return (
@@ -75,19 +80,43 @@ const SubscriptionPlans = () => {
       {/* Use the reusable SubscriptionPlanSelector component */}
       <SubscriptionPlanSelector />
 
-      {/* Feature Cards */}
+      {/* Feature Cards - Grouped by Modules */}
       <h2 className="text-3xl font-bold text-center mt-16 mb-8">Key Features</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8 mb-16">
-        {featureCards.map((card, index) => (
-          <FeatureCard
-            key={index}
-            title={card.title}
-            icon={card.icon}
-            description={card.description}
-            gradient={card.gradient}
-            textColor={card.textColor}
-          />
-        ))}
+
+      <div className="space-y-12">
+        {/* Wellness Module */}
+        <div className="border border-golden-yellow/30 rounded-lg p-6 bg-golden-yellow/5">
+          <h3 className="text-2xl font-bold text-center mb-6 text-golden-dark">Wellness Module</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {wellnessFeatures.map((card, index) => (
+              <FeatureCard
+                key={`wellness-${index}`}
+                title={card.title}
+                icon={card.icon}
+                description={card.description}
+                gradient={card.gradient}
+                textColor={card.textColor}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Community Module */}
+        <div className="border border-golden-pink/30 rounded-lg p-6 bg-golden-pink/5">
+          <h3 className="text-2xl font-bold text-center mb-6 text-golden-dark">Community Module</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {communityFeatures.map((card, index) => (
+              <FeatureCard
+                key={`community-${index}`}
+                title={card.title}
+                icon={card.icon}
+                description={card.description}
+                gradient={card.gradient}
+                textColor={card.textColor}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
