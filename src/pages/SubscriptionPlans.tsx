@@ -30,7 +30,7 @@ const SubscriptionPlans = () => {
   // Plan features for comparison table
   const features = [
     { name: 'Volunteering Access', free: true, basic: true, premium: true },
-    { name: 'Community Module', free: false, basic: true, premium: true },
+    { name: 'Community Module', free: 'Limited*', basic: true, premium: true },
     { name: 'Personalized Fitness Journey', free: false, basic: 'Limited', premium: true },
     { name: 'Six Month Medical Review', free: false, basic: false, premium: true },
     { name: 'Medical Team Consultations', free: false, basic: '1/month', premium: '3/month' },
@@ -125,51 +125,7 @@ const SubscriptionPlans = () => {
         ))}
       </div>
 
-      {/* Plan Comparison */}
-      <h2 className="text-3xl font-bold text-center mb-8">Plan Comparison</h2>
-      
-      <div className="overflow-x-auto rounded-lg shadow-lg mb-12 border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[250px]">Features</TableHead>
-              <TableHead className="text-center">Free</TableHead>
-              <TableHead className="text-center">Basic</TableHead>
-              <TableHead className="text-center bg-golden-yellow/20">Premium</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {features.map((feature, i) => (
-              <TableRow key={i}>
-                <TableCell className="font-medium">{feature.name}</TableCell>
-                <TableCell className="text-center">
-                  {feature.free === true ? <Check className="mx-auto text-green-500" /> : 
-                   feature.free === 'Basic' || feature.free === 'Limited' ? <span className="text-amber-500 text-sm">{feature.free}</span> : 
-                   <X className="mx-auto text-red-400" />}
-                </TableCell>
-                <TableCell className="text-center">
-                  {feature.basic === true ? <Check className="mx-auto text-green-500" /> : 
-                   typeof feature.basic === 'string' ? <span className="text-amber-500 text-sm">{feature.basic}</span> : 
-                   <X className="mx-auto text-red-400" />}
-                </TableCell>
-                <TableCell className="text-center bg-golden-yellow/10">
-                  {feature.premium === true ? <Check className="mx-auto text-green-500" /> : 
-                   typeof feature.premium === 'string' ? <span className="text-amber-500 text-sm">{feature.premium}</span> : 
-                   <X className="mx-auto text-red-400" />}
-                </TableCell>
-              </TableRow>
-            ))}
-            <TableRow>
-              <TableCell className="font-medium">Monthly Price</TableCell>
-              <TableCell className="text-center font-bold">Rs. 0</TableCell>
-              <TableCell className="text-center font-bold">Rs. 750</TableCell>
-              <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 1500</TableCell>
-            </TableRow>
-          </TableBody>
-        </Table>
-      </div>
-
-      {/* Plan Cards */}
+            {/* Plan Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Free Plan */}
         <Card className="overflow-hidden shadow-lg">
@@ -240,7 +196,7 @@ const SubscriptionPlans = () => {
 
         {/* Premium Plan */}
         <Card className="overflow-hidden shadow-lg border-golden-yellow border-2">
-          <div className="absolute top-0 right-0 bg-golden-yellow px-3 py-1 text-xs font-bold text-golden-dark rounded-bl-lg">
+          <div className="top-0 right-0 bg-golden-yellow px-3 py-1 text-xs font-bold text-golden-dark rounded-bl-lg">
             RECOMMENDED
           </div>
           <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
@@ -279,7 +235,53 @@ const SubscriptionPlans = () => {
           </CardFooter>
         </Card>
       </div>
-    </div>
+  
+      
+      {/* Plan Comparison */}
+      <h2 className="text-3xl font-bold text-center mb-8">Detailed Plan Comparison</h2>
+      
+      <div className="overflow-x-auto rounded-lg shadow-lg mb-12 border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[250px]">Features</TableHead>
+              <TableHead className="text-center">Free</TableHead>
+              <TableHead className="text-center">Basic</TableHead>
+              <TableHead className="text-center bg-golden-yellow/20">Premium</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {features.map((feature, i) => (
+              <TableRow key={i}>
+                <TableCell className="font-medium">{feature.name}</TableCell>
+                <TableCell className="text-center">
+                  {feature.free === true ? <Check className="mx-auto text-green-500" /> : 
+                   feature.free === 'Basic' || feature.free === 'Limited' ? <span className="text-amber-500 text-sm">{feature.free}</span> : 
+                   <X className="mx-auto text-red-400" />}
+                </TableCell>
+                <TableCell className="text-center">
+                  {feature.basic === true ? <Check className="mx-auto text-green-500" /> : 
+                   typeof feature.basic === 'string' ? <span className="text-amber-500 text-sm">{feature.basic}</span> : 
+                   <X className="mx-auto text-red-400" />}
+                </TableCell>
+                <TableCell className="text-center bg-golden-yellow/10">
+                  {feature.premium === true ? <Check className="mx-auto text-green-500" /> : 
+                   typeof feature.premium === 'string' ? <span className="text-amber-500 text-sm">{feature.premium}</span> : 
+                   <X className="mx-auto text-red-400" />}
+                </TableCell>
+              </TableRow>
+            ))}
+            <TableRow>
+              <TableCell className="font-medium">Monthly Price</TableCell>
+              <TableCell className="text-center font-bold">Rs. 0</TableCell>
+              <TableCell className="text-center font-bold">Rs. 750</TableCell>
+              <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 1500</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
+
+  </div>
   );
 };
 
