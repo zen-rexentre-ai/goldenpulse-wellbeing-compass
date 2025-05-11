@@ -50,7 +50,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
 	{ name: 'Dependents Access', free: false, basic: false, premium: true },
     { name: 'Medical Team Consultations', free: false, basic: 'Once Every 4 months', premium: 'Twice Every 2 Months' },
   	{ name: 'Volunteering Access', free: true, basic: true, premium: true },
-    { name: 'Webinars', free: 'Limited to recorded*', basic: true, premium: true },
+    { name: 'Webinars', free: 'Recorded', basic: true, premium: true },
 	{ name: 'Community Module', free: 'Limited*', basic: true, premium: true },
 	{ name: 'Cognitive Games', free: 'Limited*', basic: true, premium: true },
 	];
