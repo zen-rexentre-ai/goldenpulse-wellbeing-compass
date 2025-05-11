@@ -33,7 +33,7 @@ const SubscriptionPlans = () => {
     { name: 'Community Module', free: 'Limited*', basic: true, premium: true },
     { name: 'Personalized Fitness Journey', free: false, basic: 'Limited', premium: true },
     { name: 'Six Month Medical Review', free: false, basic: false, premium: true },
-    { name: 'Medical Team Consultations', free: false, basic: '1/month', premium: '3/month' },
+    { name: 'Medical Team Consultations', free: false, basic: '2/Year', premium: '4/Year' },
     { name: 'Dependents Access', free: false, basic: false, premium: true },
     { name: 'Emergency & SoS Tracking', free: 'Basic', basic: true, premium: 'Advanced' },
     { name: 'AI Powered Diagnostics', free: false, basic: 'Basic', premium: 'Advanced' },
@@ -163,7 +163,7 @@ const SubscriptionPlans = () => {
               </li>
               <li className="flex items-center">
                 <Check className="h-5 w-5 text-green-500 mr-2" />
-                <span>1 Medical Consultation/month</span>
+                <span>2 Medical Consultation/Year</span>
               </li>
             </ul>
           </CardContent>
@@ -193,7 +193,7 @@ const SubscriptionPlans = () => {
               </li>
               <li className="flex items-center">
                 <Check className="h-5 w-5 text-green-500 mr-2" />
-                <span>3 Medical Consultations/month</span>
+                <span>4 Medical Consultations/Year</span>
               </li>
               <li className="flex items-center">
                 <Check className="h-5 w-5 text-green-500 mr-2" />
