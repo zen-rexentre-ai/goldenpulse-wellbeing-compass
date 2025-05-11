@@ -14,7 +14,7 @@ const ComparisonTable = ({ features }: ComparisonTableProps) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[250px]">Features</TableHead>
+            <TableHead className="w-[250px] font-bold text-lg">Features</TableHead>
             <TableHead className="text-center">Free</TableHead>
             <TableHead className="text-center">Basic</TableHead>
             <TableHead className="text-center bg-golden-yellow/20">Premium</TableHead>
