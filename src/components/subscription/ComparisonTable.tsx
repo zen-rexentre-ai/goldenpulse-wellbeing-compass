@@ -30,7 +30,7 @@ const ComparisonTable = ({ features }: ComparisonTableProps) => {
                  <X className="mx-auto text-red-400" />}
               </TableCell>
               <TableCell className="text-center">
-                {feature.basic === true ? <Check className="mx-auto text-green-500" /> : 
+                {feature.basic === true || feature.basic === 'Once Every 4 months'? <Check className="mx-auto text-green-500" /> : 
                  typeof feature.basic === 'string' ? <span className="text-amber-500 text-sm">{feature.basic}</span> : 
                  <X className="mx-auto text-red-400" />}
               </TableCell>
