@@ -161,9 +161,9 @@ const SubscriptionPlans = () => {
             ))}
             <TableRow>
               <TableCell className="font-medium">Monthly Price</TableCell>
-              <TableCell className="text-center font-bold">$0</TableCell>
-              <TableCell className="text-center font-bold">Rs. 750/pm</TableCell>
-              <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 1500/pm </TableCell>
+              <TableCell className="text-center font-bold">Rs. 0</TableCell>
+              <TableCell className="text-center font-bold">Rs. 750</TableCell>
+              <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 1500</TableCell>
             </TableRow>
           </TableBody>
         </Table>
@@ -175,7 +175,7 @@ const SubscriptionPlans = () => {
         <Card className="overflow-hidden shadow-lg">
           <CardHeader className="bg-gradient-to-b from-gray-50 to-gray-100 border-b">
             <CardTitle className="text-center">Free</CardTitle>
-            <CardDescription className="text-center text-xl font-bold mt-2">$0</CardDescription>
+            <CardDescription className="text-center text-xl font-bold mt-2">0</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
             <ul className="space-y-2">
@@ -208,7 +208,7 @@ const SubscriptionPlans = () => {
         <Card className="overflow-hidden shadow-lg">
           <CardHeader className="bg-gradient-to-b from-blue-50 to-blue-100 border-b">
             <CardTitle className="text-center">Basic</CardTitle>
-            <CardDescription className="text-center text-xl font-bold mt-2">Rs. 750/pm</CardDescription>
+            <CardDescription className="text-center text-xl font-bold mt-2">Rs. 750</CardDescription>
             <CardDescription className="text-center">per month</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
@@ -245,7 +245,7 @@ const SubscriptionPlans = () => {
           </div>
           <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
             <CardTitle className="text-center text-golden-dark">Premium</CardTitle>
-            <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">Rs. 1500/pm</CardDescription>
+            <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">Rs. 1500</CardDescription>
             <CardDescription className="text-center text-golden-dark">per month</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
