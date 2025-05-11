@@ -78,7 +78,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
       features: [
         { text: 'All Free Features', available: true },
         { text: 'Personalized Fitness Journey', available: true },
-        { text: '2 Medical Consultation/Year', available: true },
+        { text: 'Once Every 4 months', available: true },
         { text: 'Community Module', available: true}
       ],
     },
@@ -90,7 +90,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
       features: [
         { text: 'All Basic Features', available: true },
         { text: 'Six Month Medical Review', available: true },
-        { text: '4 Medical Consultations/Year', available: true },
+        { text: 'Twice Every 4 months', available: true },
         { text: 'Dependents Access', available: true },
         { text: 'Advanced AI Diagnostics', available: true }
       ],
