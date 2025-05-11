@@ -1,3 +1,4 @@
+
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -76,4 +77,21 @@ const CardFooter = React.forwardRef<
 ))
 CardFooter.displayName = "CardFooter"
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent }
+// New embossed card component
+const EmbossedCard = React.forwardRef<
+  HTMLDivElement,
+  React.HTMLAttributes<HTMLDivElement>
+>(({ className, ...props }, ref) => (
+  <div
+    ref={ref}
+    className={cn(
+      "rounded-lg border bg-card text-card-foreground shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-sm backdrop-filter",
+      "hover:shadow-[0_8px_30px_rgb(0,0,0,0.2)] transition-all duration-300 ease-in-out",
+      className
+    )}
+    {...props}
+  />
+))
+EmbossedCard.displayName = "EmbossedCard"
+
+export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, EmbossedCard }

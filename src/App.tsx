@@ -16,6 +16,7 @@ import EmergencyContacts from "./pages/EmergencyContacts";
 import Volunteering from "./pages/Volunteering";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import SubscriptionPlans from "./pages/SubscriptionPlans";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/emergency-contacts" element={<EmergencyContacts />} />
             <Route path="/volunteering" element={<Volunteering />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/subscription-plans" element={<SubscriptionPlans />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
