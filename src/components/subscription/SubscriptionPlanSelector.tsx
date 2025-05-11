@@ -44,8 +44,8 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
 
   // Plan features for comparison table
  const features: Feature[] = [
-    { name: 'Personalized Fitness Journey', free: false, basic: 'Limited', premium: true },
-	{ name: 'Emergency & SoS Tracking', free: 'Basic', basic: true, premium: 'Advanced' },
+    { name: 'Personalized Fitness Journey', free: 'Limited', basic: true, premium: true },
+	{ name: 'Emergency & SoS Tracking', free: true, basic: true, premium: 'Advanced' },
     { name: 'AI Powered Diagnostics', free: false, basic: 'Basic', premium: 'Advanced' },
 	{ name: 'Dependents Access', free: false, basic: false, premium: true },
     { name: 'Medical Team Consultations', free: false, basic: 'Once Every 4 months', premium: 'Twice Every 2 Months' },
