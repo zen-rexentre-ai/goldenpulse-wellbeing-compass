@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -105,7 +106,7 @@ const SubscriptionPlans = () => {
         Choose the perfect plan for your wellness journey. Unlock premium features to enhance your health and well-being.
       </p>
 
-            {/* Plan Cards */}
+      {/* Plan Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Free Plan */}
         <Card className="overflow-hidden shadow-lg">
@@ -124,7 +125,7 @@ const SubscriptionPlans = () => {
                 <span>Basic Emergency Tracking</span>
               </li>
               <li className="flex items-center text-muted-foreground">
-                <X className="className="h-5 w-5 text-green-500 mr-2" />
+                <X className="h-5 w-5 mr-2" />
                 <span>Community Module* (Enabled after 3 volunteering sessions) </span>
               </li>
               <li className="flex items-center text-muted-foreground">
@@ -137,7 +138,7 @@ const SubscriptionPlans = () => {
             <Button className="w-full" variant="outline" onClick={() => handlePlanSelection('free')}>
               Get Started
             </Button>
-            </CardFooter>
+          </CardFooter>
         </Card>
 
         {/* Basic Plan */}
@@ -161,13 +162,12 @@ const SubscriptionPlans = () => {
                 <Check className="h-5 w-5 text-green-500 mr-2" />
                 <span>2 Medical Consultation/Year</span>
               </li>
-                <li className="flex items-center">
+              <li className="flex items-center">
                 <Check className="h-5 w-5 text-green-500 mr-2" />
                 <span>Community Module</span>
                 <span> * Enabled after 3 volunteering sessions</span>
               </li>
             </ul>
-            
           </CardContent>
           <CardFooter>
             <Button className="w-full" onClick={() => handlePlanSelection('basic')}>
@@ -178,7 +178,7 @@ const SubscriptionPlans = () => {
 
         {/* Premium Plan */}
         <Card className="overflow-hidden shadow-lg border-golden-yellow border-2">
-            <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
+          <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
             <CardTitle className="text-center text-golden-dark">Premium</CardTitle>
             <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">Rs. 2000</CardDescription>
             <CardDescription className="text-center text-golden-dark">per month</CardDescription>
@@ -215,7 +215,7 @@ const SubscriptionPlans = () => {
         </Card>
       </div>
 
-            {/* Feature Cards */}
+      {/* Feature Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
         {featureCards.map((card, index) => (
           <Card key={index} className={cn("overflow-hidden shadow-lg transform transition-all hover:scale-105", card.gradient)}>
@@ -278,8 +278,7 @@ const SubscriptionPlans = () => {
           </TableBody>
         </Table>
       </div>
-
-  </div>
+    </div>
   );
 };
 
