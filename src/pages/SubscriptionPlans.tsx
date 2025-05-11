@@ -196,10 +196,7 @@ const SubscriptionPlans = () => {
 
         {/* Premium Plan */}
         <Card className="overflow-hidden shadow-lg border-golden-yellow border-2">
-          <div className="top-0 right-0 bg-golden-yellow px-3 py-1 text-xs font-bold text-golden-dark rounded-bl-lg">
-            RECOMMENDED
-          </div>
-          <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
+            <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
             <CardTitle className="text-center text-golden-dark">Premium</CardTitle>
             <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">Rs. 1500</CardDescription>
             <CardDescription className="text-center text-golden-dark">per month</CardDescription>
