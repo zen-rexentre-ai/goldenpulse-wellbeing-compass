@@ -208,7 +208,7 @@ const SubscriptionPlans = () => {
         <Card className="overflow-hidden shadow-lg">
           <CardHeader className="bg-gradient-to-b from-blue-50 to-blue-100 border-b">
             <CardTitle className="text-center">Basic</CardTitle>
-            <CardDescription className="text-center text-xl font-bold mt-2">$9.99</CardDescription>
+            <CardDescription className="text-center text-xl font-bold mt-2">Rs. 750/pm</CardDescription>
             <CardDescription className="text-center">per month</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
@@ -245,7 +245,7 @@ const SubscriptionPlans = () => {
           </div>
           <CardHeader className="bg-gradient-to-b from-golden-yellow to-golden-orange border-b">
             <CardTitle className="text-center text-golden-dark">Premium</CardTitle>
-            <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">$19.99</CardDescription>
+            <CardDescription className="text-center text-xl font-bold mt-2 text-golden-dark">Rs. 1500/pm</CardDescription>
             <CardDescription className="text-center text-golden-dark">per month</CardDescription>
           </CardHeader>
           <CardContent className="pt-6">
