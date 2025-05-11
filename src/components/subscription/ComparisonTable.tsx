@@ -26,7 +26,7 @@ const ComparisonTable = ({ features }: ComparisonTableProps) => {
               <TableCell className="font-medium">{feature.name}</TableCell>
               <TableCell className="text-center">
                 {feature.free === true ? <Check className="mx-auto text-green-500" /> : 
-                 feature.free === 'Basic' || feature.free === 'Limited' ? <span className="text-amber-500 text-sm">{feature.free}</span> : 
+                 feature.free === 'Basic' || feature.free === 'Limited' || feature.free === 'Recorded'? <span className="text-amber-500 text-sm">{feature.free}</span> : 
                  <X className="mx-auto text-red-400" />}
               </TableCell>
               <TableCell className="text-center">
