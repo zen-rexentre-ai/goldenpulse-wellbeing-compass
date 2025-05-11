@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import Logo from '@/components/Logo';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'sonner';
 import WellnessGoals from '@/components/onboarding/WellnessGoals';
 import MedicineList from '@/components/onboarding/MedicineList';
@@ -18,8 +18,25 @@ import VolunteeringPreferences from '@/components/onboarding/VolunteeringPrefere
 
 const Onboarding = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [step, setStep] = useState(1);
-  const totalSteps = 9; // Updated total steps
+  const totalSteps = 9;
+  
+  // Check if user came from subscription plans page (premium selected)
+  useEffect(() => {
+    // For demonstration purposes, we're using a simple redirect
+    // In a real app, you would use a state management solution or localStorage
+    const referrer = document.referrer;
+    const comesFromSubscriptionPage = referrer.includes('/subscription-plans') || 
+                                      location.state?.fromPremiumSelection;
+    
+    if (!comesFromSubscriptionPage) {
+      toast.error("Access restricted", { 
+        description: "This page is only available to Premium plan members" 
+      });
+      navigate('/subscription-plans');
+    }
+  }, [navigate, location]);
   
   const nextStep = () => {
     if (step < totalSteps) {

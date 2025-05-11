@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -6,9 +5,27 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Check, X, AlertTriangle, Calendar, Users, Brain, Heart, HelpingHand, UserRound, UsersRound } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 const SubscriptionPlans = () => {
   const navigate = useNavigate();
+
+  // Handle plan selection
+  const handlePlanSelection = (plan: 'free' | 'basic' | 'premium') => {
+    if (plan === 'premium') {
+      // Only premium users get to complete the onboarding
+      toast.success("Premium plan selected!", {
+        description: "Complete onboarding to get started with all premium features."
+      });
+      navigate('/onboarding', { state: { fromPremiumSelection: true } });
+    } else {
+      // Free and basic users skip onboarding and go straight to dashboard
+      toast.success(`${plan === 'free' ? 'Free' : 'Basic'} plan selected!`, {
+        description: "Welcome to GoldenPulse!"
+      });
+      navigate('/dashboard');
+    }
+  };
 
   // Plan features for comparison table
   const features = [
@@ -181,7 +198,7 @@ const SubscriptionPlans = () => {
             </ul>
           </CardContent>
           <CardFooter>
-            <Button className="w-full" variant="outline" onClick={() => navigate("/register")}>
+            <Button className="w-full" variant="outline" onClick={() => handlePlanSelection('free')}>
               Get Started
             </Button>
           </CardFooter>
@@ -215,7 +232,7 @@ const SubscriptionPlans = () => {
             </ul>
           </CardContent>
           <CardFooter>
-            <Button className="w-full" onClick={() => navigate("/register")}>
+            <Button className="w-full" onClick={() => handlePlanSelection('basic')}>
               Choose Basic
             </Button>
           </CardFooter>
@@ -256,7 +273,7 @@ const SubscriptionPlans = () => {
             </ul>
           </CardContent>
           <CardFooter>
-            <Button className="w-full bg-golden-purple hover:bg-golden-purple/90" onClick={() => navigate("/register")}>
+            <Button className="w-full bg-golden-purple hover:bg-golden-purple/90" onClick={() => handlePlanSelection('premium')}>
               Choose Premium
             </Button>
           </CardFooter>

@@ -31,9 +31,9 @@ const Register = () => {
       window.scrollTo(0, 0);
     } else {
       toast.success("Registration successful!", {
-        description: "Welcome to GoldenPulse! Complete your profile to get started."
+        description: "Choose your subscription plan to continue."
       });
-      navigate('/onboarding');
+      navigate('/subscription-plans');
     }
   };
   
