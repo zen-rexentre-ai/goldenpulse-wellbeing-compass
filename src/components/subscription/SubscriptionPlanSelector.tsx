@@ -65,9 +65,9 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
       features: [
         { text: 'Volunteering Access', available: true },
         { text: 'Basic Emergency Tracking', available: true },
-        { text: 'Community Module**', available: true},
+        { text: 'Community Module** <br/> **Enabled after 3 volunteering sessions ', available: true},
         { text: 'Medical Team Access', available: false },
-        { text: '** (Enabled after 3 volunteering sessions)'}
+       
       ],
     },
     {
