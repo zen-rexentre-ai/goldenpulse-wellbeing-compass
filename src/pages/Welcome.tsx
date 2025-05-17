@@ -8,7 +8,7 @@ const Welcome = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-6">
       <div className="w-full max-w-md flex flex-col items-center gap-8 animate-fade-in">
-        <Logo size="lg" className="mt-6" />
+        <Logo size="lg" className="mt-4" />
         
         <div className="text-center space-y-4">
           <h1 className="text-3xl font-bold">Welcome!</h1>
@@ -29,7 +29,7 @@ const Welcome = () => {
         </div>
         
         <div className="w-full space-y-6 my-6">
-          <h2 className="text-xl font-semibold mb-4">What Awaits You:</h2>
+          <h1 className="text-3xl font-bold">What Awaits You:</h1>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* First Card - Wellness Module */}
