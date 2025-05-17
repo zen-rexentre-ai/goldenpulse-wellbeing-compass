@@ -1,48 +1,36 @@
-
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   className?: string;
+  linkToHome?: boolean;
 }
 
-const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
+const Logo: React.FC<LogoProps> = ({ size = 'md', className = '', linkToHome = true }) => {
   const sizeClasses = {
     sm: 'h-8',
-    md: 'h-12',
-    lg: 'h-16',
+    md: 'h-14',
+    lg: 'h-20',
   };
 
-  return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <div className={`rounded-full bg-golden-purple p-2 ${sizeClasses[size]}`}>
-        <svg
-          className="h-full w-auto"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21"
-            stroke="#FEC6A1"
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          <path
-            d="M12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3"
-            stroke="#FDE1D3" 
-            strokeWidth="3"
-            strokeLinecap="round"
-          />
-          <circle cx="12" cy="12" r="4" fill="#FFDEE2" />
-        </svg>
-      </div>
-      <div className="font-bold">
-        <span className="text-golden-purple block">Golden</span>
-        <span className="text-golden-orange block -mt-1">Pulse</span>
-      </div>
+  const logo = (
+    <div className={`flex items-center ${className}`}>
+      <img
+        src="/lovable-uploads/1afecd79-96fc-404a-9fd6-6d7cee1b4bf1.png"
+        alt="GoldenPulse.ai Logo"
+        className={`${sizeClasses[size]} w-auto`}
+      />
     </div>
   );
+
+  // If linkToHome is true, wrap the logo in a Link component
+  if (linkToHome) {
+    return <Link to="/">{logo}</Link>;
+  }
+  
+  // Otherwise, just return the logo
+  return logo;
 };
 
 export default Logo;
