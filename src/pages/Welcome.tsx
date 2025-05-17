@@ -9,7 +9,7 @@ import { Mail, Phone, User } from 'lucide-react';
 const Welcome = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-6">
-      <div className="w-full max-w-md flex flex-col items-center gap-8 animate-fade-in">
+      <div className="w-full max-w-md flex flex-col items-center gap-6 animate-fade-in">
         <Logo size="lg" className="mt-3" />
         
         <div className="text-center space-y-4">
