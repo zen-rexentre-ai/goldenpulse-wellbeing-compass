@@ -93,7 +93,6 @@ const Welcome = () => {
           {/* Nicely formatted founder details using an embossed card */}
           <EmbossedCard className="p-4 mb-4">
             <div className="space-y-3">
-              <h3 className="font-semibold text-lg text-center">Founder</h3>
               <div className="flex items-center gap-2 text-sm">
                 <User className="h-4 w-4 text-primary" />
                 <span>Harinath Chakrapani</span>
