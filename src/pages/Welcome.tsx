@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
 import { Link } from 'react-router-dom';
 import { EmbossedCard } from '@/components/ui/card';
-import { Mail, Phone, User, GraduationCap } from 'lucide-react';
+import { Mail, Phone, User, GraduationCap, QrCode } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Separator } from '@/components/ui/separator';
 
@@ -150,6 +150,30 @@ const Welcome = () => {
                   <Mail className="h-4 w-4 text-primary" />
                   <span>mahadevan.ranganathan@gmail.com</span>
                 </div>
+              </div>
+            </div>
+          </EmbossedCard>
+          
+          {/* QR Code Section */}
+          <EmbossedCard className="p-4 mb-3 w-full overflow-hidden">
+            <div className="bg-gradient-to-br from-golden-pink to-golden-peach p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex-1 space-y-3">
+                <div className="flex items-center gap-2">
+                  <QrCode className="h-5 w-5 text-primary" />
+                  <h3 className="text-xl font-bold text-golden-dark">Visit GoldenPulse.ai</h3>
+                </div>
+                <p className="text-sm md:text-base">
+                  Scan this QR code to access additional resources, latest updates, 
+                  and community events on our website.
+                </p>
+              </div>
+              
+              <div className="w-32 h-32 md:w-40 md:h-40 bg-white p-2 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
+                <img 
+                  src="/lovable-uploads/6ba5778a-24f3-4d18-b554-fc79f762cdc7.png"
+                  alt="QR Code for GoldenPulse.ai"
+                  className="w-full h-full object-contain"
+                />
               </div>
             </div>
           </EmbossedCard>
