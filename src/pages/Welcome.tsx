@@ -97,7 +97,7 @@ const Welcome = () => {
           {/* Founders Section with split layout - Fixed width issue */}
           <EmbossedCard className="p-4 mb-3 w-full">
             <h3 className="text-center text-lg font-medium mb-3">Meet Our Founders</h3>
-            <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"}`}>
+            <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"} w-full`}>
               {/* Founder 1 */}
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm">
@@ -139,7 +139,7 @@ const Welcome = () => {
                   <span>Mahadevan Ranganathan</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
-                  <User className="h-4 w-4 text-golden-purple" />
+                  <GraduationCap className="h-4 w-4 text-golden-purple" />
                   <span className="text-golden-dark">Retired COO</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
