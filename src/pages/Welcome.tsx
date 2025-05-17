@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
@@ -6,9 +7,18 @@ import { EmbossedCard } from '@/components/ui/card';
 import { Mail, Phone, User, GraduationCap, QrCode } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { Separator } from '@/components/ui/separator';
+import { toast } from '@/hooks/use-toast';
 
 const Welcome = () => {
   const isMobile = useIsMobile();
+  
+  const handleImageError = () => {
+    toast({
+      title: "Image Loading Issue",
+      description: "There was a problem loading the QR code image.",
+      variant: "destructive",
+    });
+  };
 
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-4">
@@ -169,9 +179,10 @@ const Welcome = () => {
               
               <div className="w-32 h-32 md:w-40 md:h-40 bg-white p-2 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
                 <img 
-                  src="/lovable-uploads/e59e6cff-3b98-4a30-ae2c-4ae03262eac3.png"
+                  src="/lovable-uploads/24569b38-feb1-45d0-afdb-859e860a4197.png"
                   alt="QR Code for GoldenPulse.ai"
                   className="w-full h-full object-contain"
+                  onError={handleImageError}
                 />
               </div>
             </div>
