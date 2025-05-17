@@ -94,8 +94,8 @@ const Welcome = () => {
         <div className="w-full space-y-3">
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
           
-          {/* Founders Section with split layout */}
-          <EmbossedCard className="p-4 mb-3">
+          {/* Founders Section with split layout - Fixed width issue */}
+          <EmbossedCard className="p-4 mb-3 w-full">
             <h3 className="text-center text-lg font-medium mb-3">Meet Our Founders</h3>
             <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"}`}>
               {/* Founder 1 */}
