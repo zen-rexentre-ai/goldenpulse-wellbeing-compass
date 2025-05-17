@@ -43,28 +43,7 @@ const FoundersSection = () => {
           </div>
         )}
         
-        {/* Separator for mobile view */}
-        {isMobile && <Separator className="my-3" />}
-        
-        {/* Founder 2 */}
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm">
-            <User className="h-4 w-4 text-primary" />
-            <span>Mahadevan Ranganathan</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-            <GraduationCap className="h-4 w-4 text-golden-purple" />
-            <span className="text-golden-dark">Retired COO</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-            <Phone className="h-4 w-4 text-primary" />
-            <span>+91-9841044186</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-            <Mail className="h-4 w-4 text-primary" />
-            <span>mahadevan.ranganathan@gmail.com</span>
-          </div>
-        </div>
+       
       </div>
     </EmbossedCard>
   );
