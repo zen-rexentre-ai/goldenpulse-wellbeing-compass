@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
@@ -170,7 +169,7 @@ const Welcome = () => {
               
               <div className="w-32 h-32 md:w-40 md:h-40 bg-white p-2 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
                 <img 
-                  src="/lovable-uploads/6ba5778a-24f3-4d18-b554-fc79f762cdc7.png"
+                  src="/lovable-uploads/403b98c5-738b-4a99-81ff-3de32a701b77.png"
                   alt="QR Code for GoldenPulse.ai"
                   className="w-full h-full object-contain"
                 />
