@@ -8,7 +8,7 @@ const Welcome = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-6">
       <div className="w-full max-w-md flex flex-col items-center gap-8 animate-fade-in">
-        <Logo size="lg" className="mt-4" />
+        <Logo size="lg" className="mt-3" />
         
         <div className="text-center space-y-4">
           <h1 className="text-3xl font-bold">Welcome!</h1>
