@@ -18,7 +18,7 @@ const Welcome = () => {
             We're delighted to have you here.
           </p>
           <p className="text-lg font-medium">
-            We Empower Seniors live Vibrant, Purposeful and Fulfilling lives.
+            We Empower Seniors Live Vibrant, Purposeful and Fulfilling lives.
           </p>
         </div>
         
