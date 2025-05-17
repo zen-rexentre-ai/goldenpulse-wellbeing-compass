@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
 import { Link } from 'react-router-dom';
 import { EmbossedCard } from '@/components/ui/card';
-import { Mail, Phone, User } from 'lucide-react';
+import { Mail, Phone, User, GraduationCap } from 'lucide-react';
 
 const Welcome = () => {
   return (
@@ -97,8 +97,13 @@ const Welcome = () => {
                 <User className="h-4 w-4 text-primary" />
                 <span>Harinath Chakrapani (Founder)</span>
               </div>
-              <div className="flex items-right gap-2 text-sm">
-                <span>IIMB Alumni, AMP-18</span>
+              <div className="flex items-center gap-2 text-sm">
+                <GraduationCap className="h-4 w-4 text-golden-purple" />
+                <span>
+                  <span className="text-golden-purple font-medium">IIMB Alumni</span>
+                  <span className="mx-1">·</span>
+                  <span className="text-golden-dark">AMP-18</span>
+                </span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Phone className="h-4 w-4 text-primary" />
