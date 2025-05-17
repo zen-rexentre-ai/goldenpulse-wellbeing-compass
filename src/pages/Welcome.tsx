@@ -1,8 +1,10 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
 import { Link } from 'react-router-dom';
 import { EmbossedCard } from '@/components/ui/card';
+import { Mail, Phone, User } from 'lucide-react';
 
 const Welcome = () => {
   return (
@@ -87,10 +89,25 @@ const Welcome = () => {
         
         <div className="w-full space-y-4">
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
-          Founder:
-          Harinath Chakrapani
-          +91-9840178288
-          harinath04@gmail.com
+          
+          {/* Nicely formatted founder details using an embossed card */}
+          <EmbossedCard className="p-4 mb-4">
+            <div className="space-y-3">
+              <h3 className="font-semibold text-lg text-center">Founder</h3>
+              <div className="flex items-center gap-2 text-sm">
+                <User className="h-4 w-4 text-primary" />
+                <span>Harinath Chakrapani</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Phone className="h-4 w-4 text-primary" />
+                <span>+91-9840178288</span>
+              </div>
+              <div className="flex items-center gap-2 text-sm">
+                <Mail className="h-4 w-4 text-primary" />
+                <span>harinath04@gmail.com</span>
+              </div>
+            </div>
+          </EmbossedCard>
           
           <div className="grid gap-4">
             <Link to="/register">
