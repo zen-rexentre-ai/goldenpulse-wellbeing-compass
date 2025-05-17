@@ -10,7 +10,7 @@ const FoundersSection = () => {
 
   return (
     <EmbossedCard className="p-4 mb-3 w-full">
-      <h3 className="text-center text-lg font-medium mb-3">Meet Our Founders</h3>
+      <h3 className="text-center text-lg font-medium mb-3">Meet Our Founder</h3>
       <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"} w-full`}>
         {/* Founder 1 */}
         <div className="space-y-2">
