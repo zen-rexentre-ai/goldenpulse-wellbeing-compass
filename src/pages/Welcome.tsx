@@ -12,12 +12,12 @@ const Welcome = () => {
         <Logo size="lg" className="mt-12" />
         
         <div className="text-center space-y-4">
-          <h1 className="text-3xl font-bold">Welcome to GoldenPulse!</h1>
+          <h1 className="text-3xl font-bold">Welcome!</h1>
           <p className="text-lg">
             We're delighted to have you here.
           </p>
           <p className="text-lg font-medium">
-            We Empower Seniors to live Vibrant, Purposeful and Fulfilling lives.
+            We Empower Seniors live Vibrant, Purposeful and Fulfilling lives.
           </p>
         </div>
         
@@ -52,7 +52,7 @@ const Welcome = () => {
                   </li>
                   <li className="flex items-start gap-2">
                     <span className="text-primary text-lg">•</span>
-                    <span>Dependent Services</span>
+                    <span>Track Your Kin</span>
                   </li>
                 </ul>
               </div>
