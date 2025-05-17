@@ -87,6 +87,10 @@ const Welcome = () => {
         
         <div className="w-full space-y-4">
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
+          Founder:
+          Harinath Chakrapani
+          +91-9840178288
+          harinath04@gmail.com
           
           <div className="grid gap-4">
             <Link to="/register">
