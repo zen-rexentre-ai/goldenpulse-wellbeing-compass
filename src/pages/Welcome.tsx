@@ -169,7 +169,7 @@ const Welcome = () => {
               
               <div className="w-32 h-32 md:w-40 md:h-40 bg-white p-2 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-shadow">
                 <img 
-                  src="/lovable-uploads/897f777b-736b-49b6-bfe0-beb0c8e18de5.png"
+                  src="/lovable-uploads/e59e6cff-3b98-4a30-ae2c-4ae03262eac3.png"
                   alt="QR Code for GoldenPulse.ai"
                   className="w-full h-full object-contain"
                 />
