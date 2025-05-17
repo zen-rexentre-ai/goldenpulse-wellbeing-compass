@@ -10,9 +10,9 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ size = 'md', className = '', linkToHome = true }) => {
   const sizeClasses = {
-    sm: 'h-8',
-    md: 'h-14',
-    lg: 'h-20',
+    sm: 'h-14',
+    md: 'h-20',
+    lg: 'h-30',
   };
 
   const logo = (
