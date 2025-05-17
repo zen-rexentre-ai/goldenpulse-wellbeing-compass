@@ -36,12 +36,7 @@ const FoundersSection = () => {
           </div>
         </div>
         
-        {/* Separator for desktop view */}
-        {!isMobile && (
-          <div className="flex justify-center">
-            <Separator orientation="vertical" className="mx-2" />
-          </div>
-        )}
+       
         
        
       </div>
