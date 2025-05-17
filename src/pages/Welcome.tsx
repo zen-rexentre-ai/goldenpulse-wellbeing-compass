@@ -1,11 +1,16 @@
+
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
 import { Link } from 'react-router-dom';
 import { EmbossedCard } from '@/components/ui/card';
 import { Mail, Phone, User, GraduationCap } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { Separator } from '@/components/ui/separator';
 
 const Welcome = () => {
+  const isMobile = useIsMobile();
+
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-4">
       <div className="w-full max-w-md flex flex-col items-center gap-2 animate-fade-in py-2">
@@ -89,27 +94,62 @@ const Welcome = () => {
         <div className="w-full space-y-3">
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
           
+          {/* Founders Section with split layout */}
           <EmbossedCard className="p-4 mb-3">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-sm">
-                <User className="h-4 w-4 text-primary" />
-                <span>Harinath Chakrapani (Founder)</span>
+            <h3 className="text-center text-lg font-medium mb-3">Meet Our Founders</h3>
+            <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"}`}>
+              {/* Founder 1 */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm">
+                  <User className="h-4 w-4 text-primary" />
+                  <span>Harinath Chakrapani</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <GraduationCap className="h-4 w-4 text-golden-purple" />
+                  <span>
+                    <span className="text-golden-purple font-medium">IIMB Alumni</span>
+                    <span className="mx-1">·</span>
+                    <span className="text-golden-dark">AMP-18</span>
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Phone className="h-4 w-4 text-primary" />
+                  <span>+91-9840178288</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Mail className="h-4 w-4 text-primary" />
+                  <span>harinath04@gmail.com</span>
+                </div>
               </div>
-              <div className="flex items-center gap-2 text-sm">
-                <GraduationCap className="h-4 w-4 text-golden-purple" />
-                <span>
-                  <span className="text-golden-purple font-medium">IIMB Alumni</span>
-                  <span className="mx-1">·</span>
-                  <span className="text-golden-dark">AMP-18</span>
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Phone className="h-4 w-4 text-primary" />
-                <span>+91-9840178288</span>
-              </div>
-              <div className="flex items-center gap-2 text-sm">
-                <Mail className="h-4 w-4 text-primary" />
-                <span>harinath04@gmail.com</span>
+              
+              {/* Separator for desktop view */}
+              {!isMobile && (
+                <div className="flex justify-center">
+                  <Separator orientation="vertical" className="mx-2" />
+                </div>
+              )}
+              
+              {/* Separator for mobile view */}
+              {isMobile && <Separator className="my-3" />}
+              
+              {/* Founder 2 */}
+              <div className="space-y-2">
+                <div className="flex items-center gap-2 text-sm">
+                  <User className="h-4 w-4 text-primary" />
+                  <span>Mahadevan Ranganathan</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <User className="h-4 w-4 text-golden-purple" />
+                  <span className="text-golden-dark">Retired COO</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Phone className="h-4 w-4 text-primary" />
+                  <span>+91-9841044186</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Mail className="h-4 w-4 text-primary" />
+                  <span>mahadevan.ranganathan@gmail.com</span>
+                </div>
               </div>
             </div>
           </EmbossedCard>
