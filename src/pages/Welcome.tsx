@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/Logo';
@@ -10,7 +9,7 @@ const Welcome = () => {
   return (
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-4">
       <div className="w-full max-w-md flex flex-col items-center gap-2 animate-fade-in py-2">
-        <Logo size="md" />
+        <Logo size="lg" />
         
         <div className="text-center space-y-2 mt-1">
           <h1 className="text-3xl font-bold">Welcome!</h1>
@@ -90,7 +89,6 @@ const Welcome = () => {
         <div className="w-full space-y-3">
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
           
-          {/* Nicely formatted founder details using an embossed card */}
           <EmbossedCard className="p-4 mb-3">
             <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm">
