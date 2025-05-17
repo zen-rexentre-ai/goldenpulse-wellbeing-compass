@@ -95,7 +95,7 @@ const Welcome = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-2 text-sm">
                 <User className="h-4 w-4 text-primary" />
-                <span>Harinath Chakrapani</span>
+                <span>Harinath Chakrapani (IIMB Alumni, AMP-18)</span>
               </div>
               <div className="flex items-center gap-2 text-sm">
                 <Phone className="h-4 w-4 text-primary" />
