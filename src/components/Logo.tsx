@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +18,7 @@ const Logo: React.FC<LogoProps> = ({ size = 'md', className = '', linkToHome = t
   const logo = (
     <div className={`flex items-center ${className}`}>
       <img
-        src="/lovable-uploads/1afecd79-96fc-404a-9fd6-6d7cee1b4bf1.png"
+        src="/lovable-uploads/GoldenPulse-Logo.png"
         alt="GoldenPulse.ai Logo"
         className={`${sizeClasses[size]} w-auto`}
       />
