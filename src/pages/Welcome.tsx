@@ -3,7 +3,6 @@ import React from 'react';
 import Hero from '@/components/welcome/Hero';
 import ModuleCards from '@/components/welcome/ModuleCards';
 import FoundersSection from '@/components/welcome/FoundersSection';
-import QrCodeSection from '@/components/welcome/QrCodeSection';
 import ActionButtons from '@/components/welcome/ActionButtons';
 
 const Welcome = () => {
@@ -17,7 +16,6 @@ const Welcome = () => {
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
           
           <FoundersSection />
-          <QrCodeSection />
           <ActionButtons />
         </div>
       </div>
