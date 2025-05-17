@@ -8,11 +8,11 @@ import { Mail, Phone, User, GraduationCap } from 'lucide-react';
 
 const Welcome = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-6">
-      <div className="w-full max-w-md flex flex-col items-center gap-3 animate-fade-in">
-        <Logo size="lg" />
+    <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-4">
+      <div className="w-full max-w-md flex flex-col items-center gap-2 animate-fade-in py-2">
+        <Logo size="md" />
         
-        <div className="text-center space-y-4">
+        <div className="text-center space-y-2 mt-1">
           <h1 className="text-3xl font-bold">Welcome!</h1>
           <p className="text-lg">
             We're delighted to have you here.
@@ -22,7 +22,7 @@ const Welcome = () => {
           </p>
         </div>
         
-        <div className="w-full rounded-lg overflow-hidden shadow-lg">
+        <div className="w-full rounded-lg overflow-hidden shadow-lg mt-2">
           <img 
             src="/lovable-uploads/1afecd79-96fc-404a-9fd6-6d7cee1b4bf1.png" 
             alt="Senior couple enjoying their golden years"
@@ -30,9 +30,9 @@ const Welcome = () => {
           />
         </div>
         
-        <div className="w-full space-y-6 my-6">
-           <div className="text-center space-y-4">
-          <h1 className="text-3xl font-bold">What Awaits You:</h1>
+        <div className="w-full space-y-4 my-4">
+           <div className="text-center space-y-2">
+            <h1 className="text-3xl font-bold">What Awaits You:</h1>
            </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* First Card - Wellness Module */}
@@ -87,12 +87,12 @@ const Welcome = () => {
           </div>
         </div>
         
-        <div className="w-full space-y-4">
+        <div className="w-full space-y-3">
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
           
           {/* Nicely formatted founder details using an embossed card */}
-          <EmbossedCard className="p-4 mb-4">
-            <div className="space-y-3">
+          <EmbossedCard className="p-4 mb-3">
+            <div className="space-y-2">
               <div className="flex items-center gap-2 text-sm">
                 <User className="h-4 w-4 text-primary" />
                 <span>Harinath Chakrapani (Founder)</span>
@@ -116,15 +116,15 @@ const Welcome = () => {
             </div>
           </EmbossedCard>
           
-          <div className="grid gap-4">
+          <div className="grid gap-3">
             <Link to="/register">
-              <Button className="w-full text-lg py-6" size="lg">
+              <Button className="w-full text-lg py-5" size="lg">
                 Create Account
               </Button>
             </Link>
             
             <Link to="/login">
-              <Button className="w-full text-lg py-6" variant="outline" size="lg">
+              <Button className="w-full text-lg py-5" variant="outline" size="lg">
                 I Already Have an Account
               </Button>
             </Link>
