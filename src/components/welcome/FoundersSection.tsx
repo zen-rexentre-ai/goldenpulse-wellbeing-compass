@@ -38,7 +38,7 @@ const FoundersSection = () => {
         
          
         {/* Separator for mobile view */}
-        {isMobile && <Separator className="my-3" />}
+        {<Separator className="my-3" />}
         
         {/* Founder 2 */}
         <div className="space-y-2">
