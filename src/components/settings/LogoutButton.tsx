@@ -4,16 +4,18 @@ import { Button } from '@/components/ui/button';
 import { LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'sonner';
+import { signOut } from '@/services/authService';
 
 export const LogoutButton: React.FC = () => {
   const navigate = useNavigate();
   
-  const handleLogout = () => {
-    // In a real app, you would handle session/auth logout here
-    toast.success('You have been logged out');
+  const handleLogout = async () => {
+    const result = await signOut();
     
-    // Navigate to login page
-    navigate('/login');
+    if (result.success) {
+      // Navigate to login page after successful logout
+      navigate('/login');
+    }
   };
   
   return (
