@@ -62,6 +62,14 @@ const ModuleCards = () => {
             </ul>
           </div>
         </EmbossedCard>
+         <Button 
+        className="w-full text-lg py-5 flex items-center justify-center gap-2" 
+        variant="golden"
+        onClick={() => setCalculatorOpen(true)}
+      >
+        <Activity className="h-5 w-5" />
+        Calculate Fitness Score
+      </Button>
       </div>
     </div>
   );
