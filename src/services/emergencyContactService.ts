@@ -1,7 +1,6 @@
 
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { ExtendedDatabase } from '@/integrations/supabase/schema';
 
 export interface EmergencyContact {
   id?: string;
@@ -14,14 +13,17 @@ export interface EmergencyContact {
 
 export async function addEmergencyContact(profileId: string, contact: EmergencyContact) {
   try {
-    const { data, error } = await supabase.from('emergency_contacts').insert({
-      profile_id: profileId,
-      name: contact.name,
-      relationship: contact.relationship,
-      phone: contact.phone,
-      email: contact.email || null,
-      is_primary: contact.isPrimary,
-    }).select();
+    const { data, error } = await supabase
+      .from('emergency_contacts')
+      .insert({
+        profile_id: profileId,
+        name: contact.name,
+        relationship: contact.relationship,
+        phone: contact.phone,
+        email: contact.email || null,
+        is_primary: contact.isPrimary,
+      })
+      .select();
 
     if (error) {
       toast.error('Could not add emergency contact');

@@ -1,7 +1,6 @@
 
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
-import { ExtendedDatabase } from '@/integrations/supabase/schema';
 
 export interface FitnessCalculationInput {
   height: number;
@@ -22,16 +21,18 @@ export async function saveFitnessCalculation(
   result: FitnessScore
 ) {
   try {
-    const { error } = await supabase.from('fitness_calculations').insert({
-      profile_id: profileId,
-      height: input.height,
-      weight: input.weight,
-      age: input.age,
-      activity_level: input.activityLevel,
-      medical_conditions: input.medicalConditions || [],
-      score: result.score,
-      recommendations: result.recommendations,
-    });
+    const { error } = await supabase
+      .from('fitness_calculations')
+      .insert({
+        profile_id: profileId,
+        height: input.height,
+        weight: input.weight,
+        age: input.age,
+        activity_level: input.activityLevel,
+        medical_conditions: input.medicalConditions || [],
+        score: result.score,
+        recommendations: result.recommendations,
+      });
 
     if (error) {
       toast.error('Could not save fitness calculation');

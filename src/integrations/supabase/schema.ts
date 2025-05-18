@@ -1,8 +1,8 @@
 
-import { Database } from './types';
+import { Database as GeneratedDatabase } from './types';
 
-// Extend the Database type with our custom tables
-export type ExtendedDatabase = Database & {
+// Extended Database type with our custom tables
+export interface Database extends GeneratedDatabase {
   public: {
     Tables: {
       profiles: {
@@ -225,5 +225,12 @@ export type ExtendedDatabase = Database & {
         };
       };
     };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
-};
+}
+
+// Create a type for the Supabase client
+export type ExtendedDatabase = Database;
