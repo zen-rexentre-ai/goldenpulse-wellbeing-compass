@@ -26,6 +26,10 @@ const ModuleCards = () => {
                 <span className="text-primary text-lg">•</span>
                 <span>AI Powered Diagnostics</span>
               </li>
+                 <li className="flex items-start gap-2">
+                <span className="text-primary text-lg">•</span>
+                <span>Pain Management</span>
+              </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary text-lg">•</span>
                 <span>Track Your Kin</span>
