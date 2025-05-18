@@ -1,17 +1,11 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Activity } from 'lucide-react';
-import FitnessCalculator from '@/components/fitness/FitnessCalculator';
 
 const ActionButtons = () => {
-  const [calculatorOpen, setCalculatorOpen] = useState(false);
-  
   return (
     <div className="grid gap-3">
-     
-      
       <Link to="/register">
         <Button className="w-full text-lg py-5" size="lg">
           Create Account
@@ -23,11 +17,6 @@ const ActionButtons = () => {
           I Already Have an Account
         </Button>
       </Link>
-      
-      <FitnessCalculator 
-        open={calculatorOpen}
-        onOpenChange={setCalculatorOpen}
-      />
     </div>
   );
 };

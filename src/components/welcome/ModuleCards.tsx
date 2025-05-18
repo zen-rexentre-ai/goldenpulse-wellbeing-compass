@@ -1,12 +1,15 @@
+
 import React, { useState } from 'react';
 import { EmbossedCard } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Activity } from 'lucide-react';
+import { Activity, Calculator } from 'lucide-react';
 import FitnessCalculator from '@/components/fitness/FitnessCalculator';
 
 
 const ModuleCards = () => {
+  const [calculatorOpen, setCalculatorOpen] = useState(false);
+  
   return (
     <div className="w-full space-y-4 my-4">
       <div className="text-center space-y-2">
@@ -66,15 +69,30 @@ const ModuleCards = () => {
             </ul>
           </div>
         </EmbossedCard>
-        <div className="bg-gradient-to-br from-golden-pink to-golden-peach p-6 h-full">
-         <Button 
-        className="w-full text-lg py-5 flex items-center justify-center gap-2"         onClick={() => setCalculatorOpen(true)}
-      >
-        <Activity className="h-5 w-5" />
-        Calculate Fitness Score
-      </Button>
+        
+        {/* Fitness Calculator Card */}
+        <EmbossedCard className="overflow-hidden col-span-1 md:col-span-2">
+          <div className="bg-gradient-to-r from-golden-pink to-golden-peach p-6">
+            <h3 className="text-xl font-bold mb-3 text-golden-dark">Check Your Health</h3>
+            <p className="mb-4 text-golden-dark">Get personalized insights about your health and wellness with our advanced calculator.</p>
+            
+            <Button 
+              variant="golden"
+              size="lg"
+              className="w-full text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none"
+              onClick={() => setCalculatorOpen(true)}
+            >
+              <Calculator className="h-6 w-6 mr-2" />
+              Calculate Your Fitness Score
+            </Button>
           </div>
+        </EmbossedCard>
       </div>
+      
+      <FitnessCalculator 
+        open={calculatorOpen}
+        onOpenChange={setCalculatorOpen}
+      />
     </div>
   );
 };
