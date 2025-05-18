@@ -31,7 +31,6 @@ const FoundersSection = () => {
             <span>+91-9840178288</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Mail className="h-4 w-4 text-primary" />
             <span>harinath04@gmail.com</span>
           </div>
         </div>
@@ -55,8 +54,7 @@ const FoundersSection = () => {
             <span>+91-9841044186</span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Mail className="h-4 w-4 text-primary" />
-            <span>mahadevan.ranganathan@gmail.com</span>
+          <span>mahadevan.ranganathan@gmail.com</span>
           </div>
         </div>
       </div>
