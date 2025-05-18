@@ -1,0 +1,191 @@
+
+import React from 'react';
+import { Progress } from '@/components/ui/progress';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { CheckCircle, Download, BarChart2, Mail } from 'lucide-react';
+import { useTheme } from '@/components/ThemeProvider';
+
+interface Recommendation {
+  text: string;
+  impact: string;
+  priority: string;
+}
+
+interface FitnessCalculatorResultsProps {
+  score: number;
+  recommendations: Recommendation[];
+  normalizedValues: { [key: string]: number };
+  onSave: () => void;
+  onReset: () => void;
+}
+
+const getScoreCategory = (score: number) => {
+  if (score >= 90) return { label: "Excellent", color: "bg-green-500" };
+  if (score >= 80) return { label: "Very Good", color: "bg-emerald-500" };
+  if (score >= 70) return { label: "Good", color: "bg-blue-500" };
+  if (score >= 60) return { label: "Fair", color: "bg-yellow-500" };
+  if (score >= 50) return { label: "Poor", color: "bg-orange-500" };
+  return { label: "Very Poor", color: "bg-red-500" };
+};
+
+const getPercentile = (score: number) => {
+  // Simplified mock percentile calculation
+  return Math.round(score * 0.8);
+};
+
+const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
+  score,
+  recommendations,
+  normalizedValues,
+  onSave,
+  onReset
+}) => {
+  const { theme } = useTheme();
+  const scoreCategory = getScoreCategory(score);
+  const percentile = getPercentile(score);
+  
+  // Mock data for age group comparison
+  const ageGroups = [
+    { age: "50-60", avgScore: 68 },
+    { age: "60-70", avgScore: 65 },
+    { age: "70-80", avgScore: 62 },
+    { age: "80+", avgScore: 57 }
+  ];
+
+  return (
+    <div className="space-y-6 animate-fade-in">
+      <div className="text-center mb-8">
+        <h2 className="text-2xl font-bold mb-2">Your Health Score</h2>
+        <div className="relative inline-block">
+          <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke={theme === 'dark' ? '#334155' : '#e2e8f0'}
+              strokeWidth="10"
+            />
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke={theme === 'dark' ? '#4f46e5' : '#4c1d95'}
+              strokeDasharray="282.7"
+              strokeDashoffset={282.7 - (282.7 * score) / 100}
+              strokeWidth="10"
+              strokeLinecap="round"
+              className="transition-all duration-1000 ease-in-out"
+            />
+          </svg>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div>
+              <span className="text-3xl font-bold">{score}</span>
+              <span className="text-sm">/100</span>
+            </div>
+          </div>
+        </div>
+        <div className="mt-2">
+          <Badge className={`${scoreCategory.color} text-white`}>{scoreCategory.label}</Badge>
+        </div>
+      </div>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Age Group Comparison</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm mb-4">
+              You scored better than <span className="font-bold">{percentile}%</span> of people in your age group.
+            </p>
+            <div className="space-y-3">
+              {ageGroups.map((group) => (
+                <div key={group.age} className="space-y-1">
+                  <div className="flex justify-between text-sm">
+                    <span>Age {group.age}</span>
+                    <span>{group.avgScore}</span>
+                  </div>
+                  <Progress value={group.avgScore} className="h-2" />
+                </div>
+              ))}
+              <div className="space-y-1 pt-2">
+                <div className="flex justify-between text-sm">
+                  <span className="font-medium">Your Score</span>
+                  <span className="font-medium">{score}</span>
+                </div>
+                <Progress value={score} className="h-3 bg-gray-200" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg">Recommendations</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {recommendations.length === 0 ? (
+              <div className="text-center py-4">
+                <CheckCircle className="h-12 w-12 mx-auto text-green-500 mb-2" />
+                <p>Great job! Keep maintaining your healthy lifestyle.</p>
+              </div>
+            ) : (
+              recommendations.map((rec, i) => (
+                <div key={i} className="flex gap-3 items-start pb-3 border-b border-gray-200 dark:border-gray-800 last:border-0">
+                  <Badge
+                    variant="outline"
+                    className={
+                      rec.priority === 'high' 
+                        ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                        : rec.priority === 'medium'
+                          ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                          : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                    }
+                  >
+                    {rec.impact}
+                  </Badge>
+                  <span>{rec.text}</span>
+                </div>
+              ))
+            )}
+          </CardContent>
+        </Card>
+      </div>
+      
+      <Card className="mt-6">
+        <CardHeader>
+          <CardTitle className="text-lg">Detailed Score Breakdown</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {Object.entries(normalizedValues).map(([key, value]) => (
+              <div key={key} className="space-y-1">
+                <div className="flex justify-between items-center">
+                  <span className="capitalize text-sm">
+                    {key === 'bmi' ? 'BMI' : key.replace(/([A-Z])/g, ' $1').trim()}
+                  </span>
+                  <span className="text-sm font-medium">{Math.round(value * 100)}%</span>
+                </div>
+                <Progress value={value * 100} className="h-2" />
+              </div>
+            ))}
+          </div>
+        </CardContent>
+        <CardFooter className="flex flex-col sm:flex-row gap-2 border-t pt-4">
+          <Button className="w-full sm:w-auto" onClick={onSave}>
+            <Download className="mr-2 h-4 w-4" /> Save Report
+          </Button>
+          <Button variant="outline" className="w-full sm:w-auto" onClick={onReset}>
+            <BarChart2 className="mr-2 h-4 w-4" /> Calculate Again
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+};
+
+export default FitnessCalculatorResults;
