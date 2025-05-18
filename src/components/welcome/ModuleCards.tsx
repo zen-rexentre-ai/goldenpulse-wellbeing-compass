@@ -1,6 +1,10 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { EmbossedCard } from '@/components/ui/card';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Activity } from 'lucide-react';
+import FitnessCalculator from '@/components/fitness/FitnessCalculator';
+
 
 const ModuleCards = () => {
   return (
