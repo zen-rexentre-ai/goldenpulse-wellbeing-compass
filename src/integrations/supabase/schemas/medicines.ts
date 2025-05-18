@@ -2,7 +2,7 @@
 import { BaseDatabase } from './base';
 
 // Medicines-specific database schema
-export interface MedicinesSchema {
+export interface MedicinesSchema extends BaseDatabase {
   public: {
     Tables: {
       medicines: {
@@ -40,6 +40,6 @@ export interface MedicinesSchema {
           notes?: string | null;
         };
       };
-    };
+    } & BaseDatabase['public']['Tables'];
   };
 }

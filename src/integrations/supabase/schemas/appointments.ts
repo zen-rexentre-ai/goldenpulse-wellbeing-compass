@@ -2,7 +2,7 @@
 import { BaseDatabase } from './base';
 
 // Appointments-specific database schema
-export interface AppointmentsSchema {
+export interface AppointmentsSchema extends BaseDatabase {
   public: {
     Tables: {
       appointments: {
@@ -43,6 +43,6 @@ export interface AppointmentsSchema {
           reminder_set?: boolean;
         };
       };
-    };
+    } & BaseDatabase['public']['Tables'];
   };
 }

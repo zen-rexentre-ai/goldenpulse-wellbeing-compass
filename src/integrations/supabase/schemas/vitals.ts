@@ -2,7 +2,7 @@
 import { BaseDatabase } from './base';
 
 // Vitals-specific database schema
-export interface VitalsSchema {
+export interface VitalsSchema extends BaseDatabase {
   public: {
     Tables: {
       vitals: {
@@ -40,6 +40,6 @@ export interface VitalsSchema {
           recorded_date?: string;
         };
       };
-    };
+    } & BaseDatabase['public']['Tables'];
   };
 }

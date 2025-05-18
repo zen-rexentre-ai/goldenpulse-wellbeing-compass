@@ -2,7 +2,7 @@
 import { BaseDatabase } from './base';
 
 // Profile-specific database schema
-export interface ProfilesSchema {
+export interface ProfilesSchema extends BaseDatabase {
   public: {
     Tables: {
       profiles: {
@@ -46,6 +46,6 @@ export interface ProfilesSchema {
           subscription_status?: string | null;
         };
       };
-    };
+    } & BaseDatabase['public']['Tables'];
   };
 }

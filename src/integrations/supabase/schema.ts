@@ -7,15 +7,25 @@ import { MedicinesSchema } from './schemas/medicines';
 import { AppointmentsSchema } from './schemas/appointments';
 import { VitalsSchema } from './schemas/vitals';
 
+// Define a type that merges all the table definitions
+type MergedTables = 
+  & ProfilesSchema['public']['Tables']
+  & EmergencyContactsSchema['public']['Tables']
+  & FitnessCalculationsSchema['public']['Tables']
+  & MedicinesSchema['public']['Tables']
+  & AppointmentsSchema['public']['Tables']
+  & VitalsSchema['public']['Tables'];
+
 // Combine all schema interfaces into a single Database interface
-export interface Database extends 
-  BaseDatabase,
-  ProfilesSchema,
-  EmergencyContactsSchema,
-  FitnessCalculationsSchema,
-  MedicinesSchema,
-  AppointmentsSchema,
-  VitalsSchema {}
+export interface Database extends Omit<BaseDatabase, 'public'> {
+  public: {
+    Tables: MergedTables;
+    Views: BaseDatabase['public']['Views'];
+    Functions: BaseDatabase['public']['Functions'];
+    Enums: BaseDatabase['public']['Enums'];
+    CompositeTypes: BaseDatabase['public']['CompositeTypes'];
+  }
+}
 
 // Create a type for the Supabase client
 export type ExtendedDatabase = Database;

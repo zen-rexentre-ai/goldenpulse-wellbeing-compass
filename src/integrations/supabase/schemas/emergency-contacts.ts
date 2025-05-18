@@ -2,7 +2,7 @@
 import { BaseDatabase } from './base';
 
 // Emergency contacts-specific database schema
-export interface EmergencyContactsSchema {
+export interface EmergencyContactsSchema extends BaseDatabase {
   public: {
     Tables: {
       emergency_contacts: {
@@ -37,6 +37,6 @@ export interface EmergencyContactsSchema {
           is_primary?: boolean;
         };
       };
-    };
+    } & BaseDatabase['public']['Tables'];
   };
 }

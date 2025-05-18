@@ -2,7 +2,7 @@
 import { BaseDatabase } from './base';
 
 // Fitness calculations-specific database schema
-export interface FitnessCalculationsSchema {
+export interface FitnessCalculationsSchema extends BaseDatabase {
   public: {
     Tables: {
       fitness_calculations: {
@@ -43,6 +43,6 @@ export interface FitnessCalculationsSchema {
           recommendations?: string[] | null;
         };
       };
-    };
+    } & BaseDatabase['public']['Tables'];
   };
 }
