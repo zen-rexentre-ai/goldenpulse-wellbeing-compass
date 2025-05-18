@@ -66,6 +66,7 @@ const ModuleCards = () => {
             </ul>
           </div>
         </EmbossedCard>
+        <div className="bg-gradient-to-br from-golden-pink to-golden-peach p-6 h-full">
          <Button 
         className="w-full text-lg py-5 flex items-center justify-center gap-2" 
         variant="golden"
@@ -74,6 +75,7 @@ const ModuleCards = () => {
         <Activity className="h-5 w-5" />
         Calculate Fitness Score
       </Button>
+          </div>
       </div>
     </div>
   );
