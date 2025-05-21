@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { FitnessCalculatorResults } from '@/components/fitness/FitnessCalculatorResults';
+import FitnessCalculatorResults from '@/components/fitness/FitnessCalculatorResults';
 import { useToast } from '@/hooks/use-toast';
 import BottomNavigation from '@/components/dashboard/BottomNavigation';
 import Logo from '@/components/Logo';
