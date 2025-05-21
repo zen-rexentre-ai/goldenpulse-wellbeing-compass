@@ -44,15 +44,15 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
 
   // Plan features for comparison table
  const features: Feature[] = [
-    { name: 'Personalized Fitness Journey', free: 'Limited', basic: true, premium: true },
+    { name: 'Personalized Wellness Journey', free: false, basic: true, premium: true },
 	{ name: 'Emergency & SoS Tracking', free: true, basic: true, premium: 'Advanced' },
-    { name: 'AI Powered Diagnostics', free: false, basic: 'Basic', premium: 'Advanced' },
-	{ name: 'Dependents Access', free: false, basic: false, premium: true },
-    { name: 'Medical Team Consultations', free: false, basic: 'Once Every 4 months', premium: 'Twice Every 2 Months' },
+    { name: 'AI Powered Diagnostics', free: false, basic: false, premium: 'Advanced' },
+	{ name: 'Access to kin', free: false, basic: false, premium: true },
+    { name: 'Medical Team Consultations', free: false, basic: 'Once Every 6 months', premium: 'Once Every 3 Months' },
   	{ name: 'Volunteering Access', free: true, basic: true, premium: true },
-    { name: 'Webinars', free: 'Recorded', basic: true, premium: true },
-	{ name: 'Community Module', free: 'Limited*', basic: true, premium: true },
-	{ name: 'Cognitive Games', free: 'Limited*', basic: true, premium: true },
+    { name: 'Webinars', free: 'Recorded', basic: true, premium: 'QnA Allowed' },
+	{ name: 'Community Module', free: 'Enabled after 3 volunteering sessions', basic: true, premium: true },
+	{ name: 'Cognitive Games', free: true, basic: true, premium: true },
 	];
 
   // Plan card configuration
