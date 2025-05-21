@@ -4,6 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue 
+} from '@/components/ui/select';
 
 const volunteeringCategories = [
   { id: 'eldercare', label: 'Elder Care' },
@@ -33,6 +40,20 @@ const VolunteeringPreferences = () => {
             min="1" 
             placeholder="8" 
           />
+        </div>
+
+        <div className="space-y-2">
+          <Label htmlFor="volunteeringMode">Mode of volunteering</Label>
+          <Select>
+            <SelectTrigger id="volunteeringMode">
+              <SelectValue placeholder="Select your preferred mode" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="outdoor">Outdoor</SelectItem>
+              <SelectItem value="online">Online</SelectItem>
+              <SelectItem value="both">Both</SelectItem>
+            </SelectContent>
+          </Select>
         </div>
 
         <div className="space-y-2">
