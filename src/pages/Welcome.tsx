@@ -11,11 +11,11 @@ const Welcome = () => {
       <div className="w-full max-w-md flex flex-col items-center gap-2 animate-fade-in py-2">
         <Hero />
         <ModuleCards />
-        
+                  <FoundersSection />
         <div className="w-full space-y-3">
           <h2 className="text-2xl font-bold text-center">Ready to Embrace Your Best Years?</h2>
           
-          <FoundersSection />
+
           <ActionButtons />
         </div>
       </div>
