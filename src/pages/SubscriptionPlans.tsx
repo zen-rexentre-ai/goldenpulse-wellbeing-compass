@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { AlertTriangle, Calendar, Users, Brain, Heart, HelpingHand, UserRound, UsersRound } from 'lucide-react';
 import SubscriptionPlanSelector from '@/components/subscription/SubscriptionPlanSelector';
@@ -50,14 +49,14 @@ const SubscriptionPlans = () => {
     {
       title: 'Community Module',
       icon: <Users className="h-8 w-8 text-golden-purple" />,
-      description: 'Expand on your hobbies and interests by Connect, share, and growing with a vibrant member community of like-minded individuals.',
+      description: 'Expand on your hobbies and interests with a vibrant member community.',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
     {
       title: 'Webinars',
       icon: <Users className="h-8 w-8 text-golden-purple" />,
-      description: 'Live and Recorded Webinars in variety of topics from Financial Literacy, Investments, Insurances, Safety devices and interesting Health topics',
+      description: 'Live and Recorded Webinars in variety of topics from Digital tech and safety, Financial Literacy and interesting Health topics',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
