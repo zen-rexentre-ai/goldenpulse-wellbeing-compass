@@ -7,7 +7,7 @@ const ActionButtons = () => {
   return (
     <div className="grid gap-3">
       <Link to="/register">
-        <Button className="w-full text-lg py-5" size="lg">
+        <Button className="w-full text-lg py-5 bg-[#FF7E00] hover:bg-[#E06E00] border-none" size="lg">
           Create Account
         </Button>
       </Link>
