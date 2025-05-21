@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AccessibilityControls } from '@/components/AccessibilityControls';
@@ -79,7 +80,7 @@ const Dashboard = () => {
       {/* Header */}
       <header className="sticky top-0 z-10 bg-background border-b p-4">
         <div className="container max-w-6xl flex justify-between items-center">
-          <Logo size="sm" />
+          <Logo size="sm" className="max-w-[150px]" />
           
           <div className="flex gap-2">
             <Button
