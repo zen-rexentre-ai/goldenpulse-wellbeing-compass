@@ -53,7 +53,7 @@ const Register = () => {
         
         <Card className="w-full shadow-lg">
           <CardHeader>
-            <CardTitle className="text-2xl text-center">GoldenPulse Registration</CardTitle>
+            <CardTitle className="text-2xl text-center">Registration</CardTitle>
             <p className="text-center text-muted-foreground">
               Step {step} of 3
             </p>
