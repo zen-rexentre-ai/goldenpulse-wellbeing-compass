@@ -9,7 +9,7 @@ const EmergencyContacts = () => {
     <div className="space-y-6">
       <h3 className="text-lg font-medium">Emergency Contacts</h3>
       <p className="text-sm text-muted-foreground">
-        Please provide contact information for emergencies. These contacts will only be used in case of an emergency.
+        Please provide contact information for your next of kin to reach out incase of emergency.  Providing additional contacts of your personal physician might help in medical emergencies.
       </p>
 
       <Card className="border border-primary/20">
@@ -23,7 +23,7 @@ const EmergencyContacts = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="physicianPhone">Phone Number</Label>
-                <Input id="physicianPhone" placeholder="(555) 123-4567" />
+                <Input id="physicianPhone" placeholder="+91 9812345678" />
               </div>
             </div>
             <div className="space-y-2">
@@ -45,7 +45,7 @@ const EmergencyContacts = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="primaryPhone">Phone Number</Label>
-                <Input id="primaryPhone" placeholder="(555) 987-6543" />
+                <Input id="primaryPhone" placeholder="+91 9812345678" />
               </div>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -73,7 +73,7 @@ const EmergencyContacts = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="secondaryPhone">Phone Number</Label>
-                <Input id="secondaryPhone" placeholder="(555) 456-7890" />
+                <Input id="secondaryPhone" placeholder="+91 9812345678" />
               </div>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
