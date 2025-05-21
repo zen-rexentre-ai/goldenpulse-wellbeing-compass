@@ -11,7 +11,7 @@ const SubscriptionPlans = () => {
     {
       title: 'Personalized Wellness Journey',
       icon: <Heart className="h-8 w-8 text-golden-purple" />,
-      description: 'Your own Personalized Wellness Journey currated by our Specialist Medical teams based on your goals & health reports.',
+      description: 'Expert medical assessment turns your health reports into a personalized wellness plan—track your journey and see real progress with your dynamic Wellness Score.',
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
     },
