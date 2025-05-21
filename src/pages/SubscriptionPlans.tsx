@@ -18,7 +18,7 @@ const SubscriptionPlans = () => {
     {
       title: 'Emergency & SoS Tracking',
       icon: <AlertTriangle className="h-8 w-8 text-golden-purple" />,
-      description: 'Real-time emergency and SoS tracking for peace of mind.',
+      description: 'Real-time emergency SoS message to your kin/personal physician.',
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
     },
@@ -30,9 +30,9 @@ const SubscriptionPlans = () => {
       textColor: 'text-golden-dark'
     }, 
     {
-      title: 'Dependents Access',
+      title: 'Access to kin',
       icon: <UsersRound className="h-8 w-8 text-golden-purple" />,
-      description: 'Your dependents can access GoldenPulse for free.',
+      description: 'Your kin can track your progress in realtime.',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
