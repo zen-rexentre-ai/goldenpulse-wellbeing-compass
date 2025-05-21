@@ -40,7 +40,6 @@ const FitnessScoreMeter = ({ score = 75 }) => {
   return (
     <div className="relative h-48 w-full flex flex-col items-center">
       <div className="text-center mb-2">
-        <h3 className="text-xl font-bold text-golden-dark">Your Fitness Score</h3>
         <div className="flex items-center justify-center gap-2">
           <Gauge className="h-5 w-5 text-primary" />
           <span className="text-lg font-medium">{score}/100 - {scoreLabel}</span>
@@ -89,16 +88,18 @@ const FitnessScoreMeter = ({ score = 75 }) => {
           </ResponsiveContainer>
         </TooltipProvider>
         
-        {/* Score Needle */}
+        {/* Score Needle - Fixed to originate from the center */}
         <div 
-          className="absolute left-1/2 bottom-0 -translate-x-1/2 origin-bottom rotate-[0deg] transition-transform duration-1000"
+          className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom"
           style={{ 
             transform: `translateX(-50%) rotate(${180 - (score * 180) / 100}deg)`,
-            transformOrigin: 'bottom center'
+            transformOrigin: 'center bottom'
           }}
         >
-          <div className="h-[60px] w-[3px] bg-primary rounded-t-full" />
-          <div className="h-4 w-4 rounded-full bg-primary -mt-1 mx-auto shadow-lg" />
+          <div className="flex flex-col items-center">
+            <div className="h-[60px] w-2 bg-gradient-to-t from-primary to-primary/70 rounded-full shadow-md" />
+            <div className="h-4 w-4 rounded-full bg-primary -mt-1 shadow-lg border-2 border-background" />
+          </div>
         </div>
         
         {/* Zone Indicators - Just small dots/markers without text */}
@@ -149,7 +150,7 @@ const ModuleCards = () => {
                 <span className="text-primary text-lg">•</span>
                 <span>AI Powered Diagnostics</span>
               </li>
-                 <li className="flex items-start gap-2">
+              <li className="flex items-start gap-2">
                 <span className="text-primary text-lg">•</span>
                 <span>Pain Management</span>
               </li>
@@ -186,28 +187,26 @@ const ModuleCards = () => {
           </div>
         </EmbossedCard>
         
-        {/* Fitness Score Meter Card */}
+        {/* Merged Wellness Score Card with Calculator */}
         <EmbossedCard className="overflow-hidden col-span-1 md:col-span-2">
-          <div className="bg-gradient-to-r from-golden-pink to-golden-peach p-6">
-            <FitnessScoreMeter score={75} />
-          </div>
-        </EmbossedCard>
-        
-        {/* Fitness Calculator Card */}
-        <EmbossedCard className="overflow-hidden col-span-1 md:col-span-2">
-          <div className="bg-gradient-to-r from-golden-pink to-golden-peach p-6">
-            <h3 className="text-xl font-bold mb-3 text-golden-dark">Check Your Health</h3>
-            <p className="mb-4 text-golden-dark">Compare how daily physical activity helps in actual results, helps track progress and optimize your health journey.</p>
+          <div className="bg-gradient-to-r from-golden-pink/90 to-golden-peach/90 p-6">
+            <h3 className="text-2xl font-bold mb-4 text-center text-golden-dark">Check Your Wellness Score</h3>
             
-            <Button 
-              variant="golden"
-              size="lg"
-              className="w-full text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none"
-              onClick={() => setCalculatorOpen(true)}
-            >
-              <Calculator className="h-6 w-6 mr-2" />
-              Calculate Your Fitness Score
-            </Button>
+            <FitnessScoreMeter score={75} />
+            
+            <div className="mt-4 text-center">
+              <p className="mb-4 text-golden-dark">Compare how daily physical activity helps in actual results, helps track progress and optimize your health journey.</p>
+              
+              <Button 
+                variant="golden"
+                size="lg"
+                className="w-full max-w-md text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none bg-gradient-to-r from-[#F97316] to-[#FBBF24] text-white"
+                onClick={() => setCalculatorOpen(true)}
+              >
+                <Calculator className="h-6 w-6 mr-2" />
+                Calculate Your Fitness Score
+              </Button>
+            </div>
           </div>
         </EmbossedCard>
       </div>

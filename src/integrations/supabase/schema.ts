@@ -8,7 +8,7 @@ import { AppointmentsSchema } from './schemas/appointments';
 import { VitalsSchema } from './schemas/vitals';
 
 // Define a combined database type that merges all schema definitions
-export interface Database extends BaseDatabase {
+export interface Database {
   public: {
     Tables: 
       & ProfilesSchema['public']['Tables']

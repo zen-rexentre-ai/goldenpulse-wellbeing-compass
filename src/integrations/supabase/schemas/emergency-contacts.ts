@@ -2,7 +2,7 @@
 import { BaseDatabase } from './base';
 
 // Emergency contacts-specific database schema
-export interface EmergencyContactsSchema extends BaseDatabase {
+export interface EmergencyContactsSchema {
   public: {
     Tables: {
       emergency_contacts: {
