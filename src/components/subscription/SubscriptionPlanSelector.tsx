@@ -77,8 +77,8 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
       headerGradient: 'bg-gradient-to-b from-blue-50 to-blue-100 border-b',
       features: [
         { text: 'All Free Features', available: true },
-        { text: 'Personalized Fitness Journey', available: true },
-        { text: 'Once Every 4 months', available: true },
+        { text: 'Personalized Wellness Journey', available: true },
+        { text: 'Medical Team Review : Once Every 6 months', available: true },
         { text: 'Community Module', available: true}
       ],
     },
@@ -89,9 +89,8 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
       headerGradient: 'bg-gradient-to-b from-golden-yellow to-golden-orange border-b',
       features: [
         { text: 'All Basic Features', available: true },
-        { text: 'Six Month Medical Review', available: true },
-        { text: 'Twice Every 4 months', available: true },
-        { text: 'Dependents Access', available: true },
+        { text: 'Medical Team Review : Once every 3 months', available: true },
+        { text: 'Access to Kin', available: true },
         { text: 'Advanced AI Diagnostics', available: true }
       ],
       isFeatured: true
