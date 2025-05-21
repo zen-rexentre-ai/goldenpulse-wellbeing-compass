@@ -124,7 +124,7 @@ const ModuleCards = () => {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-primary text-lg">•</span>
-                <span>Track Your Kin</span>
+                <span>Access to Kin</span>
               </li>
                             <li className="flex items-start gap-2">
                 <span className="text-primary text-lg">•</span>
