@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Pill, Users, Handshake, Siren, Settings } from 'lucide-react';
+import { Home, Gauge, Users, Handshake, Siren, Settings } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 
 const BottomNavigation: React.FC = () => {
@@ -25,6 +25,16 @@ const BottomNavigation: React.FC = () => {
           </Link>
         </Button>
         
+        <Button 
+          variant={isActive('/wellness-analysis') ? "default" : "ghost"} 
+          className="flex flex-col items-center gap-1"
+          asChild
+        >
+          <Link to="/wellness-analysis">
+            <Gauge size={24} />
+            <span className="text-xs">Analysis</span>
+          </Link>
+        </Button>
                
         <Button 
           variant={isActive('/emergency-contacts') ? "default" : "ghost"} 

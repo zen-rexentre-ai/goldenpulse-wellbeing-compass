@@ -4,6 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Calendar, MapPin, Video, ChevronDown, ChevronUp } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 
 interface Appointment {
   id: number;
@@ -18,12 +19,25 @@ interface Appointment {
   notes?: string;
 }
 
+interface Activity {
+  id: number;
+  name: string;
+  type: string;
+  time: string;
+  color: string;
+}
+
 interface AppointmentsWidgetProps {
   appointments: Appointment[];
+  activities: Activity[];
   toggleWidget: (widgetName: string) => void;
 }
 
-export const AppointmentsWidget: React.FC<AppointmentsWidgetProps> = ({ appointments: initialAppointments, toggleWidget }) => {
+export const AppointmentsWidget: React.FC<AppointmentsWidgetProps> = ({ 
+  appointments: initialAppointments, 
+  activities,
+  toggleWidget 
+}) => {
   // Augment the appointments with sample data since we're adding new fields
   const enhancedAppointments = initialAppointments.map(appt => ({
     ...appt,
@@ -35,6 +49,7 @@ export const AppointmentsWidget: React.FC<AppointmentsWidgetProps> = ({ appointm
   
   const [appointments] = useState(enhancedAppointments);
   const [expandedId, setExpandedId] = useState<number | null>(null);
+  const [activitiesOpen, setActivitiesOpen] = useState(false);
   
   const toggleExpand = (id: number) => {
     setExpandedId(expandedId === id ? null : id);
@@ -114,6 +129,55 @@ export const AppointmentsWidget: React.FC<AppointmentsWidgetProps> = ({ appointm
           </CardContent>
         </Card>
       ))}
+      
+      {/* Activities Section - Collapsible */}
+      <Collapsible
+        open={activitiesOpen}
+        onOpenChange={setActivitiesOpen}
+        className="border rounded-lg p-4 bg-muted/20 mt-6"
+      >
+        <div className="flex justify-between items-center">
+          <h3 className="text-lg font-medium">Upcoming Activities</h3>
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm">
+              {activitiesOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              <span className="ml-1">{activitiesOpen ? "Hide" : "Show"}</span>
+            </Button>
+          </CollapsibleTrigger>
+        </div>
+        
+        <CollapsibleContent className="mt-4 space-y-4">
+          {activities.map((activity) => (
+            <Card key={activity.id} className={activity.color}>
+              <CardContent className="p-4">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="font-medium">{activity.name}</h3>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm text-muted-foreground">{activity.time}</p>
+                      <Badge variant="outline">{activity.type}</Badge>
+                    </div>
+                  </div>
+                  <div>
+                    {activity.type === 'game' && (
+                      <Button size="sm">Play Now</Button>
+                    )}
+                    {activity.type === 'webinar' && (
+                      <Button variant="outline" size="sm">Set Reminder</Button>
+                    )}
+                    {activity.type === 'volunteer' && (
+                      <Button variant="outline" size="sm">Learn More</Button>
+                    )}
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+          
+          <Button variant="outline" className="w-full">View All Activities</Button>
+        </CollapsibleContent>
+      </Collapsible>
+      
       <Button variant="outline" className="w-full">View All Appointments</Button>
     </div>
   );

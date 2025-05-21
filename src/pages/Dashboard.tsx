@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AccessibilityControls } from '@/components/AccessibilityControls';
-import { Bell, Home } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import Logo from '@/components/Logo';
 import { useToast } from '@/hooks/use-toast';
 import { DetailedAnalysisDialog } from '@/components/DetailedAnalysisDialog';
@@ -61,7 +61,7 @@ const Dashboard = () => {
     { name: "Blood Sugar", value: "105 mg/dL", status: "normal", recommendation: "Maintain current habits" }
   ];
 
-  const upcomingActivities = [
+  const activities = [
     { id: 1, name: "Memory Game Challenge", type: "game", time: "Today at 3:00 PM", color: "bg-golden-yellow/20" },
     { id: 2, name: "Gentle Yoga Webinar", type: "webinar", time: "Tomorrow at 10:00 AM", color: "bg-golden-pink/20" },
     { id: 3, name: "Community Garden Volunteering", type: "volunteer", time: "May 15 at 9:00 AM", color: "bg-golden-peach/20" }
@@ -76,7 +76,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-16">
       {/* Header */}
       <header className="sticky top-0 z-10 bg-background border-b p-4">
         <div className="container max-w-6xl flex justify-between items-center">
@@ -130,13 +130,13 @@ const Dashboard = () => {
           <Button variant="outline" size="sm">Customize Widgets</Button>
         </div>
         
-        {/* Dashboard Tabs - Will be styled in the component */}
+        {/* Dashboard Tabs - Updated to remove Activities tab and combine Health Focus with Vitals */}
         <DashboardTabs 
           medicines={medicines}
           appointments={appointments}
           vitals={vitals}
           healthFocus={healthFocus}
-          activities={upcomingActivities}
+          activities={activities}
           toggleWidget={toggleWidget}
         />
       </main>

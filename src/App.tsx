@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
+import WellnessAnalysis from "./pages/WellnessAnalysis";
 import EmergencyContacts from "./pages/EmergencyContacts";
 import Volunteering from "./pages/Volunteering";
 import Settings from "./pages/Settings";
@@ -33,6 +34,7 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/onboarding" element={<Onboarding />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/wellness-analysis" element={<WellnessAnalysis />} />
             <Route path="/emergency-contacts" element={<EmergencyContacts />} />
             <Route path="/volunteering" element={<Volunteering />} />
             <Route path="/settings" element={<Settings />} />

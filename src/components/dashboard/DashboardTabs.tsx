@@ -2,10 +2,8 @@
 import React, { useState } from 'react';
 import { MedicineWidget } from './MedicineWidget';
 import { AppointmentsWidget } from './AppointmentsWidget';
-import { VitalsWidget } from './VitalsWidget';
-import { HealthFocusWidget } from './HealthFocusWidget';
-import { ActivitiesWidget } from './ActivitiesWidget';
-import { Pill, Calendar, Activity, Heart, Video } from 'lucide-react';
+import { HealthFocusWithVitalsWidget } from './HealthFocusWithVitalsWidget';
+import { Pill, Calendar, Heart } from 'lucide-react';
 
 interface Medicine {
   id: number;
@@ -76,35 +74,21 @@ export const DashboardTabs: React.FC<DashboardTabsProps> = ({
       id: 'appointments', 
       label: 'Appointments', 
       icon: <Calendar />, 
-      content: <AppointmentsWidget appointments={appointments} toggleWidget={toggleWidget} />,
+      content: <AppointmentsWidget appointments={appointments} activities={activities} toggleWidget={toggleWidget} />,
       color: 'bg-secondary/10'
-    },
-    { 
-      id: 'vitals', 
-      label: 'Vitals', 
-      icon: <Activity />, 
-      content: <VitalsWidget vitals={vitals} toggleWidget={toggleWidget} />,
-      color: 'bg-blue-50'
     },
     { 
       id: 'healthfocus', 
       label: 'Health Focus', 
       icon: <Heart />, 
-      content: <HealthFocusWidget healthFocus={healthFocus} toggleWidget={toggleWidget} />,
+      content: <HealthFocusWithVitalsWidget healthFocus={healthFocus} vitals={vitals} toggleWidget={toggleWidget} />,
       color: 'bg-red-50'
-    },
-    { 
-      id: 'activities', 
-      label: 'Activities', 
-      icon: <Video />, 
-      content: <ActivitiesWidget activities={activities} toggleWidget={toggleWidget} />,
-      color: 'bg-green-50'
     }
   ];
 
   return (
     <div className="w-full space-y-4">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
         {tabItems.map((tab) => (
           <div 
             key={tab.id}
