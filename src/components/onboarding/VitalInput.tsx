@@ -92,13 +92,13 @@ const VitalInput: React.FC = () => {
               </div>
               
               <div className="grid gap-2">
-                <Label htmlFor="blood-sugar">Blood Sugar (if applicable)</Label>
+                <Label htmlFor="blood-sugar">Hba1c (if applicable)</Label>
                 <Input 
                   id="blood-sugar" 
                   type="number"
-                  placeholder="100" 
+                  placeholder="5.6" 
                 />
-                <p className="text-xs text-muted-foreground">mg/dL</p>
+                <p className="text-xs text-muted-foreground">%</p>
               </div>
             </div>
           </CardContent>
