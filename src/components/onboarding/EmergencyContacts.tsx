@@ -19,16 +19,16 @@ const EmergencyContacts = () => {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="physicianName">Full Name</Label>
-                <Input id="physicianName" placeholder="Dr. John Smith" />
+                <Input id="physicianName" placeholder="Dr. Arvind" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="physicianPhone">Phone Number</Label>
-                <Input id="physicianPhone" placeholder="+91 9812345678" />
+                <Input id="physicianPhone" placeholder="+91 98123------" />
               </div>
             </div>
             <div className="space-y-2">
               <Label htmlFor="physicianAddress">Address</Label>
-              <Input id="physicianAddress" placeholder="123 Medical Center Dr." />
+              <Input id="physicianAddress" placeholder="23 Medical Center road" />
             </div>
           </div>
         </CardContent>
@@ -41,11 +41,11 @@ const EmergencyContacts = () => {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="primaryName">Full Name</Label>
-                <Input id="primaryName" placeholder="Jane Doe" />
+                <Input id="primaryName" placeholder="Name here" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="primaryPhone">Phone Number</Label>
-                <Input id="primaryPhone" placeholder="+91 9812345678" />
+                <Input id="primaryPhone" placeholder="+91 98123------" />
               </div>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -55,7 +55,7 @@ const EmergencyContacts = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="primaryEmail">Email</Label>
-                <Input id="primaryEmail" type="email" placeholder="jane@example.com" />
+                <Input id="primaryEmail" type="email" placeholder="abc@example.com" />
               </div>
             </div>
           </div>
@@ -69,11 +69,11 @@ const EmergencyContacts = () => {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="secondaryName">Full Name</Label>
-                <Input id="secondaryName" placeholder="Robert Johnson" />
+                <Input id="secondaryName" placeholder="Name here" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="secondaryPhone">Phone Number</Label>
-                <Input id="secondaryPhone" placeholder="+91 9812345678" />
+                <Input id="secondaryPhone" placeholder="+91 98123------" />
               </div>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -83,7 +83,7 @@ const EmergencyContacts = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="secondaryEmail">Email</Label>
-                <Input id="secondaryEmail" type="email" placeholder="robert@example.com" />
+                <Input id="secondaryEmail" type="email" placeholder="abc@example.com" />
               </div>
             </div>
           </div>
