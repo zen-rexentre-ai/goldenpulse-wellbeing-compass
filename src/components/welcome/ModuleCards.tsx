@@ -74,7 +74,7 @@ const ModuleCards = () => {
         <EmbossedCard className="overflow-hidden col-span-1 md:col-span-2">
           <div className="bg-gradient-to-r from-golden-pink to-golden-peach p-6">
             <h3 className="text-xl font-bold mb-3 text-golden-dark">Check Your Health</h3>
-            <p className="mb-4 text-golden-dark">Get personalized insights about your health and wellness with our advanced calculator.</p>
+            <p className="mb-4 text-golden-dark">Compare how daily physical activity helps in actual results, helps track progress and optimize your health journey.</p>
             
             <Button 
               variant="golden"
