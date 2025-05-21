@@ -10,25 +10,21 @@ const FoundersSection = () => {
 
   return (
     <EmbossedCard className="p-4 mb-3 w-full">
-      <h3 className="text-center text-lg font-medium mb-3">Meet Our Founders</h3>
+      <h3 className="text-center text-lg font-medium mb-3">Founders</h3>
       <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"} w-full`}>
         {/* Founder 1 */}
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-sm">
             <User className="h-4 w-4 text-primary" />
-            <span>Harinath Chakrapani</span>
+            <span><b>Harinath Chakrapani</b></span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <GraduationCap className="h-4 w-4 text-golden-purple" />
-            <span>
+             <span>
               <span className="text-golden-purple font-medium">MBA (IIT M), AMP (IIM B)</span>
-              <span className="mx-1">·</span>
-              <span className="text-golden-dark">IT Professional</span>
-            </span>
+             </span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <Phone className="h-4 w-4 text-primary" />
-            <span>IT Professional</span>
+           <span>IT Professional</span>
           </div>
         </div>
         
@@ -40,11 +36,10 @@ const FoundersSection = () => {
         <div className="space-y-2">
           <div className="flex items-center gap-2 text-sm">
             <User className="h-4 w-4 text-primary" />
-            <span>Mahadevan Ranganathan</span>
+            <span><b>Mahadevan Ranganathan</b></span>
           </div>
           <div className="flex items-center gap-2 text-sm">
-            <GraduationCap className="h-4 w-4 text-golden-purple" />
-             <span className="text-golden-purple font-medium">Retired Top Executive</span>
+           <span className="text-golden-purple font-medium">Retired Top Executive</span>
           </div>
          </div>
       </div>
