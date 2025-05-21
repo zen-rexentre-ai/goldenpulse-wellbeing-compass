@@ -40,6 +40,10 @@ export interface VitalsSchema extends BaseDatabase {
           recorded_date?: string;
         };
       };
-    } & BaseDatabase['public']['Tables'];
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 }

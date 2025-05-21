@@ -2,9 +2,9 @@
 import { Database as GeneratedDatabase } from '../types';
 
 // Base database type that will be extended by other schema files
-export type BaseDatabase = GeneratedDatabase & {
+export interface BaseDatabase {
   public: {
-    Tables: {};
+    Tables: Record<string, never>;
     Views: Record<string, never>;
     Functions: Record<string, never>;
     Enums: Record<string, never>;

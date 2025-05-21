@@ -7,19 +7,16 @@ import { MedicinesSchema } from './schemas/medicines';
 import { AppointmentsSchema } from './schemas/appointments';
 import { VitalsSchema } from './schemas/vitals';
 
-// Define a type that merges all the table definitions
-type MergedTables = 
-  & ProfilesSchema['public']['Tables']
-  & EmergencyContactsSchema['public']['Tables']
-  & FitnessCalculationsSchema['public']['Tables']
-  & MedicinesSchema['public']['Tables']
-  & AppointmentsSchema['public']['Tables']
-  & VitalsSchema['public']['Tables'];
-
-// Combine all schema interfaces into a single Database interface
-export interface Database extends Omit<BaseDatabase, 'public'> {
+// Define a combined database type that merges all schema definitions
+export interface Database extends BaseDatabase {
   public: {
-    Tables: MergedTables;
+    Tables: 
+      & ProfilesSchema['public']['Tables']
+      & EmergencyContactsSchema['public']['Tables']
+      & FitnessCalculationsSchema['public']['Tables']
+      & MedicinesSchema['public']['Tables']
+      & AppointmentsSchema['public']['Tables']
+      & VitalsSchema['public']['Tables'];
     Views: BaseDatabase['public']['Views'];
     Functions: BaseDatabase['public']['Functions'];
     Enums: BaseDatabase['public']['Enums'];

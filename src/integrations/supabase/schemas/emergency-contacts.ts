@@ -37,6 +37,10 @@ export interface EmergencyContactsSchema extends BaseDatabase {
           is_primary?: boolean;
         };
       };
-    } & BaseDatabase['public']['Tables'];
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 }

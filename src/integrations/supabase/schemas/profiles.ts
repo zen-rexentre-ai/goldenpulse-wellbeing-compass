@@ -46,6 +46,10 @@ export interface ProfilesSchema extends BaseDatabase {
           subscription_status?: string | null;
         };
       };
-    } & BaseDatabase['public']['Tables'];
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
   };
 }
