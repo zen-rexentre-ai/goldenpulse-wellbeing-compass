@@ -19,7 +19,7 @@ const EmergencyContacts = () => {
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="physicianName">Full Name</Label>
-                <Input id="physicianName" placeholder="Dr. Arvind" />
+                <Input id="physicianName" placeholder="Name here" />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="physicianPhone">Phone Number</Label>
