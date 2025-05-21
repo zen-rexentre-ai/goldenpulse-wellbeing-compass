@@ -74,7 +74,7 @@ const AppointmentsInput: React.FC = () => {
               id="doctor-name" 
               value={doctorName} 
               onChange={(e) => setDoctorName(e.target.value)}
-              placeholder="Dr. Arvind"
+              placeholder="Name here"
             />
           </div>
           
