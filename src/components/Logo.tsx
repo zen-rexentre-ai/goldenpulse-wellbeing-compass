@@ -11,8 +11,8 @@ interface LogoProps {
 const Logo: React.FC<LogoProps> = ({ size = 'md', className = '', linkToHome = true }) => {
   const sizeClasses = {
     sm: 'h-15',
-    md: 'h-24',
-    lg: 'h-24',
+    md: 'h-25',
+    lg: 'h-25',
   };
 
   const logo = (
