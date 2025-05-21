@@ -62,7 +62,7 @@ const AppointmentsInput: React.FC = () => {
       <div>
         <h2 className="text-xl font-semibold mb-2">Upcoming Appointments</h2>
         <p className="text-muted-foreground mb-4">
-          Add your upcoming medical appointments to keep track of them.
+          Add any of your upcoming appointments(may be medical/legal/friends/family etc.) to keep track of them & remind you in your dashboard.
         </p>
       </div>
 
