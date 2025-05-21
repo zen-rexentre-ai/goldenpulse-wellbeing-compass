@@ -12,14 +12,15 @@ import {
   Cell,
   ResponsiveContainer,
 } from 'recharts';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const FitnessScoreMeter = ({ score = 75 }) => {
   // Define the color zones for the gauge
   const zones = [
-    { name: 'Needs Improvement', value: 20, color: '#ea384c' },
-    { name: 'Good', value: 20, color: '#FEC6A1' },
-    { name: 'Very Good', value: 20, color: '#F2FCE2' },
-    { name: 'Excellent', value: 20, color: '#4C9A2A' },
+    { name: 'Needs Improvement', value: 20, color: '#ea384c', range: '<60' },
+    { name: 'Good', value: 20, color: '#FEC6A1', range: '60-70' },
+    { name: 'Very Good', value: 20, color: '#F2FCE2', range: '70-80' },
+    { name: 'Excellent', value: 20, color: '#4C9A2A', range: '>80' },
   ];
   
   // Create gauge data
@@ -47,42 +48,46 @@ const FitnessScoreMeter = ({ score = 75 }) => {
       </div>
       
       <div className="w-full h-40 relative">
-        <ResponsiveContainer width="100%" height="100%">
-          <PieChart>
-            <Pie
-              data={data}
-              cx="50%"
-              cy="80%"
-              startAngle={180}
-              endAngle={0}
-              innerRadius={60}
-              outerRadius={80}
-              paddingAngle={0}
-              dataKey="value"
-              stroke="none"
-            >
-              {data.map((entry, index) => (
-                <Cell 
-                  key={`cell-${index}`} 
-                  fill={entry.color}
-                  className={index === activeZone ? "stroke-primary stroke-2" : "opacity-80"}
-                />
-              ))}
-            </Pie>
-            <ChartTooltip
-              content={({ active, payload }) => {
-                if (active && payload && payload.length) {
-                  return (
-                    <div className="bg-background rounded-md border border-border p-2 shadow-md">
-                      <p className="font-medium">{payload[0].payload.name}</p>
-                    </div>
-                  );
-                }
-                return null;
-              }}
-            />
-          </PieChart>
-        </ResponsiveContainer>
+        <TooltipProvider>
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={data}
+                cx="50%"
+                cy="80%"
+                startAngle={180}
+                endAngle={0}
+                innerRadius={60}
+                outerRadius={80}
+                paddingAngle={0}
+                dataKey="value"
+                stroke="none"
+              >
+                {data.map((entry, index) => (
+                  <Cell 
+                    key={`cell-${index}`} 
+                    fill={entry.color}
+                    className={index === activeZone ? "stroke-primary stroke-2" : "opacity-80"}
+                  />
+                ))}
+              </Pie>
+              <ChartTooltip
+                content={({ active, payload }) => {
+                  if (active && payload && payload.length) {
+                    const data = payload[0].payload;
+                    return (
+                      <div className="bg-background rounded-md border border-border p-2 shadow-md">
+                        <p className="font-medium">{data.name}</p>
+                        <p className="text-sm text-muted-foreground">Score range: {data.range}</p>
+                      </div>
+                    );
+                  }
+                  return null;
+                }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </TooltipProvider>
         
         {/* Score Needle */}
         <div 
@@ -96,24 +101,22 @@ const FitnessScoreMeter = ({ score = 75 }) => {
           <div className="h-4 w-4 rounded-full bg-primary -mt-1 mx-auto shadow-lg" />
         </div>
         
-        {/* Score Zones Labels */}
-        <div className="absolute bottom-0 w-full flex justify-between px-2 pt-2 text-xs">
-          <div className="text-left">
-            <span className="text-red-500">{'<'}60</span>
-            <p>Needs<br/>Improvement</p>
-          </div>
-          <div className="text-center ml-4">
-            <span>60-70</span>
-            <p>Good</p>
-          </div>
-          <div className="text-center">
-            <span>70-80</span>
-            <p>Very Good</p>
-          </div>
-          <div className="text-right">
-            <span className="text-green-700">{'>'}80</span>
-            <p>Excellent</p>
-          </div>
+        {/* Zone Indicators - Just small dots/markers without text */}
+        <div className="absolute bottom-2 w-full flex justify-between px-8">
+          {zones.map((zone, index) => (
+            <Tooltip key={index}>
+              <TooltipTrigger asChild>
+                <div 
+                  className={`h-2 w-2 rounded-full cursor-help ${index === activeZone ? "ring-2 ring-primary ring-offset-1" : ""}`}
+                  style={{ backgroundColor: zone.color }}
+                />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{zone.name}</p>
+                <p className="text-xs text-muted-foreground">Range: {zone.range}</p>
+              </TooltipContent>
+            </Tooltip>
+          ))}
         </div>
       </div>
     </div>
