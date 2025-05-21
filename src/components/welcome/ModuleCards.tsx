@@ -105,6 +105,8 @@ const ModuleCards = () => {
     <div className="w-full space-y-4 my-4">
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">What Awaits You:</h1>
+        <p className="text-lg font-medium text-golden-dark mb-2">Maintaining Good Health is Key to Happiness</p>
+        <p className="text-md text-muted-foreground">Our Offerings just focus on this for you</p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* First Card - Wellness Module */}
@@ -174,8 +176,7 @@ const ModuleCards = () => {
                 className="w-full max-w-md text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none bg-gradient-to-r from-[#E05C16] to-[#D9A112] text-white font-semibold"
                 onClick={() => setCalculatorOpen(true)}
               >
-                <Calculator className="h-6 w-6 mr-2" />
-                Calculate Your Fitness Score
+                Calculate Your Wellness Score
               </Button>
             </div>
           </div>
