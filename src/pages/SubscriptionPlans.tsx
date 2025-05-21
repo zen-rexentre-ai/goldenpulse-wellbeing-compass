@@ -74,7 +74,7 @@ const SubscriptionPlans = () => {
     <div className="container mx-auto py-12 px-4 md:px-6">
       <h1 className="text-4xl font-bold text-center mb-6">Subscription Plans</h1>
       <p className="text-center text-muted-foreground mb-12 max-w-2xl font-bold mx-auto">
-        Choose the perfect plan for your wellness journey. Unlock premium features for holistic wellbeing.  All plans come with a tenure of 4/6/12 months subscription.
+        Choose the perfect plan for your wellness journey. Unlock premium features for holistic wellbeing.  All plans come with a tenure of 3/6/12 months subscription.
       </p>
 
       {/* Use the reusable SubscriptionPlanSelector component */}
