@@ -21,17 +21,14 @@ const FoundersSection = () => {
           <div className="flex items-center gap-2 text-sm">
             <GraduationCap className="h-4 w-4 text-golden-purple" />
             <span>
-              <span className="text-golden-purple font-medium">IIMB Alumni</span>
+              <span className="text-golden-purple font-medium">MBA (IIT M), AMP (IIM B)</span>
               <span className="mx-1">·</span>
-              <span className="text-golden-dark">AMP-18</span>
+              <span className="text-golden-dark">IT Professional</span>
             </span>
           </div>
           <div className="flex items-center gap-2 text-sm">
             <Phone className="h-4 w-4 text-primary" />
-            <span>+91-9840178288</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-            <span>harinath04@gmail.com</span>
+            <span>IT Professional</span>
           </div>
         </div>
         
@@ -47,16 +44,9 @@ const FoundersSection = () => {
           </div>
           <div className="flex items-center gap-2 text-sm">
             <GraduationCap className="h-4 w-4 text-golden-purple" />
-            <span className="text-golden-dark">Retired COO</span>
+             <span className="text-golden-purple font-medium">Retired Top Executive</span>
           </div>
-          <div className="flex items-center gap-2 text-sm">
-            <Phone className="h-4 w-4 text-primary" />
-            <span>+91-9841044186</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-          <span>mahadevan.ranganathan@gmail.com</span>
-          </div>
-        </div>
+         </div>
       </div>
     </EmbossedCard>
   );
