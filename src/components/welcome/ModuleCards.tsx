@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Activity, Calculator, Gauge } from 'lucide-react';
 import FitnessCalculator from '@/components/fitness/FitnessCalculator';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
+import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
 import {
   PieChart,
   Pie,
@@ -35,17 +35,9 @@ const FitnessScoreMeter = ({ score = 75 }) => {
   };
   
   const activeZone = getActiveZone(score);
-  const scoreLabel = zones[activeZone]?.name || 'N/A';
   
   return (
     <div className="relative h-48 w-full flex flex-col items-center">
-      <div className="text-center mb-2">
-        <div className="flex items-center justify-center gap-2">
-          <Gauge className="h-5 w-5 text-primary" />
-          <span className="text-lg font-medium">{score}/100 - {scoreLabel}</span>
-        </div>
-      </div>
-      
       <div className="w-full h-40 relative">
         <TooltipProvider>
           <ResponsiveContainer width="100%" height="100%">
@@ -88,7 +80,7 @@ const FitnessScoreMeter = ({ score = 75 }) => {
           </ResponsiveContainer>
         </TooltipProvider>
         
-        {/* Score Needle - Fixed to originate from the center */}
+        {/* Score Needle */}
         <div 
           className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom"
           style={{ 
@@ -100,24 +92,6 @@ const FitnessScoreMeter = ({ score = 75 }) => {
             <div className="h-[60px] w-2 bg-gradient-to-t from-primary to-primary/70 rounded-full shadow-md" />
             <div className="h-4 w-4 rounded-full bg-primary -mt-1 shadow-lg border-2 border-background" />
           </div>
-        </div>
-        
-        {/* Zone Indicators - Just small dots/markers without text */}
-        <div className="absolute bottom-2 w-full flex justify-between px-8">
-          {zones.map((zone, index) => (
-            <Tooltip key={index}>
-              <TooltipTrigger asChild>
-                <div 
-                  className={`h-2 w-2 rounded-full cursor-help ${index === activeZone ? "ring-2 ring-primary ring-offset-1" : ""}`}
-                  style={{ backgroundColor: zone.color }}
-                />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{zone.name}</p>
-                <p className="text-xs text-muted-foreground">Range: {zone.range}</p>
-              </TooltipContent>
-            </Tooltip>
-          ))}
         </div>
       </div>
     </div>
@@ -192,15 +166,15 @@ const ModuleCards = () => {
           <div className="bg-gradient-to-r from-golden-pink/90 to-golden-peach/90 p-6">
             <h3 className="text-2xl font-bold mb-4 text-center text-golden-dark">Check Your Wellness Score</h3>
             
+            <p className="text-center mb-6 text-golden-dark">Compare how daily physical activity helps in actual results, helps track progress and optimize your health journey.</p>
+            
             <FitnessScoreMeter score={75} />
             
             <div className="mt-4 text-center">
-              <p className="mb-4 text-golden-dark">Compare how daily physical activity helps in actual results, helps track progress and optimize your health journey.</p>
-              
               <Button 
                 variant="golden"
                 size="lg"
-                className="w-full max-w-md text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none bg-gradient-to-r from-[#F97316] to-[#FBBF24] text-white"
+                className="w-full max-w-md text-lg py-6 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none bg-gradient-to-r from-[#E05C16] to-[#D9A112] text-white font-semibold"
                 onClick={() => setCalculatorOpen(true)}
               >
                 <Calculator className="h-6 w-6 mr-2" />
