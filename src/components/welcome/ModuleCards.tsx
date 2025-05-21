@@ -37,8 +37,8 @@ const FitnessScoreMeter = ({ score = 75 }) => {
   const activeZone = getActiveZone(score);
   
   return (
-    <div className="relative h-40 w-full flex flex-col items-center">
-      <div className="w-full h-40 relative">
+    <div className="relative h-32 w-full flex flex-col items-center">
+      <div className="w-full h-32 relative">
         <TooltipProvider>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -158,16 +158,16 @@ const ModuleCards = () => {
           </div>
         </EmbossedCard>
         
-        {/* Merged Wellness Score Card with Calculator */}
+        {/* Wellness Score Card with Calculator - Reduced spacing */}
         <EmbossedCard className="overflow-hidden col-span-1 md:col-span-2">
           <div className="bg-gradient-to-r from-golden-pink/90 to-golden-peach/90 p-6">
-            <h3 className="text-2xl font-bold mb-4 text-center text-golden-dark">Check Your Wellness Score</h3>
+            <h3 className="text-2xl font-bold mb-2 text-center text-golden-dark">Check Your Wellness Score</h3>
             
-            <p className="text-center mb-6 text-golden-dark">Compare how daily activity helps in actual results, helps track progress and optimize your health journey.</p>
+            <p className="text-center mb-2 text-golden-dark">Compare how daily activity helps in actual results, helps track progress and optimize your health journey.</p>
         
             <FitnessScoreMeter score={75} />
             
-            <div className="mt-4 text-center">
+            <div className="mt-2 text-center">
               <Button 
                 variant="golden"
                 size="lg"
