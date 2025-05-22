@@ -13,23 +13,25 @@ interface FitnessScoreMeterProps {
 }
 
 const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => {
-  // Define the color zones for the gauge
+  // Define the color zones for the gauge with updated 5-fold range
   const zones = [
-    { name: 'Needs Improvement', value: 20, color: '#ea384c', range: '<60' },
-    { name: 'Good', value: 20, color: '#FEC6A1', range: '60-70' },
-    { name: 'Very Good', value: 20, color: '#F2FCE2', range: '70-80' },
-    { name: 'Excellent', value: 20, color: '#4C9A2A', range: '>80' },
+    { name: 'Poor', value: 10, color: '#e63946', range: '<50' },            // Brighter red
+    { name: 'Unsatisfactory', value: 15, color: '#ff9e00', range: '50-65' }, // Bright orange
+    { name: 'Satisfactory', value: 5, color: '#ffdd00', range: '65-70' },    // Bright yellow
+    { name: 'Very Good', value: 15, color: '#70e000', range: '70-85' },      // Bright green
+    { name: 'Excellent', value: 15, color: '#38b000', range: '>85' },        // Darker green
   ];
   
   // Create gauge data
   const data = zones.map((zone) => ({ ...zone }));
   
-  // Calculate active segment based on score
+  // Calculate active segment based on score with updated ranges
   const getActiveZone = (score) => {
-    if (score < 60) return 0;
-    if (score < 70) return 1;
-    if (score < 80) return 2;
-    return 3;
+    if (score < 50) return 0;
+    if (score < 65) return 1;
+    if (score < 70) return 2;
+    if (score < 85) return 3;
+    return 4;
   };
   
   const activeZone = getActiveZone(score);
@@ -56,7 +58,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
                   <Cell 
                     key={`cell-${index}`} 
                     fill={entry.color}
-                    className={index === activeZone ? "stroke-primary stroke-2" : "opacity-80"}
+                    className={index === activeZone ? "stroke-primary stroke-2 opacity-100" : "opacity-90"}
                   />
                 ))}
               </Pie>
@@ -64,7 +66,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
           </ResponsiveContainer>
         </TooltipProvider>
         
-        {/* Score Needle */}
+        {/* Score Needle - Improved design: embossed, sharper and thicker near pivot */}
         <div 
           className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom"
           style={{ 
@@ -73,8 +75,18 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
           }}
         >
           <div className="flex flex-col items-center">
-            <div className="h-[30px] w-1 bg-gradient-to-t from-primary to-primary/70 rounded-full shadow-md" />
-            <div className="h-2 w-2 rounded-full bg-primary -mt-1 shadow-lg border border-background" />
+            {/* Needle with gradient and shadow for embossed look */}
+            <div className="h-[30px] w-1.5 bg-gradient-to-t from-primary/90 to-primary/50 rounded-t-sm rounded-b-none shadow-md relative overflow-visible" 
+                 style={{ 
+                   clipPath: 'polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%)',
+                   filter: 'drop-shadow(0px 1px 1px rgba(0, 0, 0, 0.3))'
+                 }}
+            >
+              {/* Light reflection for embossed effect */}
+              <div className="absolute left-0 top-0 h-full w-[1px] bg-white/30"></div>
+            </div>
+            {/* Thicker pivot point */}
+            <div className="h-3 w-3 rounded-full bg-gradient-to-br from-primary to-primary/80 -mt-0.5 shadow-lg border border-background" />
           </div>
         </div>
       </div>
