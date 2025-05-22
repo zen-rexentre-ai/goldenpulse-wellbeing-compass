@@ -19,7 +19,7 @@ interface FitnessCalculatorFormProps {
 
 export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ onSubmit }) => {
   const [step, setStep] = useState(1);
-  const totalSteps = 4;
+  const totalSteps = 5;
   
   const form = useForm<FitnessFormValues>({
     resolver: zodResolver(formSchema),
