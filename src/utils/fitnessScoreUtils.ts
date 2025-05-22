@@ -7,11 +7,11 @@ const WEIGHTS = {
   bmi: 0.20,
   activity: 0.15,
   sleep: 0.15,
-  selfRatedHealth: 0.10,
+  selfRatedHealth: 0.00,
   smoking: 0.05,
   alcohol: 0.05,
-  chronicConditions: 0.05,
-  stress: 0.05,
+  chronicConditions: 0.15,
+  stress: 0.15,
 };
 
 // Normalize BMI score (lower is better, with optimal around 22-25)
