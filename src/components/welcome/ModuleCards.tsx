@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { EmbossedCard } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Activity, Calculator, Gauge } from 'lucide-react';
+import { Activity, Calculator, Gauge, Sparkles } from 'lucide-react';
 import FitnessCalculator from '@/components/fitness/FitnessCalculator';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
 import {
@@ -13,6 +13,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 
 const FitnessScoreMeter = ({ score = 75 }) => {
   // Define the color zones for the gauge
@@ -105,8 +106,17 @@ const ModuleCards = () => {
     <div className="w-full space-y-4 my-4">
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">What Awaits You:</h1>
-        <p className="text-lg font-medium text-golden-dark mb-2">Medical team will recommend a wellness plan & review the progress at regular intervals.</p>
-       <p className="text-lg font-medium text-golden-dark mb-2">Volunteer your services for societal good and bring purpose & positivity for your life. </p>
+        
+        <EmbossedCard className="overflow-hidden border-2 border-golden-orange animate-pulse bg-gradient-to-r from-golden-pink to-golden-peach p-4 max-w-2xl mx-auto">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="h-5 w-5 text-primary" />
+            <AlertTitle className="text-xl font-bold text-golden-dark">Your Golden Journey</AlertTitle>
+          </div>
+          <AlertDescription>
+            <p className="text-lg font-medium text-golden-dark mb-2">Medical team will recommend a wellness plan & review the progress at regular intervals.</p>
+            <p className="text-lg font-medium text-golden-dark">Volunteer your services for societal good and bring purpose & positivity for your life.</p>
+          </AlertDescription>
+        </EmbossedCard>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* First Card - Wellness Module */}
