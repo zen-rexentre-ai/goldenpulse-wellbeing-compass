@@ -7,9 +7,6 @@ const Hero = () => {
     <div className="text-center space-y-2 mt-1">
       <Logo size="lg" />
       <h1 className="text-3xl font-bold">Welcome!</h1>
-      <p className="text-lg">
-        We're delighted to have you here.
-      </p>
       <p className="text-lg font-medium">
         We Empower Seniors Live Vibrant, Purposeful and Fulfilling lives.
       </p>
