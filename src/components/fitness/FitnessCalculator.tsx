@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import FitnessCalculatorForm, { FitnessFormValues } from './FitnessCalculatorForm';
+import FitnessCalculatorForm from './FitnessCalculatorForm';
+import { FitnessFormValues } from './form/types';
 import FitnessCalculatorResults from './FitnessCalculatorResults';
 import { calculateFitnessScore } from '@/utils/fitnessScoreUtils';
 import { useToast } from '@/hooks/use-toast';
