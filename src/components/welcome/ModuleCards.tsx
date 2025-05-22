@@ -105,7 +105,8 @@ const ModuleCards = () => {
     <div className="w-full space-y-4 my-4">
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">What Awaits You:</h1>
-        <p className="text-lg font-medium text-golden-dark mb-2">Maintaining Good Physical and Mental Health is Key to a Positive Life.</p>
+        <p className="text-lg font-medium text-golden-dark mb-2">Medical team will recommend a wellness plan & review the progress at regular intervals.</p>
+       <p className="text-lg font-medium text-golden-dark mb-2">Volunteer your services for societal good and bring purpose & positivity for your life. </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* First Card - Wellness Module */}
