@@ -27,7 +27,7 @@ const GoldenJourneyCard: React.FC = () => {
         <Star className="h-5 w-5 text-golden-dark animate-pulse" />
       </div>
       
-      <div className="flex items-center gap-2 mb-2">
+      <div className="flex items-center gap-3 mb-2 mt-2">
       <AlertTitle className="text-xl font-bold text-golden-dark">Your Golden Journey</AlertTitle>
       </div>
       <AlertDescription className="font-serif italic">
