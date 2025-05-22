@@ -7,7 +7,6 @@ const WEIGHTS = {
   bmi: 0.20,
   activity: 0.15,
   sleep: 0.15,
-  selfRatedHealth: 0.00,
   smoking: 0.05,
   alcohol: 0.05,
   chronicConditions: 0.15,
@@ -76,13 +75,28 @@ export const normalizeAlcohol = (unitsPerWeek: number): number => {
   return 0.3;
 };
 
-// Normalize chronic conditions (fewer is better)
-export const normalizeChronicConditions = (count: number): number => {
-  if (count === 0) return 1.0;
-  if (count === 1) return 0.8;
-  if (count === 2) return 0.6;
-  if (count === 3) return 0.4;
-  return 0.2;
+// Normalize chronic conditions based on slider values
+export const normalizeChronicConditions = (conditions: {
+  diabetes: number;
+  hypertension: number;
+  heartRelated: number;
+  cancer: number;
+  others: number;
+}): number => {
+  // Calculate the average severity of all conditions
+  const values = Object.values(conditions);
+  const totalValue = values.reduce((sum, val) => sum + val, 0);
+  const averageSeverity = totalValue / values.length;
+  
+  // Normalize based on average severity (0 - no issues, 1 - severe issues)
+  return 1 - (averageSeverity / 100);
+};
+
+// Normalize stress level
+export const normalizeStress = (stressLevel: string): number => {
+  if (stressLevel === 'none') return 1.0;
+  if (stressLevel === 'mild') return 0.5;
+  return 0.0; // 'high' stress
 };
 
 // Generate health recommendations based on the parameters
@@ -143,6 +157,21 @@ export const generateRecommendations = (parameters: any) => {
     });
   }
   
+  // Stress recommendations
+  if (parameters.stressLevel === 'high') {
+    recommendations.push({
+      text: "Implement stress management techniques like meditation",
+      impact: "+15pts",
+      priority: "high"
+    });
+  } else if (parameters.stressLevel === 'mild') {
+    recommendations.push({
+      text: "Continue improving stress management habits",
+      impact: "+7pts",
+      priority: "medium"
+    });
+  }
+  
   return recommendations;
 };
 
@@ -156,16 +185,24 @@ export const calculateFitnessScore = (data: any): {
   const isMetric = data.heightUnit === 'cm';
   
   const bmiNormalized = normalizeBMI(data.height, data.weight, isMetric);
-  const heartRateNormalized = normalizeHeartRate(data.heartRate);
+  const heartRateNormalized = normalizeHeartRate(data.heartRate || 70); // Default if not provided
   const sleepNormalized = normalizeSleep(data.goodSleepQuality === 'yes');
   const exerciseNormalized = normalizeExercise(data.exerciseMinutes);
   const smokingNormalized = normalizeSmoking(data.smokingStatus);
   const alcoholNormalized = normalizeAlcohol(data.alcoholUnits);
-  const conditionsCount = Array.isArray(data.chronicConditions) ? data.chronicConditions.length : 0;
-  const conditionsNormalized = normalizeChronicConditions(conditionsCount);
   
-  // Default value for self-rated health if not provided
-  const selfRatedHealthNormalized = 0.75;
+  // Process chronic conditions from sliders
+  const chronicConditions = {
+    diabetes: data.diabetesLevel || 0,
+    hypertension: data.hypertensionLevel || 0,
+    heartRelated: data.heartRelatedLevel || 0,
+    cancer: data.cancerLevel || 0,
+    others: data.othersLevel || 0
+  };
+  const conditionsNormalized = normalizeChronicConditions(chronicConditions);
+  
+  // Normalize stress level
+  const stressNormalized = normalizeStress(data.stressLevel || 'none');
   
   // Calculate the weighted sum
   const weightedSum = (
@@ -173,10 +210,10 @@ export const calculateFitnessScore = (data: any): {
     (bmiNormalized * WEIGHTS.bmi) +
     (exerciseNormalized * WEIGHTS.activity) +
     (sleepNormalized * WEIGHTS.sleep) +
-    (selfRatedHealthNormalized * WEIGHTS.selfRatedHealth) +
     (smokingNormalized * WEIGHTS.smoking) +
     (alcoholNormalized * WEIGHTS.alcohol) +
-    (conditionsNormalized * WEIGHTS.chronicConditions)
+    (conditionsNormalized * WEIGHTS.chronicConditions) +
+    (stressNormalized * WEIGHTS.stress)
   );
   
   // Calculate the final score (0-100)
@@ -189,7 +226,8 @@ export const calculateFitnessScore = (data: any): {
     goodSleepQuality: data.goodSleepQuality === 'yes',
     exerciseMinutes: data.exerciseMinutes,
     smokingStatus: data.smokingStatus,
-    alcoholUnits: data.alcoholUnits
+    alcoholUnits: data.alcoholUnits,
+    stressLevel: data.stressLevel
   };
   
   const recommendations = generateRecommendations(params);
@@ -203,10 +241,10 @@ export const calculateFitnessScore = (data: any): {
       bmi: bmiNormalized,
       exercise: exerciseNormalized,
       sleep: sleepNormalized,
-      selfRatedHealth: selfRatedHealthNormalized,
       smoking: smokingNormalized,
       alcohol: alcoholNormalized,
-      chronicConditions: conditionsNormalized
+      chronicConditions: conditionsNormalized,
+      stress: stressNormalized
     }
   };
 };
