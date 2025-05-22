@@ -15,11 +15,11 @@ interface FitnessScoreMeterProps {
 const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => {
   // Define the color zones for the gauge with updated 5-fold range
   const zones = [
-    { name: 'Poor', value: 10, color: '#e63946', range: '<50' },            // Brighter red
-    { name: 'Unsatisfactory', value: 15, color: '#ff9e00', range: '50-65' }, // Bright orange
-    { name: 'Satisfactory', value: 5, color: '#ffdd00', range: '65-70' },    // Bright yellow
+    { name: 'Poor', value: 10, color: '#e63946', range: '<45' },            // Brighter red
+    { name: 'Unsatisfactory', value: 10, color: '#ff9e00', range: '45-55' }, // Bright orange
+    { name: 'Satisfactory', value: 15, color: '#ffdd00', range: '55-70' },   // Bright yellow
     { name: 'Very Good', value: 15, color: '#70e000', range: '70-85' },      // Bright green
-    { name: 'Excellent', value: 15, color: '#38b000', range: '>85' },        // Darker green
+    { name: 'Excellent', value: 10, color: '#38b000', range: '>85' },        // Darker green
   ];
   
   // Create gauge data
@@ -27,8 +27,8 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
   
   // Calculate active segment based on score with updated ranges
   const getActiveZone = (score) => {
-    if (score < 50) return 0;
-    if (score < 65) return 1;
+    if (score < 45) return 0;
+    if (score < 55) return 1;
     if (score < 70) return 2;
     if (score < 85) return 3;
     return 4;

@@ -49,15 +49,35 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
   });
 
   const nextStep = async () => {
-    const fieldsToValidate = {
-      1: ["name", "email", "phone"],
-      2: ["height", "weight"],
-      3: ["goodSleepQuality", "smokingStatus", "alcoholUnits"],
-    }[step] as Array<keyof FitnessFormValues>;
+    let fieldsToValidate: Array<keyof FitnessFormValues> = [];
     
-    const isValid = await form.trigger(fieldsToValidate);
-    if (isValid) {
+    // Define fields to validate for each step
+    switch(step) {
+      case 1:
+        fieldsToValidate = ["name", "email", "phone"];
+        break;
+      case 2:
+        fieldsToValidate = ["height", "weight"];
+        break;  
+      case 3:
+        fieldsToValidate = ["goodSleepQuality", "smokingStatus", "alcoholUnits"];
+        break;
+      // For step 4, we don't need validation as the fields are optional
+      default:
+        break;
+    }
+    
+    if (fieldsToValidate.length > 0) {
+      const isValid = await form.trigger(fieldsToValidate);
+      if (!isValid) return;
+    }
+    
+    // If we're not at the last step, proceed to the next step
+    if (step < totalSteps) {
       setStep(step + 1);
+    } else {
+      // If we're at the final step, submit the form
+      form.handleSubmit((values) => onSubmit(values))();
     }
   };
 

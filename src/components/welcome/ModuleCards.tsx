@@ -4,6 +4,7 @@ import { EmbossedCard } from '@/components/ui/card';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Activity, Calculator, Gauge, Sparkles } from 'lucide-react';
+import { Star } from 'lucide-react';
 import FitnessCalculator from '@/components/fitness/FitnessCalculator';
 import { ChartContainer, ChartTooltip } from '@/components/ui/chart';
 import {
@@ -18,11 +19,11 @@ import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 const FitnessScoreMeter = ({ score = 75 }) => {
   // Define the color zones for the gauge with updated 5-fold range
   const zones = [
-    { name: 'Poor', value: 10, color: '#e63946', range: '<50' },            // Brighter red
-    { name: 'Unsatisfactory', value: 15, color: '#ff9e00', range: '50-65' }, // Bright orange
-    { name: 'Satisfactory', value: 5, color: '#ffdd00', range: '65-70' },    // Bright yellow
+    { name: 'Poor', value: 10, color: '#e63946', range: '<45' },            // Brighter red
+    { name: 'Unsatisfactory', value: 10, color: '#ff9e00', range: '45-55' }, // Bright orange
+    { name: 'Satisfactory', value: 15, color: '#ffdd00', range: '55-70' },   // Bright yellow
     { name: 'Very Good', value: 15, color: '#70e000', range: '70-85' },      // Bright green
-    { name: 'Excellent', value: 15, color: '#38b000', range: '>85' },        // Darker green
+    { name: 'Excellent', value: 10, color: '#38b000', range: '>85' },        // Darker green
   ];
   
   // Create gauge data
@@ -30,8 +31,8 @@ const FitnessScoreMeter = ({ score = 75 }) => {
   
   // Calculate active segment based on score with updated ranges
   const getActiveZone = (score) => {
-    if (score < 50) return 0;
-    if (score < 65) return 1;
+    if (score < 45) return 0;
+    if (score < 55) return 1;
     if (score < 70) return 2;
     if (score < 85) return 3;
     return 4;
@@ -119,12 +120,32 @@ const ModuleCards = () => {
       <div className="text-center space-y-2">
         <h1 className="text-3xl font-bold">What Awaits You:</h1>
         
-        <EmbossedCard className="overflow-hidden border-2 border-golden-orange animate-pulse bg-gradient-to-r from-golden-pink to-golden-peach p-4 max-w-2xl mx-auto">
+        <EmbossedCard className="overflow-hidden border-2 border-golden-orange bg-gradient-to-r from-golden-pink to-golden-peach p-4 max-w-2xl mx-auto relative">
+          {/* Top-left star */}
+          <div className="absolute top-2 left-2">
+            <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+          </div>
+          
+          {/* Top-right star */}
+          <div className="absolute top-2 right-2">
+            <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+          </div>
+          
+          {/* Bottom-left star */}
+          <div className="absolute bottom-2 left-2">
+            <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+          </div>
+          
+          {/* Bottom-right star */}
+          <div className="absolute bottom-2 right-2">
+            <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+          </div>
+          
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="h-5 w-5 text-primary" />
+            <Sparkles className="h-5 w-5 text-primary animate-pulse" />
             <AlertTitle className="text-xl font-bold text-golden-dark">Your Golden Journey</AlertTitle>
           </div>
-          <AlertDescription>
+          <AlertDescription className="font-serif italic">
             <p className="text-lg font-medium text-golden-dark mb-2">Medical team will recommend a wellness plan & review the progress at regular intervals.</p>
             <p className="text-lg font-medium text-golden-dark">Volunteer your services for societal good and bring purpose & positivity for your life.</p>
           </AlertDescription>
@@ -149,7 +170,7 @@ const ModuleCards = () => {
                 <span className="text-primary text-lg">•</span>
                 <span>Access to Kin</span>
               </li>
-                            <li className="flex items-start gap-2">
+              <li className="flex items-start gap-2">
                 <span className="text-primary text-lg">•</span>
                 <span>AI Powered Diagnostics</span>
               </li>
