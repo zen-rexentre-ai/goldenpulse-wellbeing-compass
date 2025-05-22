@@ -28,8 +28,7 @@ const GoldenJourneyCard: React.FC = () => {
       </div>
       
       <div className="flex items-center gap-2 mb-2">
-        <Sparkles className="h-5 w-5 text-primary animate-pulse" />
-        <AlertTitle className="text-xl font-bold text-golden-dark">Your Golden Journey</AlertTitle>
+      <AlertTitle className="text-xl font-bold text-golden-dark">Your Golden Journey</AlertTitle>
       </div>
       <AlertDescription className="font-serif italic">
         <p className="text-lg font-medium text-golden-dark mb-2">Medical team will recommend a wellness plan & review the progress at regular intervals.</p>
