@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -108,19 +107,26 @@ export default {
 					'50%': { color: '#FEC6A1', opacity: '1' },
 					'100%': { color: '#1A1F2C', opacity: '0.7' }
 				},
-				// New golden-sparkle animation
+				// Enhanced golden-sparkle animation with more vibrant colors
 				'golden-sparkle': {
 					'0%': { transform: 'scale(0.8) rotate(0deg)', opacity: '0.4' },
-					'50%': { transform: 'scale(1.2) rotate(180deg)', opacity: '1', color: '#FEF7CD' },
+					'50%': { transform: 'scale(1.2) rotate(180deg)', opacity: '1', filter: 'brightness(1.5)' },
 					'100%': { transform: 'scale(0.8) rotate(360deg)', opacity: '0.4' }
 				},
-				// New celebration-pop animation
-				'celebration-pop': {
-					'0%': { transform: 'scale(1) rotate(0deg)', opacity: '0.7' },
-					'25%': { transform: 'scale(1.3) rotate(-15deg)', opacity: '1', color: '#FEF7CD' },
-					'50%': { transform: 'scale(1.1) rotate(0deg)', opacity: '0.9', color: '#FFDEE2' },
-					'75%': { transform: 'scale(1.3) rotate(15deg)', opacity: '1', color: '#FEC6A1' },
-					'100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.7' }
+				// Enhanced party-burst animation (renamed from celebration-pop)
+				'party-burst': {
+					'0%': { transform: 'scale(1) rotate(0deg)', opacity: '0.7', filter: 'brightness(1)' },
+					'25%': { transform: 'scale(1.4) rotate(-20deg)', opacity: '1', filter: 'brightness(1.5)' },
+					'50%': { transform: 'scale(1.1) rotate(0deg)', opacity: '0.9', filter: 'brightness(1.2)' },
+					'75%': { transform: 'scale(1.4) rotate(20deg)', opacity: '1', filter: 'brightness(1.5)' },
+					'100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.7', filter: 'brightness(1)' }
+				},
+				// New sparkle-burst animation for more dynamic sparkles
+				'sparkle-burst': {
+					'0%': { transform: 'scale(0.5) translate(0, 0)', opacity: '0.3' },
+					'30%': { transform: 'scale(1.3) translate(3px, -3px)', opacity: '1', filter: 'brightness(1.5)' },
+					'60%': { transform: 'scale(0.8) translate(-2px, 2px)', opacity: '0.7', filter: 'brightness(1.2)' },
+					'100%': { transform: 'scale(0.5) translate(0, 0)', opacity: '0.3' }
 				}
 			},
 			animation: {
