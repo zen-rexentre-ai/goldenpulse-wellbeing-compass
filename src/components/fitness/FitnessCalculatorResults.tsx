@@ -51,10 +51,10 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
   
   // Mock data for age group comparison
   const ageGroups = [
-    { age: "50-60", avgScore: 68 },
-    { age: "60-70", avgScore: 65 },
-    { age: "70-80", avgScore: 62 },
-    { age: "80+", avgScore: 57 }
+    { age: "50-60", avgScore: 88 },
+    { age: "60-70", avgScore: 79 },
+    { age: "70-80", avgScore: 75 },
+    { age: "80+", avgScore: 77 }
   ];
 
   return (

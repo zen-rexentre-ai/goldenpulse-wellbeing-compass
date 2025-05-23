@@ -21,10 +21,10 @@ export const normalizeHeartRateByAge = (heartRate: number, age: number): number 
   const deviation = Math.abs(heartRate - optimal);
   
   if (deviation <= range * 0.2) return 1.0;  // Very close to optimal
-  if (deviation <= range * 0.4) return 0.9;  // Close to optimal
-  if (deviation <= range * 0.6) return 0.8;  // Slightly off from optimal
-  if (deviation <= range * 0.8) return 0.7;  // Moderately off from optimal
-  if (deviation <= range) return 0.6;        // Within acceptable range
+  if (deviation <= range * 0.4) return 0.8;  // Close to optimal
+  if (deviation <= range * 0.6) return 0.75;  // Slightly off from optimal
+  if (deviation <= range * 0.8) return 0.6;  // Moderately off from optimal
+  if (deviation <= range) return 0.5;        // Within acceptable range
   if (deviation <= range * 1.5) return 0.4;  // Outside acceptable range
   return 0.2;                                // Far from optimal
 };
@@ -45,7 +45,7 @@ export const normalizeBMIByAge = (height: number, weight: number, isMetric: bool
   const deviation = Math.abs(bmi - optimal);
   
   if (deviation <= range * 0.2) return 1.0;  // Very close to optimal
-  if (deviation <= range * 0.4) return 0.9;  // Close to optimal
+  if (deviation <= range * 0.4) return 0.85;  // Close to optimal
   if (deviation <= range * 0.6) return 0.8;  // Slightly off from optimal
   if (deviation <= range * 0.8) return 0.7;  // Moderately off from optimal
   if (deviation <= range) return 0.6;        // Within acceptable range
@@ -69,7 +69,7 @@ export const normalizeBloodPressureByAge = (
   let systolicScore;
   
   if (systolicDeviation <= systolicNorm.range * 0.2) systolicScore = 1.0;
-  else if (systolicDeviation <= systolicNorm.range * 0.4) systolicScore = 0.9;
+  else if (systolicDeviation <= systolicNorm.range * 0.4) systolicScore = 0.85;
   else if (systolicDeviation <= systolicNorm.range * 0.6) systolicScore = 0.8;
   else if (systolicDeviation <= systolicNorm.range * 0.8) systolicScore = 0.7;
   else if (systolicDeviation <= systolicNorm.range) systolicScore = 0.6;
@@ -81,10 +81,10 @@ export const normalizeBloodPressureByAge = (
   let diastolicScore;
   
   if (diastolicDeviation <= diastolicNorm.range * 0.2) diastolicScore = 1.0;
-  else if (diastolicDeviation <= diastolicNorm.range * 0.4) diastolicScore = 0.9;
-  else if (diastolicDeviation <= diastolicNorm.range * 0.6) diastolicScore = 0.8;
-  else if (diastolicDeviation <= diastolicNorm.range * 0.8) diastolicScore = 0.7;
-  else if (diastolicDeviation <= diastolicNorm.range) diastolicScore = 0.6;
+  else if (diastolicDeviation <= diastolicNorm.range * 0.4) diastolicScore = 0.8;
+  else if (diastolicDeviation <= diastolicNorm.range * 0.6) diastolicScore = 0.7;
+  else if (diastolicDeviation <= diastolicNorm.range * 0.8) diastolicScore = 0.6;
+  else if (diastolicDeviation <= diastolicNorm.range) diastolicScore = 0.5;
   else if (diastolicDeviation <= diastolicNorm.range * 1.5) diastolicScore = 0.4;
   else diastolicScore = 0.2;
   
@@ -103,10 +103,10 @@ export const normalizeHbA1cByAge = (hba1c: number | undefined, age: number): num
   const deviation = Math.abs(hba1c - optimal);
   
   if (deviation <= range * 0.2) return 1.0;  // Very close to optimal
-  if (deviation <= range * 0.4) return 0.9;  // Close to optimal
-  if (deviation <= range * 0.6) return 0.8;  // Slightly off from optimal
-  if (deviation <= range * 0.8) return 0.7;  // Moderately off from optimal
-  if (deviation <= range) return 0.6;        // Within acceptable range
+  if (deviation <= range * 0.4) return 0.8;  // Close to optimal
+  if (deviation <= range * 0.6) return 0.7;  // Slightly off from optimal
+  if (deviation <= range * 0.8) return 0.6;  // Moderately off from optimal
+  if (deviation <= range) return 0.5;        // Within acceptable range
   if (deviation <= range * 1.5) return 0.4;  // Outside acceptable range
   return 0.2;                                // Far from optimal
 };
@@ -126,9 +126,9 @@ export const normalizeExerciseByAge = (minutes: number, age: number): number => 
   const percentOfTarget = (minutes / targetMinutes) * 100;
   
   if (percentOfTarget >= 100) return 1.0;      // Meeting or exceeding target
-  else if (percentOfTarget >= 80) return 0.9;  // Close to target
-  else if (percentOfTarget >= 60) return 0.7;  // Moderate exercise
-  else if (percentOfTarget >= 40) return 0.5;  // Some exercise
+  else if (percentOfTarget >= 80) return 0.8;  // Close to target
+  else if (percentOfTarget >= 60) return 0.6;  // Moderate exercise
+  else if (percentOfTarget >= 40) return 0.4;  // Some exercise
   else if (percentOfTarget >= 20) return 0.3;  // Little exercise
   else return 0.1;                             // Very little exercise
 };
