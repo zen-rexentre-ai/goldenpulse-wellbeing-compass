@@ -18,6 +18,7 @@ export interface ProfilesSchema extends BaseDatabase {
           emergency_contact_id: string | null;
           subscription_tier: string | null;
           subscription_status: string | null;
+          preferred_language: string | null;
         };
         Insert: {
           id: string;
@@ -31,6 +32,7 @@ export interface ProfilesSchema extends BaseDatabase {
           emergency_contact_id?: string | null;
           subscription_tier?: string | null;
           subscription_status?: string | null;
+          preferred_language?: string | null;
         };
         Update: {
           id?: string;
@@ -44,6 +46,7 @@ export interface ProfilesSchema extends BaseDatabase {
           emergency_contact_id?: string | null;
           subscription_tier?: string | null;
           subscription_status?: string | null;
+          preferred_language?: string | null;
         };
       };
     };

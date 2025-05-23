@@ -3,12 +3,13 @@ import React from 'react';
 import FitnessCalculatorResults from '@/components/fitness/FitnessCalculatorResults';
 import { useToast } from '@/hooks/use-toast';
 import BottomNavigation from '@/components/dashboard/BottomNavigation';
-import Logo from '@/components/Logo';
-import { Bell } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import Header from '@/components/Header';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 const WellnessAnalysis = () => {
   const { toast } = useToast();
+  const { t } = useLanguage();
   
   // Mock data for the fitness calculator results
   const mockScore = 79.8;
@@ -54,23 +55,17 @@ const WellnessAnalysis = () => {
 
   return (
     <div className="min-h-screen bg-background pb-16">
-      {/* Header */}
-      <header className="sticky top-0 z-10 bg-background border-b p-4">
-        <div className="container max-w-6xl flex justify-between items-center">
-          <Logo size="sm" className="max-w-[150px]" />
-          
-          <div className="flex gap-2">
-            <Button variant="ghost" size="icon" aria-label="Notifications">
-              <Bell />
-            </Button>
-          </div>
-        </div>
-      </header>
+      <Header title={t("wellness_analysis")} />
       
       <main className="container max-w-6xl p-4">
         <div className="mb-6">
-          <h1 className="text-2xl font-bold">Wellness Analysis</h1>
-          <p className="text-muted-foreground">Detailed breakdown of your wellness factors</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold">{t("wellness_analysis")}</h1>
+              <p className="text-muted-foreground">{t("wellness_analysis_subtitle")}</p>
+            </div>
+            <ScreenReader text={t("wellness_analysis") + " " + t("wellness_analysis_subtitle")} />
+          </div>
         </div>
         
         <FitnessCalculatorResults 

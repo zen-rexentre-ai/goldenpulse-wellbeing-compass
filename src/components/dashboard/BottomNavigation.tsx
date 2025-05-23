@@ -1,12 +1,14 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Gauge, Users, Handshake, Siren, Settings } from 'lucide-react';
+import { Home, Gauge, Siren, Handshake, Settings } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
+import { useLanguage } from '@/components/LanguageProvider';
 
 const BottomNavigation: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const { t } = useLanguage();
 
   // Helper function to determine if a link is active
   const isActive = (path: string) => currentPath === path;
@@ -21,7 +23,7 @@ const BottomNavigation: React.FC = () => {
         >
           <Link to="/dashboard">
             <Home size={24} />
-            <span className="text-xs">Home</span>
+            <span className="text-xs">{t("home")}</span>
           </Link>
         </Button>
         
@@ -32,7 +34,7 @@ const BottomNavigation: React.FC = () => {
         >
           <Link to="/wellness-analysis">
             <Gauge size={24} />
-            <span className="text-xs">Analysis</span>
+            <span className="text-xs">{t("analysis")}</span>
           </Link>
         </Button>
                
@@ -43,7 +45,7 @@ const BottomNavigation: React.FC = () => {
         >
           <Link to="/emergency-contacts">
             <Siren size={24} />
-            <span className="text-xs">Emergency</span>
+            <span className="text-xs">{t("emergency")}</span>
           </Link>
         </Button>
         
@@ -54,7 +56,7 @@ const BottomNavigation: React.FC = () => {
         >
           <Link to="/volunteering">
             <Handshake size={24} />
-            <span className="text-xs">Volunteer</span>
+            <span className="text-xs">{t("volunteer")}</span>
           </Link>
         </Button>
         
@@ -65,7 +67,7 @@ const BottomNavigation: React.FC = () => {
         >
           <Link to="/settings">
             <Settings size={24} />
-            <span className="text-xs">Settings</span>
+            <span className="text-xs">{t("settings_link")}</span>
           </Link>
         </Button>
       </div>

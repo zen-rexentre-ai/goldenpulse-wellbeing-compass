@@ -3,8 +3,12 @@ import React from 'react';
 import { EmbossedCard } from '@/components/ui/card';
 import { AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Sparkles, PartyPopper } from 'lucide-react';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 const GoldenJourneyCard: React.FC = () => {
+  const { t } = useLanguage();
+  
   return (
     <EmbossedCard className="overflow-hidden border-2 border-golden-orange bg-gradient-to-r from-golden-pink to-golden-peach p-4 max-w-2xl mx-auto relative">
       {/* Celebration sparkles floating around */}
@@ -54,13 +58,14 @@ const GoldenJourneyCard: React.FC = () => {
         <Sparkles className="h-4 w-4 absolute -bottom-1 -left-1 text-orange-400 animate-[sparkle-burst_1.3s_ease-in-out_infinite]" />
       </div>
       
-      <div className="flex items-center gap-3 mb-2 mt-2">
-        <AlertTitle className="text-xl font-bold text-golden-dark">Your Golden Journey</AlertTitle>
+      <div className="flex items-center justify-between gap-3 mb-2 mt-2">
+        <AlertTitle className="text-xl font-bold text-golden-dark">{t("golden_journey")}</AlertTitle>
+        <ScreenReader text={t("golden_journey")} />
       </div>
       <AlertDescription className="font-serif italic">
-        <p className="text-lg font-medium text-golden-dark mb-2">A medical team will recommend a wellness plan & review the progress at regular intervals.</p>
-        <p className="text-lg font-medium text-golden-dark">Volunteer your services for societal good and bring purpose & positivity in your life.</p>
-           <p className="text-lg font-medium text-golden-dark"> And Much More..... </p>
+        <p className="text-lg font-medium text-golden-dark mb-2">{t("golden_journey_desc_1")}</p>
+        <p className="text-lg font-medium text-golden-dark">{t("golden_journey_desc_2")}</p>
+        <p className="text-lg font-medium text-golden-dark">{t("golden_journey_desc_3")}</p>
       </AlertDescription>
     </EmbossedCard>
   );

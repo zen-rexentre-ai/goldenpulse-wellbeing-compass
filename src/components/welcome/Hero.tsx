@@ -1,14 +1,21 @@
 
 import React from 'react';
 import Logo from '@/components/Logo';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="text-center space-y-2 mt-1">
       <Logo size="lg" />
-      <h1 className="text-3xl font-bold">Welcome!</h1>
+      <div className="flex justify-center items-center gap-2">
+        <h1 className="text-3xl font-bold">{t("welcome")}</h1>
+        <ScreenReader text={t("welcome")} />
+      </div>
       <p className="text-lg font-medium">
-        We Empower Seniors Live Vibrant, Purposeful and Fulfilling lives.
+        {t("welcome_subtitle")}
       </p>
       
       <div className="w-full rounded-lg overflow-hidden shadow-lg mt-2">

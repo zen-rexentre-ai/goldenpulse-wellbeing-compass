@@ -11,7 +11,8 @@ CREATE TABLE IF NOT EXISTS profiles (
   address TEXT,
   emergency_contact_id UUID,
   subscription_tier TEXT,
-  subscription_status TEXT
+  subscription_status TEXT,
+  preferred_language TEXT DEFAULT 'en'
 );
 
 -- Table for emergency contacts
@@ -84,8 +85,8 @@ CREATE TABLE IF NOT EXISTS vitals (
 CREATE OR REPLACE FUNCTION public.handle_new_user()
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.profiles (id, full_name, email)
-  VALUES (new.id, new.raw_user_meta_data->>'full_name', new.email);
+  INSERT INTO public.profiles (id, full_name, email, preferred_language)
+  VALUES (new.id, new.raw_user_meta_data->>'full_name', new.email, 'en');
   RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
