@@ -131,11 +131,10 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   // If there are too many recommendations, prioritize them
   let prioritizedRecommendations = [...recommendations];
   if (recommendations.length > 5) {
-    prioritizedRecommendations.sort((a, b) => {
+    prioritizedRecommendations = [...recommendations].sort((a, b) => {
       const priorityOrder = { high: 0, medium: 1, low: 2 };
       return priorityOrder[a.priority as keyof typeof priorityOrder] - priorityOrder[b.priority as keyof typeof priorityOrder];
-    });
-    prioritizedRecommendations = prioritizedRecommendations.slice(0, 5);
+    }).slice(0, 5);
   }
 
   return prioritizedRecommendations;
