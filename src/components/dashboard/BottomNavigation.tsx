@@ -1,87 +1,85 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Gauge, Siren, Handshake, Settings, Gamepad2 } from 'lucide-react';
+import { Home, Gauge, Siren, Handshake, Settings, Gamepad2, Video } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/components/LanguageProvider';
+import { useSubscription } from '@/contexts/SubscriptionContext';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 const BottomNavigation: React.FC = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const { t } = useLanguage();
+  const { hasFeatureAccess, currentPlan } = useSubscription();
 
   // Helper function to determine if a link is active
   const isActive = (path: string) => currentPath === path;
 
+  // Navigation items with their access requirements
+  const navItems = [
+    { path: '/dashboard', label: t("home"), icon: Home, feature: 'dashboard' },
+    { path: '/wellness-analysis', label: t("analysis"), icon: Gauge, feature: 'wellness-analysis' },
+    { path: '/emergency-contacts', label: t("emergency"), icon: Siren, feature: 'emergency' },
+    { path: '/games', label: t("games"), icon: Gamepad2, feature: 'games' },
+    { path: '/webinars', label: t("webinars"), icon: Video, feature: 'webinars' },
+    { path: '/volunteering', label: t("volunteer"), icon: Handshake, feature: 'volunteering' },
+    { path: '/settings', label: t("settings_link"), icon: Settings, feature: 'settings' },
+  ];
+
+  // Render a navigation item based on subscription access
+  const renderNavItem = (item) => {
+    const hasAccess = hasFeatureAccess(item.feature);
+    
+    // Common button content
+    const buttonContent = (
+      <>
+        <item.icon size={20} />
+        <span>{item.label}</span>
+      </>
+    );
+
+    // If user doesn't have access, render a disabled button with tooltip
+    if (!hasAccess) {
+      return (
+        <TooltipProvider key={item.path}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button 
+                variant="ghost" 
+                className="flex flex-col items-center gap-1 text-xs opacity-50 cursor-not-allowed" 
+              >
+                {buttonContent}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>{t("upgrade_to_access_feature")}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      );
+    }
+
+    // If user has access, render the active link
+    return (
+      <Button 
+        key={item.path}
+        variant={isActive(item.path) ? "default" : "ghost"} 
+        className="flex flex-col items-center gap-1 text-xs" 
+        asChild
+      >
+        <Link to={item.path}>
+          {buttonContent}
+        </Link>
+      </Button>
+    );
+  };
+
   return (
     <div className="fixed bottom-0 left-0 right-0 bg-background border-t py-2">
       <div className="container max-w-6xl">
-        <div className="grid grid-cols-6 gap-1">
-          <Button 
-            variant={isActive('/dashboard') ? "default" : "ghost"} 
-            className="flex flex-col items-center gap-1 text-xs" 
-            asChild
-          >
-            <Link to="/dashboard">
-              <Home size={20} />
-              <span>{t("home")}</span>
-            </Link>
-          </Button>
-          
-          <Button 
-            variant={isActive('/wellness-analysis') ? "default" : "ghost"} 
-            className="flex flex-col items-center gap-1 text-xs"
-            asChild
-          >
-            <Link to="/wellness-analysis">
-              <Gauge size={20} />
-              <span>{t("analysis")}</span>
-            </Link>
-          </Button>
-                 
-          <Button 
-            variant={isActive('/emergency-contacts') ? "default" : "ghost"} 
-            className="flex flex-col items-center gap-1 text-xs"
-            asChild
-          >
-            <Link to="/emergency-contacts">
-              <Siren size={20} />
-              <span>{t("emergency")}</span>
-            </Link>
-          </Button>
-          
-          <Button 
-            variant={isActive('/games') ? "default" : "ghost"} 
-            className="flex flex-col items-center gap-1 text-xs"
-            asChild
-          >
-            <Link to="/games">
-              <Gamepad2 size={20} />
-              <span>{t("games")}</span>
-            </Link>
-          </Button>
-          
-          <Button 
-            variant={isActive('/volunteering') ? "default" : "ghost"} 
-            className="flex flex-col items-center gap-1 text-xs"
-            asChild
-          >
-            <Link to="/volunteering">
-              <Handshake size={20} />
-              <span>{t("volunteer")}</span>
-            </Link>
-          </Button>
-          
-          <Button 
-            variant={isActive('/settings') ? "default" : "ghost"} 
-            className="flex flex-col items-center gap-1 text-xs"
-            asChild
-          >
-            <Link to="/settings">
-              <Settings size={20} />
-              <span>{t("settings_link")}</span>
-            </Link>
-          </Button>
+        <div className="grid grid-cols-7 gap-1">
+          {navItems.map(renderNavItem)}
         </div>
       </div>
     </div>

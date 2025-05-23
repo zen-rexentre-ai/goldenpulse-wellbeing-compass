@@ -11,6 +11,8 @@ import { DashboardTabs } from '@/components/dashboard/DashboardTabs';
 import BottomNavigation from '@/components/dashboard/BottomNavigation';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
+import { useSubscription } from '@/contexts/SubscriptionContext';
+import { EmbossedCard } from '@/components/ui/card';
 
 const Dashboard = () => {
   const [showAccessibility, setShowAccessibility] = useState(false);
@@ -18,6 +20,7 @@ const Dashboard = () => {
   const [showDetailedAnalysis, setShowDetailedAnalysis] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
+  const { currentPlan, setCurrentPlan } = useSubscription();
   
   // Mock fitness score data - in a real app this would come from an API
   const fitnessScores = {
@@ -78,10 +81,22 @@ const Dashboard = () => {
     });
   };
 
+  // Plan switcher for demo purposes
+  const cyclePlan = () => {
+    if (currentPlan === 'free') setCurrentPlan('basic');
+    else if (currentPlan === 'basic') setCurrentPlan('premium');
+    else setCurrentPlan('free');
+    
+    toast({
+      title: `Plan changed to ${currentPlan === 'free' ? 'Basic' : currentPlan === 'basic' ? 'Premium' : 'Free'}`,
+      description: "This is just for demonstration purposes."
+    });
+  };
+
   return (
-    <div className="min-h-screen bg-background pb-16">
+    <div className="min-h-screen bg-gradient-to-b from-background to-secondary pb-16">
       {/* Header */}
-      <header className="sticky top-0 z-10 bg-background border-b p-4">
+      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b p-4">
         <div className="container max-w-6xl flex justify-between items-center">
           <Logo size="sm" className="max-w-[150px]" />
           
@@ -113,7 +128,20 @@ const Dashboard = () => {
       )}
       
       <main className="container max-w-6xl p-4 space-y-6">
-        {/* Fitness Score Card - Updated to be more centered/prominent */}
+        {/* Current Plan Indicator and Demo Switcher */}
+        <div className="flex justify-between items-center">
+          <EmbossedCard className="px-4 py-2 bg-gradient-to-r from-golden-peach/30 to-golden-yellow/30">
+            <p className="text-sm font-medium">
+              {t("current_plan")}: <span className="font-bold capitalize">{currentPlan}</span>
+            </p>
+          </EmbossedCard>
+          
+          <Button size="sm" variant="outline" onClick={cyclePlan}>
+            {t("change_plan")} (Demo)
+          </Button>
+        </div>
+        
+        {/* Fitness Score Card - Updated to be more visually appealing */}
         <div className="relative">
           <FitnessScoreCard 
             fitnessScores={fitnessScores}
@@ -136,7 +164,7 @@ const Dashboard = () => {
           <Button variant="outline" size="sm">{t("customize_widgets")}</Button>
         </div>
         
-        {/* Dashboard Tabs - Updated to remove Activities tab and combine Health Focus with Vitals */}
+        {/* Dashboard Tabs */}
         <DashboardTabs 
           medicines={medicines}
           appointments={appointments}

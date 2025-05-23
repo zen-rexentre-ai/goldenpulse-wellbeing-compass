@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { EmbossedCard } from '@/components/ui/card';
 import { FitnessScoreCardProps } from './types';
 import ScoreItem from './ScoreItem';
 import ScoreNavigation from './ScoreNavigation';
@@ -61,8 +61,8 @@ export const FitnessScoreCard: React.FC<FitnessScoreCardProps> = ({ fitnessScore
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="flex items-center justify-center relative mb-1">
-        <Card className="w-full max-w-sm shadow-md border-primary/20">
-          <div className="bg-primary/5 rounded-t-lg p-4 relative">
+        <EmbossedCard className="w-full max-w-sm shadow-md animate-fade-in">
+          <div className="bg-gradient-to-r from-golden-pink/90 to-golden-peach/90 rounded-t-lg p-4 relative">
             <div className="absolute top-2 right-2">
               <ScreenReader text={`${activeItem.title}: ${activeItem.score}`} />
             </div>
@@ -81,7 +81,7 @@ export const FitnessScoreCard: React.FC<FitnessScoreCardProps> = ({ fitnessScore
             onDotClick={setActiveIndex}
             onAnalysisClick={onViewDetailedAnalysis}
           />
-        </Card>
+        </EmbossedCard>
       </div>
     </div>
   );
