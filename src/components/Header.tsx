@@ -57,12 +57,12 @@ const Header: React.FC<HeaderProps> = ({ title, showBack = false }) => {
             asChild
           >
             <Link to="/settings">
-              <Settings />
+              <Settings className="h-5 w-5" />
             </Link>
           </Button>
           
           <Button variant="ghost" size="icon" aria-label={t("notifications")}>
-            <Bell />
+            <Bell className="h-5 w-5" />
           </Button>
         </div>
       </div>

@@ -27,17 +27,19 @@ const ScoreItem: React.FC<ScoreItemProps> = ({ title, subtitle, score, change })
 
   return (
     <div className="pt-5 flex flex-col items-center text-slate-900">
-      <h3 className="text-sm font-medium">{title}</h3>
-      <p className="text-xs mb-2">{subtitle}</p>
+      <h3 className="text-sm font-medium mb-1">{title}</h3>
+      <p className="text-xs mb-4">{subtitle}</p>
       
       {/* Enhanced Gauge Meter - Now more prominent */}
-      <FitnessScoreMeter score={score} />
+      <div className="mb-4">
+        <FitnessScoreMeter score={score} />
+      </div>
       
-      {/* Change indicator moved below the meter */}
+      {/* Change indicator positioned below the meter with proper spacing */}
       {change && (
-        <div className="flex items-center gap-1 mt-1">
+        <div className="flex items-center justify-center gap-1 mt-2 pt-2 border-t border-gray-200/50 w-full">
           {renderTrendArrow(change.direction)}
-          <span className={change.direction === 'up' ? 'text-green-700' : 'text-red-700'}>
+          <span className={`text-sm font-medium ${change.direction === 'up' ? 'text-green-700' : 'text-red-700'}`}>
             {change.value}%
           </span>
         </div>

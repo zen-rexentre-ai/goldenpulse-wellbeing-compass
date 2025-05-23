@@ -21,7 +21,7 @@ const Entertainment = () => {
   const games = [
     {
       id: 'trivia',
-      title: t('trivia_game'),
+      title: t('trivia_challenge'),
       description: t('trivia_description'),
       icon: Brain,
       color: 'bg-blue-500',
@@ -30,7 +30,7 @@ const Entertainment = () => {
     },
     {
       id: 'memory',
-      title: t('memory_game'),
+      title: t('memory_match'),
       description: t('memory_description'),
       icon: Layers,
       color: 'bg-green-500',
@@ -39,7 +39,7 @@ const Entertainment = () => {
     },
     {
       id: 'word',
-      title: t('word_game'),
+      title: t('word_puzzle'),
       description: t('word_description'),
       icon: Target,
       color: 'bg-purple-500',
@@ -48,7 +48,7 @@ const Entertainment = () => {
     },
     {
       id: 'puzzle',
-      title: t('puzzle_game'),
+      title: t('number_puzzle'),
       description: t('puzzle_description'),
       icon: Zap,
       color: 'bg-orange-500',
@@ -58,15 +58,57 @@ const Entertainment = () => {
   ];
 
   const upcomingWebinars = [
-    { id: 1, title: "Healthy Aging: Tips for Seniors", date: "May 28, 2025", time: "10:00 AM", instructor: "Dr. Sarah Johnson", thumbnail: "health-aging.jpg" },
-    { id: 2, title: "Technology Made Simple", date: "June 2, 2025", time: "2:00 PM", instructor: "Prof. Michael Lee", thumbnail: "tech-simple.jpg" },
-    { id: 3, title: "Financial Planning for Retirement", date: "June 5, 2025", time: "11:00 AM", instructor: "Ms. Emily Parker", thumbnail: "financial-planning.jpg" }
+    { 
+      id: 1, 
+      title: "Healthy Aging: Tips for Seniors", 
+      date: "May 28, 2025", 
+      time: "10:00 AM", 
+      instructor: "Dr. Sarah Johnson", 
+      thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop" 
+    },
+    { 
+      id: 2, 
+      title: "Technology Made Simple", 
+      date: "June 2, 2025", 
+      time: "2:00 PM", 
+      instructor: "Prof. Michael Lee", 
+      thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop" 
+    },
+    { 
+      id: 3, 
+      title: "Financial Planning for Retirement", 
+      date: "June 5, 2025", 
+      time: "11:00 AM", 
+      instructor: "Ms. Emily Parker", 
+      thumbnail: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=300&fit=crop" 
+    }
   ];
   
   const recordedWebinars = [
-    { id: 1, title: "Nutrition for Seniors", date: "May 15, 2025", instructor: "Dr. Sarah Johnson", duration: "45 minutes", thumbnail: "nutrition.jpg" },
-    { id: 2, title: "Mental Wellness in Later Life", date: "May 10, 2025", instructor: "Dr. Robert Kumar", duration: "55 minutes", thumbnail: "mental-wellness.jpg" },
-    { id: 3, title: "Staying Active at Home", date: "May 5, 2025", instructor: "Ms. Lisa Thompson", duration: "30 minutes", thumbnail: "active-home.jpg" }
+    { 
+      id: 1, 
+      title: "Nutrition for Seniors", 
+      date: "May 15, 2025", 
+      instructor: "Dr. Sarah Johnson", 
+      duration: "45 minutes", 
+      thumbnail: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&h=300&fit=crop" 
+    },
+    { 
+      id: 2, 
+      title: "Mental Wellness in Later Life", 
+      date: "May 10, 2025", 
+      instructor: "Dr. Robert Kumar", 
+      duration: "55 minutes", 
+      thumbnail: "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=300&fit=crop" 
+    },
+    { 
+      id: 3, 
+      title: "Staying Active at Home", 
+      date: "May 5, 2025", 
+      instructor: "Ms. Lisa Thompson", 
+      duration: "30 minutes", 
+      thumbnail: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop" 
+    }
   ];
 
   if (activeGame) {
@@ -76,7 +118,7 @@ const Entertainment = () => {
     return (
       <div className="min-h-screen bg-background pb-20">
         <Header 
-          title={game?.title || t('entertainment')} 
+          title={game?.title || t('engagement')} 
           showBack 
         />
         
@@ -88,7 +130,7 @@ const Entertainment = () => {
               className="flex items-center gap-2"
             >
               <ArrowLeft size={16} />
-              Back to Entertainment
+              {t("back")} to {t("engagement")}
             </Button>
           </div>
           
@@ -102,20 +144,20 @@ const Entertainment = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary pb-16">
-      <Header title={t("entertainment")} showBack />
+      <Header title={t("engagement")} showBack />
       
       <main className="container max-w-6xl p-4 space-y-6">
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-2">
-            <h1 className="text-2xl font-bold">{t('entertainment')}</h1>
-            <ScreenReader text={t('entertainment')} />
+            <h1 className="text-2xl font-bold">{t('engagement')}</h1>
+            <ScreenReader text={t('engagement')} />
           </div>
-          <p className="text-muted-foreground">Games and educational content for wellness and fun</p>
+          <p className="text-muted-foreground">{t("games_subtitle")}</p>
         </div>
 
         <Tabs defaultValue="games">
           <TabsList className="grid grid-cols-2 mb-4">
-            <TabsTrigger value="games">{t("brain_training_games")}</TabsTrigger>
+            <TabsTrigger value="games">{t("cognitive_games")}</TabsTrigger>
             <TabsTrigger value="webinars">{t("webinars_and_videos")}</TabsTrigger>
           </TabsList>
           
@@ -168,7 +210,7 @@ const Entertainment = () => {
           <TabsContent value="webinars" className="space-y-4">
             <Tabs defaultValue="upcoming">
               <TabsList className="grid grid-cols-2 mb-4">
-                <TabsTrigger value="upcoming">{t("upcoming_live")}</TabsTrigger>
+                <TabsTrigger value="upcoming">{t("upcoming")}</TabsTrigger>
                 <TabsTrigger value="recorded">{t("recorded")}</TabsTrigger>
               </TabsList>
               
@@ -177,8 +219,12 @@ const Entertainment = () => {
                   <EmbossedCard key={webinar.id} className="overflow-hidden">
                     <div className="bg-gradient-to-r from-golden-peach/50 to-golden-yellow/30 p-4">
                       <div className="flex flex-col md:flex-row gap-4">
-                        <div className="w-full md:w-1/3 aspect-video bg-gray-200 rounded-md flex items-center justify-center">
-                          <span>{t("webinar_thumbnail")}</span>
+                        <div className="w-full md:w-1/3 aspect-video bg-gray-200 rounded-md overflow-hidden">
+                          <img 
+                            src={webinar.thumbnail} 
+                            alt={webinar.title}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold">{webinar.title}</h3>
@@ -204,8 +250,12 @@ const Entertainment = () => {
                   <EmbossedCard key={webinar.id} className="overflow-hidden">
                     <div className="bg-gradient-to-r from-golden-pink/50 to-golden-peach/30 p-4">
                       <div className="flex flex-col md:flex-row gap-4">
-                        <div className="w-full md:w-1/3 aspect-video bg-gray-200 rounded-md flex items-center justify-center">
-                          <span>{t("webinar_recording")}</span>
+                        <div className="w-full md:w-1/3 aspect-video bg-gray-200 rounded-md overflow-hidden">
+                          <img 
+                            src={webinar.thumbnail} 
+                            alt={webinar.title}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
                         <div className="flex-1">
                           <h3 className="text-lg font-semibold">{webinar.title}</h3>

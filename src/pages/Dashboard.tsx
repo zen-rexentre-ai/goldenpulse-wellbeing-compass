@@ -59,18 +59,18 @@ const Dashboard = () => {
   // Mock data for wellness analysis
   const mockRecommendations = [
     { 
-      text: t("Consider adding more fiber to your diet to help with cholesterol levels"), 
-      impact: t("High Impact"), 
+      text: t("consider_adding_more_fiber_to_your_diet_to_help_with_cholesterol_levels"), 
+      impact: t("high_impact"), 
       priority: "high" 
     },
     { 
-      text: t("Try to increase daily steps to 10,000"), 
-      impact: t("Medium Impact"), 
+      text: t("try_to_increase_daily_steps_to_10000"), 
+      impact: t("medium_impact"), 
       priority: "medium" 
     },
     { 
-      text: t("Schedule your annual physical examination"), 
-      impact: t("Low Impact"), 
+      text: t("schedule_your_annual_physical_examination"), 
+      impact: t("low_impact"), 
       priority: "low" 
     }
   ];
@@ -85,15 +85,15 @@ const Dashboard = () => {
 
   const handleSave = () => {
     toast({
-      title: t("Report Saved"),
-      description: t("Your wellness analysis report has been saved to your profile")
+      title: t("report_saved"),
+      description: t("your_wellness_analysis_report_has_been_saved_to_your_profile")
     });
   };
   
   const handleReset = () => {
     toast({
-      title: t("Calculator Reset"),
-      description: t("You can now calculate a new wellness score")
+      title: t("calculator_reset"),
+      description: t("you_can_now_calculate_a_new_wellness_score")
     });
   };
 
@@ -232,15 +232,14 @@ const Dashboard = () => {
       )}
       
       <main className="container max-w-6xl p-4 space-y-6">
-        {/* Current Plan Indicator - Made clickable */}
+        {/* Simplified Current Plan Indicator */}
         <div className="flex justify-between items-center">
           <EmbossedCard 
-            className="px-4 py-2 bg-gradient-to-r from-golden-peach/30 to-golden-yellow/30 cursor-pointer hover:shadow-md transition-all"
+            className="px-3 py-2 bg-gradient-to-r from-golden-peach/30 to-golden-yellow/30 cursor-pointer hover:shadow-md transition-all"
             onClick={cyclePlan}
           >
-            <p className="text-sm font-medium">
-              {t("current_plan")}: <span className="font-bold capitalize">{currentPlan}</span>
-              <span className="text-xs ml-2 text-muted-foreground">(Click to change)</span>
+            <p className="text-sm font-bold capitalize">
+              {currentPlan}
             </p>
           </EmbossedCard>
         </div>
@@ -259,7 +258,7 @@ const Dashboard = () => {
           />
         </div>
         
-        {/* Wellness Analysis Button */}
+        {/* Simplified Analysis Button */}
         <div className="flex justify-center">
           <Button 
             onClick={() => setShowWellnessAnalysis(true)}

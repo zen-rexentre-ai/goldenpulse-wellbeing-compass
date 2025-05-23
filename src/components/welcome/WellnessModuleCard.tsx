@@ -11,10 +11,10 @@ const WellnessModuleCard = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   
   const wellnessModuleItems = [
-    'Personalized Wellness Journey',
-    'Pain Management',
-    'Access to Kin',
-    'AI Powered Diagnostics'
+    t("wellness_module_item_1"),
+    t("wellness_module_item_2"),
+    t("wellness_module_item_3"),
+    t("wellness_module_item_4")
   ];
 
   const handleCardClick = () => {

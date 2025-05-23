@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Speaker } from 'lucide-react';
+import { Volume2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useLanguage } from './LanguageProvider';
@@ -14,13 +14,13 @@ const ScreenReader: React.FC<ScreenReaderProps> = ({ text, className = '' }) => 
   const { language, t } = useLanguage();
   const [isSpeaking, setIsSpeaking] = useState(false);
   
-  // Map language codes to voice language codes
-  const languageVoiceMappings: Record<string, string> = {
-    'en': 'en-US',
-    'ta': 'ta-IN',
-    'kn': 'kn-IN',
-    'te': 'te-IN',
-    'hi': 'hi-IN',
+  // Enhanced language voice mappings with better fallbacks
+  const languageVoiceMappings: Record<string, string[]> = {
+    'en': ['en-US', 'en-GB', 'en-AU'],
+    'ta': ['ta-IN', 'ta-LK', 'hi-IN', 'en-IN'],
+    'kn': ['kn-IN', 'hi-IN', 'en-IN'],
+    'te': ['te-IN', 'hi-IN', 'en-IN'],
+    'hi': ['hi-IN', 'en-IN'],
   };
 
   const speakText = () => {
@@ -29,14 +29,31 @@ const ScreenReader: React.FC<ScreenReaderProps> = ({ text, className = '' }) => 
     
     // Create new speech synthesis utterance
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = languageVoiceMappings[language] || 'en-US';
     
-    // Set voice if available for language
+    // Get available voices
     const voices = window.speechSynthesis.getVoices();
-    const languageVoice = voices.find(voice => voice.lang.includes(languageVoiceMappings[language]));
-    if (languageVoice) {
-      utterance.voice = languageVoice;
+    const preferredLanguages = languageVoiceMappings[language] || ['en-US'];
+    
+    // Find the best matching voice
+    let selectedVoice = null;
+    for (const langCode of preferredLanguages) {
+      selectedVoice = voices.find(voice => 
+        voice.lang.toLowerCase().includes(langCode.toLowerCase())
+      );
+      if (selectedVoice) break;
     }
+    
+    // Set the voice and language
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+      utterance.lang = selectedVoice.lang;
+    } else {
+      utterance.lang = preferredLanguages[0];
+    }
+    
+    // Set speech rate and pitch for better clarity
+    utterance.rate = 0.9;
+    utterance.pitch = 1.0;
     
     // Handling events
     utterance.onstart = () => setIsSpeaking(true);
@@ -62,7 +79,7 @@ const ScreenReader: React.FC<ScreenReaderProps> = ({ text, className = '' }) => 
           onClick={isSpeaking ? stopSpeaking : speakText}
           aria-label={t("screen_reader_button")}
         >
-          <Speaker className={`h-5 w-5 ${isSpeaking ? 'text-primary animate-pulse' : ''}`} />
+          <Volume2 className={`h-5 w-5 ${isSpeaking ? 'text-primary animate-pulse' : ''}`} />
         </Button>
       </TooltipTrigger>
       <TooltipContent side="bottom">

@@ -11,10 +11,10 @@ const CommunityModuleCard = () => {
   const [popupOpen, setPopupOpen] = useState(false);
   
   const communityModuleItems = [
-    'Volunteering Opportunities',
-    'Webinars',
-    'Hobbies',
-    'Fun and Cognitive Games'
+    t("community_module_item_1"),
+    t("community_module_item_2"),
+    t("community_module_item_3"),
+    t("community_module_item_4")
   ];
 
   const handleCardClick = () => {

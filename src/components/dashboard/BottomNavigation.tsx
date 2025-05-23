@@ -20,7 +20,7 @@ const BottomNavigation: React.FC = () => {
   const navItems = [
     { path: '/dashboard', label: t("home"), icon: Home, feature: 'dashboard' },
     { path: '/emergency-contacts', label: t("emergency"), icon: Siren, feature: 'emergency' },
-    { path: '/entertainment', label: t("entertainment"), icon: Gamepad2, feature: 'games' }, // Combined games+webinars
+    { path: '/entertainment', label: t("engagement"), icon: Gamepad2, feature: 'games' }, // Renamed to engagement
     { path: '/volunteering', label: t("volunteer"), icon: Handshake, feature: 'volunteering' },
   ];
 
@@ -28,11 +28,11 @@ const BottomNavigation: React.FC = () => {
   const renderNavItem = (item) => {
     const hasAccess = hasFeatureAccess(item.feature);
     
-    // Common button content
+    // Common button content with responsive labels
     const buttonContent = (
       <>
         <item.icon size={20} />
-        <span>{item.label}</span>
+        <span className="hidden sm:block">{item.label}</span>
       </>
     );
 
