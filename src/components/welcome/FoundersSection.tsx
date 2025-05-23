@@ -4,13 +4,19 @@ import { EmbossedCard } from '@/components/ui/card';
 import { Mail, Phone, User, GraduationCap } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 const FoundersSection = () => {
   const isMobile = useIsMobile();
+  const { t } = useLanguage();
 
   return (
     <EmbossedCard className="p-4 mb-3 w-full">
-      <h3 className="text-center text-lg font-medium mb-3">Founders</h3>
+      <div className="flex justify-between items-center">
+        <h3 className="text-center text-lg font-medium mb-3">{t("founders")}</h3>
+        <ScreenReader text={t("founders")} />
+      </div>
       <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"} w-full`}>
         {/* Founder 1 */}
         <div className="space-y-2">

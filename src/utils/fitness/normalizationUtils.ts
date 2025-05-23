@@ -1,35 +1,21 @@
 
 // Utility functions for normalizing fitness metrics
+import {
+  normalizeHeartRateByAge,
+  normalizeBMIByAge,
+  normalizeBloodPressureByAge,
+  normalizeHbA1cByAge,
+  normalizeExerciseByAge
+} from './ageNormalizationUtils';
 
-// Normalize BMI score (lower is better, with optimal around 22-25)
-export const normalizeBMI = (height: number, weight: number, isMetric: boolean): number => {
-  // Convert to metric if needed
-  const heightInM = isMetric ? height / 100 : height * 0.0254;
-  const weightInKg = isMetric ? weight : weight * 0.453592;
-  
-  // Calculate BMI
-  const bmi = weightInKg / (heightInM * heightInM);
-  
-  // Normalize BMI (optimal BMI is 22-25)
-  if (bmi < 18.5) return 0.7; // Underweight
-  if (bmi >= 18.5 && bmi < 22) return 0.9;
-  if (bmi >= 22 && bmi < 25) return 1.0; // Optimal
-  if (bmi >= 25 && bmi < 30) return 0.75; // Overweight
-  if (bmi >= 30 && bmi < 35) return 0.5; // Obese Class I
-  if (bmi >= 35 && bmi < 40) return 0.3; // Obese Class II
-  return 0.1; // Obese Class III
+// Normalize BMI score using age-based normalization
+export const normalizeBMI = (height: number, weight: number, isMetric: boolean, age: number): number => {
+  return normalizeBMIByAge(height, weight, isMetric, age);
 };
 
-// Normalize resting heart rate (lower is better, with optimal around 60-70)
-export const normalizeHeartRate = (heartRate: number): number => {
-  if (!heartRate) return 0.7; // Default if not provided
-  if (heartRate < 50) return 1.0;
-  if (heartRate >= 50 && heartRate < 60) return 0.9;
-  if (heartRate >= 60 && heartRate < 70) return 0.8;
-  if (heartRate >= 70 && heartRate < 80) return 0.7;
-  if (heartRate >= 80 && heartRate < 90) return 0.5;
-  if (heartRate >= 90 && heartRate < 100) return 0.3;
-  return 0.1;
+// Normalize resting heart rate using age-based normalization
+export const normalizeHeartRate = (heartRate: number, age: number): number => {
+  return normalizeHeartRateByAge(heartRate, age);
 };
 
 // Normalize sleep (more is better, with optimal at 7-8 hours)
@@ -37,14 +23,9 @@ export const normalizeSleep = (goodSleepQuality: boolean): number => {
   return goodSleepQuality ? 1.0 : 0.4;
 };
 
-// Normalize exercise minutes per week (more is better up to a point)
-export const normalizeExercise = (minutes: number): number => {
-  if (minutes < 30) return 0.1;
-  if (minutes >= 30 && minutes < 60) return 0.3;
-  if (minutes >= 60 && minutes < 90) return 0.5;
-  if (minutes >= 90 && minutes < 150) return 0.7;
-  if (minutes >= 150 && minutes < 200) return 0.9;
-  return 1.0;
+// Normalize exercise minutes per week using age-based normalization
+export const normalizeExercise = (minutes: number, age: number): number => {
+  return normalizeExerciseByAge(minutes, age);
 };
 
 // Normalize smoking status
@@ -85,4 +66,18 @@ export const normalizeStress = (stressLevel: string): number => {
   if (stressLevel === 'none') return 1.0;
   if (stressLevel === 'mild') return 0.5;
   return 0.0; // 'high' stress
+};
+
+// Normalize HbA1c
+export const normalizeHbA1c = (hba1c: number | undefined, age: number): number => {
+  return normalizeHbA1cByAge(hba1c, age);
+};
+
+// Normalize blood pressure
+export const normalizeBloodPressure = (
+  systolic: number | undefined,
+  diastolic: number | undefined,
+  age: number
+): number => {
+  return normalizeBloodPressureByAge(systolic, diastolic, age);
 };

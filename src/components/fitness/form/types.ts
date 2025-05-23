@@ -7,6 +7,7 @@ export const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(10, { message: "Please enter a valid phone number." }),
+  age: z.coerce.number().min(1, { message: "Age is required" }).max(120, { message: "Please enter a valid age" }),
   
   // Step 2: Body Metrics
   height: z.coerce.number().min(1, { message: "Height is required" }),

@@ -2,15 +2,18 @@
 import React from 'react';
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { User, Mail, Phone } from 'lucide-react';
+import { User, Mail, Phone, Calendar } from 'lucide-react';
 import { UseFormReturn } from 'react-hook-form';
 import { FitnessFormValues } from './types';
+import { useLanguage } from '@/components/LanguageProvider';
 
 interface Step1Props {
   form: UseFormReturn<FitnessFormValues>;
 }
 
 const Step1BasicInfo: React.FC<Step1Props> = ({ form }) => {
+  const { t } = useLanguage();
+
   return (
     <div className="space-y-4 animate-fade-in">
       <h3 className="text-lg font-medium">Basic Information</h3>
@@ -25,6 +28,23 @@ const Step1BasicInfo: React.FC<Step1Props> = ({ form }) => {
               <div className="flex items-center space-x-2">
                 <User className="h-4 w-4 text-muted-foreground" />
                 <Input placeholder="Enter your name" {...field} />
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+      
+      <FormField
+        control={form.control}
+        name="age"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Age <span className="text-red-500">*</span></FormLabel>
+            <FormControl>
+              <div className="flex items-center space-x-2">
+                <Calendar className="h-4 w-4 text-muted-foreground" />
+                <Input placeholder="Enter your age" type="number" {...field} onChange={e => field.onChange(parseInt(e.target.value) || '')} />
               </div>
             </FormControl>
             <FormMessage />

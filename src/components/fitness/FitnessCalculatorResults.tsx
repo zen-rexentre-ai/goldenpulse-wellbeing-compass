@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,6 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { CheckCircle, Download, BarChart2, Mail } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 interface Recommendation {
   text: string;
@@ -44,6 +47,7 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
   const { theme } = useTheme();
   const scoreCategory = getScoreCategory(score);
   const percentile = getPercentile(score);
+  const { t } = useLanguage();
   
   // Mock data for age group comparison
   const ageGroups = [
@@ -56,7 +60,10 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
   return (
     <div className="space-y-6 animate-fade-in">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold mb-2">Your Health Score</h2>
+        <div className="flex justify-center items-center gap-2">
+          <h2 className="text-2xl font-bold mb-2">{t("health_score")}</h2>
+          <ScreenReader text={t("health_score")} />
+        </div>
         <div className="relative inline-block">
           <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
             <circle
@@ -95,11 +102,14 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Age Group Comparison</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">{t("age_group_comparison")}</CardTitle>
+              <ScreenReader text={t("age_group_comparison")} />
+            </div>
           </CardHeader>
           <CardContent>
             <p className="text-sm mb-4">
-              You scored better than <span className="font-bold">{percentile}%</span> of people in your age group.
+              {t("score_percentile").replace("{percentile}", percentile.toString())}
             </p>
             <div className="space-y-3">
               {ageGroups.map((group) => (
@@ -124,7 +134,10 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         
         <Card>
           <CardHeader>
-            <CardTitle className="text-lg">Recommendations</CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="text-lg">{t("recommendations")}</CardTitle>
+              <ScreenReader text={t("recommendations")} />
+            </div>
           </CardHeader>
           <CardContent className="space-y-3">
             {recommendations.length === 0 ? (
@@ -157,7 +170,10 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
       
       <Card className="mt-6">
         <CardHeader>
-          <CardTitle className="text-lg">Detailed Score Breakdown</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg">{t("detailed_score_breakdown")}</CardTitle>
+            <ScreenReader text={t("detailed_score_breakdown")} />
+          </div>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -176,10 +192,10 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row gap-2 border-t pt-4">
           <Button className="w-full sm:w-auto" onClick={onSave}>
-            <Download className="mr-2 h-4 w-4" /> Save Report
+            <Download className="mr-2 h-4 w-4" /> {t("save_report")}
           </Button>
           <Button variant="outline" className="w-full sm:w-auto" onClick={onReset}>
-            <BarChart2 className="mr-2 h-4 w-4" /> Calculate Again
+            <BarChart2 className="mr-2 h-4 w-4" /> {t("calculate_again")}
           </Button>
         </CardFooter>
       </Card>

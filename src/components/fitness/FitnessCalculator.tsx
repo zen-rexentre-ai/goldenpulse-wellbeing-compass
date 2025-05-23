@@ -7,6 +7,8 @@ import FitnessCalculatorResults from './FitnessCalculatorResults';
 import { calculateFitnessScore } from '@/utils/fitnessScoreUtils';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 interface FitnessCalculatorProps {
   open: boolean;
@@ -25,6 +27,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
   } | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
 
   const handleFormSubmit = (values: FitnessFormValues) => {
     setFormData(values);
@@ -65,10 +68,13 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            Health Score Calculator
-            <Badge variant="outline" className="ml-2 bg-primary/10">Beta</Badge>
-          </DialogTitle>
+          <div className="flex items-center justify-between">
+            <DialogTitle className="flex items-center gap-2">
+              {t("health_score_calculator")}
+              <Badge variant="outline" className="ml-2 bg-primary/10">Beta</Badge>
+            </DialogTitle>
+            <ScreenReader text={t("health_score_calculator")} />
+          </div>
         </DialogHeader>
         
         {isCalculating ? (

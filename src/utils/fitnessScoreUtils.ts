@@ -9,7 +9,9 @@ import {
   normalizeSmoking,
   normalizeAlcohol,
   normalizeChronicConditions,
-  normalizeStress
+  normalizeStress,
+  normalizeHbA1c,
+  normalizeBloodPressure
 } from './fitness/normalizationUtils';
 import { generateRecommendations } from './fitness/recommendationUtils';
 import { FitnessScoreResult, ChronicConditions, FitnessParameters } from './fitness/types';
@@ -18,11 +20,12 @@ import { FitnessScoreResult, ChronicConditions, FitnessParameters } from './fitn
 export const calculateFitnessScore = (data: any): FitnessScoreResult => {
   // Extract and normalize parameters
   const isMetric = data.heightUnit === 'cm';
+  const age = data.age || 65; // Default age if not provided
   
-  const bmiNormalized = normalizeBMI(data.height, data.weight, isMetric);
-  const heartRateNormalized = normalizeHeartRate(data.heartRate || 70); // Default if not provided
+  const bmiNormalized = normalizeBMI(data.height, data.weight, isMetric, age);
+  const heartRateNormalized = normalizeHeartRate(data.heartRate || 70, age); // Default if not provided
   const sleepNormalized = normalizeSleep(data.goodSleepQuality === 'yes');
-  const exerciseNormalized = normalizeExercise(data.exerciseMinutes);
+  const exerciseNormalized = normalizeExercise(data.exerciseMinutes, age);
   const smokingNormalized = normalizeSmoking(data.smokingStatus);
   const alcoholNormalized = normalizeAlcohol(data.alcoholUnits);
   
@@ -38,6 +41,10 @@ export const calculateFitnessScore = (data: any): FitnessScoreResult => {
   
   // Normalize stress level
   const stressNormalized = normalizeStress(data.stressLevel || 'none');
+  
+  // Additional age-based normalization
+  const hba1cNormalized = normalizeHbA1c(data.hba1c, age);
+  const bloodPressureNormalized = normalizeBloodPressure(data.systolicBP, data.diastolicBP, age);
   
   // Calculate the weighted sum
   const weightedSum = (
@@ -56,13 +63,17 @@ export const calculateFitnessScore = (data: any): FitnessScoreResult => {
   
   // Generate recommendations
   const params: FitnessParameters = {
+    age: age,
     bmi: bmiNormalized,
     heartRate: data.heartRate,
     goodSleepQuality: data.goodSleepQuality === 'yes',
     exerciseMinutes: data.exerciseMinutes,
     smokingStatus: data.smokingStatus,
     alcoholUnits: data.alcoholUnits,
-    stressLevel: data.stressLevel
+    stressLevel: data.stressLevel,
+    hba1c: data.hba1c,
+    systolicBP: data.systolicBP,
+    diastolicBP: data.diastolicBP
   };
   
   const recommendations = generateRecommendations(params);
@@ -79,7 +90,9 @@ export const calculateFitnessScore = (data: any): FitnessScoreResult => {
       smoking: smokingNormalized,
       alcohol: alcoholNormalized,
       chronicConditions: conditionsNormalized,
-      stress: stressNormalized
+      stress: stressNormalized,
+      bloodPressure: bloodPressureNormalized,
+      hba1c: hba1cNormalized
     }
   };
 };
@@ -94,6 +107,8 @@ export {
   normalizeAlcohol,
   normalizeChronicConditions,
   normalizeStress,
+  normalizeBloodPressure,
+  normalizeHbA1c,
   generateRecommendations,
   WEIGHTS
 };

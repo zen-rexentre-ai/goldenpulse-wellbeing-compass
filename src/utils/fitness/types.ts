@@ -1,6 +1,4 @@
 
-// Type definitions for fitness calculations
-
 export interface ChronicConditions {
   diabetes: number;
   hypertension: number;
@@ -10,13 +8,17 @@ export interface ChronicConditions {
 }
 
 export interface FitnessParameters {
+  age?: number;
   bmi: number;
   heartRate?: number;
   goodSleepQuality: boolean;
   exerciseMinutes: number;
   smokingStatus: string;
   alcoholUnits: number;
-  stressLevel: string;
+  stressLevel?: string;
+  hba1c?: number;
+  systolicBP?: number;
+  diastolicBP?: number;
 }
 
 export interface FitnessScoreResult {
@@ -29,15 +31,4 @@ export interface FitnessScoreResult {
   normalizedValues: {
     [key: string]: number;
   };
-}
-
-export interface NormalizedValues {
-  heartRate: number;
-  bmi: number;
-  exercise: number;
-  sleep: number;
-  smoking: number;
-  alcohol: number;
-  chronicConditions: number;
-  stress: number;
 }

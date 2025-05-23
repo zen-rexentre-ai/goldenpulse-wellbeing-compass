@@ -12,6 +12,8 @@ import Step4HealthStatus from './form/Step4HealthStatus';
 import FormProgressBar from './form/FormProgressBar';
 import FormNavigation from './form/FormNavigation';
 import { formSchema, FitnessFormValues } from './form/types';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 interface FitnessCalculatorFormProps {
   onSubmit: (values: FitnessFormValues) => void;
@@ -20,6 +22,7 @@ interface FitnessCalculatorFormProps {
 export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ onSubmit }) => {
   const [step, setStep] = useState(1);
   const totalSteps = 5;
+  const { t } = useLanguage();
   
   const form = useForm<FitnessFormValues>({
     resolver: zodResolver(formSchema),
@@ -27,6 +30,7 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
       name: "",
       email: "",
       phone: "",
+      age: undefined,
       height: undefined,
       heightUnit: "cm",
       weight: undefined,
@@ -54,7 +58,7 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
     // Define fields to validate for each step
     switch(step) {
       case 1:
-        fieldsToValidate = ["name", "email", "phone"];
+        fieldsToValidate = ["name", "email", "phone", "age"];
         break;
       case 2:
         fieldsToValidate = ["height", "weight"];
@@ -107,6 +111,10 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
 
   return (
     <Form {...form}>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold">{t("health_score_calculator")}</h3>
+        <ScreenReader text={t("health_score_calculator")} />
+      </div>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         {/* Progress bar */}
         <FormProgressBar currentStep={step} totalSteps={totalSteps} />
