@@ -9,12 +9,15 @@ import { DetailedAnalysisDialog } from '@/components/DetailedAnalysisDialog';
 import { FitnessScoreCard } from '@/components/dashboard/FitnessScoreCard';
 import { DashboardTabs } from '@/components/dashboard/DashboardTabs';
 import BottomNavigation from '@/components/dashboard/BottomNavigation';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 const Dashboard = () => {
   const [showAccessibility, setShowAccessibility] = useState(false);
   const [activeScoreTab, setActiveScoreTab] = useState('week');
   const [showDetailedAnalysis, setShowDetailedAnalysis] = useState(false);
   const { toast } = useToast();
+  const { t } = useLanguage();
   
   // Mock fitness score data - in a real app this would come from an API
   const fitnessScores = {
@@ -95,7 +98,7 @@ const Dashboard = () => {
               </svg>
             </Button>
             
-            <Button variant="ghost" size="icon" aria-label="Notifications">
+            <Button variant="ghost" size="icon" aria-label={t("notifications")}>
               <Bell />
             </Button>
           </div>
@@ -126,8 +129,11 @@ const Dashboard = () => {
         
         {/* Widget Controls */}
         <div className="flex justify-between items-center">
-          <h2 className="text-xl font-semibold">Your Health Dashboard</h2>
-          <Button variant="outline" size="sm">Customize Widgets</Button>
+          <div className="flex items-center gap-2">
+            <h2 className="text-xl font-semibold">{t("your_health_dashboard")}</h2>
+            <ScreenReader text={t("your_health_dashboard")} />
+          </div>
+          <Button variant="outline" size="sm">{t("customize_widgets")}</Button>
         </div>
         
         {/* Dashboard Tabs - Updated to remove Activities tab and combine Health Focus with Vitals */}

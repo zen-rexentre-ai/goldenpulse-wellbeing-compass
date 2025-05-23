@@ -5,39 +5,42 @@ import { FitnessScoreCardProps } from './types';
 import ScoreItem from './ScoreItem';
 import ScoreNavigation from './ScoreNavigation';
 import CardFooter from './CardFooter';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 export const FitnessScoreCard: React.FC<FitnessScoreCardProps> = ({ fitnessScores, onViewDetailedAnalysis }) => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const { t } = useLanguage();
   
   const scoreItems = [
     { 
-      title: 'Current Score', 
+      title: t('Current Score'), 
       score: fitnessScores.current, 
-      subtitle: 'Your score today',
+      subtitle: t('Your score today'),
       change: null 
     },
     { 
-      title: 'Weekly Score', 
+      title: t('Weekly Score'), 
       score: fitnessScores.week.score, 
-      subtitle: 'Last week',
+      subtitle: t('Last week'),
       change: { 
         value: fitnessScores.week.change, 
         direction: fitnessScores.week.direction 
       } 
     },
     { 
-      title: 'Monthly Score', 
+      title: t('Monthly Score'), 
       score: fitnessScores.month.score, 
-      subtitle: 'Last month',
+      subtitle: t('Last month'),
       change: { 
         value: fitnessScores.month.change, 
         direction: fitnessScores.month.direction 
       } 
     },
     { 
-      title: 'Since Login', 
+      title: t('Since Login'), 
       score: fitnessScores.sinceLogin.score, 
-      subtitle: 'Your progress', 
+      subtitle: t('Your progress'), 
       change: { 
         value: fitnessScores.sinceLogin.change, 
         direction: fitnessScores.sinceLogin.direction 
@@ -60,6 +63,9 @@ export const FitnessScoreCard: React.FC<FitnessScoreCardProps> = ({ fitnessScore
       <div className="flex items-center justify-center relative mb-1">
         <Card className="w-full max-w-sm shadow-md border-primary/20">
           <div className="bg-primary/5 rounded-t-lg p-4 relative">
+            <div className="absolute top-2 right-2">
+              <ScreenReader text={`${activeItem.title}: ${activeItem.score}`} />
+            </div>
             <ScoreNavigation onNext={nextScore} onPrevious={prevScore} />
             <ScoreItem 
               title={activeItem.title}

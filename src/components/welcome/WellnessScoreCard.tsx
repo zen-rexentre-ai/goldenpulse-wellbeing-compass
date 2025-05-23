@@ -21,7 +21,12 @@ const WellnessScoreCard: React.FC = () => {
         
         <p className="text-center mb-2 text-golden-dark">{t("wellness_score_description")}</p>
     
-        <FitnessScoreMeterWelcome score={75} />
+        <div className="relative">
+          <FitnessScoreMeterWelcome score={75} />
+          <div className="absolute top-0 right-0">
+            <ScreenReader text={t("wellness_score") + ": 75"} />
+          </div>
+        </div>
         
         <div className="mt-2 text-center">
           <Button 

@@ -15,18 +15,18 @@ const WellnessAnalysis = () => {
   const mockScore = 79.8;
   const mockRecommendations = [
     { 
-      text: "Consider adding more fiber to your diet to help with cholesterol levels", 
-      impact: "High Impact", 
+      text: t("Consider adding more fiber to your diet to help with cholesterol levels"), 
+      impact: t("High Impact"), 
       priority: "high" 
     },
     { 
-      text: "Try to increase daily steps to 10,000", 
-      impact: "Medium Impact", 
+      text: t("Try to increase daily steps to 10,000"), 
+      impact: t("Medium Impact"), 
       priority: "medium" 
     },
     { 
-      text: "Schedule your annual physical examination", 
-      impact: "Low Impact", 
+      text: t("Schedule your annual physical examination"), 
+      impact: t("Low Impact"), 
       priority: "low" 
     }
   ];
@@ -41,15 +41,15 @@ const WellnessAnalysis = () => {
   
   const handleSave = () => {
     toast({
-      title: "Report Saved",
-      description: "Your wellness analysis report has been saved to your profile"
+      title: t("Report Saved"),
+      description: t("Your wellness analysis report has been saved to your profile")
     });
   };
   
   const handleReset = () => {
     toast({
-      title: "Calculator Reset",
-      description: "You can now calculate a new wellness score"
+      title: t("Calculator Reset"),
+      description: t("You can now calculate a new wellness score")
     });
   };
 

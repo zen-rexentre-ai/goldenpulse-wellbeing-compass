@@ -2,6 +2,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { LineChart } from 'lucide-react';
+import { useLanguage } from '@/components/LanguageProvider';
 
 interface CardFooterProps {
   activeIndex: number;
@@ -16,6 +17,8 @@ const CardFooter: React.FC<CardFooterProps> = ({
   onDotClick, 
   onAnalysisClick 
 }) => {
+  const { t } = useLanguage();
+  
   return (
     <div className="p-3 flex justify-between items-center">
       <div className="flex gap-1.5">
@@ -26,7 +29,7 @@ const CardFooter: React.FC<CardFooterProps> = ({
             size="icon" 
             className={`h-2 w-2 rounded-full p-0 ${idx === activeIndex ? 'bg-primary' : 'bg-muted'}`}
             onClick={() => onDotClick(idx)}
-            aria-label={`Go to score ${idx + 1}`}
+            aria-label={t("Go to score") + " " + (idx + 1)}
           />
         ))}
       </div>
@@ -38,7 +41,7 @@ const CardFooter: React.FC<CardFooterProps> = ({
         className="text-primary hover:text-primary/80 flex items-center gap-1"
       >
         <LineChart size={14} />
-        <span className="text-xs">Analysis</span>
+        <span className="text-xs">{t("Analysis")}</span>
       </Button>
     </div>
   );

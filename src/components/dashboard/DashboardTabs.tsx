@@ -1,9 +1,10 @@
-
 import React, { useState } from 'react';
 import { MedicineWidget } from './MedicineWidget';
 import { AppointmentsWidget } from './AppointmentsWidget';
 import { HealthFocusWithVitalsWidget } from './HealthFocusWithVitalsWidget';
 import { Pill, Calendar, Heart } from 'lucide-react';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
 
 interface Medicine {
   id: number;
@@ -61,25 +62,26 @@ export const DashboardTabs: React.FC<DashboardTabsProps> = ({
   toggleWidget
 }) => {
   const [activeTab, setActiveTab] = useState('medicines');
+  const { t } = useLanguage();
   
   const tabItems = [
     { 
       id: 'medicines', 
-      label: 'Medicines', 
+      label: t('todays_medications'), 
       icon: <Pill />, 
       content: <MedicineWidget medicines={medicines} toggleWidget={toggleWidget} />,
       color: 'bg-primary/10'
     },
     { 
       id: 'appointments', 
-      label: 'Appointments', 
+      label: t('appointments'), 
       icon: <Calendar />, 
       content: <AppointmentsWidget appointments={appointments} activities={activities} toggleWidget={toggleWidget} />,
       color: 'bg-secondary/10'
     },
     { 
       id: 'healthfocus', 
-      label: 'Health Focus', 
+      label: t('health_focus'), 
       icon: <Heart />, 
       content: <HealthFocusWithVitalsWidget healthFocus={healthFocus} vitals={vitals} toggleWidget={toggleWidget} />,
       color: 'bg-red-50'
@@ -108,6 +110,9 @@ export const DashboardTabs: React.FC<DashboardTabsProps> = ({
             <span className={`font-medium ${activeTab === tab.id ? 'text-foreground' : 'text-muted-foreground'}`}>
               {tab.label}
             </span>
+            <div className="ml-auto">
+              <ScreenReader text={tab.label} />
+            </div>
           </div>
         ))}
       </div>

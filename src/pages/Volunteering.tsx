@@ -4,6 +4,9 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/com
 import { Badge } from '@/components/ui/badge';
 import BottomNavigation from '@/components/dashboard/BottomNavigation';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/components/LanguageProvider';
+import ScreenReader from '@/components/ScreenReader';
+import Header from '@/components/Header';
 
 const volunteeringOpportunities = [
   {
@@ -45,37 +48,44 @@ const volunteeringOpportunities = [
 ];
 
 const Volunteering = () => {
+  const { t } = useLanguage();
+  
   return (
     <div className="min-h-screen flex flex-col pb-20">
+      <Header title={t("volunteer")} />
+      
       <div className="flex-1 container max-w-6xl py-6 space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold">Volunteering</h1>
-          <Button variant="outline" size="sm">View All</Button>
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-bold">{t("volunteer")}</h1>
+            <ScreenReader text={t("volunteer")} />
+          </div>
+          <Button variant="outline" size="sm">{t("View All")}</Button>
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-lg font-medium">Your Preferences</h2>
+          <h2 className="text-lg font-medium">{t("Your Preferences")}</h2>
           <Card className="border border-primary/20">
             <CardContent className="pt-6">
               <div className="space-y-4">
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Interests</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("Interests")}</p>
                   <div className="flex flex-wrap gap-2 mt-2">
-                    <Badge variant="secondary">Elder Care</Badge>
-                    <Badge variant="secondary">Animal Shelters</Badge>
-                    <Badge variant="secondary">Environmental Cleanup</Badge>
-                    <Badge variant="secondary">Community Gardening</Badge>
+                    <Badge variant="secondary">{t("Elder Care")}</Badge>
+                    <Badge variant="secondary">{t("Animal Shelters")}</Badge>
+                    <Badge variant="secondary">{t("Environmental Cleanup")}</Badge>
+                    <Badge variant="secondary">{t("Community Gardening")}</Badge>
                   </div>
                 </div>
                 
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Availability</p>
-                  <p>Weekends, Tuesday evenings</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("Availability")}</p>
+                  <p>{t("Weekends, Tuesday evenings")}</p>
                 </div>
                 
                 <div>
-                  <p className="text-sm font-medium text-muted-foreground">Hours per month</p>
-                  <p>8 hours</p>
+                  <p className="text-sm font-medium text-muted-foreground">{t("Hours per month")}</p>
+                  <p>8 {t("hours")}</p>
                 </div>
               </div>
             </CardContent>
@@ -83,7 +93,10 @@ const Volunteering = () => {
         </div>
 
         <div className="space-y-4">
-          <h2 className="text-lg font-medium">Upcoming Opportunities</h2>
+          <div className="flex items-center gap-2">
+            <h2 className="text-lg font-medium">{t("Upcoming Opportunities")}</h2>
+            <ScreenReader text={t("Upcoming Opportunities")} />
+          </div>
           
           <div className="grid gap-4 sm:grid-cols-2">
             {volunteeringOpportunities.map((opportunity) => (
@@ -99,10 +112,10 @@ const Volunteering = () => {
                   <div className="space-y-2">
                     <div className="flex justify-between text-sm">
                       <span>{opportunity.date}</span>
-                      <span>{opportunity.spots} spots left</span>
+                      <span>{opportunity.spots} {t("spots left")}</span>
                     </div>
                     <p className="text-sm text-muted-foreground">{opportunity.location}</p>
-                    <Button className="w-full mt-2" size="sm">Sign Up</Button>
+                    <Button className="w-full mt-2" size="sm">{t("Sign Up")}</Button>
                   </div>
                 </CardContent>
               </Card>
