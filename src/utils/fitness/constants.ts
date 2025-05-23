@@ -13,6 +13,18 @@ export const WEIGHTS = {
   stress: 0.10,
 };
 
+// Gender-specific weights (for females, smoking and alcohol are excluded)
+export const FEMALE_WEIGHTS = {
+  restingHeartRate: 0.10,
+  bmi: 0.15,
+  activity: 0.20,
+  sleep: 0.15,
+  smoking: 0.0,
+  alcohol: 0.0,
+  chronicConditions: 0.20,
+  stress: 0.20, // Increased from 0.10 to account for removed smoking/alcohol
+};
+
 // Age normalization factors
 export const AGE_FACTORS = {
   // Age ranges and their normalization factors

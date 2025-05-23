@@ -14,6 +14,9 @@ interface Step3Props {
 }
 
 const Step3Lifestyle: React.FC<Step3Props> = ({ form }) => {
+  const genderValue = form.watch("gender");
+  const showSmokingAlcohol = genderValue !== "female";
+
   return (
     <div className="space-y-4 animate-fade-in">
       <h3 className="text-lg font-medium">Lifestyle</h3>
@@ -80,60 +83,64 @@ const Step3Lifestyle: React.FC<Step3Props> = ({ form }) => {
         )}
       />
       
-      <FormField
-        control={form.control}
-        name="smokingStatus"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Smoking Status</FormLabel>
-            <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl>
-                <SelectTrigger className="w-full">
+      {showSmokingAlcohol && (
+        <>
+          <FormField
+            control={form.control}
+            name="smokingStatus"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Smoking Status</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <FormControl>
+                    <SelectTrigger className="w-full">
+                      <div className="flex items-center space-x-2">
+                        <Cigarette className="h-4 w-4 text-muted-foreground" />
+                        <SelectValue placeholder="Select smoking status" />
+                      </div>
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem value="never">Never Smoked</SelectItem>
+                    <SelectItem value="former">Former Smoker</SelectItem>
+                    <SelectItem value="current">Current Smoker</SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="alcoholUnits"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Alcohol Consumption (units/week)</FormLabel>
+                <FormControl>
                   <div className="flex items-center space-x-2">
-                    <Cigarette className="h-4 w-4 text-muted-foreground" />
-                    <SelectValue placeholder="Select smoking status" />
+                    <Beer className="h-4 w-4 text-muted-foreground" />
+                    <Input 
+                      type="number"
+                      min={0}
+                      placeholder="Units per week"
+                      {...field}
+                      onChange={(e) => {
+                        const value = e.target.value === "" ? 0 : Number(e.target.value);
+                        field.onChange(value);
+                      }}
+                    />
                   </div>
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                <SelectItem value="never">Never Smoked</SelectItem>
-                <SelectItem value="former">Former Smoker</SelectItem>
-                <SelectItem value="current">Current Smoker</SelectItem>
-              </SelectContent>
-            </Select>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-      
-      <FormField
-        control={form.control}
-        name="alcoholUnits"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Alcohol Consumption (units/week)</FormLabel>
-            <FormControl>
-              <div className="flex items-center space-x-2">
-                <Beer className="h-4 w-4 text-muted-foreground" />
-                <Input 
-                  type="number"
-                  min={0}
-                  placeholder="Units per week"
-                  {...field}
-                  onChange={(e) => {
-                    const value = e.target.value === "" ? 0 : Number(e.target.value);
-                    field.onChange(value);
-                  }}
-                />
-              </div>
-            </FormControl>
-            <div className="text-xs text-muted-foreground mt-1">
-              1 unit ≈ 1 small glass of wine or 1/2 pint of beer
-            </div>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+                </FormControl>
+                <div className="text-xs text-muted-foreground mt-1">
+                  1 unit ≈ 1 small glass of wine or 1/2 pint of beer
+                </div>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </>
+      )}
     </div>
   );
 };

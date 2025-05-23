@@ -8,6 +8,7 @@ export const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(10, { message: "Please enter a valid phone number." }),
   age: z.coerce.number().min(1, { message: "Age is required" }).max(120, { message: "Please enter a valid age" }),
+  gender: z.enum(["male", "female", "other"]),
   
   // Step 2: Body Metrics
   height: z.coerce.number().min(1, { message: "Height is required" }),
@@ -18,8 +19,8 @@ export const formSchema = z.object({
   // Step 3: Lifestyle
   goodSleepQuality: z.enum(["yes", "no"]),
   exerciseMinutes: z.coerce.number().min(0).max(300),
-  smokingStatus: z.enum(["never", "former", "current"]),
-  alcoholUnits: z.coerce.number().min(0),
+  smokingStatus: z.enum(["never", "former", "current"]).optional(),
+  alcoholUnits: z.coerce.number().min(0).optional(),
   
   // Step 4: Health Status - Modified to use sliders
   diabetesLevel: z.coerce.number().min(0).max(100),

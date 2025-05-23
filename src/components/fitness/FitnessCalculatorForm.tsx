@@ -31,6 +31,7 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
       email: "",
       phone: "",
       age: undefined,
+      gender: "male",
       height: undefined,
       heightUnit: "cm",
       weight: undefined,
@@ -58,13 +59,17 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
     // Define fields to validate for each step
     switch(step) {
       case 1:
-        fieldsToValidate = ["name", "email", "phone", "age"];
+        fieldsToValidate = ["name", "email", "phone", "age", "gender"];
         break;
       case 2:
         fieldsToValidate = ["height", "weight"];
         break;  
       case 3:
-        fieldsToValidate = ["goodSleepQuality", "smokingStatus", "alcoholUnits"];
+        const gender = form.getValues("gender");
+        fieldsToValidate = ["goodSleepQuality"];
+        if (gender !== "female") {
+          fieldsToValidate.push("smokingStatus", "alcoholUnits");
+        }
         break;
       // For step 4, we don't need validation as the fields are optional
       default:

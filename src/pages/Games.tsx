@@ -9,6 +9,8 @@ import { Brain, Layers, Target, Zap, ArrowLeft } from 'lucide-react';
 import ScreenReader from '@/components/ScreenReader';
 import TriviaGame from '@/components/games/TriviaGame';
 import MemoryGame from '@/components/games/MemoryGame';
+import WordSearchGame from '@/components/games/WordSearchGame';
+import SudokuGame from '@/components/games/SudokuGame';
 
 const Games = () => {
   const { t } = useLanguage();
@@ -39,7 +41,8 @@ const Games = () => {
       description: t('word_description'),
       icon: Target,
       color: 'bg-purple-500',
-      available: false
+      available: true,
+      component: WordSearchGame
     },
     {
       id: 'puzzle',
@@ -47,7 +50,8 @@ const Games = () => {
       description: t('puzzle_description'),
       icon: Zap,
       color: 'bg-orange-500',
-      available: false
+      available: true,
+      component: SudokuGame
     }
   ];
 

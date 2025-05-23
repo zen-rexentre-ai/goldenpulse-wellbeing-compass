@@ -1,6 +1,6 @@
 
 // This file contains core utilities for calculating the fitness score
-import { WEIGHTS } from './fitness/constants';
+import { WEIGHTS, FEMALE_WEIGHTS } from './fitness/constants';
 import {
   normalizeBMI,
   normalizeHeartRate,
@@ -21,13 +21,19 @@ export const calculateFitnessScore = (data: any): FitnessScoreResult => {
   // Extract and normalize parameters
   const isMetric = data.heightUnit === 'cm';
   const age = data.age || 65; // Default age if not provided
+  const gender = data.gender || 'male';
+  
+  // Choose weights based on gender
+  const weights = gender === 'female' ? FEMALE_WEIGHTS : WEIGHTS;
   
   const bmiNormalized = normalizeBMI(data.height, data.weight, isMetric, age);
   const heartRateNormalized = normalizeHeartRate(data.heartRate || 70, age); // Default if not provided
   const sleepNormalized = normalizeSleep(data.goodSleepQuality === 'yes');
   const exerciseNormalized = normalizeExercise(data.exerciseMinutes, age);
-  const smokingNormalized = normalizeSmoking(data.smokingStatus);
-  const alcoholNormalized = normalizeAlcohol(data.alcoholUnits);
+  
+  // For females, smoking and alcohol are not considered
+  const smokingNormalized = gender === 'female' ? 1.0 : normalizeSmoking(data.smokingStatus || 'never');
+  const alcoholNormalized = gender === 'female' ? 1.0 : normalizeAlcohol(data.alcoholUnits || 0);
   
   // Process chronic conditions from sliders
   const chronicConditions: ChronicConditions = {
@@ -48,14 +54,14 @@ export const calculateFitnessScore = (data: any): FitnessScoreResult => {
   
   // Calculate the weighted sum
   const weightedSum = (
-    (heartRateNormalized * WEIGHTS.restingHeartRate) +
-    (bmiNormalized * WEIGHTS.bmi) +
-    (exerciseNormalized * WEIGHTS.activity) +
-    (sleepNormalized * WEIGHTS.sleep) +
-    (smokingNormalized * WEIGHTS.smoking) +
-    (alcoholNormalized * WEIGHTS.alcohol) +
-    (conditionsNormalized * WEIGHTS.chronicConditions) +
-    (stressNormalized * WEIGHTS.stress)
+    (heartRateNormalized * weights.restingHeartRate) +
+    (bmiNormalized * weights.bmi) +
+    (exerciseNormalized * weights.activity) +
+    (sleepNormalized * weights.sleep) +
+    (smokingNormalized * weights.smoking) +
+    (alcoholNormalized * weights.alcohol) +
+    (conditionsNormalized * weights.chronicConditions) +
+    (stressNormalized * weights.stress)
   );
   
   // Calculate the final score (0-100)
@@ -110,5 +116,6 @@ export {
   normalizeBloodPressure,
   normalizeHbA1c,
   generateRecommendations,
-  WEIGHTS
+  WEIGHTS,
+  FEMALE_WEIGHTS
 };
