@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AccessibilityControls } from '@/components/AccessibilityControls';
@@ -12,11 +13,13 @@ import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
 import { useSubscription } from '@/contexts/SubscriptionContext';
 import { EmbossedCard } from '@/components/ui/card';
+import FitnessCalculatorResults from '@/components/fitness/FitnessCalculatorResults';
 
 const Dashboard = () => {
   const [showAccessibility, setShowAccessibility] = useState(false);
   const [activeScoreTab, setActiveScoreTab] = useState('week');
   const [showDetailedAnalysis, setShowDetailedAnalysis] = useState(false);
+  const [showWellnessAnalysis, setShowWellnessAnalysis] = useState(false);
   const { toast } = useToast();
   const { t } = useLanguage();
   const { currentPlan, setCurrentPlan } = useSubscription();
@@ -50,6 +53,47 @@ const Dashboard = () => {
     toast({
       title: `Plan changed to ${currentPlan === 'free' ? 'Basic' : currentPlan === 'basic' ? 'Premium' : 'Free'}`,
       description: "This is just for demonstration purposes."
+    });
+  };
+
+  // Mock data for wellness analysis
+  const mockRecommendations = [
+    { 
+      text: t("Consider adding more fiber to your diet to help with cholesterol levels"), 
+      impact: t("High Impact"), 
+      priority: "high" 
+    },
+    { 
+      text: t("Try to increase daily steps to 10,000"), 
+      impact: t("Medium Impact"), 
+      priority: "medium" 
+    },
+    { 
+      text: t("Schedule your annual physical examination"), 
+      impact: t("Low Impact"), 
+      priority: "low" 
+    }
+  ];
+  const mockNormalizedValues = {
+    bmi: 0.85,
+    activity: 0.7,
+    sleep: 0.9,
+    nutrition: 0.75,
+    stress: 0.8,
+    bloodPressure: 0.65
+  };
+
+  const handleSave = () => {
+    toast({
+      title: t("Report Saved"),
+      description: t("Your wellness analysis report has been saved to your profile")
+    });
+  };
+  
+  const handleReset = () => {
+    toast({
+      title: t("Calculator Reset"),
+      description: t("You can now calculate a new wellness score")
     });
   };
 
@@ -91,6 +135,67 @@ const Dashboard = () => {
       description: `${widgetName} widget visibility toggled.`
     });
   };
+
+  // If showing wellness analysis, render it instead of dashboard
+  if (showWellnessAnalysis) {
+    return (
+      <div className="min-h-screen bg-background pb-16">
+        {/* Header */}
+        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b p-4">
+          <div className="container max-w-6xl flex justify-between items-center">
+            <Logo size="sm" className="max-w-[150px]" />
+            
+            <div className="flex gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShowAccessibility(!showAccessibility)}
+                aria-label="Accessibility Settings"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <path d="M12 8v4l2 2" />
+                </svg>
+              </Button>
+              
+              <Button variant="ghost" size="icon" aria-label={t("notifications")}>
+                <Bell />
+              </Button>
+            </div>
+          </div>
+        </header>
+        
+        <main className="container max-w-6xl p-4">
+          <div className="mb-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <Button 
+                  variant="ghost" 
+                  onClick={() => setShowWellnessAnalysis(false)}
+                  className="mb-2"
+                >
+                  ← Back to Dashboard
+                </Button>
+                <h1 className="text-2xl font-bold">{t("wellness_analysis")}</h1>
+                <p className="text-muted-foreground">{t("wellness_analysis_subtitle")}</p>
+              </div>
+              <ScreenReader text={t("wellness_analysis") + " " + t("wellness_analysis_subtitle")} />
+            </div>
+          </div>
+          
+          <FitnessCalculatorResults 
+            score={fitnessScores.current}
+            recommendations={mockRecommendations}
+            normalizedValues={mockNormalizedValues}
+            onSave={handleSave}
+            onReset={handleReset}
+          />
+        </main>
+        
+        <BottomNavigation />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary pb-16">
@@ -152,6 +257,17 @@ const Dashboard = () => {
             open={showDetailedAnalysis} 
             onOpenChange={setShowDetailedAnalysis} 
           />
+        </div>
+        
+        {/* Wellness Analysis Button */}
+        <div className="flex justify-center">
+          <Button 
+            onClick={() => setShowWellnessAnalysis(true)}
+            size="lg"
+            className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
+          >
+            {t("view_detailed_wellness_analysis")}
+          </Button>
         </div>
         
         {/* Widget Controls */}

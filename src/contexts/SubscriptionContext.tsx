@@ -15,11 +15,11 @@ const SubscriptionContext = createContext<SubscriptionContextType>({
   hasFeatureAccess: () => false,
 });
 
-// Features allowed for each plan level
+// Features allowed for each plan level - updated to use new routes
 const planFeatures: Record<PlanType, string[]> = {
-  free: ['emergency', 'games', 'webinars', 'volunteering'],
-  basic: ['emergency', 'games', 'webinars', 'volunteering', 'dashboard', 'wellness-analysis', 'settings'],
-  premium: ['emergency', 'games', 'webinars', 'volunteering', 'dashboard', 'wellness-analysis', 'settings'],
+  free: ['emergency', 'games', 'volunteering'],
+  basic: ['emergency', 'games', 'volunteering', 'dashboard'],
+  premium: ['emergency', 'games', 'volunteering', 'dashboard'],
 };
 
 export const SubscriptionProvider = ({ children }: { children: ReactNode }) => {

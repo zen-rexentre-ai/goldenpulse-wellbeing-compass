@@ -14,11 +14,9 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
-import WellnessAnalysis from "./pages/WellnessAnalysis";
 import EmergencyContacts from "./pages/EmergencyContacts";
-import Games from "./pages/Games";
+import Entertainment from "./pages/Entertainment";
 import Volunteering from "./pages/Volunteering";
-import Webinars from "./pages/Webinars";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import SubscriptionPlans from "./pages/SubscriptionPlans";
@@ -41,11 +39,9 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/wellness-analysis" element={<WellnessAnalysis />} />
                 <Route path="/emergency-contacts" element={<EmergencyContacts />} />
-                <Route path="/games" element={<Games />} />
+                <Route path="/entertainment" element={<Entertainment />} />
                 <Route path="/volunteering" element={<Volunteering />} />
-                <Route path="/webinars" element={<Webinars />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/subscription-plans" element={<SubscriptionPlans />} />
                 <Route path="*" element={<NotFound />} />

@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
-import { Bell } from 'lucide-react';
+import { Bell, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
 import ScreenReader from './ScreenReader';
@@ -48,6 +48,18 @@ const Header: React.FC<HeaderProps> = ({ title, showBack = false }) => {
           
           {/* Language Selector */}
           <LanguageSelector />
+          
+          {/* Settings Icon */}
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            aria-label={t("settings")}
+            asChild
+          >
+            <Link to="/settings">
+              <Settings />
+            </Link>
+          </Button>
           
           <Button variant="ghost" size="icon" aria-label={t("notifications")}>
             <Bell />
