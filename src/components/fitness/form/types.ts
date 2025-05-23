@@ -18,7 +18,7 @@ export const formSchema = z.object({
   
   // Step 3: Lifestyle
   goodSleepQuality: z.enum(["yes", "no"]),
-  exerciseMinutes: z.coerce.number().min(0).max(300),
+  exerciseMinutes: z.coerce.number().min(0).max(60),
   smokingStatus: z.enum(["never", "former", "current"]).optional(),
   alcoholUnits: z.coerce.number().min(0).optional(),
   

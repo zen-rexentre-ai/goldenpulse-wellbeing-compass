@@ -57,26 +57,26 @@ const Step3Lifestyle: React.FC<Step3Props> = ({ form }) => {
         name="exerciseMinutes"
         render={({ field }) => (
           <FormItem>
-            <FormLabel>Weekly Exercise (minutes): {field.value}</FormLabel>
+            <FormLabel>Daily Exercise (minutes): {field.value}</FormLabel>
             <FormControl>
               <div className="space-y-2">
                 <Slider
                   min={0}
-                  max={300}
+                  max={60}
                   step={5}
                   value={[field.value]}
                   onValueChange={(value) => field.onChange(value[0])}
                 />
                 <div className="flex justify-between text-xs text-muted-foreground">
                   <span>0</span>
-                  <span>150</span>
-                  <span>300</span>
+                  <span>30</span>
+                  <span>60</span>
                 </div>
               </div>
             </FormControl>
             <div className="flex items-center space-x-2 text-muted-foreground">
               <Activity className="h-4 w-4" />
-              <span className="text-xs">Recommended: 150+ minutes/week</span>
+              <span className="text-xs">Recommended: 30+ minutes/day</span>
             </div>
             <FormMessage />
           </FormItem>

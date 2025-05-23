@@ -111,16 +111,16 @@ export const normalizeHbA1cByAge = (hba1c: number | undefined, age: number): num
   return 0.2;                                // Far from optimal
 };
 
-// Normalize exercise based on age
+// Normalize exercise based on age - now using daily targets
 export const normalizeExerciseByAge = (minutes: number, age: number): number => {
-  // Adjust expected exercise minutes based on age
+  // Age-based daily exercise targets (in minutes per day)
   let targetMinutes;
   
-  if (age < 50) targetMinutes = 150;
-  else if (age < 60) targetMinutes = 140;
-  else if (age < 70) targetMinutes = 130;
-  else if (age < 80) targetMinutes = 120;
-  else targetMinutes = 100;
+  if (age < 50) targetMinutes = 60;      // 60 minutes/day for under 50
+  else if (age < 60) targetMinutes = 50; // 50 minutes/day for 50-59
+  else if (age < 70) targetMinutes = 40; // 40 minutes/day for 60-69
+  else if (age < 80) targetMinutes = 30; // 30 minutes/day for 70-79
+  else targetMinutes = 20;               // 20 minutes/day for 80+
   
   // Calculate score based on percentage of target minutes
   const percentOfTarget = (minutes / targetMinutes) * 100;
