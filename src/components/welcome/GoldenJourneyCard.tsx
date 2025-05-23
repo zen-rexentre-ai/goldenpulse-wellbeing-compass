@@ -58,8 +58,9 @@ const GoldenJourneyCard: React.FC = () => {
         <AlertTitle className="text-xl font-bold text-golden-dark">Your Golden Journey</AlertTitle>
       </div>
       <AlertDescription className="font-serif italic">
-        <p className="text-lg font-medium text-golden-dark mb-2">Medical team will recommend a wellness plan & review the progress at regular intervals.</p>
+        <p className="text-lg font-medium text-golden-dark mb-2">A medical team will recommend a wellness plan & review the progress at regular intervals.</p>
         <p className="text-lg font-medium text-golden-dark">Volunteer your services for societal good and bring purpose & positivity for your life.</p>
+           <p className="text-lg font-medium text-golden-dark"> And Much More..... </p>
       </AlertDescription>
     </EmbossedCard>
   );
