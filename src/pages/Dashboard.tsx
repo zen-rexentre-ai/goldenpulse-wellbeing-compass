@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AccessibilityControls } from '@/components/AccessibilityControls';
@@ -42,6 +41,18 @@ const Dashboard = () => {
     }
   };
   
+  // Plan switcher for demo purposes
+  const cyclePlan = () => {
+    if (currentPlan === 'free') setCurrentPlan('basic');
+    else if (currentPlan === 'basic') setCurrentPlan('premium');
+    else setCurrentPlan('free');
+    
+    toast({
+      title: `Plan changed to ${currentPlan === 'free' ? 'Basic' : currentPlan === 'basic' ? 'Premium' : 'Free'}`,
+      description: "This is just for demonstration purposes."
+    });
+  };
+
   const medicines = [
     { id: 1, name: "Vitamin D", time: "8:00 AM", dosage: "1000 IU", taken: false },
     { id: 2, name: "Omega-3", time: "12:00 PM", dosage: "1000 mg", taken: true },
@@ -81,18 +92,6 @@ const Dashboard = () => {
     });
   };
 
-  // Plan switcher for demo purposes
-  const cyclePlan = () => {
-    if (currentPlan === 'free') setCurrentPlan('basic');
-    else if (currentPlan === 'basic') setCurrentPlan('premium');
-    else setCurrentPlan('free');
-    
-    toast({
-      title: `Plan changed to ${currentPlan === 'free' ? 'Basic' : currentPlan === 'basic' ? 'Premium' : 'Free'}`,
-      description: "This is just for demonstration purposes."
-    });
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary pb-16">
       {/* Header */}
@@ -128,20 +127,20 @@ const Dashboard = () => {
       )}
       
       <main className="container max-w-6xl p-4 space-y-6">
-        {/* Current Plan Indicator and Demo Switcher */}
+        {/* Current Plan Indicator - Made clickable */}
         <div className="flex justify-between items-center">
-          <EmbossedCard className="px-4 py-2 bg-gradient-to-r from-golden-peach/30 to-golden-yellow/30">
+          <EmbossedCard 
+            className="px-4 py-2 bg-gradient-to-r from-golden-peach/30 to-golden-yellow/30 cursor-pointer hover:shadow-md transition-all"
+            onClick={cyclePlan}
+          >
             <p className="text-sm font-medium">
               {t("current_plan")}: <span className="font-bold capitalize">{currentPlan}</span>
+              <span className="text-xs ml-2 text-muted-foreground">(Click to change)</span>
             </p>
           </EmbossedCard>
-          
-          <Button size="sm" variant="outline" onClick={cyclePlan}>
-            {t("change_plan")} (Demo)
-          </Button>
         </div>
         
-        {/* Fitness Score Card - Updated to be more visually appealing */}
+        {/* Fitness Score Card */}
         <div className="relative">
           <FitnessScoreCard 
             fitnessScores={fitnessScores}
