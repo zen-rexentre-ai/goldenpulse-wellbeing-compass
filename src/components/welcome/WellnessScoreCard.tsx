@@ -27,10 +27,10 @@ const WellnessScoreCard: React.FC = () => {
           <Button 
             variant="golden"
             size="lg"
-            className="w-full max-w-md text-lg py-4 sm:py-6 px-2 sm:px-4 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none bg-gradient-to-r from-[#E05C16] to-[#D9A112] text-white font-semibold"
+            className="w-full max-w-md text-lg py-3 sm:py-6 px-2 sm:px-4 shadow-lg hover:shadow-xl transition-all duration-300 animate-pulse hover:animate-none bg-gradient-to-r from-[#E05C16] to-[#D9A112] text-white font-semibold"
             onClick={() => setCalculatorOpen(true)}
           >
-            <span className="sm:whitespace-nowrap whitespace-normal">{t("calculate_wellness_score")}</span>
+            <span className="block break-words sm:break-normal whitespace-normal">{t("calculate_wellness_score")}</span>
           </Button>
         </div>
       </div>
