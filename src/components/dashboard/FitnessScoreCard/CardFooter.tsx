@@ -29,7 +29,7 @@ const CardFooter: React.FC<CardFooterProps> = ({
             size="icon" 
             className={`h-2 w-2 rounded-full p-0 ${idx === activeIndex ? 'bg-primary' : 'bg-muted'}`}
             onClick={() => onDotClick(idx)}
-            aria-label={t("go_to_score") + " " + (idx + 1)}
+            aria-label={t("Go to score") + " " + (idx + 1)}
           />
         ))}
       </div>
@@ -41,7 +41,7 @@ const CardFooter: React.FC<CardFooterProps> = ({
         className="text-primary hover:text-primary/80 flex items-center gap-1"
       >
         <LineChart size={14} />
-        <span className="text-xs">{t("analysis")}</span>
+        <span className="text-xs">{t("Analysis")}</span>
       </Button>
     </div>
   );

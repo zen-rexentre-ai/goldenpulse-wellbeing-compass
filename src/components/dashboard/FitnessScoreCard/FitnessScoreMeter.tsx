@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import {
   PieChart,
@@ -13,6 +13,9 @@ interface FitnessScoreMeterProps {
 }
 
 const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => {
+  // Animation state for the needle
+  const [animatedScore, setAnimatedScore] = useState(0);
+  
   // Define the color zones for the gauge with updated ranges
   const zones = [
     { name: 'Poor', value: 10, color: '#e63946', range: '<30' },            // Red
@@ -34,6 +37,42 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
   };
   
   const activeZone = getActiveZone(score);
+  const startingScore = 0; // Starting position for the needle animation
+  
+  // Animate the score when component mounts
+  useEffect(() => {
+    // Start from the poor zone (red area) instead of 0
+    setAnimatedScore(startingScore);
+    
+    // Small delay to ensure the reset is visible
+    const timeout = setTimeout(() => {
+      // Animate from red zone to the actual score
+      const duration = 1500; // animation duration in ms
+      const start = startingScore;
+      const end = score;
+      const startTime = performance.now();
+      
+      const animateScore = (currentTime: number) => {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        
+        // Easing function for smoother animation
+        const easeOutQuad = (t: number) => t * (2 - t);
+        const easedProgress = easeOutQuad(progress);
+        
+        const currentScore = start + (end - start) * easedProgress;
+        setAnimatedScore(currentScore);
+        
+        if (progress < 1) {
+          requestAnimationFrame(animateScore);
+        }
+      };
+      
+      requestAnimationFrame(animateScore);
+    }, 200);
+    
+    return () => clearTimeout(timeout);
+  }, [score]);
   
   // Create gauge data
   const data = zones.map((zone) => ({ ...zone }));
@@ -69,12 +108,13 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
           </ResponsiveContainer>
         </TooltipProvider>
         
-        {/* Static Score Needle - No animation */}
+        {/* Score Needle - With animation */}
         <div 
-          className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom"
+          className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom transition-transform duration-1000"
           style={{ 
-            transform: `translateX(-50%) rotate(${180 - (score * 180) / 100}deg)`,
-            transformOrigin: 'center bottom'
+            transform: `translateX(-50%) rotate(${180 - (animatedScore * 180) / 100}deg)`,
+            transformOrigin: 'center bottom',
+            transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
           }}
         >
           <div className="flex flex-col items-center">
@@ -95,8 +135,8 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
       </div>
       
       {/* Score display below the meter in smaller font */}
-      <div className="text-2xl font-semibold text-slate-900 mt-2">
-        {Math.round(score)}
+      <div className="text-2xl font-semibold text-slate-900">
+        {Math.round(animatedScore)}
       </div>
       
       {/* Legend/scale markers - optional enhancement */}

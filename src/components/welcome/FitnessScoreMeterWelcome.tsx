@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import {
   PieChart,
@@ -14,8 +13,6 @@ interface FitnessScoreMeterWelcomeProps {
 }
 
 const FitnessScoreMeterWelcome: React.FC<FitnessScoreMeterWelcomeProps> = ({ score = 75 }) => {
-  const [animatedScore, setAnimatedScore] = useState(0);
-  
   // Define the color zones for the gauge with updated ranges
   const zones = [
     { name: 'Poor', value: 10, color: '#e63946', range: '<30' },            // Red
@@ -40,37 +37,6 @@ const FitnessScoreMeterWelcome: React.FC<FitnessScoreMeterWelcomeProps> = ({ sco
   };
   
   const activeZone = getActiveZone(score);
-  
-  // Animate the needle from red zone (30) to actual score
-  useEffect(() => {
-    const startScore = 0; // Start from far left (horizontal)
-    setAnimatedScore(startScore);
-    
-    const timeout = setTimeout(() => {
-      const duration = 2000; // animation duration in ms
-      const startTime = performance.now();
-      
-      const animateScore = (currentTime: number) => {
-        const elapsedTime = currentTime - startTime;
-        const progress = Math.min(elapsedTime / duration, 1);
-        
-        // Easing function for smoother animation
-        const easeOutQuad = (t: number) => t * (2 - t);
-        const easedProgress = easeOutQuad(progress);
-        
-        const currentScore = startScore + (score - startScore) * easedProgress;
-        setAnimatedScore(currentScore);
-        
-        if (progress < 1) {
-          requestAnimationFrame(animateScore);
-        }
-      };
-      
-      requestAnimationFrame(animateScore);
-    }, 500);
-    
-    return () => clearTimeout(timeout);
-  }, [score]);
   
   return (
     <div className="relative h-32 w-full flex flex-col items-center">
@@ -116,13 +82,12 @@ const FitnessScoreMeterWelcome: React.FC<FitnessScoreMeterWelcomeProps> = ({ sco
           </ResponsiveContainer>
         </TooltipProvider>
         
-        {/* Animated Score Needle */}
+        {/* Score Needle - Improved design: embossed, sharper and thicker near pivot */}
         <div 
-          className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom transition-transform duration-1000"
+          className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom"
           style={{ 
-            transform: `translateX(-50%) rotate(${180 - (animatedScore * 180) / 100}deg)`,
-            transformOrigin: 'center bottom',
-            transition: 'transform 1s cubic-bezier(0.34, 1.56, 0.64, 1)'
+            transform: `translateX(-50%) rotate(${180 - (score * 180) / 100}deg)`,
+            transformOrigin: 'center bottom'
           }}
         >
           <div className="flex flex-col items-center">
