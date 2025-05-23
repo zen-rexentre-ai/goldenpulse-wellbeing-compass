@@ -9,22 +9,22 @@ const GoldenJourneyCard: React.FC = () => {
     <EmbossedCard className="overflow-hidden border-2 border-golden-orange bg-gradient-to-r from-golden-pink to-golden-peach p-4 max-w-2xl mx-auto relative">
       {/* Top-left star */}
       <div className="absolute top-2 left-2">
-        <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+        <Star className="h-5 w-5 text-golden-dark animate-[pulse_1s_ease-in-out_infinite] opacity-80 hover:opacity-100" />
       </div>
       
       {/* Top-right star */}
       <div className="absolute top-2 right-2">
-        <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+        <Star className="h-5 w-5 text-golden-dark animate-[pulse_0.8s_ease-in-out_infinite] opacity-80 hover:opacity-100" />
       </div>
       
       {/* Bottom-left star */}
       <div className="absolute bottom-2 left-2">
-        <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+        <Star className="h-5 w-5 text-golden-dark animate-[pulse_0.9s_ease-in-out_infinite] opacity-80 hover:opacity-100" />
       </div>
       
       {/* Bottom-right star */}
       <div className="absolute bottom-2 right-2">
-        <Star className="h-5 w-5 text-golden-dark animate-pulse" />
+        <Star className="h-5 w-5 text-golden-dark animate-[pulse_1.1s_ease-in-out_infinite] opacity-80 hover:opacity-100" />
       </div>
       
       <div className="flex items-center gap-3 mb-2 mt-2">
