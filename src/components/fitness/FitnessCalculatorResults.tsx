@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,12 +21,12 @@ interface FitnessCalculatorResultsProps {
 }
 
 const getScoreCategory = (score: number) => {
-  if (score >= 90) return { label: "Excellent", color: "bg-green-500" };
-  if (score >= 80) return { label: "Very Good", color: "bg-emerald-500" };
-  if (score >= 70) return { label: "Good", color: "bg-blue-500" };
-  if (score >= 60) return { label: "Fair", color: "bg-yellow-500" };
-  if (score >= 50) return { label: "Poor", color: "bg-orange-500" };
-  return { label: "Very Poor", color: "bg-red-500" };
+  if (score > 85) return { label: "Excellent", color: "bg-green-900" }; // Dark Green
+  if (score >= 70) return { label: "Very Good", color: "bg-green-500" }; // Green
+  if (score >= 60) return { label: "Good", color: "bg-green-400" }; // Light Green
+  if (score >= 50) return { label: "Satisfactory", color: "bg-yellow-500" }; // Yellow
+  if (score >= 30) return { label: "Unsatisfactory", color: "bg-orange-500" }; // Orange
+  return { label: "Poor", color: "bg-red-500" }; // Red
 };
 
 const getPercentile = (score: number) => {

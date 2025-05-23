@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import {
@@ -14,13 +13,14 @@ interface FitnessScoreMeterWelcomeProps {
 }
 
 const FitnessScoreMeterWelcome: React.FC<FitnessScoreMeterWelcomeProps> = ({ score = 75 }) => {
-  // Define the color zones for the gauge with updated 5-fold range
+  // Define the color zones for the gauge with updated ranges
   const zones = [
-    { name: 'Poor', value: 10, color: '#e63946', range: '<45' },            // Brighter red
-    { name: 'Unsatisfactory', value: 10, color: '#ff9e00', range: '45-55' }, // Bright orange
-    { name: 'Satisfactory', value: 15, color: '#ffdd00', range: '55-70' },   // Bright yellow
-    { name: 'Very Good', value: 15, color: '#70e000', range: '70-85' },      // Bright green
-    { name: 'Excellent', value: 10, color: '#38b000', range: '>85' },        // Darker green
+    { name: 'Poor', value: 10, color: '#e63946', range: '<30' },            // Red
+    { name: 'Unsatisfactory', value: 20, color: '#ff9e00', range: '30-50' }, // Orange
+    { name: 'Satisfactory', value: 10, color: '#ffdd00', range: '50-60' },   // Yellow
+    { name: 'Good', value: 10, color: '#70e000', range: '60-70' },          // Light Green
+    { name: 'Very Good', value: 15, color: '#38b000', range: '70-85' },      // Green
+    { name: 'Excellent', value: 10, color: '#006400', range: '>85' },        // Dark Green
   ];
   
   // Create gauge data
@@ -28,11 +28,12 @@ const FitnessScoreMeterWelcome: React.FC<FitnessScoreMeterWelcomeProps> = ({ sco
   
   // Calculate active segment based on score with updated ranges
   const getActiveZone = (score) => {
-    if (score < 45) return 0;
-    if (score < 55) return 1;
-    if (score < 70) return 2;
-    if (score < 85) return 3;
-    return 4;
+    if (score < 30) return 0;
+    if (score < 50) return 1;
+    if (score < 60) return 2;
+    if (score < 70) return 3;
+    if (score < 85) return 4;
+    return 5;
   };
   
   const activeZone = getActiveZone(score);
