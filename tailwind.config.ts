@@ -102,11 +102,25 @@ export default {
 					'0%': { transform: 'scale(0.95)', opacity: '0' },
 					'100%': { transform: 'scale(1)', opacity: '1' }
 				},
-				// New golden-blink animation
+				// Golden-blink animation
 				'golden-blink': {
 					'0%': { color: '#1A1F2C', opacity: '0.7' },
 					'50%': { color: '#FEC6A1', opacity: '1' },
 					'100%': { color: '#1A1F2C', opacity: '0.7' }
+				},
+				// New golden-sparkle animation
+				'golden-sparkle': {
+					'0%': { transform: 'scale(0.8) rotate(0deg)', opacity: '0.4' },
+					'50%': { transform: 'scale(1.2) rotate(180deg)', opacity: '1', color: '#FEF7CD' },
+					'100%': { transform: 'scale(0.8) rotate(360deg)', opacity: '0.4' }
+				},
+				// New celebration-pop animation
+				'celebration-pop': {
+					'0%': { transform: 'scale(1) rotate(0deg)', opacity: '0.7' },
+					'25%': { transform: 'scale(1.3) rotate(-15deg)', opacity: '1', color: '#FEF7CD' },
+					'50%': { transform: 'scale(1.1) rotate(0deg)', opacity: '0.9', color: '#FFDEE2' },
+					'75%': { transform: 'scale(1.3) rotate(15deg)', opacity: '1', color: '#FEC6A1' },
+					'100%': { transform: 'scale(1) rotate(0deg)', opacity: '0.7' }
 				}
 			},
 			animation: {
