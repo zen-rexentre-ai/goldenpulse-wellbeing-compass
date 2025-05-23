@@ -15,7 +15,7 @@ const Welcome = () => {
     <div className="min-h-screen flex flex-col items-center bg-gradient-to-b from-background to-secondary p-4">
       <div className="w-full flex justify-end p-2">
         <div className="flex items-center gap-2">
-          <ScreenReader text={t("welcome")} />
+          <ScreenReader text={t("welcome to GoldenPulse.AI ! Aging gracefully is not just about living longer - it's about living stronger. Discover how Indian seniors can embrace their golden years with confidence, vitality, and joy.")} />
           <LanguageSelector />
         </div>
       </div>
