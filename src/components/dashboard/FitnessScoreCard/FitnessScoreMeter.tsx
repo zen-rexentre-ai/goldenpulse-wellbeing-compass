@@ -90,8 +90,8 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
                 cy="80%"
                 startAngle={180}
                 endAngle={0}
-                innerRadius={80} // Increased from 40 (1.5x)
-                outerRadius={110} // Increased from 55 (1.5x)
+                innerRadius={60} // Increased from 40 (1.5x)
+                outerRadius={82} // Increased from 55 (1.5x)
                 paddingAngle={0}
                 dataKey="value"
                 stroke="none"
