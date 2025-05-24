@@ -37,7 +37,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
   };
   
   const activeZone = getActiveZone(score);
-  const startingScore = 20; // Starting position for the needle animation
+  const startingScore = 80; // Starting position for the needle animation
   
   // Animate the score when component mounts
   useEffect(() => {
@@ -48,7 +48,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
     const timeout = setTimeout(() => {
       // Animate from red zone to the actual score
       const duration = 1500; // animation duration in ms
-      const start = 120;
+      const start = 50;
       const end = score;
       const startTime = performance.now();
       
