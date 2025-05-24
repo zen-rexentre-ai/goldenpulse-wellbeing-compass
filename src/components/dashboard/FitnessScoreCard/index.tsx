@@ -63,9 +63,6 @@ export const FitnessScoreCard: React.FC<FitnessScoreCardProps> = ({ fitnessScore
       <div className="flex items-center justify-center relative mb-1">
         <EmbossedCard className="w-full max-w-sm shadow-md animate-fade-in">
           <div className="bg-gradient-to-r from-golden-pink/90 to-golden-peach/90 rounded-t-lg p-4 relative">
-            <div className="absolute top-2 right-2">
-              <ScreenReader text={`${activeItem.title}: ${activeItem.score}`} />
-            </div>
             <ScoreNavigation onNext={nextScore} onPrevious={prevScore} />
             <ScoreItem 
               title={activeItem.title}
