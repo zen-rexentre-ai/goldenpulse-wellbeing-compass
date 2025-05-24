@@ -55,7 +55,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
    
   	{ name: 'Volunteering Access', free: true, basic: true, premium: true },
     { name: 'Webinars for key needs (Digital Security/Hobbies/General Health)', free: 'Recorded', basic: true, premium: 'QnA Allowed' },
-	{ name: 'User Groups', free: 'Enabled after 3 volunteering sessions', basic: true, premium: true },
+	{ name: 'User Groups', free: 'Enabled after 3 volunteering sessions', basic: true, premium: 'Advanced with AI' },
 	{ name: 'Cognitive Games', free: false, basic: 'Limited', premium: true },
 	];
 
