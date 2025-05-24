@@ -13,7 +13,7 @@ const CommunityModuleCard = () => {
   const communityModuleItems = [
     'Volunteering Opportunities',
     'Webinars',
-    'Hobbies',
+    'User Groups',
     'Fun and Cognitive Games'
   ];
 
