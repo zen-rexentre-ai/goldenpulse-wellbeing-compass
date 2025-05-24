@@ -78,9 +78,9 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
   const data = zones.map((zone) => ({ ...zone }));
   
   return (
-    <div className="relative h-50 w-full flex flex-col items-center">
+    <div className="relative h-48 w-full flex flex-col items-center">
       {/* Increased height by 1.5x for more prominence (was h-32) */}
-      <div className="w-full h-50 relative mb-2">
+      <div className="w-full h-48 relative mb-2">
         <TooltipProvider>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
