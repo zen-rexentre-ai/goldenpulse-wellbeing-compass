@@ -266,7 +266,7 @@ const Dashboard = () => {
             size="lg"
             className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70"
           >
-            {t("view_detailed_wellness_analysis")}
+            {t("Detailed Analysis")}
           </Button>
         </div>
         
