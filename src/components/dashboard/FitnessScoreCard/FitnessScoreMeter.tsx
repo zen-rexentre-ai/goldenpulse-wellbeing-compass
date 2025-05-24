@@ -37,7 +37,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
   };
   
   const activeZone = getActiveZone(score);
-  const startingScore = 150; // Starting position for the needle animation
+  const startingScore = 120; // Starting position for the needle animation
   
   // Animate the score when component mounts
   useEffect(() => {
