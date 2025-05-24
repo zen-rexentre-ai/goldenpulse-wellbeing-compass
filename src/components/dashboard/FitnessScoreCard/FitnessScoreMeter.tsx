@@ -48,7 +48,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
     const timeout = setTimeout(() => {
       // Animate from red zone to the actual score
       const duration = 2500; // animation duration in ms
-      const start = 200;
+      const start = 160;
       const end = score;
       const startTime = performance.now();
       
