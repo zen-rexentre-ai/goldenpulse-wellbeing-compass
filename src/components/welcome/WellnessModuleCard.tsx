@@ -12,6 +12,7 @@ const WellnessModuleCard = () => {
   
   const wellnessModuleItems = [
     'Personalized Wellness Journey',
+    'Guided Wellness Training',
     'Pain Management',
     'Access to Kin',
     'AI Powered Diagnostics'
