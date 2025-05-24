@@ -1,4 +1,3 @@
-
 /**
  * @ai_context
  * - Core fitness calculation engine for Indian senior citizens
