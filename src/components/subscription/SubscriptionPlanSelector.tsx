@@ -45,14 +45,18 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
   // Plan features for comparison table
  const features: Feature[] = [
     { name: 'Personalized Wellness Journey', free: false, basic: true, premium: true },
-	{ name: 'Emergency & SoS Tracking', free: true, basic: true, premium: 'Advanced' },
-    { name: 'AI Powered Diagnostics', free: false, basic: false, premium: 'Advanced' },
-	{ name: 'Access to kin', free: false, basic: false, premium: true },
     { name: 'Medical Team Consultations', free: false, basic: 'Once Every 6 months', premium: 'Once Every 3 Months' },
+	{ name: 'Specialist(Physio/Dietician/Mental Wellness Advisor) Consultations', free: false, basic: false, premium: 'Once Every 3 Months' },
+    { name: 'Wellness Recommendation/Review by Medical Team', free: false, basic: false, premium: 'Once Every 3 Months' },
+    { name: 'Wellness Webinars -  3 per week', free: false, basic: 'Fixed schedule', premium: 'Flexible Schedule' },
+    { name: 'Wellness score with AI analytics and tailored recommendations', free: false, basic: false, premium: 'Advanced' },
+    { name: 'Emergency & SoS Tracking', free: true, basic: true, premium: 'Advanced' },
+  	{ name: 'Access to kin', free: false, basic: false, premium: true },
+   
   	{ name: 'Volunteering Access', free: true, basic: true, premium: true },
-    { name: 'Webinars', free: 'Recorded', basic: true, premium: 'QnA Allowed' },
+    { name: 'Webinars for key needs (Digital Security/Hobbies/General Health)', free: 'Recorded', basic: true, premium: 'QnA Allowed' },
 	{ name: 'Community Module', free: 'Enabled after 3 volunteering sessions', basic: true, premium: true },
-	{ name: 'Cognitive Games', free: true, basic: true, premium: true },
+	{ name: 'Cognitive Games', free: false, basic: 'Limited', premium: true },
 	];
 
   // Plan card configuration
