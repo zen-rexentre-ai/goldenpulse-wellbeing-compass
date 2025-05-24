@@ -49,7 +49,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
 	{ name: 'Specialist(Physio/Dietician/Mental Wellness Advisor) Consultations', free: false, basic: false, premium: 'Once Every 3 Months' },
     { name: 'Wellness Recommendation/Review by Medical Team', free: false, basic: false, premium: 'Once Every 3 Months' },
     { name: 'Wellness Webinars -  3 per week', free: false, basic: 'Fixed schedule', premium: 'Flexible Schedule' },
-    { name: 'Wellness score with AI analytics and tailored recommendations', free: false, basic: false, premium: 'Advanced' },
+    { name: 'Wellness score with AI analytics and tailored recommendations', free: false, basic: 'Basic', premium: 'Advanced' },
     { name: 'Emergency & SoS Tracking', free: true, basic: true, premium: 'Advanced' },
   	{ name: 'Access to kin', free: false, basic: false, premium: true },
    
