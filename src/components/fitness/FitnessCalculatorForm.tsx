@@ -115,10 +115,6 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
 
   return (
     <Form {...form}>
-      <div className="flex justify-between items-center mb-4">
-        <h3 className="text-lg font-semibold">{t("health_score_calculator")}</h3>
-        <ScreenReader text={t("health_score_calculator")} />
-      </div>
       <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-6">
         {/* Progress bar */}
         <FormProgressBar currentStep={step} totalSteps={totalSteps} />

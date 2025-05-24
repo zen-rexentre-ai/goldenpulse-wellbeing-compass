@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -46,16 +45,7 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
 }) => {
   const { theme } = useTheme();
   const scoreCategory = getScoreCategory(score);
-  const percentile = getPercentile(score);
   const { t } = useLanguage();
-  
-  // Mock data for age group comparison
-  const ageGroups = [
-    { age: "50-60", avgScore: 88 },
-    { age: "60-70", avgScore: 79 },
-    { age: "70-80", avgScore: 75 },
-    { age: "80+", avgScore: 77 }
-  ];
 
   return (
     <div className="space-y-6 animate-fade-in">
@@ -99,74 +89,40 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">{t("age_group_comparison")}</CardTitle>
-              <ScreenReader text={t("age_group_comparison")} />
+      <Card>
+        <CardHeader>
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-lg">{t("recommendations")}</CardTitle>
+            <ScreenReader text={t("recommendations")} />
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-3">
+          {recommendations.length === 0 ? (
+            <div className="text-center py-4">
+              <CheckCircle className="h-12 w-12 mx-auto text-green-500 mb-2" />
+              <p>Great job! Keep maintaining your healthy lifestyle.</p>
             </div>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm mb-4">
-              {t("score_percentile").replace("{percentile}", percentile.toString())}
-            </p>
-            <div className="space-y-3">
-              {ageGroups.map((group) => (
-                <div key={group.age} className="space-y-1">
-                  <div className="flex justify-between text-sm">
-                    <span>Age {group.age}</span>
-                    <span>{group.avgScore}</span>
-                  </div>
-                  <Progress value={group.avgScore} className="h-2" />
-                </div>
-              ))}
-              <div className="space-y-1 pt-2">
-                <div className="flex justify-between text-sm">
-                  <span className="font-medium">Your Score</span>
-                  <span className="font-medium">{score}</span>
-                </div>
-                <Progress value={score} className="h-3 bg-gray-200" />
+          ) : (
+            recommendations.map((rec, i) => (
+              <div key={i} className="flex gap-3 items-start pb-3 border-b border-gray-200 dark:border-gray-800 last:border-0">
+                <Badge
+                  variant="outline"
+                  className={
+                    rec.priority === 'high' 
+                      ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                      : rec.priority === 'medium'
+                        ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
+                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
+                  }
+                >
+                  {rec.impact}
+                </Badge>
+                <span>{rec.text}</span>
               </div>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="text-lg">{t("recommendations")}</CardTitle>
-              <ScreenReader text={t("recommendations")} />
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            {recommendations.length === 0 ? (
-              <div className="text-center py-4">
-                <CheckCircle className="h-12 w-12 mx-auto text-green-500 mb-2" />
-                <p>Great job! Keep maintaining your healthy lifestyle.</p>
-              </div>
-            ) : (
-              recommendations.map((rec, i) => (
-                <div key={i} className="flex gap-3 items-start pb-3 border-b border-gray-200 dark:border-gray-800 last:border-0">
-                  <Badge
-                    variant="outline"
-                    className={
-                      rec.priority === 'high' 
-                        ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                        : rec.priority === 'medium'
-                          ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200'
-                          : 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200'
-                    }
-                  >
-                    {rec.impact}
-                  </Badge>
-                  <span>{rec.text}</span>
-                </div>
-              ))
-            )}
-          </CardContent>
-        </Card>
-      </div>
+            ))
+          )}
+        </CardContent>
+      </Card>
       
       <Card className="mt-6">
         <CardHeader>

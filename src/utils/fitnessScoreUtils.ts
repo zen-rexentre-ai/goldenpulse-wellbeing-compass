@@ -1,4 +1,3 @@
-
 /**
  * @ai_context
  * - Core fitness calculation engine for Indian senior citizens
@@ -56,7 +55,7 @@ export function calculateFitnessScore(data: FitnessParameters & {
     // #ai-reason: BMI calculation using height/weight or direct BMI input with proper defaults
     bmi: height && weight 
       ? normalizeBMI(height, weight, isMetric, age)
-      : data.bmi ? normalizeBMI(0, 0, isMetric, age) : 0,
+      : data.bmi ? normalizeBMI(0, 0, isMetric) : 0,
     
     // #ai-reason: Heart rate normalization with age-specific optimal ranges
     heartRate: data.heartRate ? normalizeHeartRate(data.heartRate, age) : 0.7,
