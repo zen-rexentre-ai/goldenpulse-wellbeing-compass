@@ -1,3 +1,4 @@
+
 /**
  * @ai_context
  * - Core fitness calculation engine for Indian senior citizens
@@ -45,12 +46,17 @@ export function calculateFitnessScore(data: FitnessParameters & {
   // #ai-reason: Use gender-specific weights for cultural appropriateness
   const weights = data.gender === 'female' ? FEMALE_WEIGHTS : WEIGHTS;
   
+  // #ai-reason: Set default values for optional parameters
+  const height = data.height || 0;
+  const weight = data.weight || 0;
+  const isMetric = data.isMetric !== undefined ? data.isMetric : true;
+  
   // Calculate normalized values for each health parameter
   const normalizedValues = {
-    // #ai-reason: BMI calculation using height/weight or direct BMI input
-    bmi: data.height && data.weight 
-      ? normalizeBMI(data.height, data.weight, data.isMetric || false, age)
-      : data.bmi ? normalizeBMI(0, 0, false, age) : 0,
+    // #ai-reason: BMI calculation using height/weight or direct BMI input with proper defaults
+    bmi: height && weight 
+      ? normalizeBMI(height, weight, isMetric, age)
+      : data.bmi ? normalizeBMI(0, 0, isMetric, age) : 0,
     
     // #ai-reason: Heart rate normalization with age-specific optimal ranges
     heartRate: data.heartRate ? normalizeHeartRate(data.heartRate, age) : 0.7,
@@ -62,10 +68,10 @@ export function calculateFitnessScore(data: FitnessParameters & {
     exercise: normalizeExercise(data.exerciseMinutes, age),
     
     // #ai-reason: Smoking status with graduated impact (never > former > current)
-    smoking: normalizeSmoking(data.smokingStatus),
+    smoking: normalizeSmoking(data.smokingStatus || 'never'),
     
     // #ai-reason: Alcohol consumption with cultural and health considerations
-    alcohol: normalizeAlcohol(data.alcoholUnits),
+    alcohol: normalizeAlcohol(data.alcoholUnits || 0),
     
     // #ai-reason: Chronic conditions weighted heavily due to senior health impact
     chronicConditions: data.chronicConditions 
