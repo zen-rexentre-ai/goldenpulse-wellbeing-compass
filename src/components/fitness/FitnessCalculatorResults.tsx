@@ -8,6 +8,7 @@ import { CheckCircle, Download, BarChart2, Mail } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
+import FitnessScoreMeter from '@/components/dashboard/FitnessScoreCard/FitnessScoreMeter';
 
 interface Recommendation {
   text: string;
@@ -55,36 +56,14 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
           <h2 className="text-2xl font-bold mb-2">{t("health_score")}</h2>
           <ScreenReader text={t("health_score")} />
         </div>
-        <div className="relative inline-block">
-          <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 100 100">
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke={theme === 'dark' ? '#334155' : '#e2e8f0'}
-              strokeWidth="10"
-            />
-            <circle
-              cx="50"
-              cy="50"
-              r="45"
-              fill="none"
-              stroke={theme === 'dark' ? '#4f46e5' : '#4c1d95'}
-              strokeDasharray="282.7"
-              strokeDashoffset={282.7 - (282.7 * score) / 100}
-              strokeWidth="10"
-              strokeLinecap="round"
-              className="transition-all duration-1000 ease-in-out"
-            />
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div>
-              <span className="text-3xl font-bold">{score}</span>
-              <span className="text-sm">/100</span>
-            </div>
+        
+        {/* Replace circular progress with gauge meter */}
+        <div className="flex justify-center mb-4">
+          <div className="w-80">
+            <FitnessScoreMeter score={score} />
           </div>
         </div>
+        
         <div className="mt-2">
           <Badge className={`${scoreCategory.color} text-white`}>{scoreCategory.label}</Badge>
         </div>
