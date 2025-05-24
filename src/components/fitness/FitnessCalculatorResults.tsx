@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -56,9 +55,10 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
           <h2 className="text-2xl font-bold mb-2">{t("health_score")}</h2>      
         </div>
         
-        {/* Replace circular progress with gauge meter */}
+        {/* Use the gauge meter for score display */}
         <div className="flex justify-center mb-4">
           <div className="w-80">
+            <FitnessScoreMeter score={score} />
           </div>
         </div>
         
