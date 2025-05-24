@@ -1,4 +1,3 @@
-
 // Utility functions for normalizing fitness metrics
 import {
   normalizeHeartRateByAge,
@@ -10,18 +9,31 @@ import {
 
 // Updated helper function for direct BMI normalization with age parameter
 export const normalizeDirectBMI = (bmi: number, age: number): number => {
-  // Validate input
-  if (bmi <= 0 || isNaN(bmi)) {
-    throw new Error(`Invalid BMI value: ${bmi}`);
+  // Age-based BMI normalization
+  // Older adults tend to have slightly higher healthy BMI ranges
+  let ageAdjustment = 0;
+  
+  if (age >= 65) {
+    ageAdjustment = 2; // Allow slightly higher BMI for seniors
+  } else if (age >= 50) {
+    ageAdjustment = 1; // Slight adjustment for middle-aged adults
   }
-
-  // Age-specific ranges per ICMR guidelines
-  const [min, max] = age >= 65 
-    ? [22, 27]  // Senior range
-    : [18.5, 24.9]; // Adult range
-
-  // Clamp and normalize between 0-1
-  return Math.min(1, Math.max(0, (bmi - min) / (max - min)));
+  
+  const adjustedOptimalBMI = 22 + ageAdjustment;
+  const adjustedRange = 6 + ageAdjustment; // Wider range for older adults
+  
+  // Calculate how far the BMI is from the age-adjusted optimal
+  const deviation = Math.abs(bmi - adjustedOptimalBMI);
+  
+  // Normalize to 0-100 scale
+  if (deviation <= adjustedRange / 2) {
+    // Within good range - linear scale from 100 to 70
+    return Math.max(70, 100 - (deviation / (adjustedRange / 2)) * 30);
+  } else {
+    // Outside good range - exponential decay
+    const excessDeviation = deviation - (adjustedRange / 2);
+    return Math.max(0, 70 * Math.exp(-excessDeviation / 5));
+  }
 };
 
 // Normalize BMI score using age-based normalization

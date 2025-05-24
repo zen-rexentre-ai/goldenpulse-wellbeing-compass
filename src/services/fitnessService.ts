@@ -1,38 +1,35 @@
 
+
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 
-export interface FitnessCalculationInput {
+export interface FitnessCalculation {
+  id?: string;
+  profileId: string;
   height: number;
   weight: number;
   age: number;
   activityLevel: string;
-  medicalConditions?: string[];
-}
-
-export interface FitnessScore {
+  medicalConditions: string[];
   score: number;
   recommendations: string[];
 }
 
-export async function saveFitnessCalculation(
-  profileId: string,
-  input: FitnessCalculationInput,
-  result: FitnessScore
-) {
+export async function saveFitnessCalculation(calculation: FitnessCalculation) {
   try {
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from('fitness_calculations')
       .insert({
-        profile_id: profileId,
-        height: input.height,
-        weight: input.weight,
-        age: input.age,
-        activity_level: input.activityLevel,
-        medical_conditions: input.medicalConditions || [],
-        score: result.score,
-        recommendations: result.recommendations,
-      });
+        profile_id: calculation.profileId,
+        height: calculation.height,
+        weight: calculation.weight,
+        age: calculation.age,
+        activity_level: calculation.activityLevel,
+        medical_conditions: calculation.medicalConditions,
+        score: calculation.score,
+        recommendations: calculation.recommendations,
+      })
+      .select();
 
     if (error) {
       toast.error('Could not save fitness calculation');
@@ -40,14 +37,14 @@ export async function saveFitnessCalculation(
     }
 
     toast.success('Fitness calculation saved successfully');
-    return { success: true };
+    return { success: true, data: data[0] };
   } catch (err) {
     toast.error('An unexpected error occurred');
     return { success: false, error: err };
   }
 }
 
-export async function getFitnessHistory(profileId: string) {
+export async function getFitnessCalculations(profileId: string) {
   try {
     const { data, error } = await supabase
       .from('fitness_calculations')
@@ -56,7 +53,7 @@ export async function getFitnessHistory(profileId: string) {
       .order('created_at', { ascending: false });
 
     if (error) {
-      toast.error('Could not fetch fitness history');
+      toast.error('Could not fetch fitness calculations');
       return { success: false, error, data: [] };
     }
 
@@ -66,3 +63,4 @@ export async function getFitnessHistory(profileId: string) {
     return { success: false, error: err, data: [] };
   }
 }
+
