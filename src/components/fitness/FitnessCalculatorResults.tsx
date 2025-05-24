@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -133,15 +134,21 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {Object.entries(normalizedValues).map(([key, value]) => (
+            {Object.entries(normalizedValues || {}).map(([key, value]) => (
               <div key={key} className="space-y-1">
-                <div className="flex justify-between items-center">
-                  <span className="capitalize text-sm">
-                    {key === 'bmi' ? 'BMI' : key.replace(/([A-Z])/g, ' $1').trim()}
-                  </span>
-                  <span className="text-sm font-medium">{Math.round(value * 100)}%</span>
-                </div>
-                <Progress value={value * 100} className="h-2" />
+                {value !== undefined && (
+                  <>
+                    <div className="flex justify-between items-center">
+                      <span className="capitalize text-sm">
+                        {key === 'bmi' ? 'BMI' : key.replace(/([A-Z])/g, ' $1').trim()}
+                      </span>
+                      <span className="text-sm font-medium">
+                        {Math.round((value || 0) * 100)}%
+                      </span>
+                    </div>
+                    <Progress value={(value || 0) * 100} className="h-2" />
+                  </>
+                )}
               </div>
             ))}
           </div>

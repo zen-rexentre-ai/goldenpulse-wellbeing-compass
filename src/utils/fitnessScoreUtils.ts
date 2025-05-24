@@ -1,3 +1,4 @@
+
 /**
  * @ai_context
  * - Core fitness calculation engine for Indian senior citizens
@@ -9,6 +10,7 @@
 import { FitnessParameters, FitnessScoreResult, ChronicConditions } from './fitness/types';
 import { 
   normalizeBMI, 
+  normalizeDirectBMI,
   normalizeHeartRate, 
   normalizeSleep, 
   normalizeExercise,
@@ -52,10 +54,10 @@ export function calculateFitnessScore(data: FitnessParameters & {
   
   // Calculate normalized values for each health parameter
   const normalizedValues = {
-    // #ai-reason: BMI calculation using height/weight or direct BMI input with proper defaults
+    // #ai-reason: Robust BMI handling with fallbacks and age-specific ranges
     bmi: height && weight 
       ? normalizeBMI(height, weight, isMetric, age)
-      : data.bmi ? normalizeBMI(0, 0, isMetric) : 0,
+      : data.bmi ? normalizeDirectBMI(data.bmi, age) : 0,
     
     // #ai-reason: Heart rate normalization with age-specific optimal ranges
     heartRate: data.heartRate ? normalizeHeartRate(data.heartRate, age) : 0.7,

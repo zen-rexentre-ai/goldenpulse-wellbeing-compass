@@ -1,4 +1,3 @@
-
 // Utility functions for normalizing fitness metrics
 import {
   normalizeHeartRateByAge,
@@ -8,9 +7,38 @@ import {
   normalizeExerciseByAge
 } from './ageNormalizationUtils';
 
+// New helper function for direct BMI normalization
+export const normalizeDirectBMI = (bmi: number, age: number): number => {
+  // Validate input
+  if (bmi <= 0 || isNaN(bmi)) {
+    throw new Error(`Invalid BMI value: ${bmi}`);
+  }
+
+  // Age-specific ranges per ICMR guidelines
+  const [min, max] = age >= 65 
+    ? [22, 27]  // Senior range
+    : [18.5, 24.9]; // Adult range
+
+  // Clamp and normalize between 0-1
+  return Math.min(1, Math.max(0, (bmi - min) / (max - min)));
+};
+
 // Normalize BMI score using age-based normalization
 export const normalizeBMI = (height: number, weight: number, isMetric: boolean, age: number): number => {
-  return normalizeBMIByAge(height, weight, isMetric, age);
+  // Validate biometric inputs
+  if (height <= 0 || weight <= 0) {
+    throw new Error(`Invalid biometric values: height=${height}, weight=${weight}`);
+  }
+
+  // Convert to metric if needed
+  const kg = isMetric ? weight : weight * 0.453592;
+  const meters = isMetric ? height/100 : height * 0.0254;
+
+  // Calculate BMI
+  const bmi = kg / (meters ** 2);
+  
+  // Use direct normalization with age ranges
+  return normalizeDirectBMI(bmi, age);
 };
 
 // Normalize resting heart rate using age-based normalization
