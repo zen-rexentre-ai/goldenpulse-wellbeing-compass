@@ -1,10 +1,17 @@
 
-// This file contains core utilities for calculating the fitness score
-import { WEIGHTS, FEMALE_WEIGHTS } from './fitness/constants';
-import {
-  normalizeBMI,
-  normalizeHeartRate,
-  normalizeSleep,
+/**
+ * @ai_context
+ * - Core fitness calculation engine for Indian senior citizens
+ * - Implements ICMR guidelines with age-specific normalization
+ * - Integrates with modular architecture through fitness service
+ * - Critical component for dashboard fitness score display
+ */
+
+import { FitnessParameters, FitnessScoreResult, ChronicConditions } from './fitness/types';
+import { 
+  normalizeBMI, 
+  normalizeHeartRate, 
+  normalizeSleep, 
   normalizeExercise,
   normalizeSmoking,
   normalizeAlcohol,
@@ -14,108 +21,160 @@ import {
   normalizeBloodPressure
 } from './fitness/normalizationUtils';
 import { generateRecommendations } from './fitness/recommendationUtils';
-import { FitnessScoreResult, ChronicConditions, FitnessParameters } from './fitness/types';
+import { WEIGHTS, FEMALE_WEIGHTS } from './fitness/constants';
 
-// Calculate the overall fitness score
-export const calculateFitnessScore = (data: any): FitnessScoreResult => {
-  // Extract and normalize parameters
-  const isMetric = data.heightUnit === 'cm';
-  const age = data.age || 65; // Default age if not provided
-  const gender = data.gender || 'male';
+/**
+ * Calculate comprehensive fitness score for Indian seniors
+ * @ai_context
+ * - Primary entry point for fitness calculations
+ * - Handles both male/female gender-specific calculations
+ * - Integrates multiple health parameters with clinical weights
+ * - Returns normalized score (0-100) with actionable recommendations
+ * - Used by dashboard widget and detailed analysis components
+ */
+export function calculateFitnessScore(data: FitnessParameters & { 
+  email?: string; 
+  gender?: string; 
+  height?: number; 
+  weight?: number; 
+  isMetric?: boolean;
+  chronicConditions?: ChronicConditions;
+}): FitnessScoreResult {
+  // #ai-reason: Extract age for age-based normalization throughout calculation
+  const age = data.age || 65; // Default to 65 for seniors if not provided
   
-  // Choose weights based on gender
-  const weights = gender === 'female' ? FEMALE_WEIGHTS : WEIGHTS;
+  // #ai-reason: Use gender-specific weights for cultural appropriateness
+  const weights = data.gender === 'female' ? FEMALE_WEIGHTS : WEIGHTS;
   
-  const bmiNormalized = normalizeBMI(data.height, data.weight, isMetric, age);
-  const heartRateNormalized = normalizeHeartRate(data.heartRate || 70, age); // Default if not provided
-  const sleepNormalized = normalizeSleep(data.goodSleepQuality === 'yes');
-  const exerciseNormalized = normalizeExercise(data.exerciseMinutes, age);
-  
-  // For females, smoking and alcohol are not considered
-  const smokingNormalized = gender === 'female' ? 1.0 : normalizeSmoking(data.smokingStatus || 'never');
-  const alcoholNormalized = gender === 'female' ? 1.0 : normalizeAlcohol(data.alcoholUnits || 0);
-  
-  // Process chronic conditions from sliders
-  const chronicConditions: ChronicConditions = {
-    diabetes: data.diabetesLevel || 0,
-    hypertension: data.hypertensionLevel || 0,
-    heartRelated: data.heartRelatedLevel || 0,
-    cancer: data.cancerLevel || 0,
-    others: data.othersLevel || 0
+  // Calculate normalized values for each health parameter
+  const normalizedValues = {
+    // #ai-reason: BMI calculation using height/weight or direct BMI input
+    bmi: data.height && data.weight 
+      ? normalizeBMI(data.height, data.weight, data.isMetric || false, age)
+      : data.bmi ? normalizeBMI(0, 0, false, age, data.bmi) : 0,
+    
+    // #ai-reason: Heart rate normalization with age-specific optimal ranges
+    heartRate: data.heartRate ? normalizeHeartRate(data.heartRate, age) : 0.7,
+    
+    // #ai-reason: Sleep quality impacts cognitive and physical health significantly
+    sleep: normalizeSleep(data.goodSleepQuality),
+    
+    // #ai-reason: Exercise minutes normalized for senior fitness capabilities
+    exercise: normalizeExercise(data.exerciseMinutes, age),
+    
+    // #ai-reason: Smoking status with graduated impact (never > former > current)
+    smoking: normalizeSmoking(data.smokingStatus),
+    
+    // #ai-reason: Alcohol consumption with cultural and health considerations
+    alcohol: normalizeAlcohol(data.alcoholUnits),
+    
+    // #ai-reason: Chronic conditions weighted heavily due to senior health impact
+    chronicConditions: data.chronicConditions 
+      ? normalizeChronicConditions(data.chronicConditions)
+      : 1.0,
+    
+    // #ai-reason: Stress level impacts overall wellness significantly
+    stress: data.stressLevel ? normalizeStress(data.stressLevel) : 0.7,
+    
+    // #ai-reason: HbA1c for diabetes management (critical for Indian population)
+    hba1c: normalizeHbA1c(data.hba1c, age),
+    
+    // #ai-reason: Blood pressure with age-adjusted normal ranges
+    bloodPressure: normalizeBloodPressure(data.systolicBP, data.diastolicBP, age)
   };
-  const conditionsNormalized = normalizeChronicConditions(chronicConditions);
-  
-  // Normalize stress level
-  const stressNormalized = normalizeStress(data.stressLevel || 'none');
-  
-  // Additional age-based normalization
-  const hba1cNormalized = normalizeHbA1c(data.hba1c, age);
-  const bloodPressureNormalized = normalizeBloodPressure(data.systolicBP, data.diastolicBP, age);
-  
-  // Calculate the weighted sum
-  const weightedSum = (
-    (heartRateNormalized * weights.restingHeartRate) +
-    (bmiNormalized * weights.bmi) +
-    (exerciseNormalized * weights.activity) +
-    (sleepNormalized * weights.sleep) +
-    (smokingNormalized * weights.smoking) +
-    (alcoholNormalized * weights.alcohol) +
-    (conditionsNormalized * weights.chronicConditions) +
-    (stressNormalized * weights.stress)
+
+  // #ai-reason: Calculate weighted score using clinical importance weights
+  const weightedScore = (
+    normalizedValues.bmi * weights.bmi +
+    normalizedValues.heartRate * weights.restingHeartRate +
+    normalizedValues.sleep * weights.sleep +
+    normalizedValues.exercise * weights.activity +
+    normalizedValues.smoking * weights.smoking +
+    normalizedValues.alcohol * weights.alcohol +
+    normalizedValues.chronicConditions * weights.chronicConditions +
+    normalizedValues.stress * weights.stress
   );
-  
-  // Calculate the final score (0-100)
-  const finalScore = Math.round(weightedSum * 100);
-  
-  // Generate recommendations
-  const params: FitnessParameters = {
-    age: age,
-    bmi: bmiNormalized,
-    heartRate: data.heartRate,
-    goodSleepQuality: data.goodSleepQuality === 'yes',
-    exerciseMinutes: data.exerciseMinutes,
-    smokingStatus: data.smokingStatus,
-    alcoholUnits: data.alcoholUnits,
-    stressLevel: data.stressLevel,
-    hba1c: data.hba1c,
-    systolicBP: data.systolicBP,
-    diastolicBP: data.diastolicBP
-  };
-  
-  const recommendations = generateRecommendations(params);
-  
-  // Return the score, recommendations and normalized values
+
+  // #ai-reason: Convert to 0-100 scale for user comprehension
+  const finalScore = Math.round(weightedScore * 100);
+
+  // #ai-reason: Generate actionable recommendations based on weak areas
+  const recommendations = generateRecommendations(normalizedValues, data);
+
   return {
     score: finalScore,
     recommendations,
-    normalizedValues: {
-      heartRate: heartRateNormalized,
-      bmi: bmiNormalized,
-      exercise: exerciseNormalized,
-      sleep: sleepNormalized,
-      smoking: smokingNormalized,
-      alcohol: alcoholNormalized,
-      chronicConditions: conditionsNormalized,
-      stress: stressNormalized,
-      bloodPressure: bloodPressureNormalized,
-      hba1c: hba1cNormalized
-    }
+    normalizedValues
   };
-};
+}
 
-// Re-export utilities for backward compatibility
-export { 
-  normalizeBMI, 
-  normalizeHeartRate, 
-  normalizeSleep, 
-  normalizeExercise,
-  normalizeSmoking,
-  normalizeAlcohol,
-  normalizeChronicConditions,
-  normalizeStress,
-  normalizeBloodPressure,
-  normalizeHbA1c,
-  generateRecommendations,
-  WEIGHTS,
-  FEMALE_WEIGHTS
-};
+/**
+ * Get fitness score interpretation for UI display
+ * @ai_context
+ * - Provides user-friendly interpretation of numeric scores
+ * - Maps clinical ranges to accessible language
+ * - Used by dashboard widgets for color coding and messaging
+ */
+export function getFitnessScoreInterpretation(score: number): {
+  level: 'excellent' | 'good' | 'fair' | 'poor';
+  message: string;
+  color: string;
+} {
+  // #ai-reason: Clinical ranges adapted for Indian senior population
+  if (score >= 80) {
+    return {
+      level: 'excellent',
+      message: 'Excellent health status for your age group',
+      color: 'text-green-600'
+    };
+  } else if (score >= 65) {
+    return {
+      level: 'good',
+      message: 'Good health with room for improvement',
+      color: 'text-blue-600'
+    };
+  } else if (score >= 50) {
+    return {
+      level: 'fair',
+      message: 'Fair health, focus on key areas',
+      color: 'text-yellow-600'
+    };
+  } else {
+    return {
+      level: 'poor',
+      message: 'Health concerns need attention',
+      color: 'text-red-600'
+    };
+  }
+}
+
+/**
+ * Calculate trend analysis for score changes
+ * @ai_context
+ * - Analyzes score changes over time periods
+ * - Provides directional indicators for dashboard widgets
+ * - Helps users understand their health journey progression
+ */
+export function calculateScoreTrend(
+  currentScore: number,
+  previousScore: number
+): {
+  change: number;
+  direction: 'up' | 'down' | 'stable';
+  percentage: number;
+} {
+  const change = currentScore - previousScore;
+  const percentage = previousScore > 0 ? Math.abs((change / previousScore) * 100) : 0;
+  
+  // #ai-reason: 2-point threshold to avoid noise in trend analysis
+  let direction: 'up' | 'down' | 'stable' = 'stable';
+  if (Math.abs(change) > 2) {
+    direction = change > 0 ? 'up' : 'down';
+  }
+  
+  return {
+    change: Math.abs(change),
+    direction,
+    percentage: Math.round(percentage)
+  };
+}
