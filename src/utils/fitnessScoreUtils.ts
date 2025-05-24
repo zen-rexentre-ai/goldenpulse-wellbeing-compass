@@ -1,3 +1,4 @@
+
 /**
  * @ai_context
  * - Core fitness calculation engine for Indian senior citizens
@@ -100,11 +101,11 @@ export function calculateFitnessScore(data: FitnessParameters & {
     normalizedValues.stress * weights.stress
   );
 
-  // #ai-reason: Convert to 0-100 scale for user comprehension
-  const finalScore = Math.round(weightedScore * 100);
+  // #ai-reason: Convert to 0-100 scale for user comprehension - ensure proper scaling
+  const finalScore = Math.round(Math.max(0, Math.min(100, weightedScore * 100)));
 
-  // #ai-reason: Generate actionable recommendations based on weak areas
-  const recommendations = generateRecommendations(normalizedValues, data);
+  // #ai-reason: Generate actionable recommendations based on weak areas - fix function call
+  const recommendations = generateRecommendations(data);
 
   return {
     score: finalScore,

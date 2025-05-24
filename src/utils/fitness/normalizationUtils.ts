@@ -1,3 +1,4 @@
+
 // Utility functions for normalizing fitness metrics
 import {
   normalizeHeartRateByAge,
@@ -25,14 +26,14 @@ export const normalizeDirectBMI = (bmi: number, age: number): number => {
   // Calculate how far the BMI is from the age-adjusted optimal
   const deviation = Math.abs(bmi - adjustedOptimalBMI);
   
-  // Normalize to 0-100 scale
+  // Normalize to 0-1 scale (not 0-100)
   if (deviation <= adjustedRange / 2) {
-    // Within good range - linear scale from 100 to 70
-    return Math.max(70, 100 - (deviation / (adjustedRange / 2)) * 30);
+    // Within good range - linear scale from 1.0 to 0.7
+    return Math.max(0.7, 1.0 - (deviation / (adjustedRange / 2)) * 0.3);
   } else {
     // Outside good range - exponential decay
     const excessDeviation = deviation - (adjustedRange / 2);
-    return Math.max(0, 70 * Math.exp(-excessDeviation / 5));
+    return Math.max(0, 0.7 * Math.exp(-excessDeviation / 5));
   }
 };
 
@@ -40,7 +41,7 @@ export const normalizeDirectBMI = (bmi: number, age: number): number => {
 export const normalizeBMI = (height: number, weight: number, isMetric: boolean, age: number): number => {
   // Validate biometric inputs
   if (height <= 0 || weight <= 0) {
-    throw new Error(`Invalid biometric values: height=${height}, weight=${weight}`);
+    return 0.5; // Return neutral score instead of throwing error
   }
 
   // Convert to metric if needed

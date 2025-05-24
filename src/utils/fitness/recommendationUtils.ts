@@ -1,19 +1,35 @@
 
-import { FitnessParameters } from './types';
+import { FitnessParameters, ChronicConditions } from './types';
 
-export const generateRecommendations = (params: FitnessParameters): Array<{text: string; impact: string; priority: string}> => {
+export const generateRecommendations = (data: FitnessParameters & { 
+  email?: string; 
+  gender?: string; 
+  height?: number; 
+  weight?: number; 
+  isMetric?: boolean;
+  chronicConditions?: ChronicConditions;
+}): Array<{text: string; impact: string; priority: string}> => {
   const recommendations: Array<{text: string; impact: string; priority: string}> = [];
-  const age = params.age || 65;
+  const age = data.age || 65;
+
+  // Calculate BMI if height and weight provided
+  let bmi = data.bmi;
+  if (data.height && data.weight) {
+    const height = data.isMetric ? data.height / 100 : data.height * 0.0254;
+    const weight = data.isMetric ? data.weight : data.weight * 0.453592;
+    bmi = weight / (height * height);
+  }
 
   // BMI recommendations
-  if (params.bmi < 0.6) {
-    if (age < 65) {
+  if (bmi) {
+    const idealBMI = age >= 65 ? 24 : 22;
+    if (bmi < 18.5 || bmi > 30) {
       recommendations.push({
         text: "Consider consulting with a nutritionist to help establish a balanced diet appropriate for your age and health condition.",
         impact: "High Impact",
         priority: "high"
       });
-    } else {
+    } else if (bmi < 20 || bmi > 27) {
       recommendations.push({
         text: "Consider gentle weight management strategies appropriate for seniors, focused on nutrition rather than calorie restriction.",
         impact: "Medium Impact",
@@ -23,7 +39,7 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // Exercise recommendations
-  if (!params.exerciseMinutes || params.exerciseMinutes < 100) {
+  if (!data.exerciseMinutes || data.exerciseMinutes < 100) {
     if (age < 65) {
       recommendations.push({
         text: "Try to increase your physical activity to at least 150 minutes per week of moderate exercise.",
@@ -40,7 +56,7 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // Sleep recommendations
-  if (!params.goodSleepQuality) {
+  if (!data.goodSleepQuality) {
     recommendations.push({
       text: "Consider establishing a regular sleep routine and improving your sleep environment for better rest.",
       impact: "Medium Impact",
@@ -49,7 +65,7 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // Smoking recommendations
-  if (params.smokingStatus === 'current') {
+  if (data.smokingStatus === 'current') {
     recommendations.push({
       text: "Consider joining a smoking cessation program with medical supervision.",
       impact: "High Impact",
@@ -58,7 +74,7 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // Alcohol recommendations
-  if (params.alcoholUnits > 14) {
+  if (data.alcoholUnits && data.alcoholUnits > 14) {
     recommendations.push({
       text: "Consider reducing alcohol consumption, as it can impact various health aspects including sleep quality and medication effectiveness.",
       impact: "Medium Impact",
@@ -67,13 +83,13 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // Stress recommendations
-  if (params.stressLevel === 'high') {
+  if (data.stressLevel === 'high') {
     recommendations.push({
       text: "Explore stress management techniques such as mindfulness, gentle yoga, or speaking with a mental health professional.",
       impact: "Medium Impact",
       priority: "medium"
     });
-  } else if (params.stressLevel === 'mild') {
+  } else if (data.stressLevel === 'mild') {
     recommendations.push({
       text: "Consider incorporating regular relaxation activities into your routine to manage stress levels.",
       impact: "Low Impact",
@@ -82,7 +98,7 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // Heart rate recommendations
-  if (params.heartRate && (params.heartRate > 80 || params.heartRate < 60)) {
+  if (data.heartRate && (data.heartRate > 80 || data.heartRate < 60)) {
     recommendations.push({
       text: "Consider discussing your resting heart rate with your healthcare provider at your next appointment.",
       impact: "Medium Impact",
@@ -91,14 +107,14 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // Blood pressure recommendations if provided
-  if (params.systolicBP && params.diastolicBP) {
-    if ((params.systolicBP > 140 || params.diastolicBP > 90) && age < 70) {
+  if (data.systolicBP && data.diastolicBP) {
+    if ((data.systolicBP > 140 || data.diastolicBP > 90) && age < 70) {
       recommendations.push({
         text: "Consider monitoring your blood pressure regularly and consulting with your doctor about management strategies.",
         impact: "High Impact",
         priority: "high"
       });
-    } else if ((params.systolicBP > 150 || params.diastolicBP > 90) && age >= 70) {
+    } else if ((data.systolicBP > 150 || data.diastolicBP > 90) && age >= 70) {
       recommendations.push({
         text: "Consider gentle approaches to blood pressure management appropriate for seniors, including regular monitoring.",
         impact: "Medium Impact",
@@ -108,11 +124,11 @@ export const generateRecommendations = (params: FitnessParameters): Array<{text:
   }
 
   // HbA1c recommendations if provided
-  if (params.hba1c) {
+  if (data.hba1c) {
     const thresholdByAge = age < 65 ? 5.7 : age < 75 ? 6.0 : 6.2;
-    if (params.hba1c > thresholdByAge) {
+    if (data.hba1c > thresholdByAge) {
       recommendations.push({
-        text: `Consider discussing your HbA1c level of ${params.hba1c} with your healthcare provider to explore age-appropriate management strategies.`,
+        text: `Consider discussing your HbA1c level of ${data.hba1c} with your healthcare provider to explore age-appropriate management strategies.`,
         impact: "Medium Impact",
         priority: "medium"
       });
