@@ -139,11 +139,6 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
         {Math.round(animatedScore)}
       </div>
       
-      <div className="w-full px-1 flex justify-between mt-1">
-        <span className="text-[10px] text-slate-700">0</span>
-        <span className="text-[10px] text-slate-700">50</span>
-        <span className="text-[10px] text-slate-700">100</span>
-      </div>
     </div>
   );
 };
