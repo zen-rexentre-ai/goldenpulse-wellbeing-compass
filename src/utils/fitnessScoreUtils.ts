@@ -53,7 +53,7 @@ export function calculateFitnessScore(data: FitnessParameters & {
   
   // Calculate normalized values for each health parameter
   const normalizedValues = {
-    // #ai-reason: Robust BMI handling with fallbacks and age-specific ranges
+    // #ai-reason: Robust BMI handling with fallbacks and age-specific ranges - FIXED: now passing both bmi and age
     bmi: height && weight 
       ? normalizeBMI(height, weight, isMetric, age)
       : data.bmi ? normalizeDirectBMI(data.bmi, age) : 0,

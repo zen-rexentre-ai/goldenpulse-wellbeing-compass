@@ -1,3 +1,4 @@
+
 // Utility functions for normalizing fitness metrics
 import {
   normalizeHeartRateByAge,
@@ -7,7 +8,7 @@ import {
   normalizeExerciseByAge
 } from './ageNormalizationUtils';
 
-// New helper function for direct BMI normalization
+// Updated helper function for direct BMI normalization with age parameter
 export const normalizeDirectBMI = (bmi: number, age: number): number => {
   // Validate input
   if (bmi <= 0 || isNaN(bmi)) {
