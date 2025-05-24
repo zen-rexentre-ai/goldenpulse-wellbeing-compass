@@ -239,8 +239,8 @@ const Dashboard = () => {
             onClick={cyclePlan}
           >
             <p className="text-sm font-medium">
-              {t("current_plan")}: <span className="font-bold capitalize">{currentPlan}</span>
-              <span className="text-xs ml-2 text-muted-foreground">(Click to change)</span>
+              <span className="font-bold capitalize">{currentPlan}</span>
+             
             </p>
           </EmbossedCard>
         </div>
