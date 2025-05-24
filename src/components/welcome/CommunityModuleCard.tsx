@@ -34,7 +34,7 @@ const CommunityModuleCard = () => {
         />
         <div className="absolute top-2 right-2 flex items-center gap-2">
           <Info className="h-5 w-5 text-golden-dark opacity-70 hover:opacity-100" />
-          <ScreenReader text={t("community_module")} />
+
         </div>
       </div>
       
