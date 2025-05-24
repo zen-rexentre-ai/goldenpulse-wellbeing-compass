@@ -142,4 +142,3 @@ class GamesModule implements IModule {
 }
 
 export const gamesModule = new GamesModule();
-export { IGamesService, GameProgress };

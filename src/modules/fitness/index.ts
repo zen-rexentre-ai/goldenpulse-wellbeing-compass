@@ -104,7 +104,6 @@ class FitnessModule implements IModule {
 
 // Export module instance and service interface
 export const fitnessModule = new FitnessModule();
-export { IFitnessService };
 
 // #ai-reason: Maintain backward compatibility by re-exporting existing utilities
 export * from '../../utils/fitnessScoreUtils';

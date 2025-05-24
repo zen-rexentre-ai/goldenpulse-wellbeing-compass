@@ -92,4 +92,3 @@ class DashboardModule implements IModule {
 }
 
 export const dashboardModule = new DashboardModule();
-export { IDashboardService };
