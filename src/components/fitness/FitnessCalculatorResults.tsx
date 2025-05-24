@@ -57,7 +57,7 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         
         {/* Use the gauge meter for score display */}
         <div className="flex justify-center mb-4">
-          <div className="w-96 h-64">
+          <div className="w-96 h-60">
             <FitnessScoreMeter score={score} />
           </div>
         </div>
