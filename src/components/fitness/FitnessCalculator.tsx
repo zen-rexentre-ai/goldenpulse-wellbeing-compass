@@ -33,9 +33,28 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
     setFormData(values);
     setIsCalculating(true);
     
+    // Convert form values to fitness calculation format
+    const fitnessData = {
+      ...values,
+      // Calculate BMI from height and weight
+      bmi: 0, // Will be calculated in the utility function
+      // Convert units to metric flag
+      isMetric: values.heightUnit === 'cm' && values.weightUnit === 'kg',
+      // Convert slider values to chronic conditions format
+      chronicConditions: {
+        diabetes: values.diabetesLevel,
+        hypertension: values.hypertensionLevel,
+        heartRelated: values.heartRelatedLevel,
+        cancer: values.cancerLevel,
+        others: values.othersLevel
+      },
+      // Convert boolean to boolean for goodSleepQuality
+      goodSleepQuality: values.goodSleepQuality === 'yes'
+    };
+    
     // Simulate calculation delay
     setTimeout(() => {
-      const result = calculateFitnessScore(values);
+      const result = calculateFitnessScore(fitnessData);
       setCalculationResult(result);
       setIsCalculating(false);
     }, 1000);

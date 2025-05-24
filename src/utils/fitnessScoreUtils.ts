@@ -51,7 +51,7 @@ export function calculateFitnessScore(data: FitnessParameters & {
     // #ai-reason: BMI calculation using height/weight or direct BMI input
     bmi: data.height && data.weight 
       ? normalizeBMI(data.height, data.weight, data.isMetric || false, age)
-      : data.bmi ? normalizeBMI(0, 0, false, age, data.bmi) : 0,
+      : data.bmi ? normalizeBMI(0, 0, false, age) : 0,
     
     // #ai-reason: Heart rate normalization with age-specific optimal ranges
     heartRate: data.heartRate ? normalizeHeartRate(data.heartRate, age) : 0.7,
