@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import FitnessCalculatorForm from './FitnessCalculatorForm';
@@ -35,11 +34,26 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
     
     // Convert form values to fitness calculation format
     const fitnessData = {
-      ...values,
-      // Calculate BMI from height and weight
+      // Basic required fields from FitnessParameters
       bmi: 0, // Will be calculated in the utility function
-      // Convert units to metric flag
+      exerciseMinutes: values.exerciseMinutes || 0, // Ensure this is always provided
+      goodSleepQuality: values.goodSleepQuality === 'yes',
+      smokingStatus: values.smokingStatus || 'never',
+      alcoholUnits: values.alcoholUnits || 0,
+      
+      // Additional fields for extended calculation
+      age: values.age,
+      email: values.email,
+      gender: values.gender,
+      height: values.height,
+      weight: values.weight,
       isMetric: values.heightUnit === 'cm' && values.weightUnit === 'kg',
+      heartRate: values.heartRate,
+      stressLevel: values.stressLevel,
+      hba1c: values.hba1c,
+      systolicBP: values.systolicBP,
+      diastolicBP: values.diastolicBP,
+      
       // Convert slider values to chronic conditions format
       chronicConditions: {
         diabetes: values.diabetesLevel,
@@ -47,9 +61,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
         heartRelated: values.heartRelatedLevel,
         cancer: values.cancerLevel,
         others: values.othersLevel
-      },
-      // Convert boolean to boolean for goodSleepQuality
-      goodSleepQuality: values.goodSleepQuality === 'yes'
+      }
     };
     
     // Simulate calculation delay
