@@ -45,7 +45,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
   // Plan features for comparison table
  const features: Feature[] = [
     { name: 'Personalized Wellness Journey', free: false, basic: true, premium: true },
-    { name: 'Medical Team Consultations', free: false, basic: 'Once Every 6 months', premium: 'Once Every 3 Months' },
+    { name: 'Doctor Consultations', free: false, basic: 'Once Every 6 months', premium: 'Once Every 3 Months' },
 	{ name: 'Specialist(Physio/Dietician/Mental Wellness Advisor) Consultations', free: false, basic: false, premium: 'Once Every 3 Months' },
     { name: 'Wellness Recommendation/Review by Medical Team', free: false, basic: false, premium: 'Once Every 3 Months' },
     { name: 'Wellness Webinars -  3 per week', free: false, basic: 'Fixed schedule', premium: 'Flexible Schedule' },
