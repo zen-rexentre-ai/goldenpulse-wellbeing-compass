@@ -53,14 +53,12 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
     <div className="space-y-6 animate-fade-in">
       <div className="text-center mb-8">
         <div className="flex justify-center items-center gap-2">
-          <h2 className="text-2xl font-bold mb-2">{t("health_score")}</h2>
-          <ScreenReader text={t("health_score")} />
+          <h2 className="text-2xl font-bold mb-2">{t("health_score")}</h2>      
         </div>
         
         {/* Replace circular progress with gauge meter */}
         <div className="flex justify-center mb-4">
           <div className="w-80">
-            <FitnessScoreMeter score={score} />
           </div>
         </div>
         
@@ -73,7 +71,7 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">{t("recommendations")}</CardTitle>
-            <ScreenReader text={t("recommendations")} />
+    
           </div>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -108,7 +106,7 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">{t("detailed_score_breakdown")}</CardTitle>
-            <ScreenReader text={t("detailed_score_breakdown")} />
+
           </div>
         </CardHeader>
         <CardContent>
