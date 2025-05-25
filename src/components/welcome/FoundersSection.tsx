@@ -15,7 +15,7 @@ const FoundersSection = () => {
     <EmbossedCard className="p-4 mb-3 w-full">
       <div className="flex justify-between items-center">
         <h3 className="text-center text-lg font-medium mb-3">{t("founders")}</h3>
-        <ScreenReader text={t("founders")} />
+        
       </div>
       <div className={`grid ${isMobile ? "grid-cols-1 gap-4" : "grid-cols-2 gap-2"} w-full`}>
         {/* Founder 1 */}
