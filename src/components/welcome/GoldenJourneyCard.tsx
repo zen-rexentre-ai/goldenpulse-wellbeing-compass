@@ -60,7 +60,6 @@ const GoldenJourneyCard: React.FC = () => {
       
       <div className="flex items-center justify-between gap-3 mb-2 mt-2">
         <AlertTitle className="text-xl font-bold text-golden-dark">{t("golden_journey")}</AlertTitle>
-        <ScreenReader text={t("golden_journey")} />
       </div>
       <AlertDescription className="font-serif italic">
         <p className="text-lg font-medium text-golden-dark mb-2">{t("golden_journey_desc_1")}</p>
