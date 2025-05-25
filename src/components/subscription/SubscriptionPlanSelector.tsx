@@ -77,7 +77,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
     {
       type: 'basic' as PlanType,
       title: 'Basic',
-      price: 'Rs. 1000',
+      price: 'Rs. 1500',
       headerGradient: 'bg-gradient-to-b from-blue-50 to-blue-100 border-b',
       features: [
         { text: 'All Free Features', available: true },
@@ -89,7 +89,7 @@ const SubscriptionPlanSelector: React.FC<SubscriptionPlanSelectorProps> = ({
     {
       type: 'premium' as PlanType,
       title: 'Premium',
-      price: 'Rs. 2000',
+      price: 'Rs. 3000',
       headerGradient: 'bg-gradient-to-b from-golden-yellow to-golden-orange border-b',
       features: [
         { text: 'All Basic Features', available: true },
