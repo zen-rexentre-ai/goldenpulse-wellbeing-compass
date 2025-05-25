@@ -108,7 +108,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
           </ResponsiveContainer>
         </TooltipProvider>
         
-        {/* Score Needle - With animation */}
+        {/* Score Needle - With animation and CORRECTED rotation formula */}
         <div 
           className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom transition-transform duration-1000"
           style={{ 
