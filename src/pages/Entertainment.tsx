@@ -88,7 +88,7 @@ const Entertainment = () => {
               className="flex items-center gap-2"
             >
               <ArrowLeft size={16} />
-              Back to Entertainment
+              {t('back')} to {t('entertainment')}
             </Button>
           </div>
           
@@ -110,7 +110,7 @@ const Entertainment = () => {
             <h1 className="text-2xl font-bold">{t('entertainment')}</h1>
             <ScreenReader text={t('entertainment')} />
           </div>
-          <p className="text-muted-foreground">Games and educational content for wellness and fun</p>
+          <p className="text-muted-foreground">{t('games_subtitle')}</p>
         </div>
 
         <Tabs defaultValue="games">

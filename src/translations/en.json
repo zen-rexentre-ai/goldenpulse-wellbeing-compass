@@ -24,6 +24,8 @@
   "volunteer": "Volunteer",
   "settings_link": "Settings",
   "games": "Games",
+  "entertainment": "Entertainment",
+  "webinars": "Webinars",
   "wellness_analysis": "Wellness Analysis",
   "wellness_analysis_subtitle": "Detailed breakdown of your wellness factors",
   "golden_journey": "Your Golden Journey",
@@ -133,5 +135,13 @@
   "improve_memory": "Improve memory and recall",
   "enhance_concentration": "Enhance focus and concentration",
   "boost_problem_solving": "Boost problem-solving skills",
-  "maintain_cognitive_health": "Maintain cognitive health and mental agility"
+  "maintain_cognitive_health": "Maintain cognitive health and mental agility",
+  "webinars_and_videos": "Webinars & Videos",
+  "upcoming_live": "Upcoming Live",
+  "recorded": "Recorded",
+  "with": "With",
+  "register_now": "Register Now",
+  "watch_now": "Watch Now",
+  "webinar_thumbnail": "Webinar Thumbnail",
+  "webinar_recording": "Webinar Recording"
 }
