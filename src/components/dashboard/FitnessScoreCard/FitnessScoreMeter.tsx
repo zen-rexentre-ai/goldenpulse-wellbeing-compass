@@ -108,11 +108,11 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
           </ResponsiveContainer>
         </TooltipProvider>
         
-        {/* Score Needle - With animation and CORRECTED rotation formula */}
+        {/* Score Needle - Fixed rotation formula for correct positioning */}
         <div 
           className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom transition-transform duration-1000"
           style={{ 
-            transform: `translateX(-50%) rotate(${180 - (animatedScore * 180) / 100}deg)`,
+            transform: `translateX(-50%) rotate(${(animatedScore * 180) / 100}deg)`,
             transformOrigin: 'center bottom',
             transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
           }}
