@@ -27,7 +27,6 @@ const Welcome = () => {
         <div className="w-full space-y-3">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">{t("ready_to_embrace")}</h2>
-            <ScreenReader text={t("ready_to_embrace")} />
           </div>
           <ActionButtons />
         </div>
