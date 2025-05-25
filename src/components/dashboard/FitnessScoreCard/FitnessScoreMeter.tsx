@@ -61,7 +61,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
         const easedProgress = easeOutQuad(progress);
         
         const currentScore = start + (end - start) * easedProgress;
-        setAnimatedScore(currentScore);
+        setAnimatedScore(score);
         
         if (progress < 1) {
           requestAnimationFrame(animateScore);
