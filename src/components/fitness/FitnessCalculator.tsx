@@ -104,7 +104,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
               {t("health_score_calculator")}
               <Badge variant="outline" className="ml-2 bg-primary/10">Beta</Badge>
             </DialogTitle>
-            <ScreenReader text={t("health_score_calculator")} />
+            <ScreenReader text={t("health_score_calculator.  Enter your Basic details, BMI, Lifestyle information, Some Health data to generate your own health score.")} />
           </div>
         </DialogHeader>
         
