@@ -30,7 +30,7 @@ const WellnessModuleCard = () => {
       >
         <ModuleCard 
           title={t("wellness_module")} 
-          items={wellnessModuleItems} 
+          items={t{wellnessModuleItems}}
           gradientClasses="bg-gradient-to-br from-golden-pink to-golden-peach"
         />
         <div className="absolute top-2 right-2 flex items-center gap-2">
