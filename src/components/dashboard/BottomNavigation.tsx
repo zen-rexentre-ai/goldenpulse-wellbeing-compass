@@ -18,10 +18,10 @@ const BottomNavigation: React.FC = () => {
 
   // Reduced navigation items - combined webinars+games, removed analysis (moved to dashboard), removed settings (moved to header)
   const navItems = [
-    { path: '/dashboard', label: t("home"), icon: Home, feature: 'dashboard' },
-    { path: '/emergency-contacts', label: t("emergency"), icon: Siren, feature: 'emergency' },
-    { path: '/entertainment', label: t("entertainment"), icon: Gamepad2, feature: 'games' }, // Combined games+webinars
-    { path: '/volunteering', label: t("volunteer"), icon: Handshake, feature: 'volunteering' },
+    { path: '/dashboard', label: t("Home"), icon: Home, feature: 'dashboard' },
+    { path: '/emergency-contacts', label: t("Emergency"), icon: Siren, feature: 'emergency' },
+    { path: '/entertainment', label: t("Entertainment"), icon: Gamepad2, feature: 'games' }, // Combined games+webinars
+    { path: '/volunteering', label: t("Volunteer"), icon: Handshake, feature: 'volunteering' },
   ];
 
   // Render a navigation item based on subscription access
