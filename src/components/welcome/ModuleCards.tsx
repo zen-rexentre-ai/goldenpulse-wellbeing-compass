@@ -15,7 +15,7 @@ const ModuleCards = () => {
       <div className="text-center space-y-2">
         <div className="flex justify-center items-center gap-2">
           <h1 className="text-3xl font-bold">{t("what_awaits_you")}</h1>
-          <ScreenReader text={t("what_awaits_you")} />
+
         </div>
         <GoldenJourneyCard />
       </div>

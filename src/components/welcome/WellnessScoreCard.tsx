@@ -16,7 +16,6 @@ const WellnessScoreCard: React.FC = () => {
       <div className="bg-gradient-to-r from-golden-pink/90 to-golden-peach/90 p-6">
         <div className="flex justify-between items-center">
           <h3 className="text-2xl font-bold mb-2 text-center text-golden-dark">{t("check_wellness_score")}</h3>
-          <ScreenReader text={t("check_wellness_score")} />
         </div>
         
         <p className="text-center mb-2 text-golden-dark">{t("wellness_score_description")}</p>
@@ -24,7 +23,7 @@ const WellnessScoreCard: React.FC = () => {
         <div className="relative">
           <FitnessScoreMeterWelcome score={75} />
           <div className="absolute top-0 right-0">
-            <ScreenReader text={t("wellness_score") + ": 75"} />
+
           </div>
         </div>
         

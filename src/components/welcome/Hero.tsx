@@ -12,7 +12,6 @@ const Hero = () => {
       <Logo size="lg" />
       <div className="flex justify-center items-center gap-2">
         <h1 className="text-3xl font-bold">{t("welcome")}</h1>
-        <ScreenReader text={t("welcome")} />
       </div>
       <p className="text-lg font-medium">
         {t("welcome_subtitle")}
