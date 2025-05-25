@@ -73,7 +73,7 @@ const FitnessScoreMeter: React.FC<FitnessScoreMeterProps> = ({ score = 75 }) => 
         <div 
           className="absolute left-1/2 bottom-[20%] -translate-x-1/2 origin-bottom"
           style={{ 
-            transform: `translateX(-50%) rotate(${-45}deg)`,
+            transform: `translateX(-90%) rotate(${-45}deg)`,
             transformOrigin: 'center bottom'
           }}
         >
