@@ -44,8 +44,8 @@ const ComparisonTable = ({ features }: ComparisonTableProps) => {
           <TableRow>
             <TableCell className="font-medium">Monthly Price</TableCell>
             <TableCell className="text-center font-bold">Rs. 0</TableCell>
-            <TableCell className="text-center font-bold">Rs. 1000</TableCell>
-            <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 2000</TableCell>
+            <TableCell className="text-center font-bold">Rs. 1500</TableCell>
+            <TableCell className="text-center font-bold bg-golden-yellow/10">Rs. 3000</TableCell>
           </TableRow>
         </TableBody>
       </Table>
