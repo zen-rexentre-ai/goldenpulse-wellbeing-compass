@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { Speaker } from 'lucide-react';
+import { Volume2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { useLanguage } from './LanguageProvider';
@@ -62,7 +62,7 @@ const ScreenReader: React.FC<ScreenReaderProps> = ({ text, className = '' }) => 
           onClick={isSpeaking ? stopSpeaking : speakText}
           aria-label={t("screen_reader_button")}
         >
-          <Speaker className={`h-5 w-5 ${isSpeaking ? 'text-primary animate-pulse' : ''}`} />
+          <Volume2 className={`h-5 w-5 ${isSpeaking ? 'text-primary animate-pulse' : ''}`} />
         </Button>
       </TooltipTrigger>
       <TooltipContent side="bottom">

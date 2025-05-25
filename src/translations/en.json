@@ -24,7 +24,8 @@
   "volunteer": "Volunteer",
   "settings_link": "Settings",
   "games": "Games",
-  "entertainment": "Entertainment",
+  "engagement": "Engagement",
+  "entertainment": "Engagement",
   "webinars": "Webinars",
   "wellness_analysis": "Wellness Analysis",
   "wellness_analysis_subtitle": "Detailed breakdown of your wellness factors",
@@ -143,5 +144,15 @@
   "register_now": "Register Now",
   "watch_now": "Watch Now",
   "webinar_thumbnail": "Webinar Thumbnail",
-  "webinar_recording": "Webinar Recording"
+  "webinar_recording": "Webinar Recording",
+  "game_score_updated": "Your game score has been updated!",
+  "cognitive_improvement": "Cognitive function improvement detected",
+  "wellness_score_impact": "This contributes to your overall wellness score",
+  "performance_analysis": "Performance Analysis",
+  "keep_playing": "Keep playing to improve your cognitive health!",
+  "game_completed": "Game Completed!",
+  "your_score": "Your Score",
+  "accuracy": "Accuracy",
+  "reaction_time": "Reaction Time",
+  "improvement": "Improvement"
 }

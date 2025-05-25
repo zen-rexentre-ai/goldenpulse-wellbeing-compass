@@ -16,23 +16,23 @@ const BottomNavigation: React.FC = () => {
   // Helper function to determine if a link is active
   const isActive = (path: string) => currentPath === path;
 
-  // Reduced navigation items - combined webinars+games, removed analysis (moved to dashboard), removed settings (moved to header)
+  // Updated navigation items with engagement instead of entertainment
   const navItems = [
-    { path: '/dashboard', label: t("Home"), icon: Home, feature: 'dashboard' },
-    { path: '/emergency-contacts', label: t("Emergency"), icon: Siren, feature: 'emergency' },
-    { path: '/entertainment', label: t("Entertainment"), icon: Gamepad2, feature: 'games' }, // Combined games+webinars
-    { path: '/volunteering', label: t("Volunteer"), icon: Handshake, feature: 'volunteering' },
+    { path: '/dashboard', label: t("home"), icon: Home, feature: 'dashboard' },
+    { path: '/emergency-contacts', label: t("emergency"), icon: Siren, feature: 'emergency' },
+    { path: '/engagement', label: t("engagement"), icon: Gamepad2, feature: 'games' },
+    { path: '/volunteering', label: t("volunteer"), icon: Handshake, feature: 'volunteering' },
   ];
 
   // Render a navigation item based on subscription access
   const renderNavItem = (item) => {
     const hasAccess = hasFeatureAccess(item.feature);
     
-    // Common button content
+    // Common button content with responsive design
     const buttonContent = (
       <>
-        <item.icon size={20} />
-        <span>{item.label}</span>
+        <item.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+        <span className="hidden sm:block text-xs">{item.label}</span>
       </>
     );
 
@@ -44,7 +44,7 @@ const BottomNavigation: React.FC = () => {
             <TooltipTrigger asChild>
               <Button 
                 variant="ghost" 
-                className="flex flex-col items-center gap-1 text-xs opacity-50 cursor-not-allowed" 
+                className="flex flex-col items-center gap-1 p-2 sm:p-3 opacity-50 cursor-not-allowed min-h-[60px] sm:min-h-[70px]" 
               >
                 {buttonContent}
               </Button>
@@ -57,12 +57,12 @@ const BottomNavigation: React.FC = () => {
       );
     }
 
-    // If user has access, render the active link
+    // If user has access, render the active link with responsive design
     return (
       <Button 
         key={item.path}
         variant={isActive(item.path) ? "default" : "ghost"} 
-        className="flex flex-col items-center gap-1 text-xs" 
+        className="flex flex-col items-center gap-1 p-2 sm:p-3 min-h-[60px] sm:min-h-[70px]" 
         asChild
       >
         <Link to={item.path}>

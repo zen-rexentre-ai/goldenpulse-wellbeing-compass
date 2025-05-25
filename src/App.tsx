@@ -15,7 +15,7 @@ import Login from "./pages/Login";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import EmergencyContacts from "./pages/EmergencyContacts";
-import Entertainment from "./pages/Entertainment";
+import Engagement from "./pages/Engagement";
 import Volunteering from "./pages/Volunteering";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
@@ -40,7 +40,7 @@ const App = () => (
                 <Route path="/onboarding" element={<Onboarding />} />
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/emergency-contacts" element={<EmergencyContacts />} />
-                <Route path="/entertainment" element={<Entertainment />} />
+                <Route path="/engagement" element={<Engagement />} />
                 <Route path="/volunteering" element={<Volunteering />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/subscription-plans" element={<SubscriptionPlans />} />
