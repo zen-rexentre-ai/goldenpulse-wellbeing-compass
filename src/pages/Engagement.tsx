@@ -13,6 +13,7 @@ import TriviaGame from '@/components/games/TriviaGame';
 import MemoryGame from '@/components/games/MemoryGame';
 import WordSearchGame from '@/components/games/WordSearchGame';
 import SudokuGame from '@/components/games/SudokuGame';
+import EngagementCarousel from '@/components/engagement/EngagementCarousel';
 
 const Engagement = () => {
   const { t } = useLanguage();
@@ -60,54 +61,54 @@ const Engagement = () => {
   const upcomingWebinars = [
     { 
       id: 1, 
-      title: "Healthy Aging: Tips for Seniors", 
+      title: "Yoga for Seniors: Mind-Body Connection", 
       date: "May 28, 2025", 
       time: "10:00 AM", 
       instructor: "Dr. Sarah Johnson", 
-      thumbnail: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=225&fit=crop"
+      thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=225&fit=crop"
     },
     { 
       id: 2, 
-      title: "Technology Made Simple", 
+      title: "Brain Training Techniques for Cognitive Health", 
       date: "June 2, 2025", 
       time: "2:00 PM", 
       instructor: "Prof. Michael Lee", 
-      thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=225&fit=crop"
+      thumbnail: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=225&fit=crop"
     },
     { 
       id: 3, 
-      title: "Financial Planning for Retirement", 
+      title: "Aerobic Exercises for Active Aging", 
       date: "June 5, 2025", 
       time: "11:00 AM", 
       instructor: "Ms. Emily Parker", 
-      thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=225&fit=crop"
+      thumbnail: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=400&h=225&fit=crop"
     }
   ];
   
   const recordedWebinars = [
     { 
       id: 1, 
-      title: "Nutrition for Seniors", 
+      title: "Memory Enhancement Through Mindfulness", 
       date: "May 15, 2025", 
       instructor: "Dr. Sarah Johnson", 
       duration: "45 minutes", 
-      thumbnail: "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?w=400&h=225&fit=crop"
+      thumbnail: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=225&fit=crop"
     },
     { 
       id: 2, 
-      title: "Mental Wellness in Later Life", 
+      title: "Mental Wellness and Brain Games", 
       date: "May 10, 2025", 
       instructor: "Dr. Robert Kumar", 
       duration: "55 minutes", 
-      thumbnail: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=225&fit=crop"
+      thumbnail: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=225&fit=crop"
     },
     { 
       id: 3, 
-      title: "Staying Active at Home", 
+      title: "Staying Mentally Active at Home", 
       date: "May 5, 2025", 
       instructor: "Ms. Lisa Thompson", 
       duration: "30 minutes", 
-      thumbnail: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=225&fit=crop"
+      thumbnail: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=225&fit=crop"
     }
   ];
 
@@ -147,6 +148,9 @@ const Engagement = () => {
       <Header title={t("engagement")} showBack />
       
       <main className="container max-w-6xl p-4 space-y-6">
+        {/* New Carousel Section */}
+        <EngagementCarousel />
+        
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-2">
             <h1 className="text-2xl font-bold">{t('engagement')}</h1>

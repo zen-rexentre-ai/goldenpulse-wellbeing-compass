@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/components/LanguageProvider';
 
 interface CarouselSlide {
@@ -12,7 +11,7 @@ interface CarouselSlide {
   type: 'image' | 'quote' | 'feature';
 }
 
-const VolunteeringCarousel = () => {
+const EngagementCarousel = () => {
   const { t } = useLanguage();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -22,36 +21,36 @@ const VolunteeringCarousel = () => {
     {
       id: 1,
       image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800&h=400&fit=crop",
-      title: "Community Garden Projects",
-      description: "Join fellow seniors in creating beautiful community spaces and growing fresh produce",
+      title: "Brain Training Games",
+      description: "Challenge your mind with engaging cognitive exercises designed for seniors",
       type: 'image'
     },
     {
       id: 2,
-      image: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=800&h=400&fit=crop",
-      title: "Senior Center Support",
-      description: "Help organize activities and provide companionship to fellow community members",
+      image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800&h=400&fit=crop",
+      title: "Memory Enhancement Activities",
+      description: "Strengthen your memory and cognitive abilities through fun interactive games",
       type: 'image'
     },
     {
       id: 3,
-      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&h=400&fit=crop",
-      title: "Food Bank Assistance",
-      description: "Make a meaningful impact by helping distribute food to families in need",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop",
+      title: "Wellness Webinars",
+      description: "Join expert-led sessions on yoga, fitness, and healthy aging practices",
       type: 'image'
     },
     {
       id: 4,
-      image: "https://images.unsplash.com/photo-1551601651-2a8555f1a136?w=800&h=400&fit=crop",
-      title: "Volunteering Impact Tracker",
-      description: "Monitor your community contribution and see the positive difference you're making",
+      image: "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&h=400&fit=crop",
+      title: "Cognitive Health Tracking",
+      description: "Monitor your mental wellness progress with our comprehensive scoring system",
       type: 'feature'
     },
     {
       id: 5,
-      image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=800&h=400&fit=crop",
-      title: "\"The best way to find yourself is to lose yourself in the service of others\"",
-      description: "Discover purpose and fulfillment through meaningful volunteer work",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop",
+      title: "\"A sharp mind is the best tool for aging gracefully\"",
+      description: "Keep your brain active and engaged for a fulfilling golden age",
       type: 'quote'
     }
   ];
@@ -114,7 +113,7 @@ const VolunteeringCarousel = () => {
       onKeyDown={handleKeyDown}
       tabIndex={0}
       role="region"
-      aria-label="Volunteering opportunities carousel"
+      aria-label="Engagement activities carousel"
       aria-live="polite"
     >
       {/* Main carousel container */}
@@ -212,4 +211,4 @@ const VolunteeringCarousel = () => {
   );
 };
 
-export default VolunteeringCarousel;
+export default EngagementCarousel;
