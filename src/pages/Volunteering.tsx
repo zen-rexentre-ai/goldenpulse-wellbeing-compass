@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
 import Header from '@/components/Header';
+import VolunteeringCarousel from '@/components/volunteering/VolunteeringCarousel';
 
 const volunteeringOpportunities = [
   {
@@ -55,6 +55,9 @@ const Volunteering = () => {
       <Header title={t("volunteer")} />
       
       <div className="flex-1 container max-w-6xl py-6 space-y-6">
+        {/* New Carousel Section */}
+        <VolunteeringCarousel />
+        
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <h1 className="text-2xl font-bold">{t("volunteer")}</h1>
