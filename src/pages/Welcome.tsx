@@ -26,9 +26,7 @@ const Welcome = () => {
         <ModuleCards />
         <FoundersSection />
         
-        {/* Database health check - temporary for testing */}
-        <HealthCheck />
-        
+             
         <div className="w-full space-y-3">
           <div className="flex justify-between items-center">
             <h2 className="text-2xl font-bold">{t("ready_to_embrace")}</h2>
