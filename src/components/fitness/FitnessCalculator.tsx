@@ -1,13 +1,16 @@
+
 import React, { useState } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import FitnessCalculatorForm from './FitnessCalculatorForm';
 import { FitnessFormValues } from './form/types';
 import FitnessCalculatorResults from './FitnessCalculatorResults';
 import { calculateFitnessScore } from '@/utils/fitnessScoreUtils';
-import { useToast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
+import { useAnonymousSession } from '@/hooks/useAnonymousSession';
+import { saveAnonymousFitnessCalculation, AnonymousFitnessCalculation } from '@/services/anonymousFitnessService';
 
 interface FitnessCalculatorProps {
   open: boolean;
@@ -25,8 +28,8 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
     normalizedValues: {[key: string]: number};
   } | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
-  const { toast } = useToast();
   const { t } = useLanguage();
+  const { sessionToken, isInitialized: isSessionInitialized } = useAnonymousSession();
 
   const handleFormSubmit = (values: FitnessFormValues) => {
     setFormData(values);
@@ -72,12 +75,44 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
     }, 1000);
   };
 
-  const handleSaveReport = () => {
-    // This would connect to Supabase in a real implementation
-    toast({
-      title: "Report Saved",
-      description: "Your health assessment has been saved and emailed to you.",
-    });
+  const handleSaveCalculation = async () => {
+    if (!calculationResult || !formData) return;
+
+    if (!isSessionInitialized || !sessionToken) {
+      toast.error("Anonymous session is not ready. Please try again in a moment.");
+      return;
+    }
+    
+    const chronicConditions = [
+      { condition_type: 'diabetes', severity_level: formData.diabetesLevel },
+      { condition_type: 'hypertension', severity_level: formData.hypertensionLevel },
+      { condition_type: 'heart_related', severity_level: formData.heartRelatedLevel },
+      { condition_type: 'cancer', severity_level: formData.cancerLevel },
+      { condition_type: 'others', severity_level: formData.othersLevel },
+    ].filter(c => c.severity_level > 0);
+
+    const payload: AnonymousFitnessCalculation = {
+      height: formData.height,
+      weight: formData.weight,
+      height_unit: formData.heightUnit,
+      weight_unit: formData.weightUnit,
+      age: formData.age,
+      gender: formData.gender,
+      exercise_minutes: formData.exerciseMinutes,
+      good_sleep_quality: formData.goodSleepQuality === 'yes',
+      smoking_status: formData.smokingStatus,
+      alcohol_units: formData.alcoholUnits,
+      stress_level: formData.stressLevel,
+      heart_rate: formData.heartRate,
+      systolic_bp: formData.systolicBP,
+      diastolic_bp: formData.diastolicBP,
+      hba1c: formData.hba1c,
+      chronicConditions,
+      score: calculationResult.score,
+      recommendations: calculationResult.recommendations,
+    };
+
+    await saveAnonymousFitnessCalculation(payload);
   };
 
   const handleReset = () => {
@@ -118,7 +153,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
             score={calculationResult.score}
             recommendations={calculationResult.recommendations}
             normalizedValues={calculationResult.normalizedValues}
-            onSave={handleSaveReport}
+            onSave={handleSaveCalculation}
             onReset={handleReset}
           />
         ) : (

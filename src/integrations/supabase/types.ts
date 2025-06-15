@@ -9,6 +9,177 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      anonymous_health_calculations: {
+        Row: {
+          age: number
+          alcohol_units: number | null
+          created_at: string | null
+          diastolic_bp: number | null
+          exercise_minutes: number | null
+          gender: string | null
+          good_sleep_quality: boolean | null
+          hba1c: number | null
+          heart_rate: number | null
+          height: number
+          height_unit: string
+          id: string
+          score: number
+          session_id: string
+          smoking_status: string | null
+          stress_level: number | null
+          systolic_bp: number | null
+          weight: number
+          weight_unit: string
+        }
+        Insert: {
+          age: number
+          alcohol_units?: number | null
+          created_at?: string | null
+          diastolic_bp?: number | null
+          exercise_minutes?: number | null
+          gender?: string | null
+          good_sleep_quality?: boolean | null
+          hba1c?: number | null
+          heart_rate?: number | null
+          height: number
+          height_unit: string
+          id?: string
+          score: number
+          session_id: string
+          smoking_status?: string | null
+          stress_level?: number | null
+          systolic_bp?: number | null
+          weight: number
+          weight_unit: string
+        }
+        Update: {
+          age?: number
+          alcohol_units?: number | null
+          created_at?: string | null
+          diastolic_bp?: number | null
+          exercise_minutes?: number | null
+          gender?: string | null
+          good_sleep_quality?: boolean | null
+          hba1c?: number | null
+          heart_rate?: number | null
+          height?: number
+          height_unit?: string
+          id?: string
+          score?: number
+          session_id?: string
+          smoking_status?: string | null
+          stress_level?: number | null
+          systolic_bp?: number | null
+          weight?: number
+          weight_unit?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anonymous_health_calculations_session_id_fkey"
+            columns: ["session_id"]
+            isOneToOne: false
+            referencedRelation: "anonymous_sessions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      anonymous_medical_conditions: {
+        Row: {
+          calculation_id: string
+          condition_type: string
+          created_at: string | null
+          id: string
+          severity_level: number
+        }
+        Insert: {
+          calculation_id: string
+          condition_type: string
+          created_at?: string | null
+          id?: string
+          severity_level: number
+        }
+        Update: {
+          calculation_id?: string
+          condition_type?: string
+          created_at?: string | null
+          id?: string
+          severity_level?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anonymous_medical_conditions_calculation_id_fkey"
+            columns: ["calculation_id"]
+            isOneToOne: false
+            referencedRelation: "anonymous_health_calculations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      anonymous_recommendations: {
+        Row: {
+          calculation_id: string
+          created_at: string | null
+          id: string
+          impact: string
+          priority: string
+          recommendation_text: string
+        }
+        Insert: {
+          calculation_id: string
+          created_at?: string | null
+          id?: string
+          impact: string
+          priority: string
+          recommendation_text: string
+        }
+        Update: {
+          calculation_id?: string
+          created_at?: string | null
+          id?: string
+          impact?: string
+          priority?: string
+          recommendation_text?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "anonymous_recommendations_calculation_id_fkey"
+            columns: ["calculation_id"]
+            isOneToOne: false
+            referencedRelation: "anonymous_health_calculations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      anonymous_sessions: {
+        Row: {
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          ip_address: unknown | null
+          last_activity: string | null
+          session_token: string
+          user_agent: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          last_activity?: string | null
+          session_token: string
+          user_agent?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          ip_address?: unknown | null
+          last_activity?: string | null
+          session_token?: string
+          user_agent?: string | null
+        }
+        Relationships: []
+      }
       appointments: {
         Row: {
           created_at: string
@@ -282,7 +453,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_anonymous_session_id: {
+        Args: { p_session_token: string }
+        Returns: string
+      }
     }
     Enums: {
       [_ in never]: never
