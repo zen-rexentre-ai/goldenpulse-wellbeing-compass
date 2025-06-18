@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, ShieldAlert, Handshake, Gamepad2 } from 'lucide-react';
+import { Home, Siren, Handshake, Gamepad2 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/components/LanguageProvider';
 import { useSubscription } from '@/contexts/SubscriptionContext';
@@ -19,7 +19,7 @@ const BottomNavigation: React.FC = () => {
   // Updated navigation items with bright red emergency icon
   const navItems = [
     { path: '/dashboard', label: t("home"), icon: Home, feature: 'dashboard' },
-    { path: '/emergency-contacts', label: t("emergency"), icon: ShieldAlert, feature: 'emergency', isEmergency: true },
+    { path: '/emergency-contacts', label: t("emergency"), icon: Siren, feature: 'emergency', isEmergency: true },
     { path: '/engagement', label: t("engagement"), icon: Gamepad2, feature: 'games' },
     { path: '/volunteering', label: t("volunteer"), icon: Handshake, feature: 'volunteering' },
   ];

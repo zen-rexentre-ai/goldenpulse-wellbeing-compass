@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import Logo from '@/components/Logo';
-import { Bell, Settings, ShieldAlert } from 'lucide-react';
+import { Bell, Settings, Siren } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import LanguageSelector from './LanguageSelector';
 import ScreenReader from './ScreenReader';
@@ -58,7 +58,7 @@ const Header: React.FC<HeaderProps> = ({ title, showBack = false }) => {
             className="hover:bg-red-50"
           >
             <Link to="/emergency-contacts">
-              <ShieldAlert className="h-5 w-5 text-red-500" />
+              <Siren className="h-5 w-5 text-red-500" />
             </Link>
           </Button>
           
