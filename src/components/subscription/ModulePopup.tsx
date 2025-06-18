@@ -11,7 +11,7 @@ interface ModulePopupProps {
 }
 
 const ModulePopup: React.FC<ModulePopupProps> = ({ open, onOpenChange, moduleType }) => {
-  const title = moduleType === 'wellness' ? 'Wellness Module Features' : 'Community Module Features';
+  const title = moduleType === 'wellness' ? 'Personal Wellness Features' : 'Engagement';
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
