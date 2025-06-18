@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Heart, AlertTriangle, Brain, UsersRound } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -18,7 +17,12 @@ const WellnessModuleSection: React.FC<WellnessModuleSectionProps> = ({
     {
       title: 'Personalized Wellness Journey',
       icon: <Heart className="h-8 w-8 text-golden-purple" />,
-      description: 'Expert medical assessment turns your health reports into a personalized wellness plan—track your journey and see real progress with your dynamic Wellness Score.',
+      description: [
+        'Expert medical assessment turns your health reports into a personalized wellness plan',
+        'Expert Tailored Videos to assist your fitness Routine',
+        'Track your journey and see real progress with your dynamic Personal Wellness Score',
+        'Medical Review at periodic intervals'
+      ],
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
     },

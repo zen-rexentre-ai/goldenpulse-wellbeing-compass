@@ -16,7 +16,18 @@ const FeatureCard = ({ title, icon, description, gradient, textColor }: FeatureC
       </CardHeader>
       <CardContent className="relative z-10">
         <CardDescription className={cn("text-center font-medium", textColor)}>
-          {description}
+          {Array.isArray(description) ? (
+            <ul className="space-y-2 text-left">
+              {description.map((item, index) => (
+                <li key={index} className="flex items-start gap-2">
+                  <span className="text-golden-dark text-lg mt-0.5">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            description
+          )}
         </CardDescription>
       </CardContent>
     </Card>

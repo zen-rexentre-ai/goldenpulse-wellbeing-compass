@@ -12,7 +12,7 @@ export type PlanType = 'free' | 'basic' | 'premium';
 export interface FeatureCardProps {
   title: string;
   icon: React.ReactNode;
-  description: string;
+  description: string | string[];
   gradient: string;
   textColor: string;
 }
