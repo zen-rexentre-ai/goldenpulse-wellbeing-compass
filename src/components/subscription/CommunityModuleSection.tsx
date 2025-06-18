@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { HelpingHand, Users } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -59,8 +58,6 @@ const CommunityModuleSection: React.FC<CommunityModuleSectionProps> = ({
         'Games to Keep Your Mind Fresh and Active',
         'Fun & Engaging Puzzles: Solve riddles, crosswords, and brain teasers—perfect for a quick mental workout.',
         'Memory Boosters: Play matching games and recall challenges to sharpen your memory.',
-        'Strategic Thinking: Enjoy strategy games that test your planning and problem-solving skills.',
-        'Speed and Reaction Games: Try quick-reaction games to keep your reflexes sharp.',
         'Educational Trivia: Test your knowledge with quizzes on a variety of topics—learn while you play!',
         'Daily Challenges: Compete with others or beat your own high scores in daily game challenges.',
         'Mindfulness Games: Relax with games designed to calm your mind and reduce stress.'
