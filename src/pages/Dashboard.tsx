@@ -1,9 +1,6 @@
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AccessibilityControls } from '@/components/AccessibilityControls';
-import { Bell } from 'lucide-react';
-import Logo from '@/components/Logo';
 import { useToast } from '@/hooks/use-toast';
 import { DetailedAnalysisDialog } from '@/components/DetailedAnalysisDialog';
 import { FitnessScoreCard } from '@/components/dashboard/FitnessScoreCard';
@@ -14,6 +11,9 @@ import ScreenReader from '@/components/ScreenReader';
 import { useSubscription } from '@/contexts/SubscriptionContext';
 import { EmbossedCard } from '@/components/ui/card';
 import FitnessCalculatorResults from '@/components/fitness/FitnessCalculatorResults';
+import Header from '@/components/Header';
+import { Bell } from 'lucide-react';
+import Logo from '@/components/Logo';
 
 const Dashboard = () => {
   const [showAccessibility, setShowAccessibility] = useState(false);
@@ -140,30 +140,7 @@ const Dashboard = () => {
   if (showWellnessAnalysis) {
     return (
       <div className="min-h-screen bg-background pb-16">
-        {/* Header */}
-        <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b p-4">
-          <div className="container max-w-6xl flex justify-between items-center">
-            <Logo size="sm" className="max-w-[150px]" />
-            
-            <div className="flex gap-2">
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={() => setShowAccessibility(!showAccessibility)}
-                aria-label="Accessibility Settings"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <path d="M12 8v4l2 2" />
-                </svg>
-              </Button>
-              
-              <Button variant="ghost" size="icon" aria-label={t("notifications")}>
-                <Bell />
-              </Button>
-            </div>
-          </div>
-        </header>
+        <Header title={t("wellness_analysis")} showBack />
         
         <main className="container max-w-6xl p-4">
           <div className="mb-6">
@@ -199,30 +176,8 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-secondary pb-16">
-      {/* Header */}
-      <header className="sticky top-0 z-10 bg-background/80 backdrop-blur-sm border-b p-4">
-        <div className="container max-w-6xl flex justify-between items-center">
-          <Logo size="sm" className="max-w-[150px]" />
-          
-          <div className="flex gap-2">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setShowAccessibility(!showAccessibility)}
-              aria-label="Accessibility Settings"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 8v4l2 2" />
-              </svg>
-            </Button>
-            
-            <Button variant="ghost" size="icon" aria-label={t("notifications")}>
-              <Bell />
-            </Button>
-          </div>
-        </div>
-      </header>
+      {/* Use shared Header component with emergency icon */}
+      <Header />
       
       {/* Accessibility Controls */}
       {showAccessibility && (
@@ -232,6 +187,21 @@ const Dashboard = () => {
       )}
       
       <main className="container max-w-6xl p-4 space-y-6">
+        {/* Accessibility toggle button */}
+        <div className="flex justify-end mb-4">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setShowAccessibility(!showAccessibility)}
+            aria-label="Accessibility Settings"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4l2 2" />
+            </svg>
+          </Button>
+        </div>
+        
         {/* Current Plan Indicator - Made clickable */}
         <div className="flex justify-between items-center">
           <EmbossedCard 
