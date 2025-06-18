@@ -24,7 +24,7 @@ const Welcome = () => {
       <div className="w-full max-w-md flex flex-col items-center gap-2 animate-fade-in py-2">
         <Hero />
         <ModuleCards />
-        <FoundersSection />
+ 
         
              
         <div className="w-full space-y-3">
