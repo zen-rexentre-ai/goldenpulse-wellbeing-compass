@@ -30,34 +30,21 @@ const WellnessModuleSection: React.FC<WellnessModuleSectionProps> = ({
     {
       title: 'Emergency & SoS Tracking',
       icon: <Siren className="h-8 w-8 text-red-500" />,
-      description: [
-        'One Touch SoS button to trigger an emergency notification to Kin/primary physician/Hospital',
-        'Location tracking feature for prompt response',
-        'Always "on" tracking feature for nearest kin'
-      ],
+      description: 'Real-time emergency SoS message to your kin/personal physician/Hospital.',
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
     },
     {
       title: 'AI Powered Diagnostics',
       icon: <Brain className="h-8 w-8 text-golden-purple" />,
-      description: [
-        'Allows selection of wellness goals in consultation with medical team',
-        'Upload medical reports',
-        'Get trends of wellness scores, daily routine, and recommendations',
-        'Get Advanced analytics highlighting overall health with recommendations from medical team'
-      ],
+      description: 'Advanced AI-driven health diagnostics for proactive care.',
       gradient: 'bg-gradient-to-br from-golden-orange to-golden-pink',
       textColor: 'text-golden-dark'
     }, 
     {
       title: 'Access to kin',
       icon: <UsersRound className="h-8 w-8 text-golden-purple" />,
-      description: [
-        'Track Engagement Trends & Results',
-        'Track Location at real time',
-        'Get Emergency notification'
-      ],
+      description: 'Your kin can track your progress in realtime.',
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
@@ -65,7 +52,6 @@ const WellnessModuleSection: React.FC<WellnessModuleSectionProps> = ({
 
   const content = (
     <div className="space-y-6">
-      <h3 className="text-2xl font-bold text-center text-golden-dark">Wellness Module</h3>
       <div className={`grid grid-cols-1 ${compact ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-4'} gap-6`}>
         {wellnessFeatures.map((card, index) => (
           <FeatureCard

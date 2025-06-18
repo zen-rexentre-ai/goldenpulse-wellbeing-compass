@@ -47,7 +47,7 @@ const CommunityModuleSection: React.FC<CommunityModuleSectionProps> = ({
 
   const content = (
     <div className="space-y-6">
-      <h3 className="text-2xl font-bold text-center text-golden-dark">Community Module</h3>
+     
       <div className={`grid grid-cols-1 ${compact ? 'md:grid-cols-2' : 'md:grid-cols-2 lg:grid-cols-4'} gap-6`}>
         {communityFeatures.map((card, index) => (
           <FeatureCard
