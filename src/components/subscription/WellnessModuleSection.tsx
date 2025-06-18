@@ -30,21 +30,34 @@ const WellnessModuleSection: React.FC<WellnessModuleSectionProps> = ({
     {
       title: 'Emergency & SoS Tracking',
       icon: <Siren className="h-8 w-8 text-red-500" />,
-      description: 'Real-time emergency SoS message to your kin/personal physician/Hospital.',
+      description: [
+        'One Touch SoS button to trigger an emergency notification to Kin/primary physician/Hospital',
+        'Location tracking feature for prompt response',
+        'Always "on" tracking feature for nearest kin'
+      ],
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
     },
     {
       title: 'AI Powered Diagnostics',
       icon: <Brain className="h-8 w-8 text-golden-purple" />,
-      description: 'Advanced AI-driven health diagnostics for proactive care.',
+      description: [
+        'Allows selection of wellness goals in consultation with medical team',
+        'Upload medical reports',
+        'Get trends of wellness scores, daily routine, and recommendations',
+        'Get Advanced analytics highlighting overall health with recommendations from medical team'
+      ],
       gradient: 'bg-gradient-to-br from-golden-orange to-golden-pink',
       textColor: 'text-golden-dark'
     }, 
     {
       title: 'Access to kin',
       icon: <UsersRound className="h-8 w-8 text-golden-purple" />,
-      description: 'Your kin can track your progress in realtime.',
+      description: [
+        'Track Engagement Trends & Results',
+        'Track Location at real time',
+        'Get Emergency notification'
+      ],
       gradient: 'bg-gradient-to-br from-golden-peach to-golden-yellow',
       textColor: 'text-golden-dark'
     },
