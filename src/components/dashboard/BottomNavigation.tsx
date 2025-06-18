@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Home, Siren, Handshake, Gamepad2 } from 'lucide-react';
+import { Home, ShieldAlert, Handshake, Gamepad2 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '@/components/LanguageProvider';
 import { useSubscription } from '@/contexts/SubscriptionContext';
@@ -16,10 +16,10 @@ const BottomNavigation: React.FC = () => {
   // Helper function to determine if a link is active
   const isActive = (path: string) => currentPath === path;
 
-  // Updated navigation items with engagement instead of entertainment
+  // Updated navigation items with bright red emergency icon
   const navItems = [
     { path: '/dashboard', label: t("home"), icon: Home, feature: 'dashboard' },
-    { path: '/emergency-contacts', label: t("emergency"), icon: Siren, feature: 'emergency' },
+    { path: '/emergency-contacts', label: t("emergency"), icon: ShieldAlert, feature: 'emergency', isEmergency: true },
     { path: '/engagement', label: t("engagement"), icon: Gamepad2, feature: 'games' },
     { path: '/volunteering', label: t("volunteer"), icon: Handshake, feature: 'volunteering' },
   ];
@@ -28,10 +28,10 @@ const BottomNavigation: React.FC = () => {
   const renderNavItem = (item) => {
     const hasAccess = hasFeatureAccess(item.feature);
     
-    // Common button content with responsive design
+    // Common button content with responsive design and emergency styling
     const buttonContent = (
       <>
-        <item.icon className="h-5 w-5 sm:h-6 sm:w-6" />
+        <item.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${item.isEmergency ? 'text-red-500' : ''}`} />
         <span className="hidden sm:block text-xs">{item.label}</span>
       </>
     );
@@ -62,7 +62,7 @@ const BottomNavigation: React.FC = () => {
       <Button 
         key={item.path}
         variant={isActive(item.path) ? "default" : "ghost"} 
-        className="flex flex-col items-center gap-1 p-2 sm:p-3 min-h-[60px] sm:min-h-[70px]" 
+        className={`flex flex-col items-center gap-1 p-2 sm:p-3 min-h-[60px] sm:min-h-[70px] ${item.isEmergency && isActive(item.path) ? 'bg-red-500 hover:bg-red-600' : ''}`}
         asChild
       >
         <Link to={item.path}>

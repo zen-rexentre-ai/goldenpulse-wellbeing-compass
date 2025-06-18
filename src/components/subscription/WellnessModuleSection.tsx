@@ -1,5 +1,6 @@
+
 import React from 'react';
-import { Heart, AlertTriangle, Brain, UsersRound } from 'lucide-react';
+import { Heart, ShieldAlert, Brain, UsersRound } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import FeatureCard from '@/components/subscription/FeatureCard';
 import { FeatureCardProps } from '@/types/subscription';
@@ -28,7 +29,7 @@ const WellnessModuleSection: React.FC<WellnessModuleSectionProps> = ({
     },
     {
       title: 'Emergency & SoS Tracking',
-      icon: <AlertTriangle className="h-8 w-8 text-golden-purple" />,
+      icon: <ShieldAlert className="h-8 w-8 text-red-500" />,
       description: 'Real-time emergency SoS message to your kin/personal physician/Hospital.',
       gradient: 'bg-gradient-to-br from-golden-yellow to-golden-orange',
       textColor: 'text-golden-dark'
