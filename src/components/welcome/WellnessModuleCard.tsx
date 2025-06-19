@@ -1,14 +1,14 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Info } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import ModuleCard from './ModuleCard';
-import ModulePopup from '@/components/subscription/ModulePopup';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
 
 const WellnessModuleCard = () => {
   const { t } = useLanguage();
-  const [popupOpen, setPopupOpen] = useState(false);
+  const navigate = useNavigate();
   
   const wellnessModuleItems = [
     'Personalized Wellness Journey',
@@ -19,7 +19,7 @@ const WellnessModuleCard = () => {
   ];
 
   const handleCardClick = () => {
-    setPopupOpen(true);
+    navigate('/personal-wellness-features');
   };
 
   return (
@@ -37,12 +37,6 @@ const WellnessModuleCard = () => {
           <Info className="h-5 w-5 text-golden-dark opacity-70 hover:opacity-100" />
         </div>
       </div>
-      
-      <ModulePopup 
-        open={popupOpen}
-        onOpenChange={setPopupOpen}
-        moduleType="wellness"
-      />
     </div>
   );
 };

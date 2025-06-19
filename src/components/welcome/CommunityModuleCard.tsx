@@ -1,24 +1,25 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Info } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import ModuleCard from './ModuleCard';
-import ModulePopup from '@/components/subscription/ModulePopup';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
 
 const CommunityModuleCard = () => {
   const { t } = useLanguage();
-  const [popupOpen, setPopupOpen] = useState(false);
+  const navigate = useNavigate();
   
   const communityModuleItems = [
     'Volunteering Opportunities',
-    'Webinars',
-    'User Groups',
-    'Fun and Cognitive Games'
+    'Community Groups & Forums',
+    'Live & Recorded Webinars',
+    'Brain Training Games',
+    'Social Engagement Activities'
   ];
 
   const handleCardClick = () => {
-    setPopupOpen(true);
+    navigate('/engagement-features');
   };
 
   return (
@@ -29,20 +30,13 @@ const CommunityModuleCard = () => {
       >
         <ModuleCard 
           title={t("community_module")} 
-          items={communityModuleItems} 
+          items={communityModuleItems}
           gradientClasses="bg-gradient-to-br from-golden-yellow to-golden-orange"
         />
         <div className="absolute top-2 right-2 flex items-center gap-2">
           <Info className="h-5 w-5 text-golden-dark opacity-70 hover:opacity-100" />
-
         </div>
       </div>
-      
-      <ModulePopup 
-        open={popupOpen}
-        onOpenChange={setPopupOpen}
-        moduleType="community"
-      />
     </div>
   );
 };

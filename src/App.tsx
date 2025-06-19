@@ -21,6 +21,8 @@ import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 import SubscriptionPlans from "./pages/SubscriptionPlans";
 import WellnessCalculator from "./pages/WellnessCalculator";
+import PersonalWellnessFeatures from "./pages/PersonalWellnessFeatures";
+import EngagementFeatures from "./pages/EngagementFeatures";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +48,8 @@ const App = () => (
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/subscription-plans" element={<SubscriptionPlans />} />
                 <Route path="/wellness-calculator" element={<WellnessCalculator />} />
+                <Route path="/personal-wellness-features" element={<PersonalWellnessFeatures />} />
+                <Route path="/engagement-features" element={<EngagementFeatures />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
