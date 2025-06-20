@@ -180,6 +180,105 @@ export type Database = {
         }
         Relationships: []
       }
+      anonymous_wellness_calculations: {
+        Row: {
+          age: number
+          alcohol_units: number | null
+          calculated_score: number
+          calculation_date: string | null
+          cancer_level: number | null
+          created_at: string | null
+          diabetes_level: number | null
+          diastolic_bp: number | null
+          email: string | null
+          exercise_minutes: number | null
+          gender: string | null
+          good_sleep_quality: boolean | null
+          hba1c: number | null
+          heart_rate: number | null
+          heart_related_level: number | null
+          height: number
+          height_unit: string
+          hypertension_level: number | null
+          id: string
+          name: string | null
+          normalized_values: Json | null
+          others_level: number | null
+          phone: string | null
+          recommendations: Json | null
+          session_token: string | null
+          smoking_status: string | null
+          stress_level: string | null
+          systolic_bp: number | null
+          weight: number
+          weight_unit: string
+        }
+        Insert: {
+          age: number
+          alcohol_units?: number | null
+          calculated_score: number
+          calculation_date?: string | null
+          cancer_level?: number | null
+          created_at?: string | null
+          diabetes_level?: number | null
+          diastolic_bp?: number | null
+          email?: string | null
+          exercise_minutes?: number | null
+          gender?: string | null
+          good_sleep_quality?: boolean | null
+          hba1c?: number | null
+          heart_rate?: number | null
+          heart_related_level?: number | null
+          height: number
+          height_unit: string
+          hypertension_level?: number | null
+          id?: string
+          name?: string | null
+          normalized_values?: Json | null
+          others_level?: number | null
+          phone?: string | null
+          recommendations?: Json | null
+          session_token?: string | null
+          smoking_status?: string | null
+          stress_level?: string | null
+          systolic_bp?: number | null
+          weight: number
+          weight_unit: string
+        }
+        Update: {
+          age?: number
+          alcohol_units?: number | null
+          calculated_score?: number
+          calculation_date?: string | null
+          cancer_level?: number | null
+          created_at?: string | null
+          diabetes_level?: number | null
+          diastolic_bp?: number | null
+          email?: string | null
+          exercise_minutes?: number | null
+          gender?: string | null
+          good_sleep_quality?: boolean | null
+          hba1c?: number | null
+          heart_rate?: number | null
+          heart_related_level?: number | null
+          height?: number
+          height_unit?: string
+          hypertension_level?: number | null
+          id?: string
+          name?: string | null
+          normalized_values?: Json | null
+          others_level?: number | null
+          phone?: string | null
+          recommendations?: Json | null
+          session_token?: string | null
+          smoking_status?: string | null
+          stress_level?: string | null
+          systolic_bp?: number | null
+          weight?: number
+          weight_unit?: string
+        }
+        Relationships: []
+      }
       appointments: {
         Row: {
           created_at: string

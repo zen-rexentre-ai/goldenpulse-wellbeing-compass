@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -77,9 +78,8 @@ const WellnessCalculator = () => {
     setIsSaving(true);
     
     try {
-      // For now, save as anonymous calculation
-      // In a real app, you'd check if user is authenticated and use appropriate method
-      const sessionToken = localStorage.getItem('anonymous_session_token') || 'demo-session';
+      // Save to the new comprehensive anonymous wellness calculations table
+      const sessionToken = `anonymous-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
       
       const result = await enhancedFitnessService.saveAnonymousCalculation(
         formData,

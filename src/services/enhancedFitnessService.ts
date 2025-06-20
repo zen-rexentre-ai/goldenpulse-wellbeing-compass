@@ -105,45 +105,59 @@ export class EnhancedFitnessService {
   }
 
   /**
-   * Save fitness calculation for anonymous users
+   * Save fitness calculation for anonymous users using the new comprehensive table
    */
   async saveAnonymousCalculation(
     formData: FitnessFormValues,
     result: FitnessScoreResult,
-    sessionToken: string
+    sessionToken?: string
   ): Promise<{ success: boolean; data?: any; error?: any }> {
     try {
-      // Get session ID from token
-      const { data: sessionData } = await supabase.rpc('get_anonymous_session_id', {
-        p_session_token: sessionToken
-      });
-
-      if (!sessionData) {
-        toast.error('Session expired. Please refresh and try again.');
-        return { success: false, error: 'Invalid session' };
-      }
-
-      // Insert main calculation record
+      // Insert comprehensive calculation record into the new table
       const { data: calculationData, error: calculationError } = await supabase
-        .from('anonymous_health_calculations')
+        .from('anonymous_wellness_calculations')
         .insert({
-          session_id: sessionData,
+          // Basic Information
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          age: formData.age || 0,
+          gender: formData.gender,
+          
+          // Body Metrics
           height: formData.height || 0,
           weight: formData.weight || 0,
-          age: formData.age || 0,
+          height_unit: formData.heightUnit || 'cm',
+          weight_unit: formData.weightUnit || 'kg',
+          
+          // Lifestyle Data
           exercise_minutes: formData.exerciseMinutes,
           good_sleep_quality: formData.goodSleepQuality === 'yes',
           smoking_status: formData.smokingStatus,
           alcohol_units: formData.alcoholUnits,
-          stress_level: formData.stressLevel === 'high' ? 2 : formData.stressLevel === 'mild' ? 1 : 0,
+          stress_level: formData.stressLevel,
+          
+          // Optional Health Metrics
           heart_rate: formData.heartRate,
           systolic_bp: formData.systolicBP,
           diastolic_bp: formData.diastolicBP,
           hba1c: formData.hba1c,
-          height_unit: formData.heightUnit || 'cm',
-          weight_unit: formData.weightUnit || 'kg',
-          gender: formData.gender,
-          score: result.score
+          
+          // Medical Conditions (slider values)
+          diabetes_level: formData.diabetesLevel || 0,
+          hypertension_level: formData.hypertensionLevel || 0,
+          heart_related_level: formData.heartRelatedLevel || 0,
+          cancer_level: formData.cancerLevel || 0,
+          others_level: formData.othersLevel || 0,
+          
+          // Results
+          calculated_score: result.score,
+          recommendations: result.recommendations, // Store as JSONB
+          normalized_values: result.normalizedValues, // Store as JSONB
+          
+          // Metadata
+          session_token: sessionToken,
+          calculation_date: new Date().toISOString()
         })
         .select()
         .single();
@@ -154,44 +168,7 @@ export class EnhancedFitnessService {
         return { success: false, error: calculationError };
       }
 
-      // Save medical conditions and recommendations for anonymous users
-      if (calculationData) {
-        // Save medical conditions
-        const conditions = [
-          { conditionType: 'diabetes', severityLevel: formData.diabetesLevel || 0 },
-          { conditionType: 'hypertension', severityLevel: formData.hypertensionLevel || 0 },
-          { conditionType: 'heart_related', severityLevel: formData.heartRelatedLevel || 0 },
-          { conditionType: 'cancer', severityLevel: formData.cancerLevel || 0 },
-          { conditionType: 'others', severityLevel: formData.othersLevel || 0 }
-        ].filter(condition => condition.severityLevel > 0);
-
-        if (conditions.length > 0) {
-          const conditionsToInsert = conditions.map(condition => ({
-            calculation_id: calculationData.id,
-            condition_type: condition.conditionType,
-            severity_level: condition.severityLevel
-          }));
-
-          await supabase
-            .from('anonymous_medical_conditions')
-            .insert(conditionsToInsert);
-        }
-
-        // Save recommendations
-        if (result.recommendations.length > 0) {
-          const recommendationsToInsert = result.recommendations.map(rec => ({
-            calculation_id: calculationData.id,
-            recommendation_text: rec.text,
-            impact: rec.impact,
-            priority: rec.priority
-          }));
-
-          await supabase
-            .from('anonymous_recommendations')
-            .insert(recommendationsToInsert);
-        }
-      }
-
+      console.log('Anonymous wellness calculation saved successfully:', calculationData.id);
       toast.success('Health calculation saved successfully!');
       return { success: true, data: calculationData };
 
@@ -247,6 +224,29 @@ export class EnhancedFitnessService {
     } catch (error) {
       console.error('Unexpected error fetching latest calculation:', error);
       return { success: false, error };
+    }
+  }
+
+  /**
+   * Get anonymous wellness calculations (for admin purposes or analytics)
+   */
+  async getAnonymousCalculations(limit: number = 100): Promise<{ success: boolean; data: any[]; error?: any }> {
+    try {
+      const { data, error } = await supabase
+        .from('anonymous_wellness_calculations')
+        .select('*')
+        .order('calculation_date', { ascending: false })
+        .limit(limit);
+
+      if (error) {
+        console.error('Error fetching anonymous calculations:', error);
+        return { success: false, data: [], error };
+      }
+
+      return { success: true, data: data || [] };
+    } catch (error) {
+      console.error('Unexpected error fetching anonymous calculations:', error);
+      return { success: false, data: [], error };
     }
   }
 }

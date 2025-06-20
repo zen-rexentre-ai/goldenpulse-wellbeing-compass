@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
+import { enhancedFitnessService } from '@/services/enhancedFitnessService';
 
 interface FitnessCalculatorProps {
   open: boolean;
@@ -26,6 +27,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
     normalizedValues: {[key: string]: number};
   } | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const { t } = useLanguage();
 
   const handleFormSubmit = (values: FitnessFormValues) => {
@@ -73,7 +75,34 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
   };
 
   const handleSaveCalculation = async () => {
-    toast.info("Saving anonymous reports is a feature coming soon!");
+    if (!formData || !calculationResult) {
+      toast.error("No calculation to save");
+      return;
+    }
+
+    setIsSaving(true);
+    
+    try {
+      // Save to the new comprehensive anonymous wellness calculations table
+      const sessionToken = `dialog-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      
+      const result = await enhancedFitnessService.saveAnonymousCalculation(
+        formData,
+        calculationResult,
+        sessionToken
+      );
+
+      if (result.success) {
+        toast.success("Health calculation saved successfully!");
+      } else {
+        toast.error("Failed to save calculation. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error saving calculation:', error);
+      toast.error("An error occurred while saving. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleReset = () => {
@@ -116,6 +145,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
             normalizedValues={calculationResult.normalizedValues}
             onSave={handleSaveCalculation}
             onReset={handleReset}
+            isSaving={isSaving}
           />
         ) : (
           <FitnessCalculatorForm onSubmit={handleFormSubmit} />
