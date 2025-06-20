@@ -28,7 +28,7 @@ export async function saveFitnessCalculation(calculation: FitnessCalculation) {
       heightUnit: 'cm' as const,
       weightUnit: 'kg' as const,
       goodSleepQuality: 'yes' as const,
-      smokingStatus: 'never',
+      smokingStatus: 'never' as const, // Fix: specify exact type
       alcoholUnits: 0,
       diabetesLevel: 0,
       hypertensionLevel: 0,
