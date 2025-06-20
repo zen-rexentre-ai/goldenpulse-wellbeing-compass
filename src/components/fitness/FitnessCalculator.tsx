@@ -28,11 +28,13 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
   } | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [isAutoSaved, setIsAutoSaved] = useState(false);
   const { t } = useLanguage();
 
-  const handleFormSubmit = (values: FitnessFormValues) => {
+  const handleFormSubmit = async (values: FitnessFormValues) => {
     setFormData(values);
     setIsCalculating(true);
+    setIsAutoSaved(false);
     
     // Convert form values to fitness calculation format
     const fitnessData = {
@@ -66,15 +68,39 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
       }
     };
     
-    // Simulate calculation delay
-    setTimeout(() => {
+    // Simulate calculation delay, then auto-save
+    setTimeout(async () => {
       const result = calculateFitnessScore(fitnessData);
       setCalculationResult(result);
       setIsCalculating(false);
+      
+      // Automatically save the calculation
+      setIsSaving(true);
+      try {
+        const sessionToken = `dialog-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+        
+        const saveResult = await enhancedFitnessService.saveAnonymousCalculation(
+          values,
+          result,
+          sessionToken
+        );
+
+        if (saveResult.success) {
+          setIsAutoSaved(true);
+          toast.success("Health calculation completed and saved automatically!");
+        } else {
+          toast.error("Calculation completed but failed to save. You can try saving manually.");
+        }
+      } catch (error) {
+        console.error('Error auto-saving calculation:', error);
+        toast.error("Calculation completed but auto-save failed. You can try saving manually.");
+      } finally {
+        setIsSaving(false);
+      }
     }, 1000);
   };
 
-  const handleSaveCalculation = async () => {
+  const handleManualSave = async () => {
     if (!formData || !calculationResult) {
       toast.error("No calculation to save");
       return;
@@ -83,8 +109,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
     setIsSaving(true);
     
     try {
-      // Save to the new comprehensive anonymous wellness calculations table
-      const sessionToken = `dialog-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const sessionToken = `dialog-manual-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
       
       const result = await enhancedFitnessService.saveAnonymousCalculation(
         formData,
@@ -93,6 +118,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
       );
 
       if (result.success) {
+        setIsAutoSaved(true);
         toast.success("Health calculation saved successfully!");
       } else {
         toast.error("Failed to save calculation. Please try again.");
@@ -108,6 +134,7 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
   const handleReset = () => {
     setFormData(null);
     setCalculationResult(null);
+    setIsAutoSaved(false);
   };
 
   const handleClose = () => {
@@ -133,19 +160,22 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
           </div>
         </DialogHeader>
         
-        {isCalculating ? (
+        {isCalculating || isSaving ? (
           <div className="flex flex-col items-center justify-center py-12">
             <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-            <p className="mt-4 text-muted-foreground">Calculating your health score...</p>
+            <p className="mt-4 text-muted-foreground">
+              {isCalculating ? "Calculating your health score..." : "Saving your results..."}
+            </p>
           </div>
         ) : calculationResult ? (
           <FitnessCalculatorResults 
             score={calculationResult.score}
             recommendations={calculationResult.recommendations}
             normalizedValues={calculationResult.normalizedValues}
-            onSave={handleSaveCalculation}
+            onSave={handleManualSave}
             onReset={handleReset}
             isSaving={isSaving}
+            isAutoSaved={isAutoSaved}
           />
         ) : (
           <FitnessCalculatorForm onSubmit={handleFormSubmit} />

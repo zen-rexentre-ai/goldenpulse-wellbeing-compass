@@ -1,9 +1,10 @@
+
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Download, BarChart2, Loader2 } from 'lucide-react';
+import { CheckCircle, Download, BarChart2, Loader2, Check } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
@@ -22,6 +23,7 @@ interface FitnessCalculatorResultsProps {
   onSave: () => void;
   onReset: () => void;
   isSaving?: boolean;
+  isAutoSaved?: boolean;
 }
 
 const getScoreCategory = (score: number) => {
@@ -33,18 +35,14 @@ const getScoreCategory = (score: number) => {
   return { label: "Poor", color: "bg-red-500" }; // Red
 };
 
-const getPercentile = (score: number) => {
-  // Simplified mock percentile calculation
-  return Math.round(score * 0.8);
-};
-
 const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
   score,
   recommendations,
   normalizedValues,
   onSave,
   onReset,
-  isSaving = false
+  isSaving = false,
+  isAutoSaved = false
 }) => {
   const { theme } = useTheme();
   const scoreCategory = getScoreCategory(score);
@@ -64,8 +62,14 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
           </div>
         </div>
         
-        <div className="mt-2">
+        <div className="mt-2 flex items-center justify-center gap-2">
           <Badge className={`${scoreCategory.color} text-white`}>{scoreCategory.label}</Badge>
+          {isAutoSaved && (
+            <Badge variant="outline" className="bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
+              <Check className="w-3 h-3 mr-1" />
+              Auto-saved
+            </Badge>
+          )}
         </div>
       </div>
       
@@ -131,23 +135,34 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
           </div>
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row gap-2 border-t pt-4">
-          <Button 
-            className="w-full sm:w-auto" 
-            onClick={onSave}
-            disabled={isSaving}
-          >
-            {isSaving ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Saving...
-              </>
-            ) : (
-              <>
-                <Download className="mr-2 h-4 w-4" />
-                {t("save_report")}
-              </>
-            )}
-          </Button>
+          {!isAutoSaved ? (
+            <Button 
+              className="w-full sm:w-auto" 
+              onClick={onSave}
+              disabled={isSaving}
+            >
+              {isSaving ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                <>
+                  <Download className="mr-2 h-4 w-4" />
+                  {t("save_report")}
+                </>
+              )}
+            </Button>
+          ) : (
+            <Button 
+              variant="outline"
+              className="w-full sm:w-auto" 
+              disabled
+            >
+              <Check className="mr-2 h-4 w-4" />
+              Data Saved
+            </Button>
+          )}
           <Button variant="outline" className="w-full sm:w-auto" onClick={onReset}>
             <BarChart2 className="mr-2 h-4 w-4" /> {t("calculate_again")}
           </Button>
