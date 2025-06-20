@@ -1,8 +1,9 @@
 
-
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
+import { enhancedFitnessService } from './enhancedFitnessService';
 
+// Legacy interface for backward compatibility
 export interface FitnessCalculation {
   id?: string;
   profileId: string;
@@ -15,29 +16,47 @@ export interface FitnessCalculation {
   recommendations: string[];
 }
 
+// Updated to use enhanced service for new functionality
 export async function saveFitnessCalculation(calculation: FitnessCalculation) {
   try {
-    const { data, error } = await supabase
-      .from('fitness_calculations')
-      .insert({
-        profile_id: calculation.profileId,
-        height: calculation.height,
-        weight: calculation.weight,
-        age: calculation.age,
-        activity_level: calculation.activityLevel,
-        medical_conditions: calculation.medicalConditions,
-        score: calculation.score,
-        recommendations: calculation.recommendations,
-      })
-      .select();
+    // Convert legacy format to new format for backward compatibility
+    const formData = {
+      height: calculation.height,
+      weight: calculation.weight,
+      age: calculation.age,
+      exerciseMinutes: parseInt(calculation.activityLevel) || 0,
+      heightUnit: 'cm' as const,
+      weightUnit: 'kg' as const,
+      goodSleepQuality: 'yes' as const,
+      smokingStatus: 'never',
+      alcoholUnits: 0,
+      diabetesLevel: 0,
+      hypertensionLevel: 0,
+      heartRelatedLevel: 0,
+      cancerLevel: 0,
+      othersLevel: 0,
+      stressLevel: 'none' as const,
+      gender: 'male' as const,
+      name: '',
+      email: '',
+      phone: ''
+    };
 
-    if (error) {
-      toast.error('Could not save fitness calculation');
-      return { success: false, error };
-    }
+    const result = {
+      score: calculation.score,
+      recommendations: calculation.recommendations.map(text => ({
+        text,
+        impact: 'Medium Impact',
+        priority: 'medium'
+      })),
+      normalizedValues: {}
+    };
 
-    toast.success('Fitness calculation saved successfully');
-    return { success: true, data: data[0] };
+    return await enhancedFitnessService.saveAuthenticatedCalculation(
+      formData,
+      result,
+      calculation.profileId
+    );
   } catch (err) {
     toast.error('An unexpected error occurred');
     return { success: false, error: err };
@@ -46,21 +65,9 @@ export async function saveFitnessCalculation(calculation: FitnessCalculation) {
 
 export async function getFitnessCalculations(profileId: string) {
   try {
-    const { data, error } = await supabase
-      .from('fitness_calculations')
-      .select('*')
-      .eq('profile_id', profileId)
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      toast.error('Could not fetch fitness calculations');
-      return { success: false, error, data: [] };
-    }
-
-    return { success: true, data };
+    return await enhancedFitnessService.getAuthenticatedCalculations(profileId);
   } catch (err) {
     toast.error('An unexpected error occurred');
     return { success: false, error: err, data: [] };
   }
 }
-

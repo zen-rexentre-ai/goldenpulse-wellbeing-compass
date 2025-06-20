@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,7 @@ import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
+import { enhancedFitnessService } from '@/services/enhancedFitnessService';
 
 const WellnessCalculator = () => {
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ const WellnessCalculator = () => {
     normalizedValues: {[key: string]: number};
   } | null>(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const { t } = useLanguage();
 
   const handleFormSubmit = (values: FitnessFormValues) => {
@@ -68,7 +69,35 @@ const WellnessCalculator = () => {
   };
 
   const handleSaveCalculation = async () => {
-    toast.info("Saving anonymous reports is a feature coming soon!");
+    if (!formData || !calculationResult) {
+      toast.error("No calculation to save");
+      return;
+    }
+
+    setIsSaving(true);
+    
+    try {
+      // For now, save as anonymous calculation
+      // In a real app, you'd check if user is authenticated and use appropriate method
+      const sessionToken = localStorage.getItem('anonymous_session_token') || 'demo-session';
+      
+      const result = await enhancedFitnessService.saveAnonymousCalculation(
+        formData,
+        calculationResult,
+        sessionToken
+      );
+
+      if (result.success) {
+        toast.success("Health calculation saved successfully!");
+      } else {
+        toast.error("Failed to save calculation. Please try again.");
+      }
+    } catch (error) {
+      console.error('Error saving calculation:', error);
+      toast.error("An error occurred while saving. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleReset = () => {
@@ -120,6 +149,7 @@ const WellnessCalculator = () => {
               normalizedValues={calculationResult.normalizedValues}
               onSave={handleSaveCalculation}
               onReset={handleReset}
+              isSaving={isSaving}
             />
           ) : (
             <FitnessCalculatorForm onSubmit={handleFormSubmit} />

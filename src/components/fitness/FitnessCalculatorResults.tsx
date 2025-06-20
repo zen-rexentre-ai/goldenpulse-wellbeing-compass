@@ -3,7 +3,7 @@ import { Progress } from '@/components/ui/progress';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Download, BarChart2, Mail } from 'lucide-react';
+import { CheckCircle, Download, BarChart2, Loader2 } from 'lucide-react';
 import { useTheme } from '@/components/ThemeProvider';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
@@ -21,6 +21,7 @@ interface FitnessCalculatorResultsProps {
   normalizedValues: { [key: string]: number };
   onSave: () => void;
   onReset: () => void;
+  isSaving?: boolean;
 }
 
 const getScoreCategory = (score: number) => {
@@ -42,7 +43,8 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
   recommendations,
   normalizedValues,
   onSave,
-  onReset
+  onReset,
+  isSaving = false
 }) => {
   const { theme } = useTheme();
   const scoreCategory = getScoreCategory(score);
@@ -71,7 +73,6 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">{t("recommendations")}</CardTitle>
-    
           </div>
         </CardHeader>
         <CardContent className="space-y-3">
@@ -106,7 +107,6 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
         <CardHeader>
           <div className="flex items-center justify-between">
             <CardTitle className="text-lg">{t("detailed_score_breakdown")}</CardTitle>
-
           </div>
         </CardHeader>
         <CardContent>
@@ -131,8 +131,22 @@ const FitnessCalculatorResults: React.FC<FitnessCalculatorResultsProps> = ({
           </div>
         </CardContent>
         <CardFooter className="flex flex-col sm:flex-row gap-2 border-t pt-4">
-          <Button className="w-full sm:w-auto" onClick={onSave}>
-            <Download className="mr-2 h-4 w-4" /> {t("save_report")}
+          <Button 
+            className="w-full sm:w-auto" 
+            onClick={onSave}
+            disabled={isSaving}
+          >
+            {isSaving ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              <>
+                <Download className="mr-2 h-4 w-4" />
+                {t("save_report")}
+              </>
+            )}
           </Button>
           <Button variant="outline" className="w-full sm:w-auto" onClick={onReset}>
             <BarChart2 className="mr-2 h-4 w-4" /> {t("calculate_again")}
