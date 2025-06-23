@@ -28,13 +28,12 @@ export async function saveFitnessCalculation(calculation: FitnessCalculation) {
       heightUnit: 'cm' as const,
       weightUnit: 'kg' as const,
       goodSleepQuality: 'yes' as const,
-      smokingStatus: 'never' as const, // Fix: specify exact type
+      smokingStatus: 'never' as const,
       alcoholUnits: 0,
-      diabetesLevel: 0,
-      hypertensionLevel: 0,
-      heartRelatedLevel: 0,
-      cancerLevel: 0,
-      othersLevel: 0,
+      // Use text-based severity levels instead of numeric values
+      heartRelatedLevel: 'none' as const,
+      cancerLevel: 'none' as const,
+      othersLevel: 'none' as const,
       stressLevel: 'none' as const,
       gender: 'male' as const,
       name: '',
