@@ -186,7 +186,7 @@ export type Database = {
           alcohol_units: number | null
           calculated_score: number
           calculation_date: string | null
-          cancer_level: number | null
+          cancer_level: string | null
           created_at: string | null
           diabetes_level: number | null
           diastolic_bp: number | null
@@ -196,14 +196,14 @@ export type Database = {
           good_sleep_quality: boolean | null
           hba1c: number | null
           heart_rate: number | null
-          heart_related_level: number | null
+          heart_related_level: string | null
           height: number
           height_unit: string
           hypertension_level: number | null
           id: string
           name: string | null
           normalized_values: Json | null
-          others_level: number | null
+          others_level: string | null
           phone: string | null
           recommendations: Json | null
           session_token: string | null
@@ -218,7 +218,7 @@ export type Database = {
           alcohol_units?: number | null
           calculated_score: number
           calculation_date?: string | null
-          cancer_level?: number | null
+          cancer_level?: string | null
           created_at?: string | null
           diabetes_level?: number | null
           diastolic_bp?: number | null
@@ -228,14 +228,14 @@ export type Database = {
           good_sleep_quality?: boolean | null
           hba1c?: number | null
           heart_rate?: number | null
-          heart_related_level?: number | null
+          heart_related_level?: string | null
           height: number
           height_unit: string
           hypertension_level?: number | null
           id?: string
           name?: string | null
           normalized_values?: Json | null
-          others_level?: number | null
+          others_level?: string | null
           phone?: string | null
           recommendations?: Json | null
           session_token?: string | null
@@ -250,7 +250,7 @@ export type Database = {
           alcohol_units?: number | null
           calculated_score?: number
           calculation_date?: string | null
-          cancer_level?: number | null
+          cancer_level?: string | null
           created_at?: string | null
           diabetes_level?: number | null
           diastolic_bp?: number | null
@@ -260,14 +260,14 @@ export type Database = {
           good_sleep_quality?: boolean | null
           hba1c?: number | null
           heart_rate?: number | null
-          heart_related_level?: number | null
+          heart_related_level?: string | null
           height?: number
           height_unit?: string
           hypertension_level?: number | null
           id?: string
           name?: string | null
           normalized_values?: Json | null
-          others_level?: number | null
+          others_level?: string | null
           phone?: string | null
           recommendations?: Json | null
           session_token?: string | null

@@ -58,13 +58,13 @@ const FitnessCalculator: React.FC<FitnessCalculatorProps> = ({
       systolicBP: values.systolicBP,
       diastolicBP: values.diastolicBP,
       
-      // Convert slider values to chronic conditions format
+      // Convert text-based severity levels to chronic conditions format
       chronicConditions: {
-        diabetes: values.diabetesLevel,
-        hypertension: values.hypertensionLevel,
-        heartRelated: values.heartRelatedLevel,
-        cancer: values.cancerLevel,
-        others: values.othersLevel
+        diabetes: 0, // Removed from form
+        hypertension: 0, // Removed from form
+        heartRelated: values.heartRelatedLevel === 'severe' ? 75 : values.heartRelatedLevel === 'moderate' ? 50 : values.heartRelatedLevel === 'mild' ? 25 : 0,
+        cancer: values.cancerLevel === 'severe' ? 75 : values.cancerLevel === 'moderate' ? 50 : values.cancerLevel === 'mild' ? 25 : 0,
+        others: values.othersLevel === 'severe' ? 75 : values.othersLevel === 'moderate' ? 50 : values.othersLevel === 'mild' ? 25 : 0
       }
     };
     

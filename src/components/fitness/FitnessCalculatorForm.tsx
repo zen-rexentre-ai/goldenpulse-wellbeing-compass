@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -39,11 +40,9 @@ export const FitnessCalculatorForm: React.FC<FitnessCalculatorFormProps> = ({ on
       exerciseMinutes: 30,
       smokingStatus: "never",
       alcoholUnits: 0,
-      diabetesLevel: 0,
-      hypertensionLevel: 0,
-      heartRelatedLevel: 0,
-      cancerLevel: 0,
-      othersLevel: 0,
+      heartRelatedLevel: "none",
+      cancerLevel: "none",
+      othersLevel: "none",
       stressLevel: "none",
       heartRate: undefined,
       hba1c: undefined,

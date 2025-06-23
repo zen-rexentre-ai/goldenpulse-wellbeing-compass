@@ -1,4 +1,3 @@
-
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from 'sonner';
 import { FitnessFormValues } from '@/components/fitness/form/types';
@@ -143,12 +142,10 @@ export class EnhancedFitnessService {
           diastolic_bp: formData.diastolicBP,
           hba1c: formData.hba1c,
           
-          // Medical Conditions (slider values)
-          diabetes_level: formData.diabetesLevel || 0,
-          hypertension_level: formData.hypertensionLevel || 0,
-          heart_related_level: formData.heartRelatedLevel || 0,
-          cancer_level: formData.cancerLevel || 0,
-          others_level: formData.othersLevel || 0,
+          // Medical Conditions (text-based severity levels)
+          heart_related_level: formData.heartRelatedLevel || 'none',
+          cancer_level: formData.cancerLevel || 'none',
+          others_level: formData.othersLevel || 'none',
           
           // Results
           calculated_score: result.score,

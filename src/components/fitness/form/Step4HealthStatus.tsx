@@ -3,7 +3,6 @@ import React from 'react';
 import { FormField, FormItem, FormLabel, FormControl, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { Slider } from '@/components/ui/slider';
 import { Card, CardContent } from '@/components/ui/card';
 import { Heart, AlertCircle } from 'lucide-react';
 import { UseFormReturn } from 'react-hook-form';
@@ -18,86 +17,46 @@ const Step4HealthStatus: React.FC<Step4Props> = ({ form }) => {
     <div className="space-y-4 animate-fade-in">
       <h3 className="text-lg font-medium">Health Status</h3>
       
-      {/* Chronic Conditions as Sliders */}
+      {/* Chronic Conditions as Radio Buttons */}
       <Card>
         <CardContent className="pt-6">
           <h4 className="font-medium mb-4">Chronic Conditions</h4>
           <p className="text-sm text-muted-foreground mb-4">
-            Rate the severity of any conditions you have (0 = None, 100 = Severe)
+            Please select the severity level for any conditions you have
           </p>
           
           <div className="space-y-6">
             <FormField
               control={form.control}
-              name="diabetesLevel"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex justify-between items-center mb-2">
-                    <FormLabel className="text-sm">Diabetes: {field.value}</FormLabel>
-                    <span className="text-xs text-muted-foreground">
-                      {field.value === 0 ? "None" : field.value < 50 ? "Mild" : "Severe"}
-                    </span>
-                  </div>
-                  <FormControl>
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={[field.value]}
-                      onValueChange={(value) => field.onChange(value[0])}
-                      className="my-1"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="hypertensionLevel"
-              render={({ field }) => (
-                <FormItem>
-                  <div className="flex justify-between items-center mb-2">
-                    <FormLabel className="text-sm">Hypertension: {field.value}</FormLabel>
-                    <span className="text-xs text-muted-foreground">
-                      {field.value === 0 ? "None" : field.value < 50 ? "Mild" : "Severe"}
-                    </span>
-                  </div>
-                  <FormControl>
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={[field.value]}
-                      onValueChange={(value) => field.onChange(value[0])}
-                      className="my-1"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
               name="heartRelatedLevel"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex justify-between items-center mb-2">
-                    <FormLabel className="text-sm">Heart Related: {field.value}</FormLabel>
-                    <span className="text-xs text-muted-foreground">
-                      {field.value === 0 ? "None" : field.value < 50 ? "Mild" : "Severe"}
-                    </span>
-                  </div>
+                  <FormLabel className="text-sm font-medium">Heart Related Conditions</FormLabel>
                   <FormControl>
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={[field.value]}
-                      onValueChange={(value) => field.onChange(value[0])}
-                      className="my-1"
-                    />
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="grid grid-cols-2 gap-2"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="none" id="heart-none" />
+                        <label htmlFor="heart-none" className="text-sm">None</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="mild" id="heart-mild" />
+                        <label htmlFor="heart-mild" className="text-sm">Mild</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="moderate" id="heart-moderate" />
+                        <label htmlFor="heart-moderate" className="text-sm">Moderate</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="severe" id="heart-severe" />
+                        <label htmlFor="heart-severe" className="text-sm">Severe</label>
+                      </div>
+                    </RadioGroup>
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -107,22 +66,32 @@ const Step4HealthStatus: React.FC<Step4Props> = ({ form }) => {
               name="cancerLevel"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex justify-between items-center mb-2">
-                    <FormLabel className="text-sm">Cancer: {field.value}</FormLabel>
-                    <span className="text-xs text-muted-foreground">
-                      {field.value === 0 ? "None" : field.value < 50 ? "Mild" : "Severe"}
-                    </span>
-                  </div>
+                  <FormLabel className="text-sm font-medium">Cancer</FormLabel>
                   <FormControl>
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={[field.value]}
-                      onValueChange={(value) => field.onChange(value[0])}
-                      className="my-1"
-                    />
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="grid grid-cols-2 gap-2"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="none" id="cancer-none" />
+                        <label htmlFor="cancer-none" className="text-sm">None</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="mild" id="cancer-mild" />
+                        <label htmlFor="cancer-mild" className="text-sm">Mild</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="moderate" id="cancer-moderate" />
+                        <label htmlFor="cancer-moderate" className="text-sm">Moderate</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="severe" id="cancer-severe" />
+                        <label htmlFor="cancer-severe" className="text-sm">Severe</label>
+                      </div>
+                    </RadioGroup>
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -132,22 +101,32 @@ const Step4HealthStatus: React.FC<Step4Props> = ({ form }) => {
               name="othersLevel"
               render={({ field }) => (
                 <FormItem>
-                  <div className="flex justify-between items-center mb-2">
-                    <FormLabel className="text-sm">Other Conditions: {field.value}</FormLabel>
-                    <span className="text-xs text-muted-foreground">
-                      {field.value === 0 ? "None" : field.value < 50 ? "Mild" : "Severe"}
-                    </span>
-                  </div>
+                  <FormLabel className="text-sm font-medium">Other Conditions</FormLabel>
                   <FormControl>
-                    <Slider
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={[field.value]}
-                      onValueChange={(value) => field.onChange(value[0])}
-                      className="my-1"
-                    />
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                      className="grid grid-cols-2 gap-2"
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="none" id="others-none" />
+                        <label htmlFor="others-none" className="text-sm">None</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="mild" id="others-mild" />
+                        <label htmlFor="others-mild" className="text-sm">Mild</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="moderate" id="others-moderate" />
+                        <label htmlFor="others-moderate" className="text-sm">Moderate</label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="severe" id="others-severe" />
+                        <label htmlFor="others-severe" className="text-sm">Severe</label>
+                      </div>
+                    </RadioGroup>
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -199,7 +178,6 @@ const Step4HealthStatus: React.FC<Step4Props> = ({ form }) => {
         </h4>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {/* Added Heart Rate Input */}
           <FormField
             control={form.control}
             name="heartRate"

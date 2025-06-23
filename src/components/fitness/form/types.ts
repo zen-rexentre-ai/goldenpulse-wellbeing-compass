@@ -22,12 +22,10 @@ export const formSchema = z.object({
   smokingStatus: z.enum(["never", "former", "current"]).optional(),
   alcoholUnits: z.coerce.number().min(0).optional(),
   
-  // Step 4: Health Status - Modified to use sliders
-  diabetesLevel: z.coerce.number().min(0).max(100),
-  hypertensionLevel: z.coerce.number().min(0).max(100),
-  heartRelatedLevel: z.coerce.number().min(0).max(100),
-  cancerLevel: z.coerce.number().min(0).max(100),
-  othersLevel: z.coerce.number().min(0).max(100),
+  // Step 4: Health Status - Updated to use text-based severity levels for remaining conditions
+  heartRelatedLevel: z.enum(["none", "mild", "moderate", "severe"]),
+  cancerLevel: z.enum(["none", "mild", "moderate", "severe"]),
+  othersLevel: z.enum(["none", "mild", "moderate", "severe"]),
   stressLevel: z.enum(["none", "mild", "high"]),
   heartRate: z.coerce.number().min(0).optional(),
   hba1c: z.coerce.number().min(0).optional(),
