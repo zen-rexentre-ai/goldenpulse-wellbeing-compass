@@ -4,16 +4,18 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
+import { supabase } from '@/integrations/supabase/client';
 
 export const SecuritySettings: React.FC = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   
   const [pin, setPin] = useState('');
   const [confirmPin, setConfirmPin] = useState('');
   
-  const handleChangePassword = (e: React.FormEvent) => {
+  const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
     
     // Simple validation
@@ -26,12 +28,51 @@ export const SecuritySettings: React.FC = () => {
       toast.error('New passwords do not match');
       return;
     }
+
+    if (newPassword.length < 6) {
+      toast.error('New password must be at least 6 characters long');
+      return;
+    }
     
-    // Success case
-    toast.success('Password updated successfully');
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
+    setIsLoading(true);
+    
+    try {
+      // First verify current password by attempting to sign in
+      const { data: user } = await supabase.auth.getUser();
+      if (!user.user?.email) {
+        toast.error('Unable to verify current user');
+        return;
+      }
+
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: user.user.email,
+        password: currentPassword,
+      });
+
+      if (signInError) {
+        toast.error('Current password is incorrect');
+        return;
+      }
+
+      // Update password
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) {
+        toast.error(error.message);
+        return;
+      }
+
+      toast.success('Password updated successfully');
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    } catch (error) {
+      toast.error('An unexpected error occurred');
+    } finally {
+      setIsLoading(false);
+    }
   };
   
   const handleChangePin = (e: React.FormEvent) => {
@@ -98,7 +139,9 @@ export const SecuritySettings: React.FC = () => {
             />
           </div>
           
-          <Button type="submit">Update Password</Button>
+          <Button type="submit" disabled={isLoading}>
+            {isLoading ? 'Updating...' : 'Update Password'}
+          </Button>
         </form>
       </div>
       
