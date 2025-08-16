@@ -34,7 +34,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider storageKey="vite-ui-theme">
+      <ThemeProvider>
         <LanguageProvider>
           <AuthProvider>
             <SubscriptionProvider>
@@ -46,6 +46,11 @@ function App() {
                     <Route path="/welcome" element={<Welcome />} />
                     <Route path="/wellness-calculator" element={<WellnessCalculator />} />
                     <Route path="/wellness-analysis" element={<WellnessAnalysis />} />
+                    <Route path="/personal-wellness-features" element={<PersonalWellnessFeatures />} />
+                    <Route path="/engagement-features" element={<EngagementFeatures />} />
+                    <Route path="/entertainment" element={<Entertainment />} />
+                    <Route path="/games" element={<Games />} />
+                    <Route path="/webinars" element={<Webinars />} />
                     
                     {/* Auth routes - redirect to dashboard if already logged in */}
                     <Route path="/login" element={
