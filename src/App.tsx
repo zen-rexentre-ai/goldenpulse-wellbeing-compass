@@ -14,6 +14,7 @@ import Welcome from "@/pages/Welcome";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import ForgotPassword from "@/pages/ForgotPassword";
+import ResetPassword from "@/pages/ResetPassword";
 import Dashboard from "@/pages/Dashboard";
 import Onboarding from "@/pages/Onboarding";
 import WellnessCalculator from "@/pages/WellnessCalculator";
@@ -66,6 +67,11 @@ function App() {
                     <Route path="/forgot-password" element={
                       <PublicRoute>
                         <ForgotPassword />
+                      </PublicRoute>
+                    } />
+                    <Route path="/reset-password" element={
+                      <PublicRoute>
+                        <ResetPassword />
                       </PublicRoute>
                     } />
                     
