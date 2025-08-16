@@ -5,42 +5,59 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import Logo from '@/components/Logo';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'sonner';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Fingerprint, Lock } from 'lucide-react';
+import { Fingerprint, Lock, Eye, EyeOff } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useLanguage } from '@/components/LanguageProvider';
 import ScreenReader from '@/components/ScreenReader';
 import LanguageSelector from '@/components/LanguageSelector';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [pin, setPin] = useState('');
+  const location = useLocation();
+  const { signIn, loading } = useAuth();
   const { t } = useLanguage();
   
-  const handleLogin = (e: React.FormEvent) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [pin, setPin] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const from = location.state?.from?.pathname || '/dashboard';
+  
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you would authenticate with a backend
-    toast.success("Login successful!");
-    navigate('/onboarding');
+    if (!email || !password) {
+      toast.error("Please enter both email and password");
+      return;
+    }
+
+    setIsSubmitting(true);
+    const result = await signIn(email, password);
+    
+    if (result.success) {
+      navigate(from, { replace: true });
+    }
+    setIsSubmitting(false);
   };
 
   const handlePinLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real app, you would verify the PIN
+    // PIN login would be implemented with a separate auth method
     if (pin.length >= 4) {
-      toast.success("PIN login successful!");
-      navigate('/onboarding');
+      toast.info("PIN login feature coming soon!");
     } else {
       toast.error("Please enter a valid PIN");
     }
   };
 
   const handleBiometricLogin = () => {
-    // In a real app, this would trigger native biometric authentication
-    toast.success("Biometric authentication successful!");
-    navigate('/onboarding');
+    // Biometric authentication would be implemented with device APIs
+    toast.info("Biometric authentication feature coming soon!");
   };
 
   return (
@@ -78,7 +95,14 @@ const Login = () => {
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="grid gap-2">
                     <Label htmlFor="email">{t("email")}</Label>
-                    <Input id="email" type="email" placeholder="your.email@example.com" />
+                    <Input 
+                      id="email" 
+                      type="email" 
+                      placeholder="your.email@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
                   </div>
                   
                   <div className="grid gap-2">
@@ -88,11 +112,34 @@ const Login = () => {
                         {t("forgot_password")}
                       </Link>
                     </div>
-                    <Input id="password" type="password" />
+                    <div className="relative">
+                      <Input 
+                        id="password" 
+                        type={showPassword ? "text" : "password"}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                      />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                        onClick={() => setShowPassword(!showPassword)}
+                      >
+                        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                      </Button>
+                    </div>
                   </div>
                   
                   <div className="pt-4">
-                    <Button type="submit" className="w-full">{t("login")}</Button>
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      disabled={isSubmitting || loading}
+                    >
+                      {isSubmitting ? "Signing in..." : t("login")}
+                    </Button>
                   </div>
                 </form>
               </TabsContent>

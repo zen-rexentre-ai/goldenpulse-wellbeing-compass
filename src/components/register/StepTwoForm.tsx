@@ -1,50 +1,78 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Button } from '@/components/ui/button';
+import { Eye, EyeOff } from 'lucide-react';
 
-const StepTwoForm: React.FC = () => {
+interface StepTwoFormProps {
+  formData: {
+    password: string;
+    confirmPassword: string;
+    dateOfBirth: string;
+  };
+  updateFormData: (field: string, value: string) => void;
+}
+
+const StepTwoForm: React.FC<StepTwoFormProps> = ({ formData, updateFormData }) => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
   return (
     <div className="space-y-4">
       <div className="grid gap-4">
         <div className="grid gap-2">
-          <Label htmlFor="dob">Date of Birth</Label>
-          <Input id="dob" type="date" />
+          <Label htmlFor="password">Password *</Label>
+          <div className="relative">
+            <Input 
+              id="password" 
+              type={showPassword ? "text" : "password"}
+              value={formData.password}
+              onChange={(e) => updateFormData('password', e.target.value)}
+              required
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </Button>
+          </div>
+          <p className="text-xs text-muted-foreground">Must be at least 6 characters</p>
         </div>
         
         <div className="grid gap-2">
-          <Label htmlFor="gender">Gender</Label>
-          <Select defaultValue="prefer-not">
-            <SelectTrigger>
-              <SelectValue placeholder="Select gender" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="male">Male</SelectItem>
-              <SelectItem value="female">Female</SelectItem>
-              <SelectItem value="other">Other</SelectItem>
-              <SelectItem value="prefer-not">Prefer not to say</SelectItem>
-            </SelectContent>
-          </Select>
+          <Label htmlFor="confirmPassword">Confirm Password *</Label>
+          <div className="relative">
+            <Input 
+              id="confirmPassword" 
+              type={showConfirmPassword ? "text" : "password"}
+              value={formData.confirmPassword}
+              onChange={(e) => updateFormData('confirmPassword', e.target.value)}
+              required
+            />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </Button>
+          </div>
         </div>
         
         <div className="grid gap-2">
-          <Label htmlFor="languages">Languages Spoken</Label>
-          <Input id="languages" placeholder="e.g., English, Hindi, Tamil" />
-        </div>
-        
-        <div className="grid gap-2">
-          <Label htmlFor="occupation">Occupation</Label>
-          <Select defaultValue="retired">
-            <SelectTrigger>
-              <SelectValue placeholder="Select occupation" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="retired">Retired</SelectItem>
-              <SelectItem value="full-time">Full Time</SelectItem>
-              <SelectItem value="part-time">Part Time</SelectItem>
-            </SelectContent>
-          </Select>
+          <Label htmlFor="dateOfBirth">Date of Birth</Label>
+          <Input 
+            id="dateOfBirth" 
+            type="date" 
+            value={formData.dateOfBirth}
+            onChange={(e) => updateFormData('dateOfBirth', e.target.value)}
+          />
         </div>
       </div>
     </div>
