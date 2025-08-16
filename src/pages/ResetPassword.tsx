@@ -19,22 +19,48 @@ const ResetPassword = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if we have the required parameters
-    const accessToken = searchParams.get('access_token');
-    const refreshToken = searchParams.get('refresh_token');
-    const type = searchParams.get('type');
+    const initializePasswordReset = async () => {
+      const accessToken = searchParams.get('access_token');
+      const refreshToken = searchParams.get('refresh_token');
+      const type = searchParams.get('type');
 
-    if (type === 'recovery' && accessToken && refreshToken) {
-      // Set the session with the tokens from the URL
-      supabase.auth.setSession({
-        access_token: accessToken,
-        refresh_token: refreshToken,
-      });
-    } else if (!type && !accessToken) {
-      // If no tokens, redirect to forgot password page
-      toast.error('Invalid reset link. Please request a new one.');
-      navigate('/forgot-password');
-    }
+      // Check if this is a valid password recovery link
+      if (type === 'recovery' && accessToken && refreshToken) {
+        try {
+          // Set the session with the tokens from the URL
+          const { data, error } = await supabase.auth.setSession({
+            access_token: accessToken,
+            refresh_token: refreshToken,
+          });
+
+          if (error) {
+            console.error('Session error:', error);
+            toast.error('Invalid or expired reset link. Please request a new one.');
+            navigate('/forgot-password');
+            return;
+          }
+
+          // Verify the session is valid and hasn't expired
+          if (!data.session) {
+            toast.error('Reset link has expired. Please request a new one.');
+            navigate('/forgot-password');
+            return;
+          }
+
+          console.log('Password reset session established successfully');
+        } catch (err) {
+          console.error('Reset password error:', err);
+          toast.error('Invalid reset link. Please request a new one.');
+          navigate('/forgot-password');
+        }
+      } else {
+        // No valid tokens found
+        toast.error('Invalid reset link. Please request a new one.');
+        navigate('/forgot-password');
+      }
+    };
+
+    initializePasswordReset();
   }, [searchParams, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
