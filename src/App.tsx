@@ -34,7 +34,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+      <ThemeProvider storageKey="vite-ui-theme">
         <LanguageProvider>
           <AuthProvider>
             <SubscriptionProvider>
