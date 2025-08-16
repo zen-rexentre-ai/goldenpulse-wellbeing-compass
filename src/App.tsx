@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -48,6 +48,9 @@ function App() {
                     <Route path="/welcome" element={<Welcome />} />
                     <Route path="/wellness-calculator" element={<WellnessCalculator />} />
                     <Route path="/wellness-analysis" element={<WellnessAnalysis />} />
+                    
+                    {/* Redirect old personal wellness features route */}
+                    <Route path="/personal-wellness-features" element={<Navigate to="/personal-wellness" replace />} />
                     
                     {/* Auth routes - redirect to dashboard if already logged in */}
                     <Route path="/login" element={
