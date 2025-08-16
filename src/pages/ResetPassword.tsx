@@ -25,12 +25,13 @@ const ResetPassword = () => {
       const type = searchParams.get('type');
 
       // Check if this is a valid password recovery link
-      if (type === 'recovery' && accessToken && refreshToken) {
+      if (type === 'recovery' && accessToken) {
         try {
           // Set the session with the tokens from the URL
+          // refresh_token is optional for password recovery
           const { data, error } = await supabase.auth.setSession({
             access_token: accessToken,
-            refresh_token: refreshToken,
+            refresh_token: refreshToken || '',
           });
 
           if (error) {
