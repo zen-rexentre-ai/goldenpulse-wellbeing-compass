@@ -600,6 +600,217 @@ export type Database = {
           },
         ]
       }
+      volunteering_alerts: {
+        Row: {
+          alert_type: string
+          created_at: string
+          email_sent: boolean
+          id: string
+          message: string | null
+          registration_id: string | null
+          scheduled_for: string
+          sent_at: string | null
+        }
+        Insert: {
+          alert_type: string
+          created_at?: string
+          email_sent?: boolean
+          id?: string
+          message?: string | null
+          registration_id?: string | null
+          scheduled_for: string
+          sent_at?: string | null
+        }
+        Update: {
+          alert_type?: string
+          created_at?: string
+          email_sent?: boolean
+          id?: string
+          message?: string | null
+          registration_id?: string | null
+          scheduled_for?: string
+          sent_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteering_alerts_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: false
+            referencedRelation: "volunteering_registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteering_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      volunteering_coordinators: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          name: string
+          organization: string | null
+          phone: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          organization?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          organization?: string | null
+          phone?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      volunteering_opportunities: {
+        Row: {
+          category_id: string | null
+          coordinator_id: string | null
+          created_at: string
+          date: string
+          description: string | null
+          filled_spots: number
+          id: string
+          is_active: boolean
+          location: string
+          organization: string
+          requirements: string | null
+          time: string
+          title: string
+          total_spots: number
+          updated_at: string
+        }
+        Insert: {
+          category_id?: string | null
+          coordinator_id?: string | null
+          created_at?: string
+          date: string
+          description?: string | null
+          filled_spots?: number
+          id?: string
+          is_active?: boolean
+          location: string
+          organization: string
+          requirements?: string | null
+          time: string
+          title: string
+          total_spots?: number
+          updated_at?: string
+        }
+        Update: {
+          category_id?: string | null
+          coordinator_id?: string | null
+          created_at?: string
+          date?: string
+          description?: string | null
+          filled_spots?: number
+          id?: string
+          is_active?: boolean
+          location?: string
+          organization?: string
+          requirements?: string | null
+          time?: string
+          title?: string
+          total_spots?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteering_opportunities_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "volunteering_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "volunteering_opportunities_coordinator_id_fkey"
+            columns: ["coordinator_id"]
+            isOneToOne: false
+            referencedRelation: "volunteering_coordinators"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      volunteering_registrations: {
+        Row: {
+          created_at: string
+          id: string
+          notes: string | null
+          opportunity_id: string
+          profile_id: string
+          registrant_address: string
+          registrant_name: string
+          registrant_phone: string
+          registration_date: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          opportunity_id: string
+          profile_id: string
+          registrant_address: string
+          registrant_name: string
+          registrant_phone: string
+          registration_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          notes?: string | null
+          opportunity_id?: string
+          profile_id?: string
+          registrant_address?: string
+          registrant_name?: string
+          registrant_phone?: string
+          registration_date?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "volunteering_registrations_opportunity_id_fkey"
+            columns: ["opportunity_id"]
+            isOneToOne: false
+            referencedRelation: "volunteering_opportunities"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
